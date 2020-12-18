@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.ORM", "src\GarciaCore.ORM\GarciaCore.ORM.csproj", "{9C0E97BF-1AD7-4738-A678-4397C7D7164D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.Infrastructure", "src\GarciaCore.Infrastructure\GarciaCore.Infrastructure.csproj", "{9D55FE1B-20CF-4579-8747-352CD2E1DBA5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C0E97BF-1AD7-4738-A678-4397C7D7164D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C0E97BF-1AD7-4738-A678-4397C7D7164D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C0E97BF-1AD7-4738-A678-4397C7D7164D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C0E97BF-1AD7-4738-A678-4397C7D7164D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D55FE1B-20CF-4579-8747-352CD2E1DBA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D55FE1B-20CF-4579-8747-352CD2E1DBA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D55FE1B-20CF-4579-8747-352CD2E1DBA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D55FE1B-20CF-4579-8747-352CD2E1DBA5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3255BD7C-849F-4F0F-B86D-5A266B1F50B6}
+	EndGlobalSection
+EndGlobal
