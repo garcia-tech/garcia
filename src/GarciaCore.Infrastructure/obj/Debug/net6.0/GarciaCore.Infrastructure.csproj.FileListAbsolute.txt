@@ -1,0 +1,12 @@
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.Infrastructure\bin\Debug\net6.0\GarciaCore.Infrastructure.deps.json
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.Infrastructure\bin\Debug\net6.0\GarciaCore.Infrastructure.dll
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.Infrastructure\bin\Debug\net6.0\ref\GarciaCore.Infrastructure.dll
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.Infrastructure\bin\Debug\net6.0\GarciaCore.Infrastructure.pdb
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.Infrastructure\obj\Debug\net6.0\GarciaCore.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.Infrastructure\obj\Debug\net6.0\GarciaCore.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.Infrastructure\obj\Debug\net6.0\GarciaCore.Infrastructure.AssemblyInfo.cs
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.Infrastructure\obj\Debug\net6.0\GarciaCore.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.Infrastructure\obj\Debug\net6.0\GarciaCore.Infrastructure.dll
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.Infrastructure\obj\Debug\net6.0\ref\GarciaCore.Infrastructure.dll
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.Infrastructure\obj\Debug\net6.0\GarciaCore.Infrastructure.pdb
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.Infrastructure\obj\Debug\net6.0\GarciaCore.Infrastructure.csproj.AssemblyReference.cache

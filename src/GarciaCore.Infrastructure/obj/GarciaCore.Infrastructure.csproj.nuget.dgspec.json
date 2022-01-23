@@ -1,31 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vehbi\\source\\repos\\GarciaCore\\src\\GarciaCore.Infrastructure\\GarciaCore.Infrastructure.csproj": {}
+    "C:\\Users\\vehbi\\source\\repos\\projects\\garciacore\\src\\GarciaCore.Infrastructure\\GarciaCore.Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vehbi\\source\\repos\\GarciaCore\\src\\GarciaCore.Infrastructure\\GarciaCore.Infrastructure.csproj": {
+    "C:\\Users\\vehbi\\source\\repos\\projects\\garciacore\\src\\GarciaCore.Infrastructure\\GarciaCore.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vehbi\\source\\repos\\GarciaCore\\src\\GarciaCore.Infrastructure\\GarciaCore.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\vehbi\\source\\repos\\projects\\garciacore\\src\\GarciaCore.Infrastructure\\GarciaCore.Infrastructure.csproj",
         "projectName": "GarciaCore.Infrastructure",
-        "projectPath": "C:\\Users\\vehbi\\source\\repos\\GarciaCore\\src\\GarciaCore.Infrastructure\\GarciaCore.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\vehbi\\source\\repos\\projects\\garciacore\\src\\GarciaCore.Infrastructure\\GarciaCore.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\vehbi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vehbi\\source\\repos\\GarciaCore\\src\\GarciaCore.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\vehbi\\source\\repos\\projects\\garciacore\\src\\GarciaCore.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\vehbi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "net6.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {}
           }
         },
@@ -36,15 +37,16 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
+        "net6.0": {
+          "targetAlias": "net6.0",
           "dependencies": {
             "Microsoft.Extensions.Caching.Memory": {
               "target": "Package",
-              "version": "[5.0.0, )"
+              "version": "[6.0.0, )"
             },
             "System.Data.SqlClient": {
               "target": "Package",
-              "version": "[4.8.2, )"
+              "version": "[4.8.3, )"
             }
           },
           "imports": [
@@ -62,7 +64,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

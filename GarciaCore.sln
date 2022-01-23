@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.ORM", "src\Garci
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.Infrastructure", "src\GarciaCore.Infrastructure\GarciaCore.Infrastructure.csproj", "{9D55FE1B-20CF-4579-8747-352CD2E1DBA5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.Domain", "GarciaCore.Domain\GarciaCore.Domain.csproj", "{BD2F2F1C-9B76-4552-81FB-E441EE142AA9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9D55FE1B-20CF-4579-8747-352CD2E1DBA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D55FE1B-20CF-4579-8747-352CD2E1DBA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D55FE1B-20CF-4579-8747-352CD2E1DBA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD2F2F1C-9B76-4552-81FB-E441EE142AA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD2F2F1C-9B76-4552-81FB-E441EE142AA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD2F2F1C-9B76-4552-81FB-E441EE142AA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD2F2F1C-9B76-4552-81FB-E441EE142AA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

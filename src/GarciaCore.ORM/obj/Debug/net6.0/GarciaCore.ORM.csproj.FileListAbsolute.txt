@@ -1,0 +1,17 @@
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.ORM\obj\Debug\net6.0\GarciaCore.ORM.csproj.AssemblyReference.cache
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.ORM\obj\Debug\net6.0\GarciaCore.ORM.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.ORM\obj\Debug\net6.0\GarciaCore.ORM.AssemblyInfoInputs.cache
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.ORM\obj\Debug\net6.0\GarciaCore.ORM.AssemblyInfo.cs
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.ORM\obj\Debug\net6.0\GarciaCore.ORM.csproj.CoreCompileInputs.cache
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.ORM\bin\Debug\net6.0\GarciaCore.ORM.deps.json
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.ORM\bin\Debug\net6.0\GarciaCore.ORM.dll
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.ORM\bin\Debug\net6.0\ref\GarciaCore.ORM.dll
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.ORM\bin\Debug\net6.0\GarciaCore.ORM.pdb
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.ORM\bin\Debug\net6.0\GarciaCore.Domain.dll
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.ORM\bin\Debug\net6.0\GarciaCore.Infrastructure.dll
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.ORM\bin\Debug\net6.0\GarciaCore.Domain.pdb
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.ORM\bin\Debug\net6.0\GarciaCore.Infrastructure.pdb
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.ORM\obj\Debug\net6.0\GarciaCore.ORM.csproj.CopyComplete
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.ORM\obj\Debug\net6.0\GarciaCore.ORM.dll
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.ORM\obj\Debug\net6.0\ref\GarciaCore.ORM.dll
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.ORM\obj\Debug\net6.0\GarciaCore.ORM.pdb
