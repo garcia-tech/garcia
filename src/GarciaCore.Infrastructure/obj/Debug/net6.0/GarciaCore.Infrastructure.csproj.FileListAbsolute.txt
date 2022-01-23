@@ -9,3 +9,6 @@ C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.Infrastructure\ob
 C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.Infrastructure\obj\Debug\net6.0\GarciaCore.Infrastructure.dll
 C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.Infrastructure\obj\Debug\net6.0\ref\GarciaCore.Infrastructure.dll
 C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.Infrastructure\obj\Debug\net6.0\GarciaCore.Infrastructure.pdb
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.Infrastructure\bin\Debug\net6.0\cmd.bat
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.Infrastructure\bin\Debug\net6.0\cmd.sh
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.Infrastructure\obj\Debug\net6.0\GarciaCore.Infrastructure.csproj.AssemblyReference.cache

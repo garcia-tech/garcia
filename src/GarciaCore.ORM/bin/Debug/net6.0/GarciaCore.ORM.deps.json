@@ -30,6 +30,17 @@
           }
         }
       },
+      "dein.ToolBox/1.7.1": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "runtime": {
+          "lib/net5.0/ToolBox.dll": {
+            "assemblyVersion": "1.7.1.0",
+            "fileVersion": "1.7.1.0"
+          }
+        }
+      },
       "MediatR/10.0.1": {
         "dependencies": {
           "MediatR.Contracts": "1.0.1"
@@ -283,7 +294,9 @@
       "GarciaCore.Infrastructure/1.0.0": {
         "dependencies": {
           "Microsoft.Extensions.Caching.Memory": "6.0.0",
-          "System.Data.SqlClient": "4.8.3"
+          "Newtonsoft.Json": "13.0.1",
+          "System.Data.SqlClient": "4.8.3",
+          "dein.ToolBox": "1.7.1"
         },
         "runtime": {
           "GarciaCore.Infrastructure.dll": {}
@@ -311,6 +324,13 @@
       "sha512": "sha512-RDFF4rBLLmbpi6pwkY7q/M6UXHRJEOerplDGE5jwEkP/JGJnBauAClYavNKJPW1yOTWRPIyfj4is3EaJxQXILQ==",
       "path": "dapper/2.0.123",
       "hashPath": "dapper.2.0.123.nupkg.sha512"
+    },
+    "dein.ToolBox/1.7.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-2k6oCZ0GWxKDNn2MHrv/vqFtonNpbHJDHkr49q3OVtGP3IYPi85G68fzodtsvRo2O+hSOyj7WSr1PBcsg9theA==",
+      "path": "dein.toolbox/1.7.1",
+      "hashPath": "dein.toolbox.1.7.1.nupkg.sha512"
     },
     "MediatR/10.0.1": {
       "type": "package",

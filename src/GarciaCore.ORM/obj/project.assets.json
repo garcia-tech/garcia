@@ -11,6 +11,25 @@
           "lib/net5.0/Dapper.dll": {}
         }
       },
+      "dein.ToolBox/1.7.1": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3"
+        },
+        "compile": {
+          "lib/net5.0/ToolBox.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/ToolBox.dll": {}
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "MediatR/10.0.1": {
         "type": "package",
         "dependencies": {
@@ -390,7 +409,9 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "Microsoft.Extensions.Caching.Memory": "6.0.0",
-          "System.Data.SqlClient": "4.8.3"
+          "Newtonsoft.Json": "13.0.1",
+          "System.Data.SqlClient": "4.8.3",
+          "dein.ToolBox": "1.7.1"
         },
         "compile": {
           "bin/placeholder/GarciaCore.Infrastructure.dll": {}
@@ -431,6 +452,26 @@
         "lib/net5.0/Dapper.xml",
         "lib/netstandard2.0/Dapper.dll",
         "lib/netstandard2.0/Dapper.xml"
+      ]
+    },
+    "dein.ToolBox/1.7.1": {
+      "sha512": "2k6oCZ0GWxKDNn2MHrv/vqFtonNpbHJDHkr49q3OVtGP3IYPi85G68fzodtsvRo2O+hSOyj7WSr1PBcsg9theA==",
+      "type": "package",
+      "path": "dein.toolbox/1.7.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "README.md",
+        "contentFiles/any/any/cmd.bat",
+        "contentFiles/any/any/cmd.sh",
+        "dein.toolbox.1.7.1.nupkg.sha512",
+        "dein.toolbox.nuspec",
+        "icon.png",
+        "lib/net5.0/ToolBox.dll",
+        "lib/net5.0/ToolBox.pdb",
+        "lib/netcoreapp3.1/ToolBox.dll",
+        "lib/netcoreapp3.1/ToolBox.pdb"
       ]
     },
     "MediatR/10.0.1": {

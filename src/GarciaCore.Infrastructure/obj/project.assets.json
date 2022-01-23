@@ -2,6 +2,32 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "dein.ToolBox/1.7.1": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3"
+        },
+        "compile": {
+          "lib/net5.0/ToolBox.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/ToolBox.dll": {}
+        },
+        "contentFiles": {
+          "contentFiles/any/any/cmd.bat": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": true,
+            "outputPath": "cmd.bat"
+          },
+          "contentFiles/any/any/cmd.sh": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": true,
+            "outputPath": "cmd.sh"
+          }
+        }
+      },
       "Microsoft.Extensions.Caching.Abstractions/6.0.0": {
         "type": "package",
         "dependencies": {
@@ -112,6 +138,15 @@
             "assetType": "runtime",
             "rid": "win"
           }
+        }
+      },
+      "Newtonsoft.Json/13.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
       "runtime.native.System.Data.SqlClient.sni/4.7.0": {
@@ -226,6 +261,26 @@
     }
   },
   "libraries": {
+    "dein.ToolBox/1.7.1": {
+      "sha512": "2k6oCZ0GWxKDNn2MHrv/vqFtonNpbHJDHkr49q3OVtGP3IYPi85G68fzodtsvRo2O+hSOyj7WSr1PBcsg9theA==",
+      "type": "package",
+      "path": "dein.toolbox/1.7.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "README.md",
+        "contentFiles/any/any/cmd.bat",
+        "contentFiles/any/any/cmd.sh",
+        "dein.toolbox.1.7.1.nupkg.sha512",
+        "dein.toolbox.nuspec",
+        "icon.png",
+        "lib/net5.0/ToolBox.dll",
+        "lib/net5.0/ToolBox.pdb",
+        "lib/netcoreapp3.1/ToolBox.dll",
+        "lib/netcoreapp3.1/ToolBox.pdb"
+      ]
+    },
     "Microsoft.Extensions.Caching.Abstractions/6.0.0": {
       "sha512": "bcz5sSFJbganH0+YrfvIjJDIcKNW7TL07C4d1eTmXy/wOt52iz4LVogJb6pazs7W0+74j0YpXFErvp++Aq5Bsw==",
       "type": "package",
@@ -449,6 +504,33 @@
         "runtimes/win/lib/netstandard2.0/Microsoft.Win32.Registry.xml",
         "useSharedDesignerContext.txt",
         "version.txt"
+      ]
+    },
+    "Newtonsoft.Json/13.0.1": {
+      "sha512": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
+      "type": "package",
+      "path": "newtonsoft.json/13.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "newtonsoft.json.13.0.1.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
       ]
     },
     "runtime.native.System.Data.SqlClient.sni/4.7.0": {
@@ -729,7 +811,9 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "Microsoft.Extensions.Caching.Memory >= 6.0.0",
-      "System.Data.SqlClient >= 4.8.3"
+      "Newtonsoft.Json >= 13.0.1",
+      "System.Data.SqlClient >= 4.8.3",
+      "dein.ToolBox >= 1.7.1"
     ]
   },
   "packageFolders": {
@@ -775,9 +859,17 @@
             "target": "Package",
             "version": "[6.0.0, )"
           },
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[13.0.1, )"
+          },
           "System.Data.SqlClient": {
             "target": "Package",
             "version": "[4.8.3, )"
+          },
+          "dein.ToolBox": {
+            "target": "Package",
+            "version": "[1.7.1, )"
           }
         },
         "imports": [
