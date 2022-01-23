@@ -11,6 +11,7 @@
           "Dapper": "2.0.123",
           "GarciaCore.Domain": "1.0.0",
           "GarciaCore.Infrastructure": "1.0.0",
+          "GarciaCore.Persistence": "1.0.0",
           "MediatR": "10.0.1",
           "Microsoft.EntityFrameworkCore": "6.0.1",
           "Microsoft.Extensions.Caching.Memory": "6.0.0",
@@ -287,6 +288,14 @@
         "runtime": {
           "GarciaCore.Infrastructure.dll": {}
         }
+      },
+      "GarciaCore.Persistence/1.0.0": {
+        "dependencies": {
+          "GarciaCore.Domain": "1.0.0"
+        },
+        "runtime": {
+          "GarciaCore.Persistence.dll": {}
+        }
       }
     }
   },
@@ -498,6 +507,11 @@
       "sha512": ""
     },
     "GarciaCore.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "GarciaCore.Persistence/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

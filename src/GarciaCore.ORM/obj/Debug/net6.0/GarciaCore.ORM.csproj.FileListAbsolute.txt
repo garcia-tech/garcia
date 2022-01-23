@@ -15,3 +15,5 @@ C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.ORM\obj\Debug\net
 C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.ORM\obj\Debug\net6.0\GarciaCore.ORM.dll
 C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.ORM\obj\Debug\net6.0\ref\GarciaCore.ORM.dll
 C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.ORM\obj\Debug\net6.0\GarciaCore.ORM.pdb
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.ORM\bin\Debug\net6.0\GarciaCore.Persistence.dll
+C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.ORM\bin\Debug\net6.0\GarciaCore.Persistence.pdb

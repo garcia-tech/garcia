@@ -17,7 +17,6 @@ public abstract partial class Entity
     private List<INotification> _domainEvents = new List<INotification>();
     [JsonIgnore]
     public IReadOnlyCollection<INotification> DomainEvents => _domainEvents?.AsReadOnly();
-    public static string BaseImageUrl { get; set; }
 
     public Entity()
     {
@@ -58,11 +57,17 @@ public abstract partial class Entity
     public override bool Equals(object obj)
     {
         if (obj == null)
+        {
             return false;
+        }
         else if (!(obj is Entity))
+        {
             return false;
+        }
         else
+        {
             return this.Id.Equals(((Entity)obj).Id);
+        }
     }
 
     public override int GetHashCode()

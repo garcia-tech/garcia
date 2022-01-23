@@ -9,4 +9,3 @@ C:\Users\vehbi\source\repos\projects\garciacore\GarciaCore.Domain\bin\Debug\net6
 C:\Users\vehbi\source\repos\projects\garciacore\GarciaCore.Domain\obj\Debug\net6.0\GarciaCore.Domain.dll
 C:\Users\vehbi\source\repos\projects\garciacore\GarciaCore.Domain\obj\Debug\net6.0\ref\GarciaCore.Domain.dll
 C:\Users\vehbi\source\repos\projects\garciacore\GarciaCore.Domain\obj\Debug\net6.0\GarciaCore.Domain.pdb
-C:\Users\vehbi\source\repos\projects\garciacore\GarciaCore.Domain\obj\Debug\net6.0\GarciaCore.Domain.csproj.AssemblyReference.cache

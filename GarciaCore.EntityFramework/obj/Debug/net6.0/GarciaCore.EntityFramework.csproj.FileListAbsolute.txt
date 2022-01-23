@@ -1,0 +1,17 @@
+C:\Users\vehbi\source\repos\projects\garciacore\GarciaCore.EntityFramework\bin\Debug\net6.0\GarciaCore.EntityFramework.deps.json
+C:\Users\vehbi\source\repos\projects\garciacore\GarciaCore.EntityFramework\bin\Debug\net6.0\GarciaCore.EntityFramework.dll
+C:\Users\vehbi\source\repos\projects\garciacore\GarciaCore.EntityFramework\bin\Debug\net6.0\ref\GarciaCore.EntityFramework.dll
+C:\Users\vehbi\source\repos\projects\garciacore\GarciaCore.EntityFramework\bin\Debug\net6.0\GarciaCore.EntityFramework.pdb
+C:\Users\vehbi\source\repos\projects\garciacore\GarciaCore.EntityFramework\bin\Debug\net6.0\GarciaCore.Domain.dll
+C:\Users\vehbi\source\repos\projects\garciacore\GarciaCore.EntityFramework\bin\Debug\net6.0\GarciaCore.Persistence.dll
+C:\Users\vehbi\source\repos\projects\garciacore\GarciaCore.EntityFramework\bin\Debug\net6.0\GarciaCore.Persistence.pdb
+C:\Users\vehbi\source\repos\projects\garciacore\GarciaCore.EntityFramework\bin\Debug\net6.0\GarciaCore.Domain.pdb
+C:\Users\vehbi\source\repos\projects\garciacore\GarciaCore.EntityFramework\obj\Debug\net6.0\GarciaCore.EntityFramework.csproj.AssemblyReference.cache
+C:\Users\vehbi\source\repos\projects\garciacore\GarciaCore.EntityFramework\obj\Debug\net6.0\GarciaCore.EntityFramework.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vehbi\source\repos\projects\garciacore\GarciaCore.EntityFramework\obj\Debug\net6.0\GarciaCore.EntityFramework.AssemblyInfoInputs.cache
+C:\Users\vehbi\source\repos\projects\garciacore\GarciaCore.EntityFramework\obj\Debug\net6.0\GarciaCore.EntityFramework.AssemblyInfo.cs
+C:\Users\vehbi\source\repos\projects\garciacore\GarciaCore.EntityFramework\obj\Debug\net6.0\GarciaCore.EntityFramework.csproj.CoreCompileInputs.cache
+C:\Users\vehbi\source\repos\projects\garciacore\GarciaCore.EntityFramework\obj\Debug\net6.0\GarciaCore.EntityFramework.csproj.CopyComplete
+C:\Users\vehbi\source\repos\projects\garciacore\GarciaCore.EntityFramework\obj\Debug\net6.0\GarciaCore.EntityFramework.dll
+C:\Users\vehbi\source\repos\projects\garciacore\GarciaCore.EntityFramework\obj\Debug\net6.0\ref\GarciaCore.EntityFramework.dll
+C:\Users\vehbi\source\repos\projects\garciacore\GarciaCore.EntityFramework\obj\Debug\net6.0\GarciaCore.EntityFramework.pdb

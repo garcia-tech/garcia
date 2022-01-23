@@ -13,7 +13,7 @@ using GarciaCore.Domain;
 
 namespace GarciaCore.ORM;
 
-public class Repository
+public class GarciaCoreRepository
 {
     protected List<Type> cachingEnabledTypes = new List<Type>()
     {
@@ -32,7 +32,7 @@ public class Repository
     protected DatabaseConnection _databaseConnection;
     protected DatabaseSettings _databaseSettings;
 
-    protected Repository(IOptions<Settings> settings, IOptions<DatabaseSettings> databaseSettings)
+    protected GarciaCoreRepository(IOptions<Settings> settings, IOptions<DatabaseSettings> databaseSettings)
     {
         _settings = settings.Value;
         _databaseSettings = databaseSettings.Value;

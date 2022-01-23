@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\GarciaCore.Domain\GarciaCore.Domain.csproj" />
+    <ProjectReference Include="..\..\GarciaCore.Persistence\GarciaCore.Persistence.csproj" />
     <ProjectReference Include="..\GarciaCore.Infrastructure\GarciaCore.Infrastructure.csproj" />
   </ItemGroup>
 
