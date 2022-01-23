@@ -1,9 +1,5 @@
 ﻿using GarciaCore.Infrastructure;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Text;
 
 namespace GarciaCore.ORM
 {
@@ -19,7 +15,7 @@ namespace GarciaCore.ORM
 
         public DatabaseConnection GetConnection()
         {
-            switch(_databaseSettings.Value.DatabaseType)
+            switch (_databaseSettings.Value.DatabaseType)
             {
                 case DatabaseType.Mssql:
                     return new MssqlDatabaseConnection(_databaseSettings);

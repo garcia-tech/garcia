@@ -1,11 +1,9 @@
 ﻿using GarciaCore.Infrastructure;
 using Microsoft.Extensions.Options;
 using Npgsql;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
 
 namespace GarciaCore.ORM
 {

@@ -1,10 +1,8 @@
-﻿using System;
+﻿using GarciaCore.Infrastructure;
+using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Data.SqlClient;
-using GarciaCore.Infrastructure;
-using Microsoft.Extensions.Options;
 using System.Linq;
 
 namespace GarciaCore.ORM

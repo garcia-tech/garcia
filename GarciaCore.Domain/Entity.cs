@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MediatR;
 using System.Text.Json.Serialization;
-using MediatR;
 
 namespace GarciaCore.Domain;
 

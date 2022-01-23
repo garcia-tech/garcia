@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GarciaCore.Domain;
+﻿namespace GarciaCore.Domain;
 
 public interface IEntity
 {

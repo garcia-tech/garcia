@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using GarciaCore.Domain;
 using GarciaCore.Infrastructure;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
@@ -7,9 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
-using GarciaCore.Domain;
 
 namespace GarciaCore.ORM;
 

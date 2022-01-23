@@ -1,9 +1,7 @@
 ﻿using GarciaCore.Infrastructure;
 using Microsoft.Extensions.Options;
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 
 namespace GarciaCore.ORM
 {
