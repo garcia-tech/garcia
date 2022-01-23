@@ -4,20 +4,22 @@ using System;
 
 namespace GarciaCore.Infrastructure
 {
-    public class GarciaCoreMemoryCache : MemoryCache
+    public class GarciaCoreMemoryCache : IGarciaCoreCache
     {
         protected Settings _settings;
+        protected MemoryCache _memoryCache;
 
-        public GarciaCoreMemoryCache(IOptions<MemoryCacheOptions> optionsAccessor, IOptions<Settings> settings) : base(optionsAccessor)
+        public GarciaCoreMemoryCache(IOptions<MemoryCacheOptions> optionsAccessor, IOptions<Settings> settings)
         {
             _settings = settings.Value;
+            _memoryCache = new MemoryCache(optionsAccessor);
         }
 
         public GarciaCoreMemoryCache(IOptions<Settings> settings) : this(new MemoryCacheOptions() { }, settings)
         {
         }
 
-        public TItem SetItem<TItem>(object key, TItem item)
+        public virtual TItem Set<TItem>(object key, TItem item)
         {
             int minutes = _settings.CacheExpirationTimeInMinutes;
 
@@ -27,8 +29,18 @@ namespace GarciaCore.Infrastructure
                 return item;
             }
 
-            TItem result = this.Set(key, item, new TimeSpan(0, minutes, 0));
+            TItem result = _memoryCache.Set(key, item, new TimeSpan(0, minutes, 0));
             return result;
+        }
+
+        public void Remove(string name)
+        {
+            _memoryCache.Remove(name);
+        }
+
+        public TItem Get<TItem>(object key)
+        {
+            return _memoryCache.Get<TItem>(key);
         }
     }
 }

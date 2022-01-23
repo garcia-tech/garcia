@@ -27,15 +27,14 @@ public class GarciaCoreRepository
     }
 
     protected Settings _settings;
-    protected GarciaCoreMemoryCache cache;
+    protected IGarciaCoreCache cache;
     protected DatabaseConnection _databaseConnection;
     protected DatabaseSettings _databaseSettings;
 
-    protected GarciaCoreRepository(IOptions<Settings> settings, IOptions<DatabaseSettings> databaseSettings)
+    protected GarciaCoreRepository(IOptions<Settings> settings, IOptions<DatabaseSettings> databaseSettings, IGarciaCoreCache cache)
     {
         _settings = settings.Value;
         _databaseSettings = databaseSettings.Value;
-        cache = new GarciaCoreMemoryCache(settings);
         _databaseConnection = new DatabaseConnectionFactory(databaseSettings).GetConnection();
     }
 
@@ -45,7 +44,7 @@ public class GarciaCoreRepository
         if (this.IsCachingEnabled<T>())
         {
             var items = await GetItemsFromDbAsync<T>(null);
-            cache.SetItem(typeof(T).Name, items);
+            cache.Set(typeof(T).Name, items);
         }
     }
 
@@ -183,7 +182,7 @@ public class GarciaCoreRepository
         if (cache.Get<List<T>>(typeName) == null)
         {
             var items = await GetItemsFromDbAsync<T>(null);
-            cache.SetItem(typeName, items);
+            cache.Set(typeName, items);
         }
 
         return cache.Get<List<T>>(typeName);
