@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "acoq4lLCQy8dOrSDotrFp4VCpFWGGjm9QTVMRZ4MD+aaVfvVIZNMhZUK21FUM3kmNoaWPomG/X5SnkByDrE6mw==",
+  "success": true,
+  "projectFilePath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/GarciaCore.Persistence.csproj",
+  "expectedPackageFiles": [
+    "/Users/vehbiyurdakurban/.nuget/packages/mediatr/10.0.1/mediatr.10.0.1.nupkg.sha512",
+    "/Users/vehbiyurdakurban/.nuget/packages/mediatr.contracts/1.0.1/mediatr.contracts.1.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

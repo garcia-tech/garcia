@@ -1191,8 +1191,8 @@
     },
     "GarciaCore.Domain/1.0.0": {
       "type": "project",
-      "path": "../../GarciaCore.Domain/GarciaCore.Domain.csproj",
-      "msbuildProject": "../../GarciaCore.Domain/GarciaCore.Domain.csproj"
+      "path": "../GarciaCore.Domain/GarciaCore.Domain.csproj",
+      "msbuildProject": "../GarciaCore.Domain/GarciaCore.Domain.csproj"
     },
     "GarciaCore.Infrastructure/1.0.0": {
       "type": "project",
@@ -1201,8 +1201,8 @@
     },
     "GarciaCore.Persistence/1.0.0": {
       "type": "project",
-      "path": "../../GarciaCore.Persistence/GarciaCore.Persistence.csproj",
-      "msbuildProject": "../../GarciaCore.Persistence/GarciaCore.Persistence.csproj"
+      "path": "../GarciaCore.Persistence/GarciaCore.Persistence.csproj",
+      "msbuildProject": "../GarciaCore.Persistence/GarciaCore.Persistence.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -1219,40 +1219,38 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\vehbi\\.nuget\\packages\\": {}
+    "/Users/vehbiyurdakurban/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\vehbi\\source\\repos\\projects\\garciacore\\src\\GarciaCore.ORM\\GarciaCore.ORM.csproj",
+      "projectUniqueName": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.ORM/GarciaCore.ORM.csproj",
       "projectName": "GarciaCore.ORM",
-      "projectPath": "C:\\Users\\vehbi\\source\\repos\\projects\\garciacore\\src\\GarciaCore.ORM\\GarciaCore.ORM.csproj",
-      "packagesPath": "C:\\Users\\vehbi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\vehbi\\source\\repos\\projects\\garciacore\\src\\GarciaCore.ORM\\obj\\",
+      "projectPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.ORM/GarciaCore.ORM.csproj",
+      "packagesPath": "/Users/vehbiyurdakurban/.nuget/packages/",
+      "outputPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.ORM/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\vehbi\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/vehbiyurdakurban/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\vehbi\\source\\repos\\projects\\garciacore\\GarciaCore.Domain\\GarciaCore.Domain.csproj": {
-              "projectPath": "C:\\Users\\vehbi\\source\\repos\\projects\\garciacore\\GarciaCore.Domain\\GarciaCore.Domain.csproj"
+            "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Domain/GarciaCore.Domain.csproj": {
+              "projectPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Domain/GarciaCore.Domain.csproj"
             },
-            "C:\\Users\\vehbi\\source\\repos\\projects\\garciacore\\GarciaCore.Persistence\\GarciaCore.Persistence.csproj": {
-              "projectPath": "C:\\Users\\vehbi\\source\\repos\\projects\\garciacore\\GarciaCore.Persistence\\GarciaCore.Persistence.csproj"
+            "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Infrastructure/GarciaCore.Infrastructure.csproj": {
+              "projectPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Infrastructure/GarciaCore.Infrastructure.csproj"
             },
-            "C:\\Users\\vehbi\\source\\repos\\projects\\garciacore\\src\\GarciaCore.Infrastructure\\GarciaCore.Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\vehbi\\source\\repos\\projects\\garciacore\\src\\GarciaCore.Infrastructure\\GarciaCore.Infrastructure.csproj"
+            "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/GarciaCore.Persistence.csproj": {
+              "projectPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/GarciaCore.Persistence.csproj"
             }
           }
         }
@@ -1307,7 +1305,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/Users/vehbiyurdakurban/.dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
       }
     }
   }

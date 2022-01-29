@@ -7,13 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.ORM", "src\Garci
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Infrastructure", "src\GarciaCore.Infrastructure\GarciaCore.Infrastructure.csproj", "{9D55FE1B-20CF-4579-8747-352CD2E1DBA5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Domain", "GarciaCore.Domain\GarciaCore.Domain.csproj", "{BD2F2F1C-9B76-4552-81FB-E441EE142AA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Domain", "src\GarciaCore.Domain\GarciaCore.Domain.csproj", "{BD2F2F1C-9B76-4552-81FB-E441EE142AA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.Persistence", "GarciaCore.Persistence\GarciaCore.Persistence.csproj", "{910268B2-274A-4728-ACA6-44327C537703}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.Persistence", "src\GarciaCore.Persistence\GarciaCore.Persistence.csproj", "{910268B2-274A-4728-ACA6-44327C537703}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.EntityFramework", "GarciaCore.EntityFramework\GarciaCore.EntityFramework.csproj", "{866D0536-6B02-4449-994B-9B0BB9944198}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.EntityFramework", "src\GarciaCore.EntityFramework\GarciaCore.EntityFramework.csproj", "{866D0536-6B02-4449-994B-9B0BB9944198}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.Cli", "GarciaCore.Cli\GarciaCore.Cli.csproj", "{5FD5A822-C575-4E18-BFF5-56AE8796A44E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.Cli", "src\GarciaCore.Cli\GarciaCore.Cli.csproj", "{5FD5A822-C575-4E18-BFF5-56AE8796A44E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

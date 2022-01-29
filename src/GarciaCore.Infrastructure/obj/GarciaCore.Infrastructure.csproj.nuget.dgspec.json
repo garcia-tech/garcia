@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vehbi\\source\\repos\\projects\\garciacore\\src\\GarciaCore.Infrastructure\\GarciaCore.Infrastructure.csproj": {}
+    "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Infrastructure/GarciaCore.Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vehbi\\source\\repos\\projects\\garciacore\\src\\GarciaCore.Infrastructure\\GarciaCore.Infrastructure.csproj": {
+    "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Infrastructure/GarciaCore.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vehbi\\source\\repos\\projects\\garciacore\\src\\GarciaCore.Infrastructure\\GarciaCore.Infrastructure.csproj",
+        "projectUniqueName": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Infrastructure/GarciaCore.Infrastructure.csproj",
         "projectName": "GarciaCore.Infrastructure",
-        "projectPath": "C:\\Users\\vehbi\\source\\repos\\projects\\garciacore\\src\\GarciaCore.Infrastructure\\GarciaCore.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\vehbi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vehbi\\source\\repos\\projects\\garciacore\\src\\GarciaCore.Infrastructure\\obj\\",
+        "projectPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Infrastructure/GarciaCore.Infrastructure.csproj",
+        "packagesPath": "/Users/vehbiyurdakurban/.nuget/packages/",
+        "outputPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Infrastructure/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\vehbi\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/vehbiyurdakurban/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -72,7 +70,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/Users/vehbiyurdakurban/.dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
         }
       }
     }
