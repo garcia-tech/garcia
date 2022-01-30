@@ -1,0 +1,12 @@
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Application/bin/Debug/net6.0/GarciaCore.Application.deps.json
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Application/bin/Debug/net6.0/GarciaCore.Application.dll
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Application/bin/Debug/net6.0/ref/GarciaCore.Application.dll
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Application/bin/Debug/net6.0/GarciaCore.Application.pdb
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Application/obj/Debug/net6.0/GarciaCore.Application.csproj.AssemblyReference.cache
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Application/obj/Debug/net6.0/GarciaCore.Application.GeneratedMSBuildEditorConfig.editorconfig
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Application/obj/Debug/net6.0/GarciaCore.Application.AssemblyInfoInputs.cache
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Application/obj/Debug/net6.0/GarciaCore.Application.AssemblyInfo.cs
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Application/obj/Debug/net6.0/GarciaCore.Application.csproj.CoreCompileInputs.cache
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Application/obj/Debug/net6.0/GarciaCore.Application.dll
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Application/obj/Debug/net6.0/ref/GarciaCore.Application.dll
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Application/obj/Debug/net6.0/GarciaCore.Application.pdb

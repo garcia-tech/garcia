@@ -213,6 +213,16 @@
           "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
+      "GarciaCore.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/GarciaCore.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/GarciaCore.Application.dll": {}
+        }
+      },
       "GarciaCore.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -594,6 +604,11 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "GarciaCore.Application/1.0.0": {
+      "type": "project",
+      "path": "../GarciaCore.Application/GarciaCore.Application.csproj",
+      "msbuildProject": "../GarciaCore.Application/GarciaCore.Application.csproj"
+    },
     "GarciaCore.Domain/1.0.0": {
       "type": "project",
       "path": "../GarciaCore.Domain/GarciaCore.Domain.csproj",
@@ -607,6 +622,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "GarciaCore.Application >= 1.0.0",
       "GarciaCore.Persistence >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 6.0.1"
     ]
@@ -636,6 +652,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+            "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Application/GarciaCore.Application.csproj": {
+              "projectPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Application/GarciaCore.Application.csproj"
+            },
             "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/GarciaCore.Persistence.csproj": {
               "projectPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/GarciaCore.Persistence.csproj"
             }

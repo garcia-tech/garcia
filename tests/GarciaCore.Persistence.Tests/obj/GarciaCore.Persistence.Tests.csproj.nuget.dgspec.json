@@ -1,0 +1,485 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/vehbiyurdakurban/source/repos/projects/garciacore/tests/GarciaCore.Persistence.Tests/GarciaCore.Persistence.Tests.csproj": {}
+  },
+  "projects": {
+    "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Application/GarciaCore.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Application/GarciaCore.Application.csproj",
+        "projectName": "GarciaCore.Application",
+        "projectPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Application/GarciaCore.Application.csproj",
+        "packagesPath": "/Users/vehbiyurdakurban/.nuget/packages/",
+        "outputPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Application/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/vehbiyurdakurban/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/Users/vehbiyurdakurban/.dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Domain/GarciaCore.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Domain/GarciaCore.Domain.csproj",
+        "projectName": "GarciaCore.Domain",
+        "projectPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Domain/GarciaCore.Domain.csproj",
+        "packagesPath": "/Users/vehbiyurdakurban/.nuget/packages/",
+        "outputPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/vehbiyurdakurban/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "MediatR": {
+              "target": "Package",
+              "version": "[10.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/Users/vehbiyurdakurban/.dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.EntityFramework/GarciaCore.EntityFramework.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.EntityFramework/GarciaCore.EntityFramework.csproj",
+        "projectName": "GarciaCore.EntityFramework",
+        "projectPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.EntityFramework/GarciaCore.EntityFramework.csproj",
+        "packagesPath": "/Users/vehbiyurdakurban/.nuget/packages/",
+        "outputPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.EntityFramework/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/vehbiyurdakurban/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Application/GarciaCore.Application.csproj": {
+                "projectPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Application/GarciaCore.Application.csproj"
+              },
+              "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/GarciaCore.Persistence.csproj": {
+                "projectPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/GarciaCore.Persistence.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/Users/vehbiyurdakurban/.dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Infrastructure/GarciaCore.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Infrastructure/GarciaCore.Infrastructure.csproj",
+        "projectName": "GarciaCore.Infrastructure",
+        "projectPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Infrastructure/GarciaCore.Infrastructure.csproj",
+        "packagesPath": "/Users/vehbiyurdakurban/.nuget/packages/",
+        "outputPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/vehbiyurdakurban/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.Extensions.Caching.Memory": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.3, )"
+            },
+            "dein.ToolBox": {
+              "target": "Package",
+              "version": "[1.7.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/Users/vehbiyurdakurban/.dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.ORM/GarciaCore.ORM.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.ORM/GarciaCore.ORM.csproj",
+        "projectName": "GarciaCore.ORM",
+        "projectPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.ORM/GarciaCore.ORM.csproj",
+        "packagesPath": "/Users/vehbiyurdakurban/.nuget/packages/",
+        "outputPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.ORM/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/vehbiyurdakurban/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Domain/GarciaCore.Domain.csproj": {
+                "projectPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Domain/GarciaCore.Domain.csproj"
+              },
+              "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Infrastructure/GarciaCore.Infrastructure.csproj": {
+                "projectPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Infrastructure/GarciaCore.Infrastructure.csproj"
+              },
+              "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/GarciaCore.Persistence.csproj": {
+                "projectPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/GarciaCore.Persistence.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.123, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[10.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "Microsoft.Extensions.Caching.Memory": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[6.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/Users/vehbiyurdakurban/.dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/GarciaCore.Persistence.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/GarciaCore.Persistence.csproj",
+        "projectName": "GarciaCore.Persistence",
+        "projectPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/GarciaCore.Persistence.csproj",
+        "packagesPath": "/Users/vehbiyurdakurban/.nuget/packages/",
+        "outputPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/vehbiyurdakurban/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Domain/GarciaCore.Domain.csproj": {
+                "projectPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Domain/GarciaCore.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/Users/vehbiyurdakurban/.dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/vehbiyurdakurban/source/repos/projects/garciacore/tests/GarciaCore.Persistence.Tests/GarciaCore.Persistence.Tests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/tests/GarciaCore.Persistence.Tests/GarciaCore.Persistence.Tests.csproj",
+        "projectName": "GarciaCore.Persistence.Tests",
+        "projectPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/tests/GarciaCore.Persistence.Tests/GarciaCore.Persistence.Tests.csproj",
+        "packagesPath": "/Users/vehbiyurdakurban/.nuget/packages/",
+        "outputPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/tests/GarciaCore.Persistence.Tests/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/vehbiyurdakurban/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.EntityFramework/GarciaCore.EntityFramework.csproj": {
+                "projectPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.EntityFramework/GarciaCore.EntityFramework.csproj"
+              },
+              "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.ORM/GarciaCore.ORM.csproj": {
+                "projectPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.ORM/GarciaCore.ORM.csproj"
+              },
+              "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/GarciaCore.Persistence.csproj": {
+                "projectPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/GarciaCore.Persistence.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.11.0, )"
+            },
+            "coverlet.collector": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.4.1, )"
+            },
+            "xunit.runner.visualstudio": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.4.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/Users/vehbiyurdakurban/.dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

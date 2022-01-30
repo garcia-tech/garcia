@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace GarciaCore.EntityFramework;
 
-public class EntityFrameworkRepository<T> : BaseRepository<T> where T : Entity
+public partial class EntityFrameworkRepository<T> : BaseRepository<T> where T : Entity
 {
     protected readonly DbContext _dbContext;
 
