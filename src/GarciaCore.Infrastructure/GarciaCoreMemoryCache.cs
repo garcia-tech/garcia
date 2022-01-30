@@ -2,45 +2,44 @@
 using Microsoft.Extensions.Options;
 using System;
 
-namespace GarciaCore.Infrastructure
+namespace GarciaCore.Infrastructure;
+
+public class GarciaCoreMemoryCache : IGarciaCoreCache
 {
-    public class GarciaCoreMemoryCache : IGarciaCoreCache
+    protected Settings _settings;
+    protected MemoryCache _memoryCache;
+
+    public GarciaCoreMemoryCache(IOptions<MemoryCacheOptions> optionsAccessor, IOptions<Settings> settings)
     {
-        protected Settings _settings;
-        protected MemoryCache _memoryCache;
+        _settings = settings.Value;
+        _memoryCache = new MemoryCache(optionsAccessor);
+    }
 
-        public GarciaCoreMemoryCache(IOptions<MemoryCacheOptions> optionsAccessor, IOptions<Settings> settings)
+    public GarciaCoreMemoryCache(IOptions<Settings> settings) : this(new MemoryCacheOptions() { }, settings)
+    {
+    }
+
+    public virtual TItem Set<TItem>(object key, TItem item)
+    {
+        int minutes = _settings.CacheExpirationTimeInMinutes;
+
+        if (minutes == 0)
         {
-            _settings = settings.Value;
-            _memoryCache = new MemoryCache(optionsAccessor);
+            //Provider.CachingEnabled = false;
+            return item;
         }
 
-        public GarciaCoreMemoryCache(IOptions<Settings> settings) : this(new MemoryCacheOptions() { }, settings)
-        {
-        }
+        TItem result = _memoryCache.Set(key, item, new TimeSpan(0, minutes, 0));
+        return result;
+    }
 
-        public virtual TItem Set<TItem>(object key, TItem item)
-        {
-            int minutes = _settings.CacheExpirationTimeInMinutes;
+    public void Remove(string name)
+    {
+        _memoryCache.Remove(name);
+    }
 
-            if (minutes == 0)
-            {
-                //Provider.CachingEnabled = false;
-                return item;
-            }
-
-            TItem result = _memoryCache.Set(key, item, new TimeSpan(0, minutes, 0));
-            return result;
-        }
-
-        public void Remove(string name)
-        {
-            _memoryCache.Remove(name);
-        }
-
-        public TItem Get<TItem>(object key)
-        {
-            return _memoryCache.Get<TItem>(key);
-        }
+    public TItem Get<TItem>(object key)
+    {
+        return _memoryCache.Get<TItem>(key);
     }
 }

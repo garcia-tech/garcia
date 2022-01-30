@@ -1,11 +1,10 @@
-﻿namespace GarciaCore.Infrastructure
+﻿namespace GarciaCore.Infrastructure;
+
+public enum DatabaseType
 {
-    public enum DatabaseType
-    {
-        Mssql = 0,
-        Postgresql = 1,
-        Mysql = 2,
-        Mongodb = 3,
-        Cassandra = 4
-    }
+    Mssql = 0,
+    Postgresql = 1,
+    Mysql = 2,
+    Mongodb = 3,
+    Cassandra = 4
 }
