@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using GarciaCore.Domain;
+using GarciaCore.Persistence.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
@@ -12,7 +13,7 @@ public class EntityFrameworkTestFixture
     private const string ConnectionString =
         @"Server=(localdb)\mssqllocaldb;Database=EFTestSample;Trusted_Connection=True";
 
-    private ORM.EntityFrameworkRepository<TestEntity> _repository;
+    private EntityFrameworkRepository<TestEntity> _repository );
 
     private static readonly object _lock = new();
     private static bool _databaseInitialized;

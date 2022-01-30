@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
-namespace GarciaCore.ORM
+namespace GarciaCore.Persistence.ORM
 {
     public class PostgresqlDatabaseConnection : DatabaseConnection
     {

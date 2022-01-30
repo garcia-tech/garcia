@@ -5,7 +5,7 @@
 //using System.Text;
 //using GarciaCore.Domain;
 
-//namespace GarciaCore.ORM;
+//namespace GarciaCore.Persistence.ORM;
 
 //public abstract partial class Entity
 //{

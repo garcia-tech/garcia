@@ -5,7 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 
-namespace GarciaCore.ORM
+namespace GarciaCore.Persistence.ORM
 {
     public class MssqlDatabaseConnection : DatabaseConnection
     {

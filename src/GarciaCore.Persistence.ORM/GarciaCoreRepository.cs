@@ -10,7 +10,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace GarciaCore.ORM;
+namespace GarciaCore.Persistence.ORM;
 
 public class GarciaCoreRepository
 {

@@ -3,21 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.ORM", "src\GarciaCore.ORM\GarciaCore.ORM.csproj", "{9C0E97BF-1AD7-4738-A678-4397C7D7164D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Persistence.ORM", "src\GarciaCore.Persistence.ORM\GarciaCore.Persistence.ORM.csproj", "{9C0E97BF-1AD7-4738-A678-4397C7D7164D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Infrastructure", "src\GarciaCore.Infrastructure\GarciaCore.Infrastructure.csproj", "{9D55FE1B-20CF-4579-8747-352CD2E1DBA5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Domain", "src\GarciaCore.Domain\GarciaCore.Domain.csproj", "{BD2F2F1C-9B76-4552-81FB-E441EE142AA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.Persistence", "src\GarciaCore.Persistence\GarciaCore.Persistence.csproj", "{910268B2-274A-4728-ACA6-44327C537703}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Persistence", "src\GarciaCore.Persistence\GarciaCore.Persistence.csproj", "{910268B2-274A-4728-ACA6-44327C537703}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.EntityFramework", "src\GarciaCore.EntityFramework\GarciaCore.EntityFramework.csproj", "{866D0536-6B02-4449-994B-9B0BB9944198}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.Persistence.EntityFramework", "src\GarciaCore.Persistence.EntityFramework\GarciaCore.Persistence.EntityFramework.csproj", "{866D0536-6B02-4449-994B-9B0BB9944198}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.Cli", "src\GarciaCore.Cli\GarciaCore.Cli.csproj", "{5FD5A822-C575-4E18-BFF5-56AE8796A44E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Cli", "src\GarciaCore.Cli\GarciaCore.Cli.csproj", "{5FD5A822-C575-4E18-BFF5-56AE8796A44E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.Persistence.Tests", "tests\GarciaCore.Persistence.Tests\GarciaCore.Persistence.Tests.csproj", "{9941660D-F8D2-49E0-A1C5-0AC467A51515}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Persistence.Tests", "tests\GarciaCore.Persistence.Tests\GarciaCore.Persistence.Tests.csproj", "{9941660D-F8D2-49E0-A1C5-0AC467A51515}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.Application", "src\GarciaCore.Application\GarciaCore.Application.csproj", "{0F33B788-4300-4B3B-B2C7-5D4F510F3614}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Application", "src\GarciaCore.Application\GarciaCore.Application.csproj", "{0F33B788-4300-4B3B-B2C7-5D4F510F3614}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

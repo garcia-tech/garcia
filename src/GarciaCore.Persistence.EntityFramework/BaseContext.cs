@@ -2,7 +2,7 @@ using GarciaCore.Application;
 using GarciaCore.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace GarciaCore.EntityFramework;
+namespace GarciaCore.Persistence.EntityFramework;
 
 public class BaseContext : DbContext
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GarciaCore.ORM
+namespace GarciaCore.Persistence.ORM
 {
     public class NotSelectedAttribute : Attribute
     {

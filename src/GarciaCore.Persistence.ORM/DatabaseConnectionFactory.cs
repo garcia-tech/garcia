@@ -1,7 +1,7 @@
 ﻿using GarciaCore.Infrastructure;
 using Microsoft.Extensions.Options;
 
-namespace GarciaCore.ORM
+namespace GarciaCore.Persistence.ORM
 {
 
     public class DatabaseConnectionFactory

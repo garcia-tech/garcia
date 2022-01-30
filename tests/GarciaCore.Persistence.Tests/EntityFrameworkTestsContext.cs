@@ -1,4 +1,4 @@
-using GarciaCore.EntityFramework;
+using GarciaCore.Persistence.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 
 namespace GarciaCore.Persistence.Tests;

@@ -3,7 +3,7 @@ using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Data;
 
-namespace GarciaCore.ORM
+namespace GarciaCore.Persistence.ORM
 {
     public abstract class DatabaseConnection
     {

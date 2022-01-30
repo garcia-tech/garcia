@@ -24,6 +24,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\src\GarciaCore.EntityFramework\GarciaCore.EntityFramework.csproj" />
       <ProjectReference Include="..\..\src\GarciaCore.ORM\GarciaCore.ORM.csproj" />
+      <ProjectReference Include="..\..\src\GarciaCore.Persistence.EntityFramework\GarciaCore.Persistence.EntityFramework.csproj" />
       <ProjectReference Include="..\..\src\GarciaCore.Persistence\GarciaCore.Persistence.csproj" />
     </ItemGroup>
 
