@@ -10,7 +10,7 @@
   <ItemGroup>
     <PackageReference Include="dein.ToolBox" Version="1.7.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="TextCopy" Version="5.0.2" />
+    <PackageReference Include="TextCopy" Version="6.1.0" />
   </ItemGroup>
 
   <ItemGroup>

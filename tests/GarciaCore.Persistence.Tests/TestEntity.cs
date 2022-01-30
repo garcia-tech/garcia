@@ -14,6 +14,6 @@ public class TestEntity : Entity
     {
     }
 
-    public int Key { get; set; }
-    public string Name { get; set; }
+    public int Key { get; set; } = 0;
+    public string Name { get; set; } = string.Empty;
 }

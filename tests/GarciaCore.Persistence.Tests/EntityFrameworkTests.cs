@@ -16,7 +16,6 @@ public class EntityFrameworkTestFixture
     private EntityFrameworkRepository<TestEntity> _repository;
 
     private static readonly object _lock = new();
-    private static bool _databaseInitialized;
 
     public EntityFrameworkTestFixture()
     {
