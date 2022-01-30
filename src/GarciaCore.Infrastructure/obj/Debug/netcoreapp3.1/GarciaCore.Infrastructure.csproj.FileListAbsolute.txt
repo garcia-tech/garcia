@@ -1,9 +1,0 @@
-C:\Users\vehbi\source\repos\GarciaCore\src\GarciaCore.Infrastructure\bin\Debug\netcoreapp3.1\GarciaCore.Infrastructure.deps.json
-C:\Users\vehbi\source\repos\GarciaCore\src\GarciaCore.Infrastructure\bin\Debug\netcoreapp3.1\GarciaCore.Infrastructure.dll
-C:\Users\vehbi\source\repos\GarciaCore\src\GarciaCore.Infrastructure\obj\Debug\netcoreapp3.1\GarciaCore.Infrastructure.csprojAssemblyReference.cache
-C:\Users\vehbi\source\repos\GarciaCore\src\GarciaCore.Infrastructure\obj\Debug\netcoreapp3.1\GarciaCore.Infrastructure.AssemblyInfoInputs.cache
-C:\Users\vehbi\source\repos\GarciaCore\src\GarciaCore.Infrastructure\obj\Debug\netcoreapp3.1\GarciaCore.Infrastructure.AssemblyInfo.cs
-C:\Users\vehbi\source\repos\GarciaCore\src\GarciaCore.Infrastructure\obj\Debug\netcoreapp3.1\GarciaCore.Infrastructure.csproj.CoreCompileInputs.cache
-C:\Users\vehbi\source\repos\GarciaCore\src\GarciaCore.Infrastructure\bin\Debug\netcoreapp3.1\GarciaCore.Infrastructure.pdb
-C:\Users\vehbi\source\repos\GarciaCore\src\GarciaCore.Infrastructure\obj\Debug\netcoreapp3.1\GarciaCore.Infrastructure.dll
-C:\Users\vehbi\source\repos\GarciaCore\src\GarciaCore.Infrastructure\obj\Debug\netcoreapp3.1\GarciaCore.Infrastructure.pdb
