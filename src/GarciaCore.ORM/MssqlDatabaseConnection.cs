@@ -1,16 +1,24 @@
-﻿using System;
+﻿using GarciaCore.Infrastructure;
+using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Data.SqlClient;
-using GarciaCore.Infrastructure;
-using Microsoft.Extensions.Options;
 using System.Linq;
 
 namespace GarciaCore.ORM
 {
     public class MssqlDatabaseConnection : DatabaseConnection
     {
+        public override string IdentitySqlStatement => ";select @@identity;";
+        public override string RowCountSqlStatement => "select @@rowcount;";
+        public override string BeginTranSqlStatement => "begin transaction;";
+        public override string CommitTranSqlStatement => "commit transaction";
+        public override string GetDateSqlStatement => "getdate()";
+        public override string ColumnPrefix => "";
+        public override string ColumnPpostfix => "";
+        public override string TablePrefix => "";
+        public override string IdKeyword => string.Format("Id", TablePrefix);
+
         public MssqlDatabaseConnection(IOptions<DatabaseSettings> databaseSettings) : base(databaseSettings)
         {
         }
