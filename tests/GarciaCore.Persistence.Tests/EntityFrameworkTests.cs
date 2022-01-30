@@ -36,4 +36,49 @@ public class EntityFrameworkTestFixture
             new DbContextOptionsBuilder<EntityFrameworkTestsContext>()
                 .UseSqlServer(ConnectionString)
                 .Options);
+
+    [Fact]
+    public void GetByIdAsync()
+    {
+    }
+
+    [Fact]
+    public void GetAllAsync()
+    {
+    }
+
+    [Fact]
+    public void AddAsync()
+    {
+    }
+
+    [Fact]
+    public void UpdateAsync()
+    {
+    }
+
+    [Fact]
+    public void DeleteAsync()
+    {
+    }
+
+    [Fact]
+    public void GetAllAsync2()
+    {
+    }
+
+    [Fact]
+    public void GetByKeyAsync()
+    {
+    }
+
+    [Fact]
+    public void GetAsync()
+    {
+    }
+
+    [Fact]
+    public void GetAsync2()
+    {
+    }
 }
