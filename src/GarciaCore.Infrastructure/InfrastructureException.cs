@@ -1,10 +1,11 @@
 ﻿using System;
 
-namespace GarciaCore.Infrastructure;
-
-public class InfrastructureException : Exception
+namespace GarciaCore.Infrastructure
 {
-    public InfrastructureException(string message) : base(message)
+    public class InfrastructureException : Exception
     {
+        public InfrastructureException(string message) : base(message)
+        {
+        }
     }
 }

@@ -1,7 +1,8 @@
-﻿namespace GarciaCore.Infrastructure;
-
-public class Endpoint
+﻿namespace GarciaCore.Infrastructure
 {
-    public string Name { get; set; }
-    public int Port { get; set; }
+    public class Endpoint
+    {
+        public string Name { get; set; }
+        public int Port { get; set; }
+    }
 }

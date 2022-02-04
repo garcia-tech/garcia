@@ -1,39 +1,43 @@
 using GarciaCore.Application;
 using GarciaCore.Domain;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
-namespace GarciaCore.Persistence.EntityFramework;
-
-public class BaseContext : DbContext
+namespace GarciaCore.Persistence.EntityFramework
 {
-    private readonly ILoggedInUserService _loggedInUserService;
-
-    public BaseContext(DbContextOptions options, ILoggedInUserService loggedInUserService) : base(options)
+    public class BaseContext : DbContext
     {
-        _loggedInUserService = loggedInUserService;
-    }
+        private readonly ILoggedInUserService _loggedInUserService;
 
-    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
-    {
-        foreach (var entry in ChangeTracker.Entries<IEntity>())
+        public BaseContext(DbContextOptions options, ILoggedInUserService loggedInUserService) : base(options)
         {
-            switch (entry.State)
-            {
-                case EntityState.Added:
-                    entry.Entity.CreatedOn = DateTimeOffset.UtcNow;
-                    entry.Entity.CreatedBy = _loggedInUserService?.UserId;
-                    break;
-                case EntityState.Modified:
-                    entry.Entity.LastUpdatedOn = DateTimeOffset.UtcNow;
-                    entry.Entity.LastUpdatedBy = _loggedInUserService?.UserId;
-                    break;
-                case EntityState.Deleted:
-                    entry.Entity.DeletedOn = DateTimeOffset.UtcNow;
-                    entry.Entity.DeletedBy = _loggedInUserService?.UserId;
-                    break;
-            }
+            _loggedInUserService = loggedInUserService;
         }
 
-        return base.SaveChangesAsync(cancellationToken);
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        {
+            foreach (var entry in ChangeTracker.Entries<IEntity>())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        entry.Entity.CreatedOn = DateTimeOffset.UtcNow;
+                        entry.Entity.CreatedBy = _loggedInUserService?.UserId;
+                        break;
+                    case EntityState.Modified:
+                        entry.Entity.LastUpdatedOn = DateTimeOffset.UtcNow;
+                        entry.Entity.LastUpdatedBy = _loggedInUserService?.UserId;
+                        break;
+                    case EntityState.Deleted:
+                        entry.Entity.DeletedOn = DateTimeOffset.UtcNow;
+                        entry.Entity.DeletedBy = _loggedInUserService?.UserId;
+                        break;
+                }
+            }
+
+            return base.SaveChangesAsync(cancellationToken);
+        }
     }
 }

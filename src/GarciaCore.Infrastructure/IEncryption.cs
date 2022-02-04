@@ -1,8 +1,9 @@
-﻿namespace GarciaCore.Infrastructure;
-
-public interface IEncryption
+﻿namespace GarciaCore.Infrastructure
 {
-    string Encrypt(string plainText);
-    string Decrypt(string cipherText);
-    string CreateOneWayHash(string inValue, HashAlgorithm HashAlgorithm = HashAlgorithm.MD5);
+    public interface IEncryption
+    {
+        string Encrypt(string plainText);
+        string Decrypt(string cipherText);
+        string CreateOneWayHash(string inValue, HashAlgorithm HashAlgorithm = HashAlgorithm.MD5);
+    }
 }

@@ -1,7 +1,8 @@
-﻿namespace GarciaCore.Infrastructure;
-
-public interface IRandomNumberGenerator
+﻿namespace GarciaCore.Infrastructure
 {
-    int Generate(int minimumValue, int maximumValue);
-    string GenerateKey(int length);
+    public interface IRandomNumberGenerator
+    {
+        int Generate(int minimumValue, int maximumValue);
+        string GenerateKey(int length);
+    }
 }

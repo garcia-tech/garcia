@@ -1,19 +1,20 @@
 using GarciaCore.Domain;
 
-namespace GarciaCore.Persistence.Tests;
-
-public class TestEntity : Entity
+namespace GarciaCore.Persistence.Tests
 {
-    public TestEntity(int key, string name)
+    public class TestEntity : Entity
     {
-        Key = key;
-        Name = name;
-    }
+        public TestEntity(int key, string name)
+        {
+            Key = key;
+            Name = name;
+        }
 
-    public TestEntity()
-    {
-    }
+        public TestEntity()
+        {
+        }
 
-    public int Key { get; set; } = 0;
-    public string Name { get; set; } = string.Empty;
+        public int Key { get; set; } = 0;
+        public string Name { get; set; } = string.Empty;
+    }
 }

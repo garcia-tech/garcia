@@ -1,6 +1,7 @@
-﻿namespace GarciaCore.Infrastructure;
-
-public class Settings : ISettings
+﻿namespace GarciaCore.Infrastructure
 {
-    public int CacheExpirationTimeInMinutes { get; set; }
+    public class Settings : ISettings
+    {
+        public int CacheExpirationTimeInMinutes { get; set; }
+    }
 }
