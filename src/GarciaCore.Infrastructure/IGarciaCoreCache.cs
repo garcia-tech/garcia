@@ -1,8 +1,9 @@
-﻿namespace GarciaCore.Infrastructure;
-
-public interface IGarciaCoreCache
+﻿namespace GarciaCore.Infrastructure
 {
-    TItem Set<TItem>(object key, TItem item);
-    void Remove(string name);
-    TItem Get<TItem>(object key);
+    public interface IGarciaCoreCache
+    {
+        TItem Set<TItem>(object key, TItem item);
+        void Remove(string name);
+        TItem Get<TItem>(object key);
+    }
 }

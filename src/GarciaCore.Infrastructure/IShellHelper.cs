@@ -1,9 +1,10 @@
 ﻿using ToolBox.Bridge;
 
-namespace GarciaCore.Infrastructure;
-
-public interface IShellHelper
+namespace GarciaCore.Infrastructure
 {
-    Response RunExternalCommand(string command);
-    Response RunInternalCommand(string command);
+    public interface IShellHelper
+    {
+        Response RunExternalCommand(string command);
+        Response RunInternalCommand(string command);
+    }
 }

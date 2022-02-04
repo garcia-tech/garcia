@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net5.0</TargetFramework>
         <Nullable>enable</Nullable>
 
         <IsPackable>false</IsPackable>
@@ -22,8 +22,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\GarciaCore.EntityFramework\GarciaCore.EntityFramework.csproj" />
-      <ProjectReference Include="..\..\src\GarciaCore.ORM\GarciaCore.ORM.csproj" />
+     
+      <ProjectReference Include="..\..\src\GarciaCore.Persistence.ORM\GarciaCore.Persistence.ORM.csproj" />
       <ProjectReference Include="..\..\src\GarciaCore.Persistence.EntityFramework\GarciaCore.Persistence.EntityFramework.csproj" />
       <ProjectReference Include="..\..\src\GarciaCore.Persistence\GarciaCore.Persistence.csproj" />
     </ItemGroup>

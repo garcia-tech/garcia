@@ -1,6 +1,7 @@
-﻿namespace GarciaCore.Application;
-
-public interface ILoggedInUserService
+﻿namespace GarciaCore.Application
 {
-    public int UserId { get; set; }
+    public interface ILoggedInUserService
+    {
+        public int UserId { get; set; }
+    }
 }
