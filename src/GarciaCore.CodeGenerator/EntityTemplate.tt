@@ -9,5 +9,21 @@ namespace <#= Namespace #>
 {
     public partial class <#= Item.Name #> : <#= BaseClass #>
     {
+<#
+        foreach (var property in Item.Properties)
+	    {
+            string innerTypeName = this.generator.GetInnerTypeName(property);
+#>
+        public <#= innerTypeName #> _<#= property.Name.ToPascalCase() #>;
+<#
+        }
+#>
     }
 }
+
+<#+
+    protected override Generator CreateGenerator()
+	{
+		return new EntityGenerator();
+	}
+#>

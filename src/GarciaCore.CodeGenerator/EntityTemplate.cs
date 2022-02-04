@@ -55,9 +55,54 @@ namespace GarciaCore.CodeGenerator
             
             #line default
             #line hidden
-            this.Write("\n    {\n    }\n}");
+            this.Write("\n    {\n");
+            
+            #line 1 "C:\Users\vehbi\source\repos\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+
+        foreach (var property in Item.Properties)
+	    {
+            string innerTypeName = this.generator.GetInnerTypeName(property);
+
+            
+            #line default
+            #line hidden
+            this.Write("\n        public ");
+            
+            #line 1 "C:\Users\vehbi\source\repos\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(innerTypeName));
+            
+            #line default
+            #line hidden
+            this.Write(" _");
+            
+            #line 1 "C:\Users\vehbi\source\repos\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToPascalCase()));
+            
+            #line default
+            #line hidden
+            this.Write(";\n");
+            
+            #line 1 "C:\Users\vehbi\source\repos\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+
+        }
+
+            
+            #line default
+            #line hidden
+            this.Write("\n    }\n}\n\n");
             return this.GenerationEnvironment.ToString();
         }
+        
+        #line 1 "C:\Users\vehbi\source\repos\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+
+    protected override Generator CreateGenerator()
+	{
+		return new EntityGenerator();
+	}
+
+        
+        #line default
+        #line hidden
     }
     
     #line default
