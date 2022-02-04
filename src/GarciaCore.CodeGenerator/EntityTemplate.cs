@@ -13,6 +13,7 @@ namespace GarciaCore.CodeGenerator
     using System.Text;
     using System.Collections.Generic;
     using GarciaCore.CodeGenerator;
+    using GarciaCore.Infrastructure;
     using System;
     
     /// <summary>
@@ -29,6 +30,7 @@ namespace GarciaCore.CodeGenerator
         /// </summary>
         public override string TransformText()
         {
+            this.Write("\n");
             this.Write("\n");
             this.Write("\n");
             this.Write("\n");

@@ -1,4 +1,5 @@
-﻿using GarciaCore.Infrastructure;
+﻿using GarciaCore.CodeGenerator;
+using GarciaCore.Infrastructure;
 using System;
 using TextCopy;
 using ToolBox.Bridge;
@@ -17,6 +18,7 @@ namespace MigrationNameGenerator
                 Console.WriteLine("Options:");
                 Console.WriteLine("\tmigrate");
                 Console.WriteLine("\tmigrateandupdatedatabase");
+                Console.WriteLine("\tgenerate");
                 return;
             }
 
@@ -31,6 +33,19 @@ namespace MigrationNameGenerator
                     var migrationName2 = CreateAndCopyMigrationName(true);
                     Response result2 = _shellHelper.RunInternalCommand(migrationName2);
                     Console.WriteLine(result2);
+                    break;
+                case "generate":
+                    var item = new Item()
+                    {
+                        Name = "Test",
+                        Properties = new System.Collections.Generic.List<ItemProperty>()
+                        {
+                            new ItemProperty(){Name = "Test property", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
+                            new ItemProperty(){Name = "Test property list", Type = ItemPropertyType.Integer, MappingType = ItemPropertyMappingType.List }
+                        }
+                    };
+                    var text = Generate(item);
+                    Console.WriteLine(text);
                     break;
                 default:
                     break;
@@ -65,6 +80,12 @@ namespace MigrationNameGenerator
             Clipboard clipboard = new();
             clipboard.SetText(text);
             return text;
+        }
+
+        static string Generate(Item item)
+        {
+            var generator = new EntityGenerator();
+            return generator.Generate(item);
         }
     }
 }

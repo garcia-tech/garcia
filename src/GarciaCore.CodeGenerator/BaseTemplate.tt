@@ -4,13 +4,16 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="GarciaCore.CodeGenerator" #>
+<#@ import namespace="GarciaCore.Infrastructure" #>
+<#@ include file="IncludeWarning.t4" #>
+<#@ include file="IncludeUsings.t4" #> 
 <#+
 protected Generator generator;
 
 public BaseTemplate() 
 {
     this.generator = this.CreateGenerator();
-}
+} 
     
 protected virtual Generator CreateGenerator()
 {

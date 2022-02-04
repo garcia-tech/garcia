@@ -13,6 +13,7 @@ namespace GarciaCore.CodeGenerator
     using System.Text;
     using System.Collections.Generic;
     using GarciaCore.CodeGenerator;
+    using GarciaCore.Infrastructure;
     using System;
     
     /// <summary>
@@ -35,6 +36,15 @@ namespace GarciaCore.CodeGenerator
             this.Write("\n");
             this.Write("\n");
             this.Write("\n");
+            this.Write("\n");
+            this.Write("/*\r\n\tThis file was generated automatically by Garcia Framework. \r\n\tDo not edit ma" +
+                    "nually. \r\n\tAdd a new partial class with the same name if you want to add extra f" +
+                    "unctionality.\r\n*/");
+            this.Write("\n");
+            this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing System.Data;\r\nusing Syste" +
+                    "m.Linq;\r\nusing System.ComponentModel.DataAnnotations;\r\nusing GarciaCore.Infrastr" +
+                    "ucture;");
+            this.Write(" \n");
             return this.GenerationEnvironment.ToString();
         }
         
@@ -45,7 +55,7 @@ protected Generator generator;
 public BaseTemplate() 
 {
     this.generator = this.CreateGenerator();
-}
+} 
     
 protected virtual Generator CreateGenerator()
 {
