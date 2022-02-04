@@ -1,6 +1,7 @@
 ﻿using GarciaCore.Infrastructure;
 using TextCopy;
 using ToolBox.Bridge;
+using System;
 
 namespace MigrationNameGenerator
 {

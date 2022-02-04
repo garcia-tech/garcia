@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {
+    "net5.0": {
       "MediatR/10.0.1": {
         "type": "package",
         "dependencies": {
@@ -25,7 +25,7 @@
       },
       "GarciaCore.Domain/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
+        "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
           "MediatR": "10.0.1"
         },
@@ -76,7 +76,7 @@
     }
   },
   "projectFileDependencyGroups": {
-    "net6.0": [
+    "net5.0": [
       "GarciaCore.Domain >= 1.0.0"
     ]
   },
@@ -93,17 +93,17 @@
       "outputPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/vehbiyurdakurban/.nuget/NuGet/NuGet.Config"
+        "/Users/vehbiyurdakurban/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
-        "net6.0"
+        "net5.0"
       ],
       "sources": {
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net5.0": {
+          "targetAlias": "net5.0",
           "projectReferences": {
             "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Domain/GarciaCore.Domain.csproj": {
               "projectPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Domain/GarciaCore.Domain.csproj"
@@ -118,8 +118,8 @@
       }
     },
     "frameworks": {
-      "net6.0": {
-        "targetAlias": "net6.0",
+      "net5.0": {
+        "targetAlias": "net5.0",
         "imports": [
           "net461",
           "net462",
@@ -135,7 +135,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/Users/vehbiyurdakurban/.dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/x64/sdk/5.0.404/RuntimeIdentifierGraph.json"
       }
     }
   }

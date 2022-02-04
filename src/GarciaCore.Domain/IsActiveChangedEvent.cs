@@ -1,17 +1,18 @@
 ﻿using MediatR;
 
-namespace GarciaCore.Domain;
-
-public class IsActiveChangedEvent : INotification
+namespace GarciaCore.Domain
 {
-    public long Id { get; set; }
-    public Entity Entity { get; set; }
-    public bool IsActive { get; set; }
-
-    public IsActiveChangedEvent(long id, Entity entity, bool isActive)
+    public class IsActiveChangedEvent : INotification
     {
-        Id = id;
-        Entity = entity;
-        IsActive = isActive;
+        public long Id { get; set; }
+        public Entity Entity { get; set; }
+        public bool IsActive { get; set; }
+
+        public IsActiveChangedEvent(long id, Entity entity, bool isActive)
+        {
+            Id = id;
+            Entity = entity;
+            IsActive = isActive;
+        }
     }
 }

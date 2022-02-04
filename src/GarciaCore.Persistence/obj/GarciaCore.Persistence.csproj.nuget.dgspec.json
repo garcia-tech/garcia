@@ -14,17 +14,17 @@
         "outputPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/vehbiyurdakurban/.nuget/NuGet/NuGet.Config"
+          "/Users/vehbiyurdakurban/.config/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net5.0"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net5.0": {
+            "targetAlias": "net5.0",
             "projectReferences": {}
           }
         },
@@ -35,8 +35,8 @@
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net5.0": {
+          "targetAlias": "net5.0",
           "dependencies": {
             "MediatR": {
               "target": "Package",
@@ -58,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/Users/vehbiyurdakurban/.dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/x64/sdk/5.0.404/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -72,17 +72,17 @@
         "outputPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/vehbiyurdakurban/.nuget/NuGet/NuGet.Config"
+          "/Users/vehbiyurdakurban/.config/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net5.0"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net5.0": {
+            "targetAlias": "net5.0",
             "projectReferences": {
               "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Domain/GarciaCore.Domain.csproj": {
                 "projectPath": "/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Domain/GarciaCore.Domain.csproj"
@@ -97,8 +97,8 @@
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net5.0": {
+          "targetAlias": "net5.0",
           "imports": [
             "net461",
             "net462",
@@ -114,7 +114,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/Users/vehbiyurdakurban/.dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/x64/sdk/5.0.404/RuntimeIdentifierGraph.json"
         }
       }
     }

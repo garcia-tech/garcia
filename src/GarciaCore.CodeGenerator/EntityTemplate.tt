@@ -1,3 +1,16 @@
-<#@ template language="C#" #>
+<#@ template language="C#" inherits="BaseTemplate" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="GarciaCore.CodeGenerator" #>
+<#@ parameter type="GarciaCore.CodeGenerator.Item" name="Item" #>
+<#@ parameter type="System.String" name="BaseClass" #>
+<#@ parameter type="System.String" name="Namespace" #>
+
+namespace <#= Namespace #>
+{
+    public partial class <#= Item.Name #> : <#= BaseClass #>
+    {
+    }
+}

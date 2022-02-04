@@ -1,0 +1,60 @@
+﻿<Properties StartupConfiguration="{5FD5A822-C575-4E18-BFF5-56AE8796A44E}|Default">
+  <MonoDevelop.Ide.Workbench>
+    <Files>
+      <File FileName="src/GarciaCore.Infrastructure/IEncryption.cs" Line="10" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="GarciaCore" expanded="True">
+            <Node name="GarciaCore.Application" expanded="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="FrameworkReferences" expanded="True" />
+              </Node>
+            </Node>
+            <Node name="GarciaCore.Cli" expanded="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="FrameworkReferences" expanded="True" />
+                <Node name="PackageDependencies" expanded="True" />
+                <Node name="ProjectDependencies" expanded="True" />
+              </Node>
+            </Node>
+            <Node name="GarciaCore.CodeGenerator" expanded="True">
+              <Node name="BaseTemplate.tt" expanded="True" />
+              <Node name="EntityTemplate.tt" expanded="True" />
+            </Node>
+            <Node name="GarciaCore.Domain" expanded="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="FrameworkReferences" expanded="True" />
+                <Node name="PackageDependencies" expanded="True" />
+              </Node>
+            </Node>
+            <Node name="GarciaCore.EntityFramework" expanded="True" />
+            <Node name="GarciaCore.Infrastructure" expanded="True">
+              <Node name="IEncryption.cs" selected="True" />
+            </Node>
+            <Node name="GarciaCore.Persistence" expanded="True" />
+            <Node name="GarciaCore.Persistence.Tests" expanded="True">
+              <Node name="Dependencies" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="GarciaCore" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.GarciaCore.Cli PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

@@ -5,43 +5,44 @@ using GarciaCore.Domain;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
-namespace GarciaCore.Persistence.Tests;
-
-public class EntityFrameworkTestFixture
+namespace GarciaCore.Persistence.Tests
 {
-    private const string ConnectionString =
-        @"Server=(localdb)\mssqllocaldb;Database=EFTestSample;Trusted_Connection=True";
-
-    private ORM.EntityFrameworkRepository<TestEntity> _repository;
-
-    private static readonly object _lock = new();
-    private static bool _databaseInitialized;
-
-    public EntityFrameworkTestFixture()
+    public class EntityFrameworkTestFixture
     {
-        lock (_lock)
+        private const string ConnectionString =
+            @"Server=(localdb)\mssqllocaldb;Database=EFTestSample;Trusted_Connection=True";
+
+        private ORM.EntityFrameworkRepository<TestEntity> _repository;
+
+        private static readonly object _lock = new();
+        private static bool _databaseInitialized;
+
+        public EntityFrameworkTestFixture()
         {
-            if (!_databaseInitialized)
+            lock (_lock)
             {
-                using (var context = CreateContext())
+                if (!_databaseInitialized)
                 {
-                    context.Database.EnsureDeleted();
-                    context.Database.EnsureCreated();
+                    using (var context = CreateContext())
+                    {
+                        context.Database.EnsureDeleted();
+                        context.Database.EnsureCreated();
 
-                    context.AddRange(
-                        new TestEntity(1, "One"),
-                        new TestEntity(2, "Two"));
-                    context.SaveChanges();
+                        context.AddRange(
+                            new TestEntity(1, "One"),
+                            new TestEntity(2, "Two"));
+                        context.SaveChanges();
+                    }
+
+                    _databaseInitialized = true;
                 }
-
-                _databaseInitialized = true;
             }
         }
-    }
 
-    public DbContext CreateContext()
-        => new EntityFrameworkTestsContext(
-            new DbContextOptionsBuilder<EntityFrameworkTestsContext>()
-                .UseSqlServer(ConnectionString)
-                .Options);
+        public DbContext CreateContext()
+            => new EntityFrameworkTestsContext(
+                new DbContextOptionsBuilder<EntityFrameworkTestsContext>()
+                    .UseSqlServer(ConnectionString)
+                    .Options);
+    }
 }

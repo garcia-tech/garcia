@@ -1,0 +1,15 @@
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/obj/Debug/net5.0/GarciaCore.Persistence.csproj.AssemblyReference.cache
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/obj/Debug/net5.0/GarciaCore.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/obj/Debug/net5.0/GarciaCore.Persistence.AssemblyInfoInputs.cache
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/obj/Debug/net5.0/GarciaCore.Persistence.AssemblyInfo.cs
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/obj/Debug/net5.0/GarciaCore.Persistence.csproj.CoreCompileInputs.cache
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/bin/Debug/net5.0/GarciaCore.Persistence.deps.json
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/bin/Debug/net5.0/GarciaCore.Persistence.dll
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/bin/Debug/net5.0/ref/GarciaCore.Persistence.dll
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/bin/Debug/net5.0/GarciaCore.Persistence.pdb
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/bin/Debug/net5.0/GarciaCore.Domain.dll
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/bin/Debug/net5.0/GarciaCore.Domain.pdb
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/obj/Debug/net5.0/GarciaCore.Persistence.csproj.CopyComplete
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/obj/Debug/net5.0/GarciaCore.Persistence.dll
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/obj/Debug/net5.0/ref/GarciaCore.Persistence.dll
+/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.Persistence/obj/Debug/net5.0/GarciaCore.Persistence.pdb
