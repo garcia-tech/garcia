@@ -1,5 +1,0 @@
-/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.CodeGenerator/obj/Debug/net5.0/GarciaCore.CodeGenerator.csproj.AssemblyReference.cache
-/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.CodeGenerator/obj/Debug/net5.0/GarciaCore.CodeGenerator.GeneratedMSBuildEditorConfig.editorconfig
-/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.CodeGenerator/obj/Debug/net5.0/GarciaCore.CodeGenerator.AssemblyInfoInputs.cache
-/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.CodeGenerator/obj/Debug/net5.0/GarciaCore.CodeGenerator.AssemblyInfo.cs
-/Users/vehbiyurdakurban/source/repos/projects/garciacore/src/GarciaCore.CodeGenerator/obj/Debug/net5.0/GarciaCore.CodeGenerator.csproj.CoreCompileInputs.cache
