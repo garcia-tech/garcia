@@ -13,17 +13,25 @@ namespace MigrationNameGenerator
         static void Main(string[] args)
         {
 
-            var item2 = new Item()
+            try
             {
-                Name = "Test",
-                Properties = new System.Collections.Generic.List<ItemProperty>()
+                var item2 = new Item()
+                {
+                    Name = "Test",
+                    Properties = new System.Collections.Generic.List<ItemProperty>()
                         {
-                            new ItemProperty(){Name = "Test property", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
-                            new ItemProperty(){Name = "Test property list", Type = ItemPropertyType.Integer, MappingType = ItemPropertyMappingType.List }
+                            new ItemProperty(){Name = "Testproperty", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
+                            new ItemProperty(){Name = "Testpropertylist", Type = ItemPropertyType.Integer, MappingType = ItemPropertyMappingType.List }
                         }
-            };
-            var text2 = Generate(item2);
-            Console.WriteLine(text2);
+                };
+                var text2 = Generate(item2);
+                Console.WriteLine(text2);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
 
             if (args.Length == 0)
             {

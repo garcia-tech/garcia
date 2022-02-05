@@ -15,7 +15,7 @@ namespace <#= Namespace #>
 	    {
             string innerTypeName = this.generator.GetInnerTypeName(property);
 #>
-        public <#= innerTypeName #> _<#= property.Name.ToPascalCase() #>;
+        public <#= innerTypeName #> <#= property.Name.ToPascalCase() #> { get; set; }
 <#
         }
 #>

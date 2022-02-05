@@ -11,6 +11,9 @@ namespace GarciaCore.CodeGenerator
         {
             var template = CreateItem<T>();
             template.Item = item;
+            template.BaseClass = "BaseClass";
+            template.Includes = "BaseClass";
+            template.Namespace = "Namespace";
             var text = template.TransformText();
             return text;
         }

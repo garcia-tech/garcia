@@ -75,14 +75,14 @@ namespace GarciaCore.CodeGenerator
             
             #line default
             #line hidden
-            this.Write(" _");
+            this.Write(" ");
             
             #line 1 "C:\Users\vehbi\source\repos\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToPascalCase()));
             
             #line default
             #line hidden
-            this.Write(";\n");
+            this.Write(" { get; set; }\n");
             
             #line 1 "C:\Users\vehbi\source\repos\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
 
