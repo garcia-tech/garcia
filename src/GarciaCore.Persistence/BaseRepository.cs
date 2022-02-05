@@ -12,11 +12,11 @@ namespace GarciaCore.Persistence
         {
         }
 
-        public abstract Task<T> GetByIdAsync(int id);
+        public abstract Task<T> GetByIdAsync(long id);
         public abstract Task<IReadOnlyList<T>> GetAllAsync();
-        public abstract Task<IReadOnlyList<T>> GetByKeyAsync(string key, object value);
+        //public abstract Task<IReadOnlyList<T>> GetByKeyAsync(string key, object value);
         public abstract Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> filter);
-        public abstract Task<IReadOnlyList<T>> GetAsync(Dictionary<string, object> filter);
+        //public abstract Task<IReadOnlyList<T>> GetAsync(Dictionary<string, object> filter);
         public abstract Task<T> AddAsync(T entity);
         public abstract Task UpdateAsync(T entity);
         public abstract Task DeleteAsync(T entity);

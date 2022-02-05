@@ -41,19 +41,9 @@ namespace GarciaCore.Persistence
             return await _repository.GetAsync(filter);
         }
 
-        public override async Task<IReadOnlyList<T>> GetAsync(Dictionary<string, object> filter)
-        {
-            return await _repository.GetAsync(filter);
-        }
-
-        public override async Task<T> GetByIdAsync(int id)
+        public override async Task<T> GetByIdAsync(long id)
         {
             return await _repository.GetByIdAsync(id);
-        }
-
-        public override async Task<IReadOnlyList<T>> GetByKeyAsync(string key, object value)
-        {
-            return await _repository.GetByKeyAsync(key, value);
         }
 
         public override async Task UpdateAsync(T entity)

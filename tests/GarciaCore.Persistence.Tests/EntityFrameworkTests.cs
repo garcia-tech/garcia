@@ -15,8 +15,6 @@ namespace GarciaCore.Persistence.Tests
 
         private EntityFrameworkRepository<TestEntity> _repository;
 
-        private static readonly object _lock = new();
-
         public EntityFrameworkTestFixture()
         {
             using (var context = CreateContext())
@@ -38,48 +36,76 @@ namespace GarciaCore.Persistence.Tests
                     .Options);
 
         [Fact]
-        public void GetByIdAsync()
+        public async void GetByIdAsync()
         {
+            var item = await _repository.GetByIdAsync(1);
+            Assert.NotNull(item);
+            item = await _repository.GetByIdAsync(3);
+            Assert.Null(item);
         }
 
         [Fact]
-        public void GetAllAsync()
+        public async void GetAllAsync()
         {
+            var items = await _repository.GetAllAsync();
+            Assert.NotNull(items);
+            Assert.Equal(2, items.Count);
         }
 
         [Fact]
-        public void AddAsync()
+        public async void AddAsync()
         {
+            var item = new TestEntity(3, "Three");
+            var result = await _repository.AddAsync(item);
+            Assert.NotNull(result);
+            Assert.NotEqual(0, result.Id);
         }
 
         [Fact]
-        public void UpdateAsync()
+        public async void UpdateAsync()
         {
+            var item = await _repository.GetByIdAsync(1);
+            item.Name = $"One-{DateTime.Now}";
+            await _repository.UpdateAsync(item);
+            var existingItem = await _repository.GetByIdAsync(1);
+            Assert.Equal(item.Name, existingItem.Name);
         }
 
         [Fact]
-        public void DeleteAsync()
+        public async void DeleteAsync()
         {
+            var item = await _repository.GetByIdAsync(1);
+            await _repository.DeleteAsync(item);
+            item = await _repository.GetByIdAsync(1);
+            Assert.Null(item);
+
+            item = await _repository.GetByIdAsync(2);
+            item.IsDeleted = true;
+            await _repository.SaveAsync(item);
+            item = await _repository.GetByIdAsync(2);
+            Assert.Null(item);
         }
 
         [Fact]
-        public void GetAllAsync2()
+        public async void GetAllAsync2()
         {
+            var items = await _repository.GetAllAsync(1, 1);
+            Assert.NotNull(items);
+            Assert.Equal(1, items.Count);
+            items = await _repository.GetAllAsync(1, 2);
+            Assert.NotNull(items);
+            Assert.Equal(2, items.Count);
         }
 
         [Fact]
-        public void GetByKeyAsync()
+        public async void GetAsync()
         {
-        }
-
-        [Fact]
-        public void GetAsync()
-        {
-        }
-
-        [Fact]
-        public void GetAsync2()
-        {
+            var items = await _repository.GetAsync(x => x.Id == 1);
+            Assert.NotNull(items);
+            Assert.Equal(1, items.Count);
+            items = await _repository.GetAsync(x => x.Id == 3);
+            Assert.NotNull(items);
+            Assert.Equal(0, items.Count);
         }
     }
 }

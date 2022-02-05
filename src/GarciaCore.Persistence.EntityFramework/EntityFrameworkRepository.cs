@@ -18,7 +18,7 @@ namespace GarciaCore.Persistence.EntityFramework
             _dbContext = dbContext;
         }
 
-        public override async Task<T> GetByIdAsync(int id)
+        public override async Task<T> GetByIdAsync(long id)
         {
             return await _dbContext.Set<T>().FindAsync(id);
         }
@@ -52,19 +52,19 @@ namespace GarciaCore.Persistence.EntityFramework
             return await _dbContext.Set<T>().Skip((page - 1) * size).Take(size).AsNoTracking().ToListAsync();
         }
 
-        public override Task<IReadOnlyList<T>> GetByKeyAsync(string key, object value)
-        {
-            throw new NotImplementedException();
-        }
+        //public override Task<IReadOnlyList<T>> GetByKeyAsync(string key, object value)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public override async Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> filter)
         {
             return await _dbContext.Set<T>().Where(filter).AsNoTracking().ToListAsync();
         }
 
-        public override Task<IReadOnlyList<T>> GetAsync(Dictionary<string, object> filter)
-        {
-            throw new NotImplementedException();
-        }
+        //public override Task<IReadOnlyList<T>> GetAsync(Dictionary<string, object> filter)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
