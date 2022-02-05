@@ -17,7 +17,8 @@ namespace GarciaCore.CodeGenerator
 
         protected virtual T CreateItem<T>() where T : BaseTemplate
         {
-            return Activator.CreateInstance<T>();
+            var item = Activator.CreateInstance<T>();
+            return item;
         }
 
         protected virtual string GetInnerTypeClassName(string innerTypeName)

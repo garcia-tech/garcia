@@ -12,9 +12,21 @@ namespace MigrationNameGenerator
 
         static void Main(string[] args)
         {
+
+            var item2 = new Item()
+            {
+                Name = "Test",
+                Properties = new System.Collections.Generic.List<ItemProperty>()
+                        {
+                            new ItemProperty(){Name = "Test property", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
+                            new ItemProperty(){Name = "Test property list", Type = ItemPropertyType.Integer, MappingType = ItemPropertyMappingType.List }
+                        }
+            };
+            var text2 = Generate(item2);
+            Console.WriteLine(text2);
+
             if (args.Length == 0)
             {
-                Console.WriteLine("Usage: gr [options]");
                 Console.WriteLine("Options:");
                 Console.WriteLine("\tmigrate");
                 Console.WriteLine("\tmigrateandupdatedatabase");

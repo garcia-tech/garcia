@@ -25,7 +25,7 @@ public void test()
 }
 
 public GarciaCore.CodeGenerator.Item Item { get; set; }
-public string BaseClass { get; set; }
-public string Namespace { get; set; }
-public string Includes { get; set; }
+public string? BaseClass { get; set; }
+public string? Namespace { get; set; }
+public string? Includes { get; set; }
 #>
