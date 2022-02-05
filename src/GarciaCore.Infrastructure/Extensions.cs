@@ -276,7 +276,7 @@ namespace GarciaCore.Infrastructure
                 return Value;
             }
 
-            return Char.ToLower(Value[0], new CultureInfo("en-US")) + Value.Substring(1);
+            return Char.ToUpper(Value[0], new CultureInfo("en-US")) + Value.Substring(1);
         }
 
         public static string ToCamelCase(this string Value, CultureInfo CultureInfo = null)
@@ -286,7 +286,7 @@ namespace GarciaCore.Infrastructure
                 return Value;
             }
 
-            return Char.ToUpper(Value[0], new CultureInfo("en-US")) + Value.Substring(1);
+            return Char.ToLower(Value[0], new CultureInfo("en-US")) + Value.Substring(1);
         }
 
         public static string GetString(this DataRow obj, string ColumnName)
