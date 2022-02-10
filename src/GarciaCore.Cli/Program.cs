@@ -105,7 +105,9 @@ namespace MigrationNameGenerator
         static string Generate(Item item)
         {
             var generator = new EntityGenerator();
-            return generator.Generate(item);
+            var text = generator.Generate(item);
+            var generator2 = new RepositoryGenerator();
+            return text + "\n\n" + generator2.Generate(item);
         }
     }
 }

@@ -8,12 +8,18 @@
     <ItemGroup>
       <None Remove="BaseTemplate.tt" />
       <None Remove="EntityTemplate.tt" />
+      <None Remove="RepositoryTemplate.tt" />
     </ItemGroup>
     <ItemGroup>
       <Compile Update="BaseTemplate.cs">
         <AutoGen>True</AutoGen>
         <DesignTime>True</DesignTime>
         <DependentUpon>BaseTemplate.tt</DependentUpon>
+      </Compile>
+      <Compile Update="RepositoryTemplate.cs">
+        <DependentUpon>RepositoryTemplate.tt</DependentUpon>
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
       </Compile>
       <Compile Update="EntityTemplate.cs">
         <DependentUpon>EntityTemplate.tt</DependentUpon>
@@ -26,6 +32,10 @@
       <Content Include="BaseTemplate.tt">
         <Generator>TextTemplatingFilePreprocessor</Generator>
         <LastGenOutput>BaseTemplate.cs</LastGenOutput>
+      </Content>
+      <Content Include="RepositoryTemplate.tt">
+        <LastGenOutput>RepositoryTemplate.cs</LastGenOutput>
+        <Generator>TextTemplatingFilePreprocessor</Generator>
       </Content>
       <Content Include="EntityTemplate.tt">
         <Generator>TextTemplatingFilePreprocessor</Generator>

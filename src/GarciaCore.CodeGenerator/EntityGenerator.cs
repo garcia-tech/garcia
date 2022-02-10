@@ -118,4 +118,13 @@ namespace GarciaCore.CodeGenerator
     public class EntityGenerator : Generator<EntityTemplate>, IEntityGenerator<EntityTemplate>
     {
     }
+
+    public interface IRepositoryGenerator<T> where  T : BaseTemplate
+    {
+        string Generate(Item item);
+    }
+
+    public class RepositoryGenerator : Generator<RepositoryTemplate>, IRepositoryGenerator<RepositoryTemplate>
+    {
+    }
 }
