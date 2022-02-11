@@ -11,13 +11,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Domain", "src\Ga
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Persistence", "src\GarciaCore.Persistence\GarciaCore.Persistence.csproj", "{910268B2-274A-4728-ACA6-44327C537703}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.Persistence.EntityFramework", "src\GarciaCore.Persistence.EntityFramework\GarciaCore.Persistence.EntityFramework.csproj", "{866D0536-6B02-4449-994B-9B0BB9944198}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Persistence.EntityFramework", "src\GarciaCore.Persistence.EntityFramework\GarciaCore.Persistence.EntityFramework.csproj", "{866D0536-6B02-4449-994B-9B0BB9944198}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Cli", "src\GarciaCore.Cli\GarciaCore.Cli.csproj", "{5FD5A822-C575-4E18-BFF5-56AE8796A44E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Persistence.Tests", "tests\GarciaCore.Persistence.Tests\GarciaCore.Persistence.Tests.csproj", "{9941660D-F8D2-49E0-A1C5-0AC467A51515}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Application", "src\GarciaCore.Application\GarciaCore.Application.csproj", "{0F33B788-4300-4B3B-B2C7-5D4F510F3614}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.CodeGenerator", "src\GarciaCore.CodeGenerator\GarciaCore.CodeGenerator.csproj", "{F98E4397-B2FA-4CD8-9B96-22D50439E2AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{0F33B788-4300-4B3B-B2C7-5D4F510F3614}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F33B788-4300-4B3B-B2C7-5D4F510F3614}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F33B788-4300-4B3B-B2C7-5D4F510F3614}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F98E4397-B2FA-4CD8-9B96-22D50439E2AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F98E4397-B2FA-4CD8-9B96-22D50439E2AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F98E4397-B2FA-4CD8-9B96-22D50439E2AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F98E4397-B2FA-4CD8-9B96-22D50439E2AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
