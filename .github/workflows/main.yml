@@ -9,10 +9,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: dotnet/nbgv@master
+    - uses: dotnet/nbgv@dev
       id: nbgv
-    - name: nbgv echo
-      run: echo 'SemVer2=${{ steps.nbgv.outputs.SemVer2 }}'
+    - run: echo 'SemVer2=${{ steps.nbgv.outputs.SemVer2 }}'
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
