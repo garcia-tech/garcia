@@ -4,6 +4,8 @@
         <TargetFramework>net5.0</TargetFramework>
         
         <Nullable>enable</Nullable>
+        
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     </PropertyGroup>
 
 </Project>
