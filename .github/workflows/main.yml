@@ -11,6 +11,7 @@ jobs:
     steps:
     - uses: dotnet/nbgv@master
       id: nbgv
+    - name: nbgv echo
       run: echo 'SemVer2=${{ steps.nbgv.outputs.SemVer2 }}'
     - uses: actions/checkout@v2
       with:
