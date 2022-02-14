@@ -9,9 +9,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: dotnet/nbgv@dev
-      id: nbgv
-    - run: echo 'SemVer2=${{ steps.nbgv.outputs.SemVer2 }}'
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
@@ -23,6 +20,9 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
+    - uses: dotnet/nbgv@master
+      id: nbgv
+    - run: echo 'SemVer2=${{ steps.nbgv.outputs.SemVer2 }}'
     - name: Publish GarciaCore
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
