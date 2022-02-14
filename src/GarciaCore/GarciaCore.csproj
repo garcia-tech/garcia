@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GarciaCore.Application\GarciaCore.Application.csproj" />
+    <ProjectReference Include="..\GarciaCore.Cli\GarciaCore.Cli.csproj" />
+    <ProjectReference Include="..\GarciaCore.CodeGenerator\GarciaCore.CodeGenerator.csproj" />
+    <ProjectReference Include="..\GarciaCore.Domain\GarciaCore.Domain.csproj" />
+    <ProjectReference Include="..\GarciaCore.Infrastructure\GarciaCore.Infrastructure.csproj" />
+    <ProjectReference Include="..\GarciaCore.Persistence.EntityFramework\GarciaCore.Persistence.EntityFramework.csproj" />
+    <ProjectReference Include="..\GarciaCore.Persistence\GarciaCore.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>
