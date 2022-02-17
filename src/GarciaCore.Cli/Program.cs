@@ -19,15 +19,15 @@ namespace MigrationNameGenerator
             {
                 var solution = new Solution("TestSolution", "c:\\files\\garciacoretest");
                 var infrastructure = new Project("Infrastructure", "Infrastructure");
-                infrastructure.Generators.Add(new ProjectGenerator("Entity", "Entity", new EntityGenerator()));
+                infrastructure.AddGenerator("Entity", new EntityGenerator());
                 solution.Projects.Add(infrastructure);
                 var domain = new Project("Domain", "Domain");
-                domain.Generators.Add(new ProjectGenerator("Entity", "Entity", new EntityGenerator()));
-                domain.Generators.Add(new ProjectGenerator("Repository", "Repository", new RepositoryGenerator()));
+                domain.AddGenerator("Entity", new EntityGenerator());
+                domain.AddGenerator("Repository", new RepositoryGenerator());
                 domain.ProjectDependencies.Add(infrastructure);
                 solution.Projects.Add(domain);
-                
-                Console.WriteLine(JsonConvert.SerializeObject(solution));
+
+                Console.WriteLine(JsonConvert.SerializeObject(solution, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
                 Console.WriteLine("");
                 var item2 = new Item()
                 {
@@ -86,8 +86,8 @@ namespace MigrationNameGenerator
                             new ItemProperty(){Name = "Test property list", Type = ItemPropertyType.Integer, MappingType = ItemPropertyMappingType.List }
                         }
                     };
-                    var text = Generate(item);
-                    Console.WriteLine(text);
+                    //var text = Generate(item);
+                    //Console.WriteLine(text);
                     break;
                 default:
                     break;
@@ -124,12 +124,12 @@ namespace MigrationNameGenerator
             return text;
         }
 
-        static string Generate(Item item)
-        {
-            var generator = new EntityGenerator();
-            var text = generator.Generate(item);
-            var generator2 = new RepositoryGenerator();
-            return text + "\n\n" + generator2.Generate(item);
-        }
+        //static string Generate(Item item)
+        //{
+        //    var generator = new EntityGenerator();
+        //    var text = generator.Generate(item);
+        //    var generator2 = new RepositoryGenerator();
+        //    return text + "\n\n" + generator2.Generate(item);
+        //}
     }
 }

@@ -13,13 +13,13 @@ namespace GarciaCore.CodeGenerator
 
         public virtual List<IGenerator> Dependencies { get; set; } = new List<IGenerator>();
 
-        public virtual async Task<string> Generate<T>(Item item) where T : BaseTemplate
+        public virtual async Task<string> Generate<T>(Item item, string @namespace, string baseClass) where T : BaseTemplate
         {
             var template = CreateItem<T>();
             template.Item = item;
             template.BaseClass = "BaseClass";
-            template.Includes = "BaseClass";
-            template.Namespace = "Namespace";
+            template.Includes = baseClass;
+            template.Namespace = @namespace;
             var text = template.TransformText();
             return text;
         }
@@ -107,20 +107,20 @@ namespace GarciaCore.CodeGenerator
             return typeName;
         }
 
-        public abstract Task<string> Generate(Item item);
+        public abstract Task<string> Generate(Item item, string @namespace, string baseClass);
     }
 
     public abstract class Generator<T> : Generator where T : BaseTemplate
     {
-        public override async Task<string> Generate(Item item)
+        public override async Task<string> Generate(Item item, string @namespace, string baseClass)
         {
-            return await Generate<T>(item);
+            return await Generate<T>(item, @namespace, baseClass);
         }
     }
 
     public interface IGenerator
     {
-        Task<string> Generate(Item item);
+        Task<string> Generate(Item item, string @namespace, string baseClass);
         List<IGenerator> Dependencies { get; set; }
     }
 
@@ -147,29 +147,33 @@ namespace GarciaCore.CodeGenerator
 
     public class ProjectGenerator
     {
-        public ProjectGenerator(string name, string folder, IGenerator generator)
+        public ProjectGenerator(Project project, string name, string folder, string @namespace, IGenerator generator)
         {
+            Project = project;
             Name = name;
             Folder = folder;
+            Namespace = @namespace;
             Generator = generator;
         }
 
-        public ProjectGenerator(string name, IGenerator generator) : this(name, name, generator)
+        public ProjectGenerator(Project project, string name, IGenerator generator) : this(project, name, name, name.Replace(" ", ""), generator)
         {
         }
 
+        public Project Project { get; }
         public string Name { get; set; }
         public string Folder { get; set; }
+        public string Namespace { get; }
         public IGenerator Generator { get; set; }
 
-        public virtual async Task<GenerationResult> Generate(Item item)
+        public virtual async Task<GenerationResult> Generate(Item item, string @namespace, string baseClass)
         {
             if (Generator == null)
             {
                 throw new CodeGeneratorException("Generator cannot be null");
             }
 
-            var code = await Generator.Generate(item);
+            var code = await Generator.Generate(item, @namespace, baseClass);
             var generationResult = new GenerationResult(Folder, Generator, code);
             return generationResult;
         }
@@ -256,11 +260,21 @@ namespace GarciaCore.CodeGenerator
 
             foreach (var generator in Generators)
             {
-                var generationResult = await generator.Generate(item);
+                var generationResult = await generator.Generate(item, Namespace, "");
                 generationResults.Add(generationResult);
             }
 
             return generationResults;
+        }
+
+        public void AddGenerator(string name, string @namespace, IGenerator generator)
+        {
+            this.Generators.Add(new ProjectGenerator(this, name, Folder, @namespace, generator));
+        }
+
+        public void AddGenerator(string name, IGenerator generator)
+        {
+            this.Generators.Add(new ProjectGenerator(this, name, generator));
         }
     }
 
@@ -293,6 +307,7 @@ namespace GarciaCore.CodeGenerator
     public interface ISolutionService
     {
         Solution CreateSolution(string solutionJson);
+        string GetSolutionJson(Solution solution);
         string GetSampleJson();
     }
 
@@ -314,14 +329,19 @@ namespace GarciaCore.CodeGenerator
         {
             var solution = new Solution("TestSolution", "c:\\files\\garciacoretest");
             var infrastructure = new Project("Infrastructure");
-            infrastructure.Generators.Add(new ProjectGenerator("Entity", new EntityGenerator()));
+            infrastructure.AddGenerator("Entity", new EntityGenerator());
             solution.Projects.Add(infrastructure);
             var domain = new Project("Domain");
-            domain.Generators.Add(new ProjectGenerator("Entity", new EntityGenerator()));
-            domain.Generators.Add(new ProjectGenerator("Repository", new RepositoryGenerator()));
+            domain.AddGenerator("Entity", new EntityGenerator());
+            domain.AddGenerator("Repository", new RepositoryGenerator());
             domain.ProjectDependencies.Add(infrastructure);
             solution.Projects.Add(domain);
-            return JsonConvert.SerializeObject(solution);
+            return JsonConvert.SerializeObject(solution, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+        }
+
+        public string GetSolutionJson(Solution solution)
+        {
+            return JsonConvert.SerializeObject(solution, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
         }
     }
 }
