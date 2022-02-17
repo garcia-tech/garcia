@@ -1,6 +1,8 @@
 ﻿using GarciaCore.CodeGenerator;
 using GarciaCore.Infrastructure;
+using Newtonsoft.Json;
 using System;
+using System.Threading.Tasks;
 using TextCopy;
 using ToolBox.Bridge;
 
@@ -10,11 +12,23 @@ namespace MigrationNameGenerator
     {
         private static ShellHelper _shellHelper = new ShellHelper();
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
 
             try
             {
+                var solution = new Solution("TestSolution", "c:\\files\\garciacoretest");
+                var infrastructure = new Project("Infrastructure", "Infrastructure");
+                infrastructure.Generators.Add(new ProjectGenerator("Entity", "Entity", new EntityGenerator()));
+                solution.Projects.Add(infrastructure);
+                var domain = new Project("Domain", "Domain");
+                domain.Generators.Add(new ProjectGenerator("Entity", "Entity", new EntityGenerator()));
+                domain.Generators.Add(new ProjectGenerator("Repository", "Repository", new RepositoryGenerator()));
+                domain.ProjectDependencies.Add(infrastructure);
+                solution.Projects.Add(domain);
+                
+                Console.WriteLine(JsonConvert.SerializeObject(solution));
+                Console.WriteLine("");
                 var item2 = new Item()
                 {
                     Name = "Test",
@@ -24,8 +38,16 @@ namespace MigrationNameGenerator
                             new ItemProperty(){Name = "Testpropertylist", Type = ItemPropertyType.Integer, MappingType = ItemPropertyMappingType.List }
                         }
                 };
-                var text2 = Generate(item2);
-                Console.WriteLine(text2);
+
+                Console.WriteLine(JsonConvert.SerializeObject(item2));
+                var text2 = await solution.Generate(item2);
+
+                foreach (var item in text2)
+                {
+                    Console.WriteLine(item.Code);
+                }
+
+                return;
             }
             catch (Exception ex)
             {
