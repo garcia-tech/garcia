@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GarciaCore.Persistence
 {
-    public abstract class BaseRepository<T> : IAsyncRepository<T> where T : Entity
+    public abstract class BaseRepository<T> : IAsyncRepository<T, long> where T : Entity
     {
         public BaseRepository()
         {
@@ -18,9 +18,12 @@ namespace GarciaCore.Persistence
         public abstract Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> filter);
         //public abstract Task<IReadOnlyList<T>> GetAsync(Dictionary<string, object> filter);
         public abstract Task<T> AddAsync(T entity);
+        public abstract Task AddRangeAsync(IEnumerable<T> entities);
         public abstract Task UpdateAsync(T entity);
         public abstract Task DeleteAsync(T entity);
+        public abstract Task DeleteManyAsync(Expression<Func<T, bool>> filter);
         public abstract Task<IReadOnlyList<T>> GetAllAsync(int page, int size);
+
 
         public virtual async Task<T> SaveAsync(T entity)
         {

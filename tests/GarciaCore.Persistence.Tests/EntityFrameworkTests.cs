@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using GarciaCore.Domain;
@@ -106,6 +108,31 @@ namespace GarciaCore.Persistence.Tests
             items = await _repository.GetAsync(x => x.Id == 3);
             Assert.NotNull(items);
             Assert.Equal(0, items.Count);
+        }
+
+        [Fact]
+        public async void AddRangeAsync()
+        {
+            var items = new List<TestEntity>()
+            {
+                new TestEntity(4 , "Test4"),
+                new TestEntity(5 , "Test5")
+
+            };
+
+            await _repository.AddRangeAsync(items);
+            var entities = await _repository.GetAllAsync();
+            Assert.NotNull(entities);
+            Assert.NotEqual(0, entities.Count);
+            Assert.Contains(entities, x => x.Key == 4 || x.Key == 5);
+        }
+
+        [Fact]
+        public async void DeleteManyAsync()
+        {
+            await _repository.DeleteManyAsync(x => x.Key > 4);
+            var entities = await _repository.GetAllAsync();
+            Assert.DoesNotContain(entities, x => x.Key > 4);
         }
     }
 }
