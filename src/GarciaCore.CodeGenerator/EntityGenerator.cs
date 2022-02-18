@@ -13,11 +13,13 @@ namespace GarciaCore.CodeGenerator
 
         public virtual List<IGenerator> Dependencies { get; set; } = new List<IGenerator>();
 
+        public abstract string DefaultBaseClass { get; }
+
         public virtual async Task<string> Generate<T>(Item item, string @namespace, string baseClass) where T : BaseTemplate
         {
             var template = CreateItem<T>();
             template.Item = item;
-            template.BaseClass = "BaseClass";
+            template.BaseClass = baseClass;
             template.Includes = baseClass;
             template.Namespace = @namespace;
             var text = template.TransformText();
@@ -120,6 +122,7 @@ namespace GarciaCore.CodeGenerator
 
     public interface IGenerator
     {
+        string DefaultBaseClass { get; }
         Task<string> Generate(Item item, string @namespace, string baseClass);
         List<IGenerator> Dependencies { get; set; }
     }
@@ -134,6 +137,7 @@ namespace GarciaCore.CodeGenerator
 
     public class EntityGenerator : Generator<EntityTemplate>
     {
+        public override string DefaultBaseClass => "Entity";
     }
 
     //public interface IRepositoryGenerator<T> where T : BaseTemplate
@@ -143,20 +147,22 @@ namespace GarciaCore.CodeGenerator
 
     public class RepositoryGenerator : Generator<RepositoryTemplate>
     {
+        public override string DefaultBaseClass => "Repository";
     }
 
     public class ProjectGenerator
     {
-        public ProjectGenerator(Project project, string name, string folder, string @namespace, IGenerator generator)
+        public ProjectGenerator(Project project, string name, string folder, string @namespace, string baseClass, IGenerator generator)
         {
             Project = project;
             Name = name;
             Folder = folder;
             Namespace = @namespace;
             Generator = generator;
+            BaseClass = baseClass;
         }
 
-        public ProjectGenerator(Project project, string name, IGenerator generator) : this(project, name, name, name.Replace(" ", ""), generator)
+        public ProjectGenerator(Project project, string name, IGenerator generator) : this(project, name, name, name.Replace(" ", ""), generator.DefaultBaseClass, generator)
         {
         }
 
@@ -164,16 +170,17 @@ namespace GarciaCore.CodeGenerator
         public string Name { get; set; }
         public string Folder { get; set; }
         public string Namespace { get; }
+        public string BaseClass { get; }
         public IGenerator Generator { get; set; }
 
-        public virtual async Task<GenerationResult> Generate(Item item, string @namespace, string baseClass)
+        public virtual async Task<GenerationResult> Generate(Item item, string @namespace)
         {
             if (Generator == null)
             {
                 throw new CodeGeneratorException("Generator cannot be null");
             }
 
-            var code = await Generator.Generate(item, @namespace, baseClass);
+            var code = await Generator.Generate(item, @namespace, BaseClass);
             var generationResult = new GenerationResult(Folder, Generator, code);
             return generationResult;
         }
@@ -260,16 +267,16 @@ namespace GarciaCore.CodeGenerator
 
             foreach (var generator in Generators)
             {
-                var generationResult = await generator.Generate(item, Namespace, "");
+                var generationResult = await generator.Generate(item, Namespace);
                 generationResults.Add(generationResult);
             }
 
             return generationResults;
         }
 
-        public void AddGenerator(string name, string @namespace, IGenerator generator)
+        public void AddGenerator(string name, string @namespace, string baseClass, IGenerator generator)
         {
-            this.Generators.Add(new ProjectGenerator(this, name, Folder, @namespace, generator));
+            this.Generators.Add(new ProjectGenerator(this, name, Folder, @namespace, baseClass, generator));
         }
 
         public void AddGenerator(string name, IGenerator generator)
