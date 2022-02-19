@@ -14,19 +14,11 @@ namespace MigrationNameGenerator
 
         static async Task Main(string[] args)
         {
-
             try
             {
-                var solution = new Solution("TestSolution", "c:\\files\\garciacoretest");
-                var infrastructure = new Project("Infrastructure", "Infrastructure");
-                infrastructure.AddGenerator("Entity", new EntityGenerator());
-                solution.Projects.Add(infrastructure);
-                var domain = new Project("Domain", "Domain");
-                domain.AddGenerator("Entity", new EntityGenerator());
-                domain.AddGenerator("Repository", new RepositoryGenerator());
-                domain.ProjectDependencies.Add(infrastructure);
-                solution.Projects.Add(domain);
-
+                ISolutionService solutionService = new SolutionService();
+                var solution = solutionService.CreateSampleSolution();
+                
                 Console.WriteLine(JsonConvert.SerializeObject(solution, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
                 Console.WriteLine("");
                 var item2 = new Item()

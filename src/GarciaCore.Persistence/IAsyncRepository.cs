@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace GarciaCore.Persistence
 {
-    public interface IAsyncRepository<T> where T : Entity
+    public interface IAsyncRepository
+    {
+    }
+
+    public interface IAsyncRepository<T> : IAsyncRepository where T : Entity
     {
         Task<T> GetByIdAsync(long id);
         Task<IReadOnlyList<T>> GetAllAsync();

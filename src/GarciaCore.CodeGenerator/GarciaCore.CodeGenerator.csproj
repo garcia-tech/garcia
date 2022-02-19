@@ -9,12 +9,18 @@
       <None Remove="BaseTemplate.tt" />
       <None Remove="EntityTemplate.tt" />
       <None Remove="RepositoryTemplate.tt" />
+      <None Remove="WebApiControllerTemplate.tt" />
     </ItemGroup>
     <ItemGroup>
       <Compile Update="BaseTemplate.cs">
         <AutoGen>True</AutoGen>
         <DesignTime>True</DesignTime>
         <DependentUpon>BaseTemplate.tt</DependentUpon>
+      </Compile>
+      <Compile Update="WebApiControllerTemplate.cs">
+        <DependentUpon>WebApiControllerTemplate.tt</DependentUpon>
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
       </Compile>
       <Compile Update="RepositoryTemplate.cs">
         <DependentUpon>RepositoryTemplate.tt</DependentUpon>
@@ -32,6 +38,10 @@
       <Content Include="BaseTemplate.tt">
         <Generator>TextTemplatingFilePreprocessor</Generator>
         <LastGenOutput>BaseTemplate.cs</LastGenOutput>
+      </Content>
+      <Content Include="WebApiControllerTemplate.tt">
+        <LastGenOutput>WebApiControllerTemplate.cs</LastGenOutput>
+        <Generator>TextTemplatingFilePreprocessor</Generator>
       </Content>
       <Content Include="RepositoryTemplate.tt">
         <LastGenOutput>RepositoryTemplate.cs</LastGenOutput>

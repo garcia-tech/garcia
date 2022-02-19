@@ -150,6 +150,11 @@ namespace GarciaCore.CodeGenerator
         public override string DefaultBaseClass => "Repository";
     }
 
+    public class WebApiControllerGenerator : Generator<WebApiControllerTemplate>
+    {
+        public override string DefaultBaseClass => "ApiController";
+    }
+
     public class ProjectGenerator
     {
         public ProjectGenerator(Project project, string name, string folder, string @namespace, string baseClass, IGenerator generator)
@@ -316,10 +321,34 @@ namespace GarciaCore.CodeGenerator
         Solution CreateSolution(string solutionJson);
         string GetSolutionJson(Solution solution);
         string GetSampleJson();
+        Solution CreateSampleSolution();
     }
 
     public class SolutionService : ISolutionService
     {
+        public Solution CreateSampleSolution()
+        {
+            var solution = new Solution("TestSolution", "c:\\files\\garciacoretest");
+            
+            var infrastructure = new Project("Infrastructure");
+            infrastructure.AddGenerator("Entity", new EntityGenerator());
+            solution.Projects.Add(infrastructure);
+            
+            var domain = new Project("Domain");
+            domain.AddGenerator("Entity", new EntityGenerator());
+            domain.AddGenerator("Repository", new RepositoryGenerator());
+            domain.ProjectDependencies.Add(infrastructure);
+            solution.Projects.Add(domain);
+
+            var api = new Project("Api");
+            api.AddGenerator("Controller", "Controllers", "ApiController", new WebApiControllerGenerator());
+            api.ProjectDependencies.Add(infrastructure);
+            api.ProjectDependencies.Add(domain);
+            solution.Projects.Add(api);
+
+            return solution;
+        }
+
         public Solution CreateSolution(string solutionJson)
         {
             var solution = JsonConvert.DeserializeObject<Solution>(solutionJson);
@@ -334,15 +363,7 @@ namespace GarciaCore.CodeGenerator
 
         public string GetSampleJson()
         {
-            var solution = new Solution("TestSolution", "c:\\files\\garciacoretest");
-            var infrastructure = new Project("Infrastructure");
-            infrastructure.AddGenerator("Entity", new EntityGenerator());
-            solution.Projects.Add(infrastructure);
-            var domain = new Project("Domain");
-            domain.AddGenerator("Entity", new EntityGenerator());
-            domain.AddGenerator("Repository", new RepositoryGenerator());
-            domain.ProjectDependencies.Add(infrastructure);
-            solution.Projects.Add(domain);
+            var solution = CreateSampleSolution();
             return JsonConvert.SerializeObject(solution, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
         }
 
