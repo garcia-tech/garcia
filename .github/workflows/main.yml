@@ -10,6 +10,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
@@ -18,8 +20,12 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
+    - uses: dotnet/nbgv@master
+      id: nbgv
+    - run: echo 'SemVer2=${{ steps.nbgv.outputs.SemVer2 }}'
     - name: Publish GarciaCore
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
           PROJECT_FILE_PATH: src/GarciaCore/GarciaCore.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
