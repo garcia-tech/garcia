@@ -79,22 +79,22 @@ namespace GarciaCore.CodeGenerator
                         name = this.GetInnerTypeClassName(name);
                     }
 
-                    if (useCollections)
-                    {
-                        switch (property.MappingType)
-                        {
-                            case ItemPropertyMappingType.Property:
-                                typeName = name;
-                                break;
-                            case ItemPropertyMappingType.List:
-                                typeName = "List<" + name + ">";
-                                break;
-                            case ItemPropertyMappingType.Array:
-                                typeName = name + "[]";
-                                break;
-                        }
-                    }
-                    else
+                    //if (useCollections)
+                    //{
+                    //    switch (property.MappingType)
+                    //    {
+                    //        case ItemPropertyMappingType.Property:
+                    //            typeName = name;
+                    //            break;
+                    //        case ItemPropertyMappingType.List:
+                    //            typeName = "List<" + name + ">";
+                    //            break;
+                    //        case ItemPropertyMappingType.Array:
+                    //            typeName = name + "[]";
+                    //            break;
+                    //    }
+                    //}
+                    //else
                     {
                         typeName = name;
                     }
@@ -104,6 +104,21 @@ namespace GarciaCore.CodeGenerator
             if (property.IsNullable && !this.notNullablePropertyTypes.Contains(property.Type))
             {
                 typeName = typeName + "?";
+            }
+
+            if (useCollections)
+            {
+                switch (property.MappingType)
+                {
+                    case ItemPropertyMappingType.Property:
+                        break;
+                    case ItemPropertyMappingType.List:
+                        typeName = "List<" + typeName + ">";
+                        break;
+                    case ItemPropertyMappingType.Array:
+                        typeName = typeName + "[]";
+                        break;
+                }
             }
 
             return typeName;
