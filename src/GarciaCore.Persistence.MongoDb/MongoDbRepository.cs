@@ -19,18 +19,14 @@ namespace GarciaCore.Persistence.MongoDb
         public MongoDbRepository(IOptions<MongoDbSettings> options)
         {
             var settings = options.Value;
-
             var client = new MongoClient(settings.ConnectionString);
-
             var database = client.GetDatabase(settings.DatabaseName);
-
             Collection = database.GetCollection<T>(typeof(T).Name);
         }
 
         public async Task<T> AddAsync(T entity)
         {
             await Collection.InsertOneAsync(entity);
-
             return entity;
         }
 
@@ -40,7 +36,6 @@ namespace GarciaCore.Persistence.MongoDb
             {
                 IsOrdered = false,
                 BypassDocumentValidation = false
-
             };
 
             await Collection.InsertManyAsync(entities, options);
@@ -64,23 +59,32 @@ namespace GarciaCore.Persistence.MongoDb
 
         public async Task<IReadOnlyList<T>> GetAllAsync()
         {
-            return await (await Collection.FindAsync(_ => true)).ToListAsync();
+            return await (await Collection
+                .FindAsync(_ => true))
+                .ToListAsync();
         }
 
         public async Task<IReadOnlyList<T>> GetAllAsync(int page, int size)
         {
-            return await Collection.Aggregate().Match(_ => true).Skip((page - 1) * size).Limit(size)
+            return await Collection
+                .Aggregate()
+                .Match(_ => true)
+                .Skip((page - 1) * size)
+                .Limit(size)
                 .ToListAsync();
         }
 
         public async Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> filter)
         {
-            return await (await Collection.FindAsync(filter)).ToListAsync();
+            return await (await Collection
+                .FindAsync(filter))
+                .ToListAsync();
         }
 
         public async Task<T> GetByIdAsync(string id)
         {
-            return await (await Collection.FindAsync(x => x.Id == id))
+            return await (await Collection
+                .FindAsync(x => x.Id == id))
                 .FirstOrDefaultAsync();
         }
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GarciaCore.Persistence.Tests.Utils
 {
-    public static  class Helpers
+    public static class Helpers
     {
         public static async Task SeedMongo(MongoDbRepository<TestMongoEntity> repository)
         {

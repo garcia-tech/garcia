@@ -6,6 +6,11 @@ namespace GarciaCore.Domain.MongoDb
 {
     public abstract class MongoDbEntity : IEntity<string>
     {
+        public MongoDbEntity()
+        {
+            CreatedOn = DateTime.UtcNow;
+        }
+
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonId]
         [BsonElement(Order = 0)]
@@ -18,11 +23,6 @@ namespace GarciaCore.Domain.MongoDb
         public DateTimeOffset LastUpdatedOn { get; set; }
         public int? DeletedBy { get; set; }
         public DateTimeOffset DeletedOn { get; set; }
-        public MongoDbEntity()
-        {
-            CreatedOn = DateTime.UtcNow;
-        }
-
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -32,7 +32,6 @@ namespace GarciaCore.Domain.MongoDb
 
             return obj is MongoDbEntity && Id.Equals(((MongoDbEntity)obj).Id);
         }
-
         public override int GetHashCode() => base.GetHashCode();
 
     }

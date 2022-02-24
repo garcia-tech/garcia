@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using GarciaCore.Infrastructure.MongoDb;
 using GarciaCore.Domain.MongoDb;
 
@@ -12,15 +8,21 @@ namespace GarciaCore.Persistence.MongoDb
 {
     public static class MongoDbServiceRegistration
     {
-        public static IServiceCollection AddMongoDbSettings(this IServiceCollection services,
-           IConfiguration configuration)
+        public static IServiceCollection AddMongoDbSettings<T>(this IServiceCollection services, IOptions<T> options) where T : MongoDbSettings
+        {
+            return services.Configure<T>(o =>
+            {
+                o.ConnectionString = options.Value.ConnectionString;
+                o.DatabaseName = options.Value.DatabaseName;
+            });
+        }
+        public static IServiceCollection AddMongoDbSettings(this IServiceCollection services, IConfiguration configuration)
         {
             return services.Configure<MongoDbSettings>(options =>
             {
-                options.ConnectionString = configuration
-                    .GetSection(nameof(MongoDbSettings) + ":" + MongoDbSettings.ConnectionStringKeyValue).Value;
-                options.DatabaseName = configuration
-                    .GetSection(nameof(MongoDbSettings) + ":" + MongoDbSettings.DatabaseNameKeyValue).Value;
+                string node = options.GetNodeValue();
+                options.ConnectionString = configuration.GetSection(node + ":" + options.GetConnectionStringKeyValue()).Value;
+                options.DatabaseName = configuration.GetSection(node + ":" + options.GetDatabaseNameKeyValue()).Value;
             });
         }
         public static IServiceCollection AddMongoDbRepository<T>(this IServiceCollection services) where T : MongoDbEntity
