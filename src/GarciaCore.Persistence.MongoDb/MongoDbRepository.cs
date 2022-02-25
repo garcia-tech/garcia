@@ -41,9 +41,9 @@ namespace GarciaCore.Persistence.MongoDb
             await Collection.InsertManyAsync(entities, options);
         }
 
-        public async Task<bool> AnyAsync(Expression<Func<T, bool>> expression)
+        public async Task<bool> AnyAsync(Expression<Func<T, bool>> filter)
         {
-            var count = await Collection.CountDocumentsAsync(expression);
+            var count = await Collection.CountDocumentsAsync(filter);
             return count > 0;
         }
 
