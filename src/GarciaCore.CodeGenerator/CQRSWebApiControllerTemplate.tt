@@ -106,6 +106,6 @@ namespace <#= Namespace #>
 <#+
     protected override Generator CreateGenerator()
 	{
-		return new WebApiControllerGenerator();
+		return new CQRSWebApiControllerGenerator();
 	}
 #>

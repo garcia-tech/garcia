@@ -64,7 +64,7 @@ namespace GarciaCore.CodeGenerator
 
         foreach (var property in Item.Properties)
 	    {
-            string innerTypeName = this.generator.GetInnerTypeName(property);
+            string innerTypeName = generator.GetInnerTypeName(property);
 
             
             #line default

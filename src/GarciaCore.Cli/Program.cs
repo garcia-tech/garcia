@@ -18,7 +18,7 @@ namespace MigrationNameGenerator
             {
                 ISolutionService solutionService = new SolutionService();
                 var solution = solutionService.CreateSampleSolution();
-                
+
                 Console.WriteLine(JsonConvert.SerializeObject(solution, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
                 Console.WriteLine("");
                 var item2 = new Item()
@@ -28,7 +28,9 @@ namespace MigrationNameGenerator
                     Properties = new System.Collections.Generic.List<ItemProperty>()
                         {
                             new ItemProperty(){Name = "Testproperty", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
-                            new ItemProperty(){Name = "Testpropertylist", Type = ItemPropertyType.Integer, MappingType = ItemPropertyMappingType.List }
+                            new ItemProperty(){Name = "Testpropertylist", Type = ItemPropertyType.Integer, MappingType = ItemPropertyMappingType.List },
+                            new ItemProperty(){Name = "Testproperty2", Type = ItemPropertyType.Class, MappingType = ItemPropertyMappingType.Property, InnerType = new Item(){Name = "InnerTestType" } },
+                            new ItemProperty(){Name = "Testproperty3", Type = ItemPropertyType.Class, MappingType = ItemPropertyMappingType.Property, InnerType = new Item(){Name = "InnerTestType" } }
                         }
                 };
 

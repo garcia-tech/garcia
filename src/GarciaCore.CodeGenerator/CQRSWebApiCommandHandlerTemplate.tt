@@ -1,0 +1,93 @@
+<#@ template language="C#" inherits="BaseTemplate" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="GarciaCore.CodeGenerator" #>
+<#@ import namespace="GarciaCore.Infrastructure" #>
+<#@ include file="IncludeWarning.t4" #>
+<#@ include file="IncludeUsings.t4" #>
+
+<#
+    var repositoryString = $"I{Item.Name}Repository {Item.Name.ToCamelCase()}Repository";
+    var properties = Item.Properties.Where(x => x.Type == ItemPropertyType.Class);
+    var repositories = new List<string>();
+
+    foreach (var property in properties)
+    {
+        if (!repositories.Contains(property.InnerType.Name))
+        {
+            repositories.Add(property.InnerType.Name);
+        }
+    }
+
+    foreach (var repository in repositories)
+    {
+        repositoryString += $", I{repository}Repository {repository.ToCamelCase()}Repository";
+    }
+
+    repositoryString = repositoryString.Trim().TrimEnd(',');
+#>
+
+namespace <#= Namespace #>
+{
+    public partial class Create<#= Item.Name #>CommandHandler : <#= BaseClass #>
+    {
+        private I<#= Item.Name #>Repository _<#= Item.Name.ToCamelCase() #>Repository;
+<#
+    foreach (var repository in repositories)
+    {
+#>
+        private I<#= repository #>Repository _<#= repository.ToCamelCase() #>Repository;
+<#
+    }
+#>
+
+        public Create<#= Item.Name #>CommandHandler(<#= repositoryString #>)
+        {
+             _<#= Item.Name.ToCamelCase() #>Repository =  <#= Item.Name.ToCamelCase() #>Repository;
+<#
+    foreach (var repository in repositories)
+    {
+#>
+            _<#= repository.ToCamelCase() #>Repository =  <#= repository.ToCamelCase() #>Repository;
+<#
+    }
+#>
+        }
+
+        public async Task<bool> Handle(Create<#= Item.Name #>Command request, CancellationToken cancellationToken)
+        {
+            var item = new <#= Item.Name #>();
+<#
+    foreach (var property in properties.Where(x => x.Type != ItemPropertyType.Class))
+    {
+#>
+            item.<#= property.Name #> = request.<#= property.Name #>;
+<#
+    }
+#>
+<#
+    foreach (var property in properties.Where(x => x.Type == ItemPropertyType.Class))
+    {
+#>
+            item.<#= property.Name #> = request.<#= property.Name #>;
+            var <#= property.Name.ToCamelCase() #> = await _<#= property.InnerType.Name.ToCamelCase() #>Repository.GetByIdAsync(item.Id);
+
+            if (<#= property.Name.ToCamelCase() #> == null)
+            {
+                throw new GarciaCoreNotFoundException($"<#= property.InnerType.Name #> {item.Id} not found");
+            }
+<#
+    }
+#>
+        }
+    }
+}
+
+<#+
+    protected override Generator CreateGenerator()
+	{
+		return new CQRSWebApiCommandHandlerGenerator();
+	}
+#>

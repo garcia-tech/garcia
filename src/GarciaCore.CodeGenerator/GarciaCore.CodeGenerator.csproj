@@ -7,9 +7,11 @@
 
     <ItemGroup>
       <None Remove="BaseTemplate.tt" />
+      <None Remove="CQRSWebApiCommandHandlerTemplate.tt" />
+      <None Remove="CQRSWebApiCommandTemplate.tt" />
+      <None Remove="CQRSWebApiControllerTemplate.tt" />
       <None Remove="EntityTemplate.tt" />
       <None Remove="RepositoryTemplate.tt" />
-      <None Remove="WebApiControllerTemplate.tt" />
     </ItemGroup>
     <ItemGroup>
       <Compile Update="BaseTemplate.cs">
@@ -17,8 +19,18 @@
         <DesignTime>True</DesignTime>
         <DependentUpon>BaseTemplate.tt</DependentUpon>
       </Compile>
-      <Compile Update="WebApiControllerTemplate.cs">
-        <DependentUpon>WebApiControllerTemplate.tt</DependentUpon>
+      <Compile Update="CQRSWebApiCommandHandlerTemplate.cs">
+        <DependentUpon>CQRSWebApiCommandHandlerTemplate.tt</DependentUpon>
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+      </Compile>
+      <Compile Update="CQRSWebApiCommandTemplate.cs">
+        <DependentUpon>CQRSWebApiCommandTemplate.tt</DependentUpon>
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+      </Compile>
+      <Compile Update="CQRSWebApiControllerTemplate.cs">
+        <DependentUpon>CQRSWebApiControllerTemplate.tt</DependentUpon>
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
       </Compile>
@@ -39,8 +51,16 @@
         <Generator>TextTemplatingFilePreprocessor</Generator>
         <LastGenOutput>BaseTemplate.cs</LastGenOutput>
       </Content>
-      <Content Include="WebApiControllerTemplate.tt">
-        <LastGenOutput>WebApiControllerTemplate.cs</LastGenOutput>
+      <Content Include="CQRSWebApiCommandHandlerTemplate.tt">
+        <LastGenOutput>CQRSWebApiCommandHandlerTemplate.cs</LastGenOutput>
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+      </Content>
+      <Content Include="CQRSWebApiCommandTemplate.tt">
+        <LastGenOutput>CQRSWebApiCommandTemplate.cs</LastGenOutput>
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+      </Content>
+      <Content Include="CQRSWebApiControllerTemplate.tt">
+        <LastGenOutput>CQRSWebApiControllerTemplate.cs</LastGenOutput>
         <Generator>TextTemplatingFilePreprocessor</Generator>
       </Content>
       <Content Include="RepositoryTemplate.tt">
