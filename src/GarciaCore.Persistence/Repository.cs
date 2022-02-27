@@ -9,9 +9,9 @@ namespace GarciaCore.Persistence
 {
     public class Repository<T> : BaseRepository<T> where T : Entity
     {
-        private IAsyncRepository<T> _repository;
+        private IAsyncRepository<T, long> _repository;
 
-        public Repository(IAsyncRepository<T> repository)
+        public Repository(IAsyncRepository<T, long> repository)
         {
             _repository = repository;
         }
@@ -21,9 +21,19 @@ namespace GarciaCore.Persistence
             return await _repository.AddAsync(entity);
         }
 
+        public override async Task AddRangeAsync(IEnumerable<T> entities)
+        {
+            await _repository.AddRangeAsync(entities);
+        }
+
         public override async Task DeleteAsync(T entity)
         {
             await _repository.DeleteAsync(entity);
+        }
+
+        public override async Task DeleteManyAsync(Expression<Func<T, bool>> filter)
+        {
+            await _repository.DeleteManyAsync(filter);
         }
 
         public override async Task<IReadOnlyList<T>> GetAllAsync()

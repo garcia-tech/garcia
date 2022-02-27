@@ -62,6 +62,19 @@ namespace GarciaCore.Persistence.EntityFramework
             return await _dbContext.Set<T>().Where(filter).AsNoTracking().ToListAsync();
         }
 
+        public override async Task AddRangeAsync(IEnumerable<T> entities)
+        {
+            await _dbContext.Set<T>().AddRangeAsync(entities);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public override async Task DeleteManyAsync(Expression<Func<T, bool>> filter)
+        {
+            var entities = _dbContext.Set<T>().Where(filter);
+            _dbContext.Set<T>().RemoveRange(entities);
+            await _dbContext.SaveChangesAsync();
+        }
+
         //public override Task<IReadOnlyList<T>> GetAsync(Dictionary<string, object> filter)
         //{
         //    throw new NotImplementedException();

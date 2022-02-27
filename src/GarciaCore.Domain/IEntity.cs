@@ -2,9 +2,9 @@
 
 namespace GarciaCore.Domain
 {
-    public interface IEntity
+    public interface IEntity<out TKey> where TKey : IEquatable<TKey>
     {
-        int Id { get; set; }
+        public TKey Id { get; }
         bool Active { get; set; }
         bool Deleted { get; set; }
         int? CreatedBy { get; set; }
