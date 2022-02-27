@@ -124,6 +124,34 @@ namespace GarciaCore.CodeGenerator
             return typeName;
         }
 
+        public virtual string GetIdTypeName(Item item)
+        {
+            switch (item.IdType)
+            {
+                case IdType.Int:
+                    return "int";
+                case IdType.Long:
+                    return "long";
+                case IdType.Guid:
+                    return "Guid";
+                case IdType.ObjectId:
+                    return "string";
+                default:
+                    return string.Empty;
+            }
+        }
+
+        public virtual string GetIdTypeAttributes(Item item)
+        {
+            switch (item.IdType)
+            {
+                case IdType.ObjectId:
+                    return "string";
+                default:
+                    return string.Empty;
+            }
+        }
+
         public abstract Task<string> Generate(Item item, string @namespace, string baseClass);
     }
 
@@ -344,11 +372,11 @@ namespace GarciaCore.CodeGenerator
         public Solution CreateSampleSolution()
         {
             var solution = new Solution("TestSolution", "c:\\files\\garciacoretest");
-            
+
             var infrastructure = new Project("Infrastructure");
             infrastructure.AddGenerator("Entity", new EntityGenerator());
             solution.Projects.Add(infrastructure);
-            
+
             var domain = new Project("Domain");
             domain.AddGenerator("Entity", new EntityGenerator());
             domain.AddGenerator("Repository", new RepositoryGenerator());

@@ -24,6 +24,7 @@ namespace MigrationNameGenerator
                 var item2 = new Item()
                 {
                     Name = "Test",
+                    IdType = IdType.Guid,
                     Properties = new System.Collections.Generic.List<ItemProperty>()
                         {
                             new ItemProperty(){Name = "Testproperty", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
@@ -31,7 +32,7 @@ namespace MigrationNameGenerator
                         }
                 };
 
-                Console.WriteLine(JsonConvert.SerializeObject(item2));
+                Console.WriteLine(JsonConvert.SerializeObject(item2, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
                 var text2 = await solution.Generate(item2);
 
                 foreach (var item in text2)

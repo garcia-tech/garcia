@@ -6,24 +6,30 @@
 <#@ import namespace="GarciaCore.CodeGenerator" #>
 <#@ import namespace="GarciaCore.Infrastructure" #>
 <#@ include file="IncludeWarning.t4" #>
-<#@ include file="IncludeUsings.t4" #>  
+<#@ include file="IncludeUsings.t4" #>
 
 namespace <#= Namespace #>
 {
     public interface I<#= Item.Name #>Repository : IAsyncRepository<<#= Item.Name #>>
     {
 <#
-        if(Item.Properties.Count(x => x.InnerType != null))
+        if (Item.Properties.Count(x => x.InnerType != null) > 0)
 	    {
-            string innerTypeName = this.generator.GetInnerTypeName(property);
+#>
+        Task<List<<#= Item.Name #>>> GetByIdWithIncludes(long id);
+<#
+        }
 #>
     }
 
     public partial class <#= Item.Name #>Repository : <#= BaseClass #><<#= Item.Name #>>, I<#= Item.Name #>Repository
     {
         public LockerRepository(DbContext dbContext) : base(dbContext) { }
-
-        public async Task<List<<#= Item.Name #>>> GetByIdWithIncludes(long id)
+<#
+        if (Item.Properties.Count(x => x.InnerType != null) > 0)
+	    {
+#>
+        public async Task<List<<#= Item.Name #>>> GetByIdWithIncludes( <#= IdTypeName #> id)
         {
             return await _dbContext.<#= Item.Name #>s
 <#
@@ -39,6 +45,9 @@ namespace <#= Namespace #>
                 .AsNoTracking()
                 .ToListAsync();
         }
+<#
+        }
+#>
     }
 }
 

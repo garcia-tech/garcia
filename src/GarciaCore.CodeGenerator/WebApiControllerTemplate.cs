@@ -336,9 +336,16 @@ namespace GarciaCore.CodeGenerator
             
             #line default
             #line hidden
-            this.Write("(int id)\r\n        {\r\n            var item = await _repository.GetAsync(id);\r\n\r\n  " +
-                    "          if (item != null)\r\n            {\r\n                return Ok(item);\r\n  " +
-                    "          }\r\n\r\n            return NotFound();\r\n        }\r\n");
+            this.Write("(");
+            
+            #line 71 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(IdTypeName));
+            
+            #line default
+            #line hidden
+            this.Write(" id)\r\n        {\r\n            var item = await _repository.GetAsync(id);\r\n\r\n      " +
+                    "      if (item != null)\r\n            {\r\n                return Ok(item);\r\n      " +
+                    "      }\r\n\r\n            return NotFound();\r\n        }\r\n");
             
             #line 82 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiControllerTemplate.tt"
 
@@ -377,8 +384,15 @@ namespace GarciaCore.CodeGenerator
             
             #line default
             #line hidden
-            this.Write("(long id)\r\n        {\r\n            var item = await _repository.GetAsync(id);\r\n\r\n " +
-                    "           if (item != null)\r\n            {\r\n                return Ok(item.");
+            this.Write("(");
+            
+            #line 89 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(IdTypeName));
+            
+            #line default
+            #line hidden
+            this.Write(" id)\r\n        {\r\n            var item = await _repository.GetAsync(id);\r\n\r\n      " +
+                    "      if (item != null)\r\n            {\r\n                return Ok(item.");
             
             #line 95 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));

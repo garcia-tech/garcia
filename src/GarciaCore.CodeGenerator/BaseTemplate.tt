@@ -10,7 +10,7 @@ protected Generator generator;
 
 public BaseTemplate() 
 {
-    this.generator = this.CreateGenerator();
+    generator = CreateGenerator();
 } 
     
 protected virtual Generator CreateGenerator()
@@ -20,6 +20,21 @@ protected virtual Generator CreateGenerator()
 
 public void test()
 {
+}
+
+private string idTypeName;
+
+public string IdTypeName
+{
+    get
+    {
+        if (string.IsNullOrEmpty(idTypeName))
+        {
+            idTypeName = generator.GetIdTypeName(Item);
+        }
+
+        return idTypeName;
+    }
 }
 
 public GarciaCore.CodeGenerator.Item Item { get; set; }

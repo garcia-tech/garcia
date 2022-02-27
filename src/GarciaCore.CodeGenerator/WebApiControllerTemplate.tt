@@ -68,7 +68,7 @@ namespace <#= Namespace #>
         }
 
         [HttpGet("api/<#= Item.Name #>/{id}", Name = "Get<#= Item.Name #>")]
-        public async Task<<#= Item.Name #>> Get<#= Item.Name #>(int id)
+        public async Task<<#= Item.Name #>> Get<#= Item.Name #>(<#= IdTypeName #> id)
         {
             var item = await _repository.GetAsync(id);
 
@@ -86,7 +86,7 @@ namespace <#= Namespace #>
 #>
         
         [HttpGet("api/<#= Item.Name #>/{id}/<#= property.Name.ToPascalCase() #>")]
-        public async Task<<#= innerTypeName #>> Get<#= property.Name.ToPascalCase() #>(long id)
+        public async Task<<#= innerTypeName #>> Get<#= property.Name.ToPascalCase() #>(<#= IdTypeName #> id)
         {
             var item = await _repository.GetAsync(id);
 

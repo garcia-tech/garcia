@@ -7,6 +7,7 @@ namespace GarciaCore.CodeGenerator
         public string Name { get; set; }
         public List<ItemProperty> Properties { get; set; } = new List<ItemProperty>();
         public bool IsEnum { get; set; }
+        public IdType IdType { get; set; }
 
         public override string ToString()
         {
@@ -36,6 +37,14 @@ namespace GarciaCore.CodeGenerator
         //public string FieldName { get; set; }
         //public bool AddOnChange { get; set; }
         //public string EditGroupName { get; set; }
+    }
+
+    public enum IdType
+    {
+        Int = 0,
+        Long,
+        Guid,
+        ObjectId
     }
 
     public enum ItemPropertyType
