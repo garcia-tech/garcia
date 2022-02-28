@@ -34,33 +34,40 @@ namespace GarciaCore.CodeGenerator
                     "nually. \r\n\tAdd a new partial class with the same name if you want to add extra f" +
                     "unctionality.\r\n*/");
             this.Write("\r\n");
-            this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing System.Data;\r\nusing Syste" +
-                    "m.Linq;\r\nusing System.ComponentModel.DataAnnotations;\r\nusing GarciaCore.Infrastr" +
-                    "ucture;\r\nusing GarciaCore.Domain;\r\nusing GarciaCore.Persistence;");
-            this.Write("  \r\n\r\nnamespace ");
+            this.Write(@"using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.ComponentModel.DataAnnotations;
+using GarciaCore.Infrastructure;
+using GarciaCore.Domain;
+using GarciaCore.Persistence;
+using System.Threading;
+using System.Threading.Tasks;");
+            this.Write("  \r\nusing MediatR;\r\n\r\nnamespace ");
             
-            #line 11 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
+            #line 12 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public partial class Create");
             
-            #line 13 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
+            #line 14 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("Command : ");
             
-            #line 13 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
+            #line 14 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(BaseClass));
             
             #line default
             #line hidden
             this.Write("\r\n    {\r\n");
             
-            #line 15 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
+            #line 16 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
   
     if (!string.IsNullOrEmpty(IdTypeName))
     {
@@ -70,14 +77,14 @@ namespace GarciaCore.CodeGenerator
             #line hidden
             this.Write("        public ");
             
-            #line 19 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
+            #line 20 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(IdTypeName));
             
             #line default
             #line hidden
             this.Write(" Id { get; set; }\r\n");
             
-            #line 20 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
+            #line 21 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
 
     }
 
@@ -85,9 +92,9 @@ namespace GarciaCore.CodeGenerator
             #line default
             #line hidden
             
-            #line 23 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
+            #line 24 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
 
-    foreach (var property in Item.Properties)
+    foreach (var property in Item.Properties.Where(x => x.Type != ItemPropertyType.Class || x.MappingType == ItemPropertyMappingType.List))
 	{
         string innerTypeName = generator.GetInnerTypeName(property);
 
@@ -96,21 +103,61 @@ namespace GarciaCore.CodeGenerator
             #line hidden
             this.Write("        public ");
             
-            #line 28 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
+            #line 29 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(innerTypeName));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 28 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
+            #line 29 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToPascalCase()));
             
             #line default
             #line hidden
             this.Write(" { get; set; }\r\n");
             
-            #line 29 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
+            #line 30 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
+
+    }
+
+            
+            #line default
+            #line hidden
+            
+            #line 33 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
+
+    foreach (var property in Item.Properties.Where(x => x.Type == ItemPropertyType.Class && x.MappingType != ItemPropertyMappingType.List))
+	{
+        string innerTypeName = generator.GetInnerTypeName(property);
+        var idPostfix = property.Type == ItemPropertyType.Class && property.MappingType != ItemPropertyMappingType.List ? "Id" : string.Empty;
+
+            
+            #line default
+            #line hidden
+            this.Write("        public ");
+            
+            #line 39 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(innerTypeName));
+            
+            #line default
+            #line hidden
+            this.Write(" ");
+            
+            #line 39 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToPascalCase()));
+            
+            #line default
+            #line hidden
+            
+            #line 39 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(idPostfix));
+            
+            #line default
+            #line hidden
+            this.Write(" { get; set; }\r\n");
+            
+            #line 40 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
 
     }
 
@@ -119,7 +166,7 @@ namespace GarciaCore.CodeGenerator
             #line hidden
             this.Write("    }\r\n\r\n");
             
-            #line 34 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
+            #line 45 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
 
     if (!string.IsNullOrEmpty(IdTypeName))
     {
@@ -129,42 +176,42 @@ namespace GarciaCore.CodeGenerator
             #line hidden
             this.Write("    public partial class Update");
             
-            #line 38 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
+            #line 49 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("Command : Create");
             
-            #line 38 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
+            #line 49 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("Command\r\n    {\r\n    }\r\n\r\n    public partial class Delete");
             
-            #line 42 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
+            #line 53 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("Command : ");
             
-            #line 42 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
+            #line 53 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(BaseClass));
             
             #line default
             #line hidden
             this.Write("\r\n    {\r\n        public ");
             
-            #line 44 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
+            #line 55 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(IdTypeName));
             
             #line default
             #line hidden
             this.Write(" Id { get; set; }\r\n    }\r\n");
             
-            #line 46 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
+            #line 57 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
 
     }
 
@@ -175,7 +222,7 @@ namespace GarciaCore.CodeGenerator
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 51 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
+        #line 62 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiCommandTemplate.tt"
 
     protected override Generator CreateGenerator()
 	{

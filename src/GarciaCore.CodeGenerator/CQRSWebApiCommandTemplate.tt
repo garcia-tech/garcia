@@ -7,6 +7,7 @@
 <#@ import namespace="GarciaCore.Infrastructure" #>
 <#@ include file="IncludeWarning.t4" #>
 <#@ include file="IncludeUsings.t4" #>  
+using MediatR;
 
 namespace <#= Namespace #>
 {
@@ -21,11 +22,21 @@ namespace <#= Namespace #>
     }
 #>
 <#
-    foreach (var property in Item.Properties)
+    foreach (var property in Item.Properties.Where(x => x.Type != ItemPropertyType.Class || x.MappingType == ItemPropertyMappingType.List))
 	{
         string innerTypeName = generator.GetInnerTypeName(property);
 #>
         public <#= innerTypeName #> <#= property.Name.ToPascalCase() #> { get; set; }
+<#
+    }
+#>
+<#
+    foreach (var property in Item.Properties.Where(x => x.Type == ItemPropertyType.Class && x.MappingType != ItemPropertyMappingType.List))
+	{
+        string innerTypeName = generator.GetInnerTypeName(property);
+        var idPostfix = property.Type == ItemPropertyType.Class && property.MappingType != ItemPropertyMappingType.List ? "Id" : string.Empty;
+#>
+        public <#= innerTypeName #> <#= property.Name.ToPascalCase() #><#= idPostfix #> { get; set; }
 <#
     }
 #>

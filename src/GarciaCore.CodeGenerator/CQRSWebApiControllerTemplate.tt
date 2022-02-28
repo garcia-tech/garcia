@@ -6,7 +6,8 @@
 <#@ import namespace="GarciaCore.CodeGenerator" #>
 <#@ import namespace="GarciaCore.Infrastructure" #>
 <#@ include file="IncludeWarning.t4" #>
-<#@ include file="IncludeUsings.t4" #>  
+<#@ include file="IncludeUsings.t4" #>
+using MediatR;
 
 namespace <#= Namespace #>
 {
