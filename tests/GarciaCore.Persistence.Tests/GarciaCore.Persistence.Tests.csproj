@@ -32,10 +32,13 @@
      
       <ProjectReference Include="..\..\src\GarciaCore.Infrastructure.MongoDb\GarciaCore.Infrastructure.MongoDb.csproj" />
      
+      <ProjectReference Include="..\..\src\GarciaCore.Infrastructure.Redis\GarciaCore.Infrastructure.Redis.csproj" />
+     
       <ProjectReference Include="..\..\src\GarciaCore.Persistence.MongoDb\GarciaCore.Persistence.MongoDb.csproj" />
      
       <ProjectReference Include="..\..\src\GarciaCore.Persistence.ORM\GarciaCore.Persistence.ORM.csproj" />
       <ProjectReference Include="..\..\src\GarciaCore.Persistence.EntityFramework\GarciaCore.Persistence.EntityFramework.csproj" />
+      <ProjectReference Include="..\..\src\GarciaCore.Persistence.Redis\GarciaCore.Persistence.Redis.csproj" />
       <ProjectReference Include="..\..\src\GarciaCore.Persistence\GarciaCore.Persistence.csproj" />
     </ItemGroup>
 
