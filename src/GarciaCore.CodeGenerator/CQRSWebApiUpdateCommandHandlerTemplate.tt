@@ -30,7 +30,7 @@
 
 namespace <#= Namespace #>
 {
-    public partial class Create<#= Item.Name #>CommandHandler : <#= BaseClass #>
+    public partial class Update<#= Item.Name #>CommandHandler : <#= BaseClass #>
     {
         private I<#= Item.Name #>Repository _<#= Item.Name.ToCamelCase() #>Repository;
 <#
@@ -42,7 +42,7 @@ namespace <#= Namespace #>
     }
 #>
 
-        public Create<#= Item.Name #>CommandHandler(<#= repositoryString #>)
+        public Update<#= Item.Name #>CommandHandler(<#= repositoryString #>)
         {
              _<#= Item.Name.ToCamelCase() #>Repository =  <#= Item.Name.ToCamelCase() #>Repository;
 <#
@@ -55,9 +55,14 @@ namespace <#= Namespace #>
 #>
         }
 
-        public async Task<bool> Handle(Create<#= Item.Name #>Command request, CancellationToken cancellationToken)
+        public async Task<int> Handle(Update<#= Item.Name #>Command request, CancellationToken cancellationToken)
         {
-            var item = new <#= Item.Name #>();
+            var item = await _<#= Item.Name #>Repository.GetByIdAsync(request.Id);
+
+            if (item == null)
+            {
+                throw new DomainNotFoundException($"<#= Item.Name #> {request.Id} not found");
+            }
 <#
     foreach (var property in Item.Properties.Where(x => x.Type != ItemPropertyType.Class))
     {
@@ -81,6 +86,8 @@ namespace <#= Namespace #>
 <#
     }
 #>
+            var result = await _<#= Item.Name #>Repository.SaveAsync(item);
+            return result;
         }
     }
 }
@@ -88,6 +95,6 @@ namespace <#= Namespace #>
 <#+
     protected override Generator CreateGenerator()
 	{
-		return new CQRSWebApiCommandHandlerGenerator();
+		return new CQRSWebApiUpdateCommandHandlerGenerator();
 	}
 #>

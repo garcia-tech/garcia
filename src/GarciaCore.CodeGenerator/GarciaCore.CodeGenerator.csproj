@@ -7,9 +7,11 @@
 
     <ItemGroup>
       <None Remove="BaseTemplate.tt" />
-      <None Remove="CQRSWebApiCommandHandlerTemplate.tt" />
       <None Remove="CQRSWebApiCommandTemplate.tt" />
       <None Remove="CQRSWebApiControllerTemplate.tt" />
+      <None Remove="CQRSWebApiCreateCommandHandlerTemplate.tt" />
+      <None Remove="CQRSWebApiDeleteCommandHandlerTemplate.tt" />
+      <None Remove="CQRSWebApiUpdateCommandHandlerTemplate.tt" />
       <None Remove="EntityTemplate.tt" />
       <None Remove="RepositoryTemplate.tt" />
     </ItemGroup>
@@ -19,8 +21,18 @@
         <DesignTime>True</DesignTime>
         <DependentUpon>BaseTemplate.tt</DependentUpon>
       </Compile>
-      <Compile Update="CQRSWebApiCommandHandlerTemplate.cs">
-        <DependentUpon>CQRSWebApiCommandHandlerTemplate.tt</DependentUpon>
+      <Compile Update="CQRSWebApiDeleteCommandHandlerTemplate.cs">
+        <DependentUpon>CQRSWebApiDeleteCommandHandlerTemplate.tt</DependentUpon>
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+      </Compile>
+      <Compile Update="CQRSWebApiUpdateCommandHandlerTemplate.cs">
+        <DependentUpon>CQRSWebApiUpdateCommandHandlerTemplate.tt</DependentUpon>
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+      </Compile>
+      <Compile Update="CQRSWebApiCreateCommandHandlerTemplate.cs">
+        <DependentUpon>CQRSWebApiCreateCommandHandlerTemplate.tt</DependentUpon>
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
       </Compile>
@@ -51,8 +63,16 @@
         <Generator>TextTemplatingFilePreprocessor</Generator>
         <LastGenOutput>BaseTemplate.cs</LastGenOutput>
       </Content>
-      <Content Include="CQRSWebApiCommandHandlerTemplate.tt">
-        <LastGenOutput>CQRSWebApiCommandHandlerTemplate.cs</LastGenOutput>
+      <Content Include="CQRSWebApiDeleteCommandHandlerTemplate.tt">
+        <LastGenOutput>CQRSWebApiDeleteCommandHandlerTemplate.cs</LastGenOutput>
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+      </Content>
+      <Content Include="CQRSWebApiUpdateCommandHandlerTemplate.tt">
+        <LastGenOutput>CQRSWebApiUpdateCommandHandlerTemplate.cs</LastGenOutput>
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+      </Content>
+      <Content Include="CQRSWebApiCreateCommandHandlerTemplate.tt">
+        <LastGenOutput>CQRSWebApiCreateCommandHandlerTemplate.cs</LastGenOutput>
         <Generator>TextTemplatingFilePreprocessor</Generator>
       </Content>
       <Content Include="CQRSWebApiCommandTemplate.tt">
