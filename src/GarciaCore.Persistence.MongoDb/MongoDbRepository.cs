@@ -32,14 +32,13 @@ namespace GarciaCore.Persistence.MongoDb
 
         public async Task<long> AddRangeAsync(IEnumerable<T> entities)
         {
-            var options = new InsertManyOptions
+            var options = new BulkWriteOptions
             {
                 IsOrdered = false,
                 BypassDocumentValidation = false
             };
 
-            await Collection.InsertManyAsync(entities, options);
-            return entities.Count();
+            return (await Collection.BulkWriteAsync((IEnumerable<WriteModel<T>>)entities, options)).InsertedCount;
         }
 
         public async Task<bool> AnyAsync(Expression<Func<T, bool>> filter)
