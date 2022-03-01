@@ -16,24 +16,24 @@ namespace GarciaCore.Persistence
             _repository = repository;
         }
 
-        public override async Task<T> AddAsync(T entity)
+        public override async Task<long> AddAsync(T entity)
         {
             return await _repository.AddAsync(entity);
         }
 
-        public override async Task AddRangeAsync(IEnumerable<T> entities)
+        public override async Task<long> AddRangeAsync(IEnumerable<T> entities)
         {
-            await _repository.AddRangeAsync(entities);
+            return await _repository.AddRangeAsync(entities);
         }
 
-        public override async Task DeleteAsync(T entity)
+        public override async Task<long> DeleteAsync(T entity)
         {
-            await _repository.DeleteAsync(entity);
+            return await _repository.DeleteAsync(entity);
         }
 
-        public override async Task DeleteManyAsync(Expression<Func<T, bool>> filter)
+        public override async Task<long> DeleteManyAsync(Expression<Func<T, bool>> filter)
         {
-            await _repository.DeleteManyAsync(filter);
+            return await _repository.DeleteManyAsync(filter);
         }
 
         public override async Task<IReadOnlyList<T>> GetAllAsync()
@@ -56,9 +56,9 @@ namespace GarciaCore.Persistence
             return await _repository.GetByIdAsync(id);
         }
 
-        public override async Task UpdateAsync(T entity)
+        public override async Task<long> UpdateAsync(T entity)
         {
-            await _repository.UpdateAsync(entity);
+            return await _repository.UpdateAsync(entity);
         }
     }
 }

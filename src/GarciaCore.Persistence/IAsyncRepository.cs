@@ -23,32 +23,32 @@ namespace GarciaCore.Persistence
         /// Adds a single entity.
         /// </summary>
         /// <param name="entity">The entity to be inserted.</param>
-        /// <returns>Inserted entity <typeparamref name="T"/></returns>
-        Task<T> AddAsync(T entity);
+        /// <returns>Number of affected records.</returns>
+        Task<long> AddAsync(T entity);
         /// <summary>
         /// Adds many entities, bulk insert operation.
         /// </summary>
         /// <param name="entities">Entity list to be inserted.</param>
-        /// <returns></returns>
-        Task AddRangeAsync(IEnumerable<T> entities);
+        /// <returns>Number of affected records.</returns>
+        Task<long> AddRangeAsync(IEnumerable<T> entities);
         /// <summary>
         /// Deletes multiple entities matching the <paramref name="filter"/>.
         /// </summary>
         /// <param name="filter">Query of the operation.</param>
-        /// <returns></returns>
-        Task DeleteManyAsync(Expression<Func<T, bool>> filter);
+        /// <returns>Number of affected records.</returns>
+        Task<long> DeleteManyAsync(Expression<Func<T, bool>> filter);
         /// <summary>
         /// Updates single entity <typeparamref name="T"/>
         /// </summary>
         /// <param name="entity">The entity to be updated.</param>
-        /// <returns></returns>
-        Task UpdateAsync(T entity);
+        /// <returns>Number of affected records.</returns>
+        Task<long> UpdateAsync(T entity);
         /// <summary>
         /// Deletes single entity <typeparamref name="T"/>
         /// </summary>
         /// <param name="entity">The entity to be deleted.</param>
-        /// <returns></returns>
-        Task DeleteAsync(T entity);
+        /// <returns>Number of affected records.</returns>
+        Task<long> DeleteAsync(T entity);
         /// <summary>
         /// Gets all entities with pagination.
         /// </summary>

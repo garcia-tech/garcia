@@ -28,23 +28,22 @@ namespace GarciaCore.Persistence.EntityFramework
             return await _dbContext.Set<T>().ToListAsync();
         }
 
-        public override async Task<T> AddAsync(T entity)
+        public override async Task<long> AddAsync(T entity)
         {
             await _dbContext.Set<T>().AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
-            return entity;
+            return await _dbContext.SaveChangesAsync();
         }
 
-        public override async Task UpdateAsync(T entity)
+        public override async Task<long> UpdateAsync(T entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
-            await _dbContext.SaveChangesAsync();
+            return await _dbContext.SaveChangesAsync();
         }
 
-        public override async Task DeleteAsync(T entity)
+        public override async Task<long> DeleteAsync(T entity)
         {
             _dbContext.Set<T>().Remove(entity);
-            await _dbContext.SaveChangesAsync();
+            return await _dbContext.SaveChangesAsync();
         }
 
         public override async Task<IReadOnlyList<T>> GetAllAsync(int page, int size)
@@ -62,17 +61,17 @@ namespace GarciaCore.Persistence.EntityFramework
             return await _dbContext.Set<T>().Where(filter).AsNoTracking().ToListAsync();
         }
 
-        public override async Task AddRangeAsync(IEnumerable<T> entities)
+        public override async Task<long> AddRangeAsync(IEnumerable<T> entities)
         {
             await _dbContext.Set<T>().AddRangeAsync(entities);
-            await _dbContext.SaveChangesAsync();
+            return await _dbContext.SaveChangesAsync();
         }
 
-        public override async Task DeleteManyAsync(Expression<Func<T, bool>> filter)
+        public override async Task<long> DeleteManyAsync(Expression<Func<T, bool>> filter)
         {
             var entities = _dbContext.Set<T>().Where(filter);
             _dbContext.Set<T>().RemoveRange(entities);
-            await _dbContext.SaveChangesAsync();
+            return await _dbContext.SaveChangesAsync();
         }
 
         //public override Task<IReadOnlyList<T>> GetAsync(Dictionary<string, object> filter)

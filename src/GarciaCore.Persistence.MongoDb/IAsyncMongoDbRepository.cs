@@ -14,7 +14,7 @@ namespace GarciaCore.Persistence.MongoDb
         /// <param name="filter">Query of the operation.</param>
         /// <param name="definition">Definition of the update operation.</param>
         /// <returns></returns>
-        Task UpdateManyAsync(Expression<Func<T, bool>> filter, UpdateDefinition<T> definition);
+        Task<long> UpdateManyAsync(Expression<Func<T, bool>> filter, UpdateDefinition<T> definition);
         /// <summary>
         /// Checks if there are any entities that match the filter
         /// </summary>

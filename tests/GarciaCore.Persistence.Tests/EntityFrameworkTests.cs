@@ -59,8 +59,7 @@ namespace GarciaCore.Persistence.Tests
         {
             var item = new TestEntity(3, "Three");
             var result = await _repository.AddAsync(item);
-            Assert.NotNull(result);
-            Assert.NotEqual(0, result.Id);
+            Assert.NotEqual(0, result);
         }
 
         [Fact]
