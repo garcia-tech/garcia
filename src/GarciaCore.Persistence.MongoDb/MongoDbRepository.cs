@@ -24,21 +24,21 @@ namespace GarciaCore.Persistence.MongoDb
             Collection = database.GetCollection<T>(typeof(T).Name);
         }
 
-        public async Task<T> AddAsync(T entity)
+        public async Task<long> AddAsync(T entity)
         {
             await Collection.InsertOneAsync(entity);
-            return entity;
+            return entity == null ? 0 : 1;
         }
 
-        public async Task AddRangeAsync(IEnumerable<T> entities)
+        public async Task<long> AddRangeAsync(IEnumerable<T> entities)
         {
-            var options = new InsertManyOptions
+            var options = new BulkWriteOptions
             {
                 IsOrdered = false,
                 BypassDocumentValidation = false
             };
 
-            await Collection.InsertManyAsync(entities, options);
+            return (await Collection.BulkWriteAsync((IEnumerable<WriteModel<T>>)entities, options)).InsertedCount;
         }
 
         public async Task<bool> AnyAsync(Expression<Func<T, bool>> filter)
@@ -47,14 +47,14 @@ namespace GarciaCore.Persistence.MongoDb
             return count > 0;
         }
 
-        public async Task DeleteAsync(T entity)
+        public async Task<long> DeleteAsync(T entity)
         {
-            await Collection.DeleteOneAsync(x => x.Id == entity.Id);
+            return (await Collection.DeleteOneAsync(x => x.Id == entity.Id)).DeletedCount;
         }
 
-        public async Task DeleteManyAsync(Expression<Func<T, bool>> filter)
+        public async Task<long> DeleteManyAsync(Expression<Func<T, bool>> filter)
         {
-            await Collection.DeleteManyAsync(filter);
+            return (await Collection.DeleteManyAsync(filter)).DeletedCount;
         }
 
         public async Task<IReadOnlyList<T>> GetAllAsync()
@@ -88,14 +88,15 @@ namespace GarciaCore.Persistence.MongoDb
                 .FirstOrDefaultAsync();
         }
 
-        public async Task UpdateAsync(T entity)
+        public async Task<long> UpdateAsync(T entity)
         {
             await Collection.FindOneAndReplaceAsync(x => x.Id == entity.Id, entity);
+            return entity == null ? 0 : 1;
         }
 
-        public async Task UpdateManyAsync(Expression<Func<T, bool>> filter, UpdateDefinition<T> definition)
+        public async Task<long> UpdateManyAsync(Expression<Func<T, bool>> filter, UpdateDefinition<T> definition)
         {
-            await Collection.UpdateManyAsync(filter, definition);
+            return (await Collection.UpdateManyAsync(filter, definition)).ModifiedCount;
         }
     }
 }

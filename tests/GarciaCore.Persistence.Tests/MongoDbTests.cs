@@ -86,7 +86,7 @@ namespace GarciaCore.Persistence.Tests
             };
 
             var result = await _repository.AddAsync(entity);
-            result.Id.ShouldNotBeNull();
+            Assert.Equal(1, result);
             DisposeConnection();
         }
 
@@ -107,7 +107,8 @@ namespace GarciaCore.Persistence.Tests
                 }
             };
 
-            await _repository.AddRangeAsync(entities);
+            var resultCount = await _repository.AddRangeAsync(entities);
+            resultCount.ShouldBe(2);
             var result = await _repository.GetAllAsync();
             result.ShouldNotBeNull();
             result.Count.ShouldBe(2);
@@ -119,7 +120,8 @@ namespace GarciaCore.Persistence.Tests
             CreateConnection();
             await SeedMongo(_repository);
             var entities = await _repository.GetAllAsync();
-            await _repository.DeleteAsync(entities.FirstOrDefault()!);
+            var resultCount = await _repository.DeleteAsync(entities.FirstOrDefault()!);
+            resultCount.ShouldBe(1);
             var result = await _repository.GetAllAsync();
 
             result.Count.ShouldBeLessThan(entities.Count);
@@ -133,7 +135,8 @@ namespace GarciaCore.Persistence.Tests
             CreateConnection();
             await SeedMongo(_repository);
             var entities = await _repository.GetAllAsync();
-            await _repository.DeleteManyAsync(x => x.Indicator > 3);
+            var resultCount = await _repository.DeleteManyAsync(x => x.Indicator > 3);
+            // resultCount.ShouldBe(1); TODO: sayı kaç olmalı?
             var result = await _repository.GetAllAsync();
 
             result.Count.ShouldBeLessThan(entities.Count);
@@ -150,7 +153,8 @@ namespace GarciaCore.Persistence.Tests
 
             TestMongoEntity subject = entities.FirstOrDefault()!;
             subject.Name = "Updated";
-            await _repository.UpdateAsync(subject);
+            var resultCount = await _repository.UpdateAsync(subject);
+            resultCount.ShouldBe(1);
             var updatedEntity = await _repository.GetByIdAsync(subject.Id);
             var result = updatedEntity.Equals(subject);
             result.ShouldBeTrue();
@@ -173,7 +177,8 @@ namespace GarciaCore.Persistence.Tests
             CreateConnection();
             await SeedMongo(_repository);
             var updateDefinition = Builders<TestMongoEntity>.Update.Set(x => x.Name, "Updated");
-            await _repository.UpdateManyAsync(x => x.Indicator > 4, updateDefinition);
+            var resultCount = await _repository.UpdateManyAsync(x => x.Indicator > 4, updateDefinition);
+            // resultCount.ShouldBe(1); TODO: sayı kaç olmalı?
             var entities = await _repository.GetAsync(x => x.Indicator > 4);
 
             var result = entities.All(x => x.Name == "Updated");

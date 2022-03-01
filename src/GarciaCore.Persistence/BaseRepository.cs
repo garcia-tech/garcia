@@ -17,30 +17,27 @@ namespace GarciaCore.Persistence
         //public abstract Task<IReadOnlyList<T>> GetByKeyAsync(string key, object value);
         public abstract Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> filter);
         //public abstract Task<IReadOnlyList<T>> GetAsync(Dictionary<string, object> filter);
-        public abstract Task<T> AddAsync(T entity);
-        public abstract Task AddRangeAsync(IEnumerable<T> entities);
-        public abstract Task UpdateAsync(T entity);
-        public abstract Task DeleteAsync(T entity);
-        public abstract Task DeleteManyAsync(Expression<Func<T, bool>> filter);
+        public abstract Task<long> AddAsync(T entity);
+        public abstract Task<long> AddRangeAsync(IEnumerable<T> entities);
+        public abstract Task<long> UpdateAsync(T entity);
+        public abstract Task<long> DeleteAsync(T entity);
+        public abstract Task<long> DeleteManyAsync(Expression<Func<T, bool>> filter);
         public abstract Task<IReadOnlyList<T>> GetAllAsync(int page, int size);
 
-
-        public virtual async Task<T> SaveAsync(T entity)
+        public virtual async Task<long> SaveAsync(T entity)
         {
             if (entity.Id == 0)
             {
-                await AddAsync(entity);
+                return await AddAsync(entity);
             }
             else if (entity.IsDeleted)
             {
-                await DeleteAsync(entity);
+                return await DeleteAsync(entity);
             }
             else
             {
-                await UpdateAsync(entity);
+                return await UpdateAsync(entity);
             }
-
-            return entity;
         }
     }
 }
