@@ -20,7 +20,9 @@ namespace GarciaCore.CodeGenerator
 
             var api = new Project("Api");
             api.AddGenerator("Controller", "Controllers", "ApiController", new CQRSWebApiControllerGenerator());
-            api.AddGenerator("Command", new CQRSWebApiCommandGenerator());
+            api.AddGenerator("Command", new CQRSWebApiCreateCommandGenerator());
+            api.AddGenerator("Command", new CQRSWebApiUpdateCommandGenerator());
+            api.AddGenerator("Command", new CQRSWebApiDeleteCommandGenerator());
             api.AddGenerator("CommandHandler", new CQRSWebApiCreateCommandHandlerGenerator());
             api.AddGenerator("CommandHandler", new CQRSWebApiUpdateCommandHandlerGenerator());
             api.AddGenerator("CommandHandler", new CQRSWebApiDeleteCommandHandlerGenerator());

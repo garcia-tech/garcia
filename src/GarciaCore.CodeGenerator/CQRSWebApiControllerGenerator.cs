@@ -5,7 +5,17 @@
         public override string DefaultBaseClass => "ApiController";
     }
 
-    public class CQRSWebApiCommandGenerator : Generator<CQRSWebApiCommandTemplate>
+    public class CQRSWebApiCreateCommandGenerator : Generator<CQRSWebApiCreateCommandTemplate>
+    {
+        public override string DefaultBaseClass => "IRequest<int>";
+    }
+
+    public class CQRSWebApiUpdateCommandGenerator : Generator<CQRSWebApiUpdateCommandTemplate>
+    {
+        public override string DefaultBaseClass => "IRequest<int>";
+    }
+
+    public class CQRSWebApiDeleteCommandGenerator : Generator<CQRSWebApiDeleteCommandTemplate>
     {
         public override string DefaultBaseClass => "IRequest<int>";
     }

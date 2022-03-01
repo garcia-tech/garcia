@@ -7,11 +7,13 @@
 
     <ItemGroup>
       <None Remove="BaseTemplate.tt" />
-      <None Remove="CQRSWebApiCommandTemplate.tt" />
       <None Remove="CQRSWebApiControllerTemplate.tt" />
       <None Remove="CQRSWebApiCreateCommandHandlerTemplate.tt" />
+      <None Remove="CQRSWebApiCreateCommandTemplate.tt" />
       <None Remove="CQRSWebApiDeleteCommandHandlerTemplate.tt" />
+      <None Remove="CQRSWebApiDeleteCommandTemplate.tt" />
       <None Remove="CQRSWebApiUpdateCommandHandlerTemplate.tt" />
+      <None Remove="CQRSWebApiUpdateCommandTemplate.tt" />
       <None Remove="EntityTemplate.tt" />
       <None Remove="RepositoryTemplate.tt" />
     </ItemGroup>
@@ -20,6 +22,16 @@
         <AutoGen>True</AutoGen>
         <DesignTime>True</DesignTime>
         <DependentUpon>BaseTemplate.tt</DependentUpon>
+      </Compile>
+      <Compile Update="CQRSWebApiDeleteCommandTemplate.cs">
+        <DependentUpon>CQRSWebApiDeleteCommandTemplate.tt</DependentUpon>
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+      </Compile>
+      <Compile Update="CQRSWebApiUpdateCommandTemplate.cs">
+        <DependentUpon>CQRSWebApiUpdateCommandTemplate.tt</DependentUpon>
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
       </Compile>
       <Compile Update="CQRSWebApiDeleteCommandHandlerTemplate.cs">
         <DependentUpon>CQRSWebApiDeleteCommandHandlerTemplate.tt</DependentUpon>
@@ -36,8 +48,8 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
       </Compile>
-      <Compile Update="CQRSWebApiCommandTemplate.cs">
-        <DependentUpon>CQRSWebApiCommandTemplate.tt</DependentUpon>
+      <Compile Update="CQRSWebApiCreateCommandTemplate.cs">
+        <DependentUpon>CQRSWebApiCreateCommandTemplate.tt</DependentUpon>
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
       </Compile>
@@ -63,6 +75,14 @@
         <Generator>TextTemplatingFilePreprocessor</Generator>
         <LastGenOutput>BaseTemplate.cs</LastGenOutput>
       </Content>
+      <Content Include="CQRSWebApiDeleteCommandTemplate.tt">
+        <LastGenOutput>CQRSWebApiDeleteCommandTemplate.cs</LastGenOutput>
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+      </Content>
+      <Content Include="CQRSWebApiUpdateCommandTemplate.tt">
+        <LastGenOutput>CQRSWebApiUpdateCommandTemplate.cs</LastGenOutput>
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+      </Content>
       <Content Include="CQRSWebApiDeleteCommandHandlerTemplate.tt">
         <LastGenOutput>CQRSWebApiDeleteCommandHandlerTemplate.cs</LastGenOutput>
         <Generator>TextTemplatingFilePreprocessor</Generator>
@@ -75,8 +95,8 @@
         <LastGenOutput>CQRSWebApiCreateCommandHandlerTemplate.cs</LastGenOutput>
         <Generator>TextTemplatingFilePreprocessor</Generator>
       </Content>
-      <Content Include="CQRSWebApiCommandTemplate.tt">
-        <LastGenOutput>CQRSWebApiCommandTemplate.cs</LastGenOutput>
+      <Content Include="CQRSWebApiCreateCommandTemplate.tt">
+        <LastGenOutput>CQRSWebApiCreateCommandTemplate.cs</LastGenOutput>
         <Generator>TextTemplatingFilePreprocessor</Generator>
       </Content>
       <Content Include="CQRSWebApiControllerTemplate.tt">

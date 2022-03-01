@@ -41,27 +41,11 @@ namespace <#= Namespace #>
     }
 #>
     }
-
-<#
-    if (!string.IsNullOrEmpty(IdTypeName))
-    {
-#>
-    public partial class Update<#= Item.Name #>Command : Create<#= Item.Name #>Command
-    {
-    }
-
-    public partial class Delete<#= Item.Name #>Command : <#= BaseClass #>
-    {
-        public <#= IdTypeName #> Id { get; set; }
-    }
-<#
-    }
-#>
 }
 
 <#+
     protected override Generator CreateGenerator()
 	{
-		return new CQRSWebApiCommandGenerator();
+		return new CQRSWebApiCreateCommandGenerator();
 	}
 #>
