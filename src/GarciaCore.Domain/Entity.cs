@@ -9,7 +9,7 @@ namespace GarciaCore.Domain
     {
         public virtual long Id { get; set; }
         public virtual Guid UniqueId { get; set; } = Guid.NewGuid();
-        public virtual DateTime CreatedOn { get; private set; }
+        public virtual DateTime CreatedOn { get; set; }
         public virtual DateTime LastUpdatedOn { get; set; }
         public virtual bool IsActive { get; set; }
         [JsonIgnore]
