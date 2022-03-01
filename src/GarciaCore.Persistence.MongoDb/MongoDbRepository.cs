@@ -38,7 +38,7 @@ namespace GarciaCore.Persistence.MongoDb
                 BypassDocumentValidation = false
             };
 
-            return (await Collection.BulkWriteAsync((IEnumerable<WriteModel<T>>)entities, options)).InsertedCount;
+            return (await Collection.BulkWriteAsync(entities.Select(x => new InsertOneModel<T>(x)), options)).InsertedCount;
         }
 
         public async Task<bool> AnyAsync(Expression<Func<T, bool>> filter)
