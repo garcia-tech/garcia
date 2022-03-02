@@ -30,7 +30,7 @@
 
 namespace <#= Namespace #>
 {
-    public partial class Delete<#= Item.Name #>CommandHandler : <#= BaseClass #>
+    public partial class Delete<#= Item.Name #>CommandHandler : IRequestHandler<Delete<#= Item.Name #>Command, int>
     {
         private I<#= Item.Name #>Repository _<#= Item.Name.ToCamelCase() #>Repository;
 <#

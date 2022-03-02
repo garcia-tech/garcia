@@ -30,7 +30,7 @@
 
 namespace <#= Namespace #>
 {
-    public partial class Create<#= Item.Name #>CommandHandler : <#= BaseClass #>
+    public partial class Create<#= Item.Name #>CommandHandler : IRequestHandler<Create<#= Item.Name #>Command, int>
     {
         private I<#= Item.Name #>Repository _<#= Item.Name.ToCamelCase() #>Repository;
 <#

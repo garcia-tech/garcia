@@ -15,5 +15,6 @@ namespace GarciaCore.CodeGenerator
         public IGenerator Generator { get; set; }
         public string Code { get; set; }
         public List<string> Messages { get; set; } = new List<string>();
+        public string AllMessages { get { return string.Join('\n', Messages); } }
     }
 }

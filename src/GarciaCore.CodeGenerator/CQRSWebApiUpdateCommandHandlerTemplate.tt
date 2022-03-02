@@ -30,7 +30,7 @@
 
 namespace <#= Namespace #>
 {
-    public partial class Update<#= Item.Name #>CommandHandler : <#= BaseClass #>
+    public partial class Update<#= Item.Name #>CommandHandler : IRequestHandler<Update<#= Item.Name #>Command, int>
     {
         private I<#= Item.Name #>Repository _<#= Item.Name.ToCamelCase() #>Repository;
 <#

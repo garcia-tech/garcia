@@ -22,16 +22,16 @@
 
     public class CQRSWebApiCreateCommandHandlerGenerator : Generator<CQRSWebApiCreateCommandHandlerTemplate>
     {
-        public override string DefaultBaseClass => "IRequestHandler<T, int>";
+        public override string DefaultBaseClass => "";
     }
 
     public class CQRSWebApiUpdateCommandHandlerGenerator : Generator<CQRSWebApiUpdateCommandHandlerTemplate>
     {
-        public override string DefaultBaseClass => "IRequestHandler<T, int>";
+        public override string DefaultBaseClass => "";
     }
 
     public class CQRSWebApiDeleteCommandHandlerGenerator : Generator<CQRSWebApiDeleteCommandHandlerTemplate>
     {
-        public override string DefaultBaseClass => "IRequestHandler<T, int>";
+        public override string DefaultBaseClass => "";
     }
 }

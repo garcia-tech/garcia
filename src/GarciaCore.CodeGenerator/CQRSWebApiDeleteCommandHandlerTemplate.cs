@@ -84,14 +84,14 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write("CommandHandler : ");
+            this.Write("CommandHandler : IRequestHandler<Delete");
             
             #line 33 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiDeleteCommandHandlerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(BaseClass));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
-            this.Write("\r\n    {\r\n        private I");
+            this.Write("Command, int>\r\n    {\r\n        private I");
             
             #line 35 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiDeleteCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
