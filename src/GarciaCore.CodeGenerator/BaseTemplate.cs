@@ -20,7 +20,7 @@ namespace GarciaCore.CodeGenerator
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\vehbi\source\repos\garciacore\src\GarciaCore.CodeGenerator\BaseTemplate.tt"
+    #line 1 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\BaseTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
     public partial class BaseTemplate : BaseTemplateBase
     {
@@ -30,24 +30,16 @@ namespace GarciaCore.CodeGenerator
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("/*\r\n\tThis file was generated automatically by Garcia Framework. \r\n\tDo not edit ma" +
-                    "nually. \r\n\tAdd a new partial class with the same name if you want to add extra f" +
-                    "unctionality.\r\n*/");
-            this.Write("\r\n");
-            this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing System.Data;\r\nusing Syste" +
-                    "m.Linq;\r\nusing System.ComponentModel.DataAnnotations;\r\nusing GarciaCore.Infrastr" +
-                    "ucture;");
-            this.Write(" \r\n");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 10 "C:\Users\vehbi\source\repos\garciacore\src\GarciaCore.CodeGenerator\BaseTemplate.tt"
+        #line 8 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\BaseTemplate.tt"
 
 protected Generator generator;
 
 public BaseTemplate() 
 {
-    this.generator = this.CreateGenerator();
+    generator = CreateGenerator();
 } 
     
 protected virtual Generator CreateGenerator()
@@ -57,6 +49,21 @@ protected virtual Generator CreateGenerator()
 
 public void test()
 {
+}
+
+private string idTypeName;
+
+public string IdTypeName
+{
+    get
+    {
+        if (string.IsNullOrEmpty(idTypeName))
+        {
+            idTypeName = generator.GetIdTypeName(Item);
+        }
+
+        return idTypeName;
+    }
 }
 
 public GarciaCore.CodeGenerator.Item Item { get; set; }

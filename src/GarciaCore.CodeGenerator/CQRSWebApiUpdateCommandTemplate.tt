@@ -7,26 +7,18 @@
 <#@ import namespace="GarciaCore.Infrastructure" #>
 <#@ include file="IncludeWarning.t4" #>
 <#@ include file="IncludeUsings.t4" #>  
+using MediatR;
 
 namespace <#= Namespace #>
 {
-    public partial class <#= Item.Name #> : <#= BaseClass #>
+    public partial class Update<#= Item.Name #>Command : Create<#= Item.Name #>Command
     {
-<#
-        foreach (var property in Item.Properties)
-	    {
-            string innerTypeName = generator.GetInnerTypeName(property);
-#>
-        public <#= innerTypeName #> <#= property.Name.ToPascalCase() #> { get; set; }
-<#
-        }
-#>
     }
 }
 
 <#+
     protected override Generator CreateGenerator()
 	{
-		return new EntityGenerator();
+		return new CQRSWebApiUpdateCommandGenerator();
 	}
 #>

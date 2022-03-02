@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace GarciaCore.Persistence
 {
+    public interface IAsyncRepository
+    {
+    }
+
     public interface IAsyncRepository<T, TKey> where TKey : IEquatable<TKey>
     {
         /// <summary>

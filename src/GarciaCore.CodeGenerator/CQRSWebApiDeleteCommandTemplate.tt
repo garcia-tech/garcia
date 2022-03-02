@@ -7,26 +7,19 @@
 <#@ import namespace="GarciaCore.Infrastructure" #>
 <#@ include file="IncludeWarning.t4" #>
 <#@ include file="IncludeUsings.t4" #>  
+using MediatR;
 
 namespace <#= Namespace #>
 {
-    public partial class <#= Item.Name #> : <#= BaseClass #>
+    public partial class Delete<#= Item.Name #>Command : <#= BaseClass #>
     {
-<#
-        foreach (var property in Item.Properties)
-	    {
-            string innerTypeName = generator.GetInnerTypeName(property);
-#>
-        public <#= innerTypeName #> <#= property.Name.ToPascalCase() #> { get; set; }
-<#
-        }
-#>
+        public <#= IdTypeName #> Id { get; set; }
     }
 }
 
 <#+
     protected override Generator CreateGenerator()
 	{
-		return new EntityGenerator();
+		return new CQRSWebApiDeleteCommandGenerator();
 	}
 #>

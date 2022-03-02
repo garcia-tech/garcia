@@ -1,0 +1,71 @@
+<#@ template language="C#" inherits="BaseTemplate" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="GarciaCore.CodeGenerator" #>
+<#@ import namespace="GarciaCore.Infrastructure" #>
+<#@ include file="IncludeWarning.t4" #>
+<#@ include file="IncludeUsings.t4" #>
+<#
+    var repositoryString = $"I{Item.Name}Repository {Item.Name.ToCamelCase()}Repository";
+    var properties = Item.Properties.Where(x => x.Type == ItemPropertyType.Class);
+    var repositories = new List<string>();
+
+    foreach (var property in properties)
+    {
+        if (!repositories.Contains(property.InnerType.Name))
+        {
+            repositories.Add(property.InnerType.Name);
+        }
+    }
+
+    foreach (var repository in repositories)
+    {
+        repositoryString += $", I{repository}Repository {repository.ToCamelCase()}Repository";
+    }
+
+    repositoryString = repositoryString.Trim().TrimEnd(',');
+#>
+
+namespace <#= Namespace #>
+{
+    public partial class Delete<#= Item.Name #>CommandHandler : IRequestHandler<Delete<#= Item.Name #>Command, int>
+    {
+        private I<#= Item.Name #>Repository _<#= Item.Name.ToCamelCase() #>Repository;
+<#
+    foreach (var repository in repositories)
+    {
+#>
+        private I<#= repository #>Repository _<#= repository.ToCamelCase() #>Repository;
+<#
+    }
+#>
+
+        public Delete<#= Item.Name #>CommandHandler(<#= repositoryString #>)
+        {
+             _<#= Item.Name.ToCamelCase() #>Repository =  <#= Item.Name.ToCamelCase() #>Repository;
+        }
+
+        public async Task<int> Handle(Delete<#= Item.Name #>Command request, CancellationToken cancellationToken)
+        {
+            var item = await _<#= Item.Name #>Repository.GetByIdAsync(request.Id);
+
+            if (item == null)
+            {
+                throw new DomainNotFoundException($"<#= Item.Name #> {request.Id} not found");
+            }
+            
+            item.IsDeleted = true;
+            var result = await _<#= Item.Name #>Repository.SaveAsync(item);
+            return result;
+        }
+    }
+}
+
+<#+
+    protected override Generator CreateGenerator()
+	{
+		return new CQRSWebApiDeleteCommandHandlerGenerator();
+	}
+#>

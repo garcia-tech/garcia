@@ -1,6 +1,9 @@
 ﻿using GarciaCore.CodeGenerator;
 using GarciaCore.Infrastructure;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using TextCopy;
 using ToolBox.Bridge;
 
@@ -10,22 +13,57 @@ namespace MigrationNameGenerator
     {
         private static ShellHelper _shellHelper = new ShellHelper();
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-
             try
             {
-                var item2 = new Item()
+                ISolutionService solutionService = new SolutionService();
+                var solution = solutionService.CreateSampleSolution();
+
+                Console.WriteLine(JsonConvert.SerializeObject(solution, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
+                Console.WriteLine("");
+                var items = new List<Item>()
                 {
-                    Name = "Test",
-                    Properties = new System.Collections.Generic.List<ItemProperty>()
+                    new Item()
+                    {
+                        Name = "User",
+                        IdType = IdType.Guid,
+                        Properties = new List<ItemProperty>()
                         {
-                            new ItemProperty(){Name = "Testproperty", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
-                            new ItemProperty(){Name = "Testpropertylist", Type = ItemPropertyType.Integer, MappingType = ItemPropertyMappingType.List }
+                            new ItemProperty() { Name = "Name", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
+                            new ItemProperty() { Name = "Surname", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
+                            new ItemProperty() { Name = "HomeAddress", Type = ItemPropertyType.Class, MappingType = ItemPropertyMappingType.Property, InnerType = new Item() { Name = "Address" } },
+                            new ItemProperty() { Name = "WorkAddress", Type = ItemPropertyType.Class, MappingType = ItemPropertyMappingType.Property, InnerType = new Item() { Name = "Address" } }
                         }
+                    },
+                    new Item()
+                    {
+                        Name = "Address",
+                        IdType = IdType.Int,
+                        Properties = new List<ItemProperty>()
+                        {
+                            new ItemProperty() { Name = "Addressline", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
+                        }
+                    }
                 };
-                var text2 = Generate(item2);
-                Console.WriteLine(text2);
+              
+                Console.WriteLine(JsonConvert.SerializeObject(items, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
+                var text2 = await solution.Generate(items);
+
+                //foreach (var item in text2)
+                //{
+                //    Console.WriteLine(item.Code);
+                //}
+
+                foreach (var item in text2)
+                {
+                    var allMessages = item.AllMessages;
+
+                    if (!string.IsNullOrEmpty(allMessages))
+                        Console.WriteLine(allMessages);
+                }
+
+                return;
             }
             catch (Exception ex)
             {
@@ -64,8 +102,8 @@ namespace MigrationNameGenerator
                             new ItemProperty(){Name = "Test property list", Type = ItemPropertyType.Integer, MappingType = ItemPropertyMappingType.List }
                         }
                     };
-                    var text = Generate(item);
-                    Console.WriteLine(text);
+                    //var text = Generate(item);
+                    //Console.WriteLine(text);
                     break;
                 default:
                     break;
@@ -102,12 +140,12 @@ namespace MigrationNameGenerator
             return text;
         }
 
-        static string Generate(Item item)
-        {
-            var generator = new EntityGenerator();
-            var text = generator.Generate(item);
-            var generator2 = new RepositoryGenerator();
-            return text + "\n\n" + generator2.Generate(item);
-        }
+        //static string Generate(Item item)
+        //{
+        //    var generator = new EntityGenerator();
+        //    var text = generator.Generate(item);
+        //    var generator2 = new RepositoryGenerator();
+        //    return text + "\n\n" + generator2.Generate(item);
+        //}
     }
 }

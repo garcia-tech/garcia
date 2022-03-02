@@ -5,17 +5,55 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="GarciaCore.CodeGenerator" #>
 <#@ import namespace="GarciaCore.Infrastructure" #>
+<#@ include file="IncludeWarning.t4" #>
+<#@ include file="IncludeUsings.t4" #>
 
 namespace <#= Namespace #>
 {
-    public partial class <#= Item.Name #>Repository : <#= BaseClass #>
+    public interface I<#= Item.Name #>Repository : IAsyncRepository<<#= Item.Name #>>
     {
+<#
+        if (Item.Properties.Count(x => x.InnerType != null) > 0)
+	    {
+#>
+        Task<List<<#= Item.Name #>>> GetByIdWithIncludes(long id);
+<#
+        }
+#>
+    }
+
+    public partial class <#= Item.Name #>Repository : <#= BaseClass #><<#= Item.Name #>>, I<#= Item.Name #>Repository
+    {
+        public LockerRepository(DbContext dbContext) : base(dbContext) { }
+<#
+        if (Item.Properties.Count(x => x.InnerType != null) > 0)
+	    {
+#>
+        public async Task<List<<#= Item.Name #>>> GetByIdWithIncludes( <#= IdTypeName #> id)
+        {
+            return await _dbContext.<#= Item.Name #>s
+<#
+        foreach (var property in Item.Properties.Where(x => x.InnerType != null))
+	    {
+            string innerTypeName = this.generator.GetInnerTypeName(property);
+#>
+                .Include(i => i.<#= property.Name #>)
+<#
+        }
+#>
+                .Where(i => i.Id == id)
+                .AsNoTracking()
+                .ToListAsync();
+        }
+<#
+        }
+#>
     }
 }
 
 <#+
     protected override Generator CreateGenerator()
 	{
-		return new EntityGenerator();
+		return new RepositoryGenerator();
 	}
 #>

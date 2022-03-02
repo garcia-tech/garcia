@@ -1,0 +1,112 @@
+<#@ template language="C#" inherits="BaseTemplate" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="GarciaCore.CodeGenerator" #>
+<#@ import namespace="GarciaCore.Infrastructure" #>
+<#@ include file="IncludeWarning.t4" #>
+<#@ include file="IncludeUsings.t4" #>
+using MediatR;
+
+namespace <#= Namespace #>
+{
+    public partial class <#= Item.Name #>Controller : <#= BaseClass #>
+    {
+        private I<#= Item.Name #>Service _<#= Item.Name.ToCamelCase() #>Service;
+        private I<#= Item.Name #>Repository _<#= Item.Name.ToCamelCase() #>Repository;
+
+        public <#= Item.Name #>Controller(IOptions<Settings> settings, <#= Item.Name #>Repository <#= Item.Name #>Repository, I<#= Item.Name #>Service <#= Item.Name #>Service, IMediator mediator, IQrCodeService qrCodeService) : base(settings, repository, mediator)
+        {
+            _<#= Item.Name.ToCamelCase() #>Service = <#= Item.Name.ToCamelCase() #>Service;
+            _<#= Item.Name.ToCamelCase() #>Repository = <#= Item.Name.ToCamelCase() #>Repository;
+        }
+
+        [HttpPost(Name = "Create<#= Item.Name #>")]
+        public async Task<ActionResult<<#= Item.Name #>>> Create<#= Item.Name #>Command(Create<#= Item.Name #>Command command)
+        {
+            var response = await _mediator.Send(command);
+
+            if (response.IsValidResponse)
+            {
+                return StatusCode(response.StatusCode, response.Error);
+            }
+
+            return Created($"/<#= Item.Name #>s/{command.Id}", response.Result);
+        }
+
+        [HttpPut(Name = "Update<#= Item.Name #>")]
+        public async Task<ActionResult<<#= Item.Name #>>> Update<#= Item.Name #>Command(Update<#= Item.Name #>Command command)
+        {
+            var response = await _mediator.Send(command);
+
+            if (response.IsValidResponse)
+            {
+                return StatusCode(response.StatusCode, response.Error);
+            }
+
+            return Created($"/<#= Item.Name #>s/{command.Id}", response.Result);
+        }
+
+        [HttpDelete("{id}", Name = "Delete<#= Item.Name #>")]
+        public async Task<ActionResult<<#= Item.Name #>>> Delete<#= Item.Name #>Command(Delete<#= Item.Name #>Command command)
+        {
+            var response = await _mediator.Send(command);
+
+            if (response.IsValidResponse)
+            {
+                return StatusCode(response.StatusCode, response.Error);
+            }
+
+            return NoContent();
+        }
+
+        [HttpGet("api/<#= Item.Name #>", Name = "GetAll<#= Item.Name #>s")]
+        public async Task<List<<#= Item.Name #>>> GetAll<#= Item.Name #>s()
+        {
+            var items = await _repository.GetAllAsync();
+            return Ok(items);
+        }
+
+        [HttpGet("api/<#= Item.Name #>/{id}", Name = "Get<#= Item.Name #>")]
+        public async Task<<#= Item.Name #>> Get<#= Item.Name #>(<#= IdTypeName #> id)
+        {
+            var item = await _repository.GetAsync(id);
+
+            if (item != null)
+            {
+                return Ok(item);
+            }
+
+            return NotFound();
+        }
+<#
+        foreach (var property in Item.Properties.Where(x => x.MappingType == ItemPropertyMappingType.List && x.Type == ItemPropertyType.Class))
+	    {
+            string innerTypeName = this.generator.GetInnerTypeName(property);
+#>
+        
+        [HttpGet("api/<#= Item.Name #>/{id}/<#= property.Name.ToPascalCase() #>")]
+        public async Task<<#= innerTypeName #>> Get<#= property.Name.ToPascalCase() #>(<#= IdTypeName #> id)
+        {
+            var item = await _repository.GetAsync(id);
+
+            if (item != null)
+            {
+                return Ok(item.<#= property.Name #>);
+            }
+
+            return NotFound();
+        }
+<#
+        }
+#>
+    }
+}
+
+<#+
+    protected override Generator CreateGenerator()
+	{
+		return new CQRSWebApiControllerGenerator();
+	}
+#>

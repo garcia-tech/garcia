@@ -20,7 +20,7 @@ namespace GarciaCore.CodeGenerator
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\vehbi\source\repos\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+    #line 1 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
     public partial class EntityTemplate : BaseTemplate
     {
@@ -30,72 +30,73 @@ namespace GarciaCore.CodeGenerator
         /// </summary>
         public override string TransformText()
         {
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n\nnamespace ");
+            this.Write("/*\r\n\tThis file was generated automatically by Garcia Framework. \r\n\tDo not edit ma" +
+                    "nually. \r\n\tAdd a new partial class with the same name if you want to add extra f" +
+                    "unctionality.\r\n*/");
+            this.Write("\r\n");
+            this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing System.Data;\r\nusing Syste" +
+                    "m.Linq;\r\nusing System.ComponentModel.DataAnnotations;\r\nusing GarciaCore.Infrastr" +
+                    "ucture;\r\nusing GarciaCore.Domain;\r\nusing GarciaCore.Persistence;");
+            this.Write("  \r\n\r\nnamespace ");
             
-            #line 1 "C:\Users\vehbi\source\repos\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+            #line 11 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
             
             #line default
             #line hidden
-            this.Write("\n{\n    public partial class ");
+            this.Write("\r\n{\r\n    public partial class ");
             
-            #line 1 "C:\Users\vehbi\source\repos\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+            #line 13 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write(" : ");
             
-            #line 1 "C:\Users\vehbi\source\repos\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+            #line 13 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(BaseClass));
             
             #line default
             #line hidden
-            this.Write("\n    {\n");
+            this.Write("\r\n    {\r\n");
             
-            #line 1 "C:\Users\vehbi\source\repos\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+            #line 15 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
 
         foreach (var property in Item.Properties)
 	    {
-            string innerTypeName = this.generator.GetInnerTypeName(property);
+            string innerTypeName = generator.GetInnerTypeName(property);
 
             
             #line default
             #line hidden
-            this.Write("\n        public ");
+            this.Write("        public ");
             
-            #line 1 "C:\Users\vehbi\source\repos\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+            #line 20 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(innerTypeName));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 1 "C:\Users\vehbi\source\repos\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+            #line 20 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToPascalCase()));
             
             #line default
             #line hidden
-            this.Write(" { get; set; }\n");
+            this.Write(" { get; set; }\r\n");
             
-            #line 1 "C:\Users\vehbi\source\repos\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+            #line 21 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
 
         }
 
             
             #line default
             #line hidden
-            this.Write("\n    }\n}\n\n");
+            this.Write("    }\r\n}\r\n\r\n");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "C:\Users\vehbi\source\repos\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+        #line 27 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
 
     protected override Generator CreateGenerator()
 	{
