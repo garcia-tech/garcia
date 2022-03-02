@@ -136,7 +136,7 @@ namespace GarciaCore.Persistence.Tests
             await SeedMongo(_repository);
             var entities = await _repository.GetAllAsync();
             var resultCount = await _repository.DeleteManyAsync(x => x.Indicator > 3);
-            // resultCount.ShouldBe(1); TODO: sayı kaç olmalı?
+             resultCount.ShouldBe(2);
             var result = await _repository.GetAllAsync();
 
             result.Count.ShouldBeLessThan(entities.Count);
@@ -178,7 +178,7 @@ namespace GarciaCore.Persistence.Tests
             await SeedMongo(_repository);
             var updateDefinition = Builders<TestMongoEntity>.Update.Set(x => x.Name, "Updated");
             var resultCount = await _repository.UpdateManyAsync(x => x.Indicator > 4, updateDefinition);
-            // resultCount.ShouldBe(1); TODO: sayı kaç olmalı?
+            resultCount.ShouldBe(1);
             var entities = await _repository.GetAsync(x => x.Indicator > 4);
 
             var result = entities.All(x => x.Name == "Updated");
