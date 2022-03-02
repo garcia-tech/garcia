@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.Linq.Async" Version="6.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\GarciaCore.Exceptions.Redis\GarciaCore.Exceptions.Redis.csproj" />
+		<ProjectReference Include="..\GarciaCore.Infrastructure.Redis\GarciaCore.Infrastructure.Redis.csproj" />
+	</ItemGroup>
+
+</Project>

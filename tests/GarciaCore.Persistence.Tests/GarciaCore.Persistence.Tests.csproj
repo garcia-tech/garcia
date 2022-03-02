@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
@@ -10,6 +10,9 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.13" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+        <PackageReference Include="Mongo2Go" Version="3.1.3" />
+        <PackageReference Include="Moq" Version="4.16.1" />
+        <PackageReference Include="Shouldly" Version="4.0.3" />
         <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.255">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -27,8 +30,15 @@
 
     <ItemGroup>
      
+      <ProjectReference Include="..\..\src\GarciaCore.Infrastructure.MongoDb\GarciaCore.Infrastructure.MongoDb.csproj" />
+     
+      <ProjectReference Include="..\..\src\GarciaCore.Infrastructure.Redis\GarciaCore.Infrastructure.Redis.csproj" />
+     
+      <ProjectReference Include="..\..\src\GarciaCore.Persistence.MongoDb\GarciaCore.Persistence.MongoDb.csproj" />
+     
       <ProjectReference Include="..\..\src\GarciaCore.Persistence.ORM\GarciaCore.Persistence.ORM.csproj" />
       <ProjectReference Include="..\..\src\GarciaCore.Persistence.EntityFramework\GarciaCore.Persistence.EntityFramework.csproj" />
+      <ProjectReference Include="..\..\src\GarciaCore.Persistence.Redis\GarciaCore.Persistence.Redis.csproj" />
       <ProjectReference Include="..\..\src\GarciaCore.Persistence\GarciaCore.Persistence.csproj" />
     </ItemGroup>
 
