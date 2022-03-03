@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using GarciaCore.Application.Redis.Contracts.Infrastructure;
 using StackExchange.Redis;
 
 namespace GarciaCore.Infrastructure.Redis

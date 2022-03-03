@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using GarciaCore.Infrastructure;
+using GarciaCore.Application.Contracts.Infrastructure;
 using StackExchange.Redis;
 
-namespace GarciaCore.Persistence.Redis
+namespace GarciaCore.Application.Redis.Contracts.Persistence
 {
     public interface IRedisCache : IAsyncCache
     {

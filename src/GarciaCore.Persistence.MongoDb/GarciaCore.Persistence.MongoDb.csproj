@@ -10,9 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GarciaCore.Application.MongoDb\GarciaCore.Application.MongoDb.csproj" />
     <ProjectReference Include="..\GarciaCore.Domain.MongoDb\GarciaCore.Domain.MongoDb.csproj" />
     <ProjectReference Include="..\GarciaCore.Infrastructure.MongoDb\GarciaCore.Infrastructure.MongoDb.csproj" />
-    <ProjectReference Include="..\GarciaCore.Persistence\GarciaCore.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

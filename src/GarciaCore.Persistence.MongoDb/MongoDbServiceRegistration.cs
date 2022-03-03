@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using GarciaCore.Infrastructure.MongoDb;
 using GarciaCore.Domain.MongoDb;
+using GarciaCore.Application.MongoDb.Contracts.Persistence;
 
 namespace GarciaCore.Persistence.MongoDb
 {
@@ -25,9 +26,9 @@ namespace GarciaCore.Persistence.MongoDb
                 options.DatabaseName = configuration.GetSection(node + ":" + options.GetDatabaseNameKeyValue()).Value;
             });
         }
-        public static IServiceCollection AddMongoDbRepository<T>(this IServiceCollection services) where T : MongoDbEntity
+        public static IServiceCollection AddMongoDbRepository(this IServiceCollection services)
         {
-            services.AddScoped<IAsyncMongoDbRepository<T>, MongoDbRepository<T>>();
+            services.AddScoped(typeof(IAsyncMongoDbRepository<>), typeof(MongoDbRepository<>));
             return services;
         }
     }

@@ -1,10 +1,11 @@
-﻿using GarciaCore.Domain;
+﻿using GarciaCore.Application.Contracts.Persistence;
+using GarciaCore.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace GarciaCore.Persistence
+namespace GarciaCore.Application.Contracts.Persistence
 {
     public abstract class BaseRepository<T> : IAsyncRepository<T, long> where T : Entity
     {

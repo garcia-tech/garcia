@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Security.Cryptography;
+using GarciaCore.Application;
 
 namespace GarciaCore.Infrastructure
 {

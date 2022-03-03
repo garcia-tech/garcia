@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.Caching.Memory;
+﻿using System;
+using GarciaCore.Application.Contracts.Infrastructure;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
-using System;
 
 namespace GarciaCore.Infrastructure
 {

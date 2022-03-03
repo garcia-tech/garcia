@@ -1,9 +1,10 @@
-﻿using GarciaCore.Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using GarciaCore.Domain;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using GarciaCore.Application.Contracts.Persistence;
 
 namespace GarciaCore.Persistence
 {

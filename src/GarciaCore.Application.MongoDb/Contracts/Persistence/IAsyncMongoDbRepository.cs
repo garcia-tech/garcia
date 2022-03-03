@@ -1,12 +1,12 @@
-﻿using GarciaCore.Domain.MongoDb;
+﻿using GarciaCore.Application.Contracts.Persistence;
 using MongoDB.Driver;
 using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace GarciaCore.Persistence.MongoDb
+namespace GarciaCore.Application.MongoDb.Contracts.Persistence
 {
-    public interface IAsyncMongoDbRepository<T> : IAsyncRepository<T, string> where T : MongoDbEntity
+    public interface IAsyncMongoDbRepository<T> : IAsyncRepository<T, string> where T : class
     {
         /// <summary>
         /// Updates multiple document matching the <paramref name="filter"/> by <paramref name="definition"/>

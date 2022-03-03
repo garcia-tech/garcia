@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace GarciaCore.Infrastructure
+namespace GarciaCore.Application
 {
     public class GarciaCoreStringBuilder
     {

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GarciaCore.Application.Contracts.Infrastructure;
 
-namespace GarciaCore.Infrastructure.Redis
+namespace GarciaCore.Application.Redis.Contracts.Infrastructure
 {
     public interface IRedisService : IAsyncPubSubService
     {

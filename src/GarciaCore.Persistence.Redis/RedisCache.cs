@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Threading.Tasks;
+using GarciaCore.Application.Redis.Contracts.Persistence;
 using GarciaCore.Exceptions.Redis;
 using GarciaCore.Infrastructure.Redis;
 using StackExchange.Redis;
