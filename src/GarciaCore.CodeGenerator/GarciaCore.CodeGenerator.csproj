@@ -122,6 +122,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\GarciaCore.Application\GarciaCore.Application.csproj" />
       <ProjectReference Include="..\GarciaCore.Infrastructure\GarciaCore.Infrastructure.csproj" />
     </ItemGroup>
 

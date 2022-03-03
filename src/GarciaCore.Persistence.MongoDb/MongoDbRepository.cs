@@ -9,6 +9,7 @@ using MongoDB.Driver;
 using GarciaCore.Infrastructure;
 using GarciaCore.Domain.MongoDb;
 using GarciaCore.Infrastructure.MongoDb;
+using GarciaCore.Application.MongoDb.Contracts.Persistence;
 
 namespace GarciaCore.Persistence.MongoDb
 {

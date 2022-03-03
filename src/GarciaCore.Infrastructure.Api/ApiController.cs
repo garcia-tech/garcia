@@ -1,4 +1,5 @@
-﻿using GarciaCore.Persistence;
+﻿using GarciaCore.Application.Contracts.Persistence;
+using GarciaCore.Persistence;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;

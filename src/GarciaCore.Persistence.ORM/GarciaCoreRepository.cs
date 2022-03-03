@@ -1,14 +1,16 @@
-﻿using Dapper;
-using GarciaCore.Domain;
-using GarciaCore.Infrastructure;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Options;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Dapper;
+using GarciaCore.Infrastructure;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
+using GarciaCore.Application.Contracts.Infrastructure;
+using GarciaCore.Domain;
+using GarciaCore.Application;
 
 namespace GarciaCore.Persistence.ORM
 {

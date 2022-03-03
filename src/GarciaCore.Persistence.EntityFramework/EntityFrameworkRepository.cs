@@ -1,11 +1,11 @@
-﻿using GarciaCore.Domain;
-using GarciaCore.Persistence;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using GarciaCore.Application.Contracts.Persistence;
+using GarciaCore.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace GarciaCore.Persistence.EntityFramework
 {

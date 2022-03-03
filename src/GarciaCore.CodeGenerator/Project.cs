@@ -1,6 +1,6 @@
-﻿using GarciaCore.Infrastructure;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using GarciaCore.Application;
 
 namespace GarciaCore.CodeGenerator
 {

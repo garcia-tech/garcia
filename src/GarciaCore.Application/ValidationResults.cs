@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace GarciaCore.Infrastructure
+namespace GarciaCore.Application
 {
     public class ValidationResults : List<ValidationResult>
     {

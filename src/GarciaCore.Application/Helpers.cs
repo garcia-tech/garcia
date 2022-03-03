@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Xml;
 
-namespace GarciaCore.Infrastructure
+namespace GarciaCore.Application
 {
     public static class Helpers
     {

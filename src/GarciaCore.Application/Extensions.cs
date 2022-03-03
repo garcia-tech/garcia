@@ -9,8 +9,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-
-namespace GarciaCore.Infrastructure
+namespace GarciaCore.Application
 {
     public static class Extensions
     {

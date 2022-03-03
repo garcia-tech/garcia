@@ -2,6 +2,7 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using GarciaCore.Application.Contracts.Infrastructure;
 
 namespace GarciaCore.Infrastructure
 {
@@ -60,20 +61,20 @@ namespace GarciaCore.Infrastructure
             return Encoding.UTF8.GetString(plainTextBytes, 0, decryptedByteCount);
         }
 
-        public string CreateOneWayHash(string inValue, HashAlgorithm HashAlgorithm = HashAlgorithm.MD5)
+        public string CreateOneWayHash(string inValue, Application.HashAlgorithm HashAlgorithm = Application.HashAlgorithm.MD5)
         {
             var result = new byte[inValue.Length];
 
             try
             {
-                System.Security.Cryptography.HashAlgorithm hash = null;
+                HashAlgorithm hash = null;
 
                 switch (HashAlgorithm)
                 {
-                    case HashAlgorithm.SHA1:
+                    case Application.HashAlgorithm.SHA1:
                         hash = new SHA1CryptoServiceProvider();
                         break;
-                    case HashAlgorithm.MD5:
+                    case Application.HashAlgorithm.MD5:
                         hash = new MD5CryptoServiceProvider();
                         break;
                 }

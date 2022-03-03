@@ -5,6 +5,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="GarciaCore.CodeGenerator" #>
 <#@ import namespace="GarciaCore.Infrastructure" #>
+<#@ import namespace="GarciaCore.Application" #>
 <#@ include file="IncludeWarning.t4" #>
 <#@ include file="IncludeUsings.t4" #>
 <#

@@ -1,4 +1,4 @@
-﻿namespace GarciaCore.Infrastructure
+﻿namespace GarciaCore.Application.Contracts.Infrastructure
 {
     public interface IGarciaCoreCache
     {
