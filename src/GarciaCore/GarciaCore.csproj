@@ -16,8 +16,11 @@
     <ProjectReference Include="..\GarciaCore.Cli\GarciaCore.Cli.csproj" />
     <ProjectReference Include="..\GarciaCore.CodeGenerator\GarciaCore.CodeGenerator.csproj" />
     <ProjectReference Include="..\GarciaCore.Domain\GarciaCore.Domain.csproj" />
+    <ProjectReference Include="..\GarciaCore.Infrastructure.Redis\GarciaCore.Infrastructure.Redis.csproj" />
     <ProjectReference Include="..\GarciaCore.Infrastructure\GarciaCore.Infrastructure.csproj" />
     <ProjectReference Include="..\GarciaCore.Persistence.EntityFramework\GarciaCore.Persistence.EntityFramework.csproj" />
+    <ProjectReference Include="..\GarciaCore.Persistence.MongoDb\GarciaCore.Persistence.MongoDb.csproj" />
+    <ProjectReference Include="..\GarciaCore.Persistence.Redis\GarciaCore.Persistence.Redis.csproj" />
     <ProjectReference Include="..\GarciaCore.Persistence\GarciaCore.Persistence.csproj" />
   </ItemGroup>
 
