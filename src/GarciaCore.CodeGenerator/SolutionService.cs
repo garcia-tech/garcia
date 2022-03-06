@@ -1,10 +1,11 @@
 ﻿using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace GarciaCore.CodeGenerator
 {
     public class SolutionService : ISolutionService
     {
-        public Solution CreateSampleSolution()
+        public async Task<Solution> CreateSampleSolutionAsync()
         {
             var solution = new Solution("TestSolution", "c:\\files\\garciacoretest");
 
@@ -33,7 +34,7 @@ namespace GarciaCore.CodeGenerator
             return solution;
         }
 
-        public Solution CreateSolution(string solutionJson)
+        public async Task<Solution> CreateSolutionAsync(string solutionJson)
         {
             var solution = JsonConvert.DeserializeObject<Solution>(solutionJson);
 
@@ -45,13 +46,13 @@ namespace GarciaCore.CodeGenerator
             return solution;
         }
 
-        public string GetSampleJson()
+        public async Task<string> GetSampleJsonAsync()
         {
-            var solution = CreateSampleSolution();
+            var solution = await CreateSampleSolutionAsync();
             return JsonConvert.SerializeObject(solution, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
         }
 
-        public string GetSolutionJson(Solution solution)
+        public async Task<string> GetSolutionJsonAsync(Solution solution)
         {
             return JsonConvert.SerializeObject(solution, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
         }

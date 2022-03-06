@@ -18,6 +18,10 @@ namespace GarciaCore.CodeGenerator
         {
         }
 
+        public ProjectGenerator()
+        {
+        }
+
         public Project Project { get; }
         public string Name { get; set; }
         public string Folder { get; set; }
