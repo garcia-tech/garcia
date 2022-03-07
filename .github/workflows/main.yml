@@ -110,7 +110,7 @@ jobs:
     - name: Publish GarciaCore.Persistence.MongoDb
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: src/GarciaCorePersistence.MongoDb/GarciaCore.Persistence.MongoDb.csproj
+          PROJECT_FILE_PATH: src/GarciaCore.Persistence.MongoDb/GarciaCore.Persistence.MongoDb.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
     - name: Publish GarciaCore.Persistence.Redis
