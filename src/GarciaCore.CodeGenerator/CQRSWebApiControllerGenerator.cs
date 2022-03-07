@@ -34,4 +34,9 @@
     {
         public override string DefaultBaseClass => "";
     }
+
+    public class CQRSWebApiQueryGenerator : Generator<CQRSApplicationQueryTemplate>
+    {
+        public override string DefaultBaseClass => "";
+    }
 }

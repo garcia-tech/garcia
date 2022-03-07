@@ -91,7 +91,7 @@ namespace GarciaCore.CodeGenerator.Tests
                 item.Folder.ShouldNotBeNullOrEmpty();
                 item.Generator.ShouldNotBeNull();
                 item.Code.ShouldNotBeNullOrEmpty();
-                _output.WriteLine($"Folder: {item.Folder}, Generator: {item.Generator.GetType().Name}");
+                _output.WriteLine($"// Folder: {item.Folder}, Generator: {item.Generator.GetType().Name}");
                 _output.WriteLine(item.Code);
             }
 
@@ -100,7 +100,7 @@ namespace GarciaCore.CodeGenerator.Tests
                 var allMessages = item.AllMessages;
 
                 if (!string.IsNullOrEmpty(allMessages))
-                    _output.WriteLine(allMessages);
+                    _output.WriteLine($"// Messages: {allMessages}");
             }
         }
     }
