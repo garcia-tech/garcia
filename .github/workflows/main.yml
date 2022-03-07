@@ -26,97 +26,97 @@ jobs:
     - name: Publish GarciaCore.Application
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: src/GarciaCore/GarciaCore.Application.csproj
+          PROJECT_FILE_PATH: src/GarciaCore.Application/GarciaCore.Application.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
     - name: Publish GarciaCore.Application.MongoDb
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: src/GarciaCore/GarciaCore.Application.MongoDb.csproj
+          PROJECT_FILE_PATH: src/GarciaCore.Application.MongoDb/GarciaCore.Application.MongoDb.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
     - name: Publish GarciaCore.Application.Redis
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: src/GarciaCore/GarciaCore.Application.Redis.csproj
+          PROJECT_FILE_PATH: src/GarciaCore.Application.Redis/GarciaCore.Application.Redis.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
     - name: Publish GarciaCore.Cli
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: src/GarciaCore/GarciaCore.Cli.csproj
+          PROJECT_FILE_PATH: src/GarciaCore.Cli/GarciaCore.Cli.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
     - name: Publish GarciaCore.CodeGenerator
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: src/GarciaCore/GarciaCore.CodeGenerator.csproj
+          PROJECT_FILE_PATH: src/GarciaCore.CodeGenerator/GarciaCore.CodeGenerator.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
     - name: Publish GarciaCore.Domain
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: src/GarciaCore/GarciaCore.Domain.csproj
+          PROJECT_FILE_PATH: src/GarciaCore.Domain/GarciaCore.Domain.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
     - name: Publish GarciaCore.Domain.MongoDb
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: src/GarciaCore/GarciaCore.Domain.MongoDb.csproj
+          PROJECT_FILE_PATH: src/GarciaCore.Domain.MongoDb/GarciaCore.Domain.MongoDb.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
     - name: Publish GarciaCore.Exceptions.Redis
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: src/GarciaCore/GarciaCore.Exceptions.Redis.csproj
+          PROJECT_FILE_PATH: src/GarciaCore.Exceptions.Redis/GarciaCore.Exceptions.Redis.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
     - name: Publish GarciaCore.Infrastructure
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: src/GarciaCore/GarciaCore.Infrastructure.csproj
+          PROJECT_FILE_PATH: src/GarciaCore.Infrastructure/GarciaCore.Infrastructure.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
     - name: Publish GarciaCore.Infrastructure.Api
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: src/GarciaCore/GarciaCore.Infrastructure.Api.csproj
+          PROJECT_FILE_PATH: src/GarciaCore.Infrastructure.Api/GarciaCore.Infrastructure.Api.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
     - name: Publish GarciaCore.Infrastructure.MongoDb
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: src/GarciaCore/GarciaCore.Infrastructure.MongoDb.csproj
+          PROJECT_FILE_PATH: src/GarciaCore.Infrastructure.MongoDb/GarciaCore.Infrastructure.MongoDb.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
     - name: Publish GarciaCore.Infrastructure.Redis
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: src/GarciaCore/GarciaCore.Infrastructure.Redis.csproj
+          PROJECT_FILE_PATH: src/GarciaCore.Infrastructure.Redis/GarciaCore.Infrastructure.Redis.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
     - name: Publish GarciaCore.Persistence
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: src/GarciaCore/GarciaCore.Persistence.csproj
+          PROJECT_FILE_PATH: src/GarciaCore.Persistence/GarciaCore.Persistence.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
     - name: Publish GarciaCore.Persistence.EntityFramework
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: src/GarciaCore/GarciaCore.Persistence.EntityFramework.csproj
+          PROJECT_FILE_PATH: src/GarciaCore.Persistence.EntityFramework/GarciaCore.Persistence.EntityFramework.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
     - name: Publish GarciaCore.Persistence.MongoDb
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: src/GarciaCore/GarciaCore.Persistence.MongoDb.csproj
+          PROJECT_FILE_PATH: src/GarciaCorePersistence.MongoDb/GarciaCore.Persistence.MongoDb.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
     - name: Publish GarciaCore.Persistence.Redis
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: src/GarciaCore/GarciaCore.Persistence.Redis.csproj
+          PROJECT_FILE_PATH: src/GarciaCore.Persistence.Redis/GarciaCore.Persistence.Redis.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
     - name: Publish GarciaCore
