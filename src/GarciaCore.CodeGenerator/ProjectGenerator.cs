@@ -18,6 +18,10 @@ namespace GarciaCore.CodeGenerator
         {
         }
 
+        public ProjectGenerator()
+        {
+        }
+
         public Project Project { get; }
         public string Name { get; set; }
         public string Folder { get; set; }
@@ -25,14 +29,14 @@ namespace GarciaCore.CodeGenerator
         public string BaseClass { get; }
         public IGenerator Generator { get; set; }
 
-        public virtual async Task<GenerationResult> Generate(Item item, string @namespace)
+        public virtual async Task<GenerationResult> Generate(Item item)
         {
             if (Generator == null)
             {
                 throw new CodeGeneratorException("Generator cannot be null");
             }
 
-            var code = await Generator.Generate(item, @namespace, BaseClass);
+            var code = await Generator.Generate(item, Namespace, BaseClass);
             var generationResult = new GenerationResult(Folder, Generator, code);
             return generationResult;
         }

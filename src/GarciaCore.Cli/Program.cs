@@ -12,65 +12,10 @@ namespace MigrationNameGenerator
     class Program
     {
         private static ShellHelper _shellHelper = new ShellHelper();
+        private static ISolutionService _solutionService = new SolutionService();
 
         static async Task Main(string[] args)
         {
-            try
-            {
-                ISolutionService solutionService = new SolutionService();
-                var solution = solutionService.CreateSampleSolution();
-
-                Console.WriteLine(JsonConvert.SerializeObject(solution, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
-                Console.WriteLine("");
-                var items = new List<Item>()
-                {
-                    new Item()
-                    {
-                        Name = "User",
-                        IdType = IdType.Guid,
-                        Properties = new List<ItemProperty>()
-                        {
-                            new ItemProperty() { Name = "Name", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
-                            new ItemProperty() { Name = "Surname", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
-                            new ItemProperty() { Name = "HomeAddress", Type = ItemPropertyType.Class, MappingType = ItemPropertyMappingType.Property, InnerType = new Item() { Name = "Address" } },
-                            new ItemProperty() { Name = "WorkAddress", Type = ItemPropertyType.Class, MappingType = ItemPropertyMappingType.Property, InnerType = new Item() { Name = "Address" } }
-                        }
-                    },
-                    new Item()
-                    {
-                        Name = "Address",
-                        IdType = IdType.Int,
-                        Properties = new List<ItemProperty>()
-                        {
-                            new ItemProperty() { Name = "Addressline", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
-                        }
-                    }
-                };
-              
-                Console.WriteLine(JsonConvert.SerializeObject(items, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
-                var text2 = await solution.Generate(items);
-
-                //foreach (var item in text2)
-                //{
-                //    Console.WriteLine(item.Code);
-                //}
-
-                foreach (var item in text2)
-                {
-                    var allMessages = item.AllMessages;
-
-                    if (!string.IsNullOrEmpty(allMessages))
-                        Console.WriteLine(allMessages);
-                }
-
-                return;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-            }
-
             if (args.Length == 0)
             {
                 Console.WriteLine("Options:");

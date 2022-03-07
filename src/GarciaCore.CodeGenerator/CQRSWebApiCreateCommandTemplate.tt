@@ -37,7 +37,7 @@ namespace <#= Namespace #>
         string innerTypeName = generator.GetInnerTypeName(property);
         var idPostfix = property.Type == ItemPropertyType.Class && property.MappingType != ItemPropertyMappingType.List ? "Id" : string.Empty;
 #>
-        public <#= innerTypeName #> <#= property.Name.ToPascalCase() #><#= idPostfix #> { get; set; }
+        public <#= IdTypeName #> <#= property.Name.ToPascalCase() #><#= idPostfix #> { get; set; }
 <#
     }
 #>

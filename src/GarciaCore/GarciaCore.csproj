@@ -12,10 +12,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GarciaCore.Application.MongoDb\GarciaCore.Application.MongoDb.csproj" />
+    <ProjectReference Include="..\GarciaCore.Application.Redis\GarciaCore.Application.Redis.csproj" />
     <ProjectReference Include="..\GarciaCore.Application\GarciaCore.Application.csproj" />
     <ProjectReference Include="..\GarciaCore.Cli\GarciaCore.Cli.csproj" />
     <ProjectReference Include="..\GarciaCore.CodeGenerator\GarciaCore.CodeGenerator.csproj" />
+    <ProjectReference Include="..\GarciaCore.Domain.MongoDb\GarciaCore.Domain.MongoDb.csproj" />
     <ProjectReference Include="..\GarciaCore.Domain\GarciaCore.Domain.csproj" />
+    <ProjectReference Include="..\GarciaCore.Exceptions.Redis\GarciaCore.Exceptions.Redis.csproj" />
+    <ProjectReference Include="..\GarciaCore.Infrastructure.Api\GarciaCore.Infrastructure.Api.csproj" />
+    <ProjectReference Include="..\GarciaCore.Infrastructure.MongoDb\GarciaCore.Infrastructure.MongoDb.csproj" />
     <ProjectReference Include="..\GarciaCore.Infrastructure.Redis\GarciaCore.Infrastructure.Redis.csproj" />
     <ProjectReference Include="..\GarciaCore.Infrastructure\GarciaCore.Infrastructure.csproj" />
     <ProjectReference Include="..\GarciaCore.Persistence.EntityFramework\GarciaCore.Persistence.EntityFramework.csproj" />
