@@ -103,5 +103,26 @@ namespace GarciaCore.CodeGenerator.Tests
                     _output.WriteLine($"// Messages: {allMessages}");
             }
         }
+
+        [Fact]
+        public async Task CreateSampleSolution2Async()
+        {
+            var result = await _solutionService.CreateSampleSolution2Async();
+            result.ShouldNotBeNull();
+            result.Projects.ShouldNotBeNull();
+            var json = JsonSerializer.Serialize(result, new JsonSerializerOptions() { WriteIndented = true });
+            _output.WriteLine(json);
+
+            var solution = await _solutionService.CreateSolutionAsync(json);
+            solution.ShouldNotBeNull();
+            solution.Solution.ShouldNotBeNull();
+            solution.Messages.ShouldNotBeNull();
+            _output.WriteLine(JsonSerializer.Serialize(solution.Solution, new JsonSerializerOptions() { WriteIndented = true}));
+
+            foreach (var message in solution.Messages)
+            {
+                _output.WriteLine(message);
+            }
+        }
     }
 }
