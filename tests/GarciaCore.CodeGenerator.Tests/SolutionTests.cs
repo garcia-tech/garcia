@@ -1,7 +1,9 @@
 using Shouldly;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
@@ -32,6 +34,7 @@ namespace GarciaCore.CodeGenerator.Tests
         {
             var solution = await _solutionService.CreateSampleSolutionAsync();
             var result = await _solutionService.GetSolutionJsonAsync(solution);
+            var solution2 = JsonSerializer.Deserialize<Solution>(result);
             result.ShouldNotBeNullOrEmpty();
             _output.WriteLine(result);
         }
@@ -110,14 +113,31 @@ namespace GarciaCore.CodeGenerator.Tests
             var result = await _solutionService.CreateSampleSolution2Async();
             result.ShouldNotBeNull();
             result.Projects.ShouldNotBeNull();
-            var json = JsonSerializer.Serialize(result, new JsonSerializerOptions() { WriteIndented = true });
+            var json = JsonSerializer.Serialize(result, new JsonSerializerOptions() { WriteIndented = true});
             _output.WriteLine(json);
 
             var solution = await _solutionService.CreateSolutionAsync(json);
             solution.ShouldNotBeNull();
             solution.Solution.ShouldNotBeNull();
             solution.Messages.ShouldNotBeNull();
-            _output.WriteLine(JsonSerializer.Serialize(solution.Solution, new JsonSerializerOptions() { WriteIndented = true}));
+            _output.WriteLine(JsonSerializer.Serialize(solution.Solution, new JsonSerializerOptions() { WriteIndented = true, ReferenceHandler = ReferenceHandler.Preserve }));
+
+            foreach (var message in solution.Messages)
+            {
+                _output.WriteLine(message);
+            }
+        }
+
+        [Fact]
+        public async Task CreateSolutionFromFileAsync()
+        {
+            var json = await File.ReadAllTextAsync("TestSolution.json");
+            _output.WriteLine(json);
+            var solution = await _solutionService.CreateSolutionAsync(json);
+            solution.ShouldNotBeNull();
+            solution.Solution.ShouldNotBeNull();
+            solution.Messages.ShouldNotBeNull();
+            _output.WriteLine(JsonSerializer.Serialize(solution.Solution, new JsonSerializerOptions() { WriteIndented = true, ReferenceHandler = ReferenceHandler.Preserve }));
 
             foreach (var message in solution.Messages)
             {

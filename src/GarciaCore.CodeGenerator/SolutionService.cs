@@ -1,8 +1,9 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace GarciaCore.CodeGenerator
 {
@@ -50,9 +51,23 @@ namespace GarciaCore.CodeGenerator
                 {
                     new ProjectModel()
                     {
-                        Name = "TestSolution.Infrastructure",
-                        ProjectType = ProjectType.ClassLibrary,
-                        Generators = new List<ProjectGeneratorModel> { new ProjectGeneratorModel() { } }
+                        Name = "TestSolution.Application",
+                        // ProjectType = ProjectType.ClassLibrary.ToString(),
+                        Generators = new List<ProjectGeneratorModel>
+                        {
+                            new ProjectGeneratorModel() { Name = "Commands", GeneratorName = GeneratorNames.CQRSWebApiCreateCommandGenerator } ,
+                            new ProjectGeneratorModel() { Name = "Commands", GeneratorName = GeneratorNames.CQRSWebApiUpdateCommandGenerator }
+                        }
+                    },
+                    new ProjectModel()
+                    {
+                        Name = "TestSolution.Api",
+                        ProjectType = ProjectType.WebApi.ToString(),
+                        Generators = new List<ProjectGeneratorModel>
+                        {
+                            new ProjectGeneratorModel() { Name = "Controllers", GeneratorName = GeneratorNames.CQRSWebApiControllerGenerator }
+                        },
+                        ProjectDependencies = new List<string>() { "TestSolution.Application" }
                     }
                 }
             };
@@ -63,7 +78,7 @@ namespace GarciaCore.CodeGenerator
         public async Task<SolutionGenerationResult> CreateSolutionAsync(string solutionJson)
         {
             //var solution = JsonConvert.DeserializeObject<Solution>(solutionJson);
-            var solutionModel = JsonConvert.DeserializeObject<SolutionModel>(solutionJson);
+            var solutionModel = JsonSerializer.Deserialize<SolutionModel>(solutionJson);
             var messages = new List<string>();
 
             if (solutionModel == null)
@@ -76,7 +91,12 @@ namespace GarciaCore.CodeGenerator
             {
                 foreach (var projectModel in solutionModel.Projects)
                 {
-                    var project = new Project(projectModel.Name, projectModel.Folder, projectModel.Namespace, projectModel.ProjectType);
+                    if (!Enum.TryParse(projectModel.ProjectType, out ProjectType projectType))
+                    {
+                        messages.Add($"String \"{projectModel.ProjectType}\" could not be converted to ProjectType for project {projectModel.Name}. ProjectType.ClassLibrary will be used.");
+                    }
+
+                    var project = new Project(projectModel.Name, projectModel.Folder, projectModel.Namespace, projectType);
                     project.Uid = projectModel.Uid;
                     solution.Projects.Add(project);
                     allProjects.Add(project);
@@ -94,7 +114,7 @@ namespace GarciaCore.CodeGenerator
                             else
                             {
                                 var generator = Activator.CreateInstance(type) as IGenerator;
-                                project.AddGenerator(generatorModel.Name, generatorModel.Folder, generatorModel.Name, generatorModel.BaseClass, generator);
+                                project.AddGenerator(generatorModel.Name, generatorModel.Name, generatorModel.Name, generatorModel.BaseClass, generator);
                             }
                         }
                     }
@@ -130,13 +150,16 @@ namespace GarciaCore.CodeGenerator
 
         public async Task<string> GetSampleJsonAsync()
         {
-            var solution = await CreateSampleSolutionAsync();
-            return JsonConvert.SerializeObject(solution, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+            return "";
+            //var solution = await CreateSampleSolutionAsync();
+            //return JsonConvert.SerializeObject(solution, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
         }
 
         public async Task<string> GetSolutionJsonAsync(Solution solution)
         {
-            return JsonConvert.SerializeObject(solution, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+            //return "";
+            return JsonSerializer.Serialize(solution, new JsonSerializerOptions() { WriteIndented = true, ReferenceHandler = ReferenceHandler.Preserve });
+            //return JsonConvert.SerializeObject(solution, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
         }
     }
 }

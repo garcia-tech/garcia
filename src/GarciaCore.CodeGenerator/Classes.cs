@@ -78,4 +78,11 @@ namespace GarciaCore.CodeGenerator
         Internal,
         ProtectedInternal
     }
+
+    public class GeneratorNames
+    {
+        public const string CQRSWebApiCreateCommandGenerator = "CQRSWebApiCreateCommandGenerator";
+        public const string CQRSWebApiUpdateCommandGenerator = "CQRSWebApiUpdateCommandGenerator";
+        public const string CQRSWebApiControllerGenerator = "CQRSWebApiControllerGenerator";
+    }
 }

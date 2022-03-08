@@ -25,4 +25,10 @@
     <ProjectReference Include="..\..\src\GarciaCore.CodeGenerator\GarciaCore.CodeGenerator.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="TestSolution.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

@@ -33,7 +33,7 @@ namespace GarciaCore.CodeGenerator
         public List<ProjectGenerator> Generators { get; set; } = new List<ProjectGenerator>();
         public List<Project> ProjectDependencies { get; set; } = new List<Project>();
         public ProjectType ProjectType { get; set; }
-        public Guid Uid { get; set; }
+        protected internal Guid Uid { get; set; }
 
         public virtual ValidationResults Validate()
         {
@@ -100,15 +100,15 @@ namespace GarciaCore.CodeGenerator
         public string Namespace { get; set; }
         public List<string> ProjectDependencies { get; set; }
         public List<ProjectGeneratorModel> Generators { get; set; }
-        public ProjectType ProjectType { get; set; }
-        public Guid Uid { get; set; } = Guid.NewGuid();
+        public string ProjectType { get; set; }
+        protected internal Guid Uid { get; protected set; } = Guid.NewGuid();
     }
 
     public class ProjectGeneratorModel
     {
         public string Name { get; set; }
-        public string Folder { get; set; }
-        public string Namespace { get; }
+        //public string Folder { get; set; }
+        //public string Namespace { get; }
         public string BaseClass { get; }
         public string GeneratorName { get; set; }
     }
