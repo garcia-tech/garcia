@@ -31,7 +31,7 @@
 
 namespace <#= Namespace #>
 {
-    public partial class Delete<#= Item.Name #>CommandHandler : IRequestHandler<Delete<#= Item.Name #>Command, int>
+    public partial class Update<#= Item.Name #>CommandHandler : IRequestHandler<Update<#= Item.Name #>Command, int>
     {
         private I<#= Item.Name #>Repository _<#= Item.Name.ToCamelCase() #>Repository;
 <#
@@ -43,12 +43,20 @@ namespace <#= Namespace #>
     }
 #>
 
-        public Delete<#= Item.Name #>CommandHandler(<#= repositoryString #>)
+        public Update<#= Item.Name #>CommandHandler(<#= repositoryString #>)
         {
              _<#= Item.Name.ToCamelCase() #>Repository =  <#= Item.Name.ToCamelCase() #>Repository;
+<#
+    foreach (var repository in repositories)
+    {
+#>
+            _<#= repository.ToCamelCase() #>Repository =  <#= repository.ToCamelCase() #>Repository;
+<#
+    }
+#>
         }
 
-        public async Task<int> Handle(Delete<#= Item.Name #>Command request, CancellationToken cancellationToken)
+        public async Task<int> Handle(Update<#= Item.Name #>Command request, CancellationToken cancellationToken)
         {
             var item = await _<#= Item.Name #>Repository.GetByIdAsync(request.Id);
 
@@ -56,8 +64,29 @@ namespace <#= Namespace #>
             {
                 throw new DomainNotFoundException($"<#= Item.Name #> {request.Id} not found");
             }
-            
-            item.IsDeleted = true;
+<#
+    foreach (var property in Item.Properties.Where(x => x.Type != ItemPropertyType.Class))
+    {
+#>
+            item.<#= property.Name #> = request.<#= property.Name #>;
+<#
+    }
+#>
+<#
+    foreach (var property in properties)
+    {
+#>
+            var <#= property.Name.ToCamelCase() #> = await _<#= property.InnerType.Name.ToCamelCase() #>Repository.GetByIdAsync(request.<#= property.Name #>Id);
+
+            if (<#= property.Name.ToCamelCase() #> == null)
+            {
+                throw new DomainNotFoundException($"<#= property.InnerType.Name #> {request.<#= property.Name #>Id} not found");
+            }
+
+            item.<#= property.Name #> = <#= property.Name.ToCamelCase() #>;
+<#
+    }
+#>
             var result = await _<#= Item.Name #>Repository.SaveAsync(item);
             return result;
         }
@@ -67,6 +96,6 @@ namespace <#= Namespace #>
 <#+
     protected override Generator CreateGenerator()
 	{
-		return new CQRSWebApiDeleteCommandHandlerGenerator();
+		return new CQRSApplicationUpdateCommandHandlerGenerator();
 	}
 #>

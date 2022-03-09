@@ -5,32 +5,32 @@
         public override string DefaultBaseClass => "ApiController";
     }
 
-    public class CQRSWebApiCreateCommandGenerator : Generator<CQRSWebApiCreateCommandTemplate>
+    public class CQRSApplicationCreateCommandGenerator : Generator<CQRSApplicationCreateCommandTemplate>
     {
         public override string DefaultBaseClass => "IRequest<int>";
     }
 
-    public class CQRSWebApiUpdateCommandGenerator : Generator<CQRSWebApiUpdateCommandTemplate>
+    public class CQRSApplicationUpdateCommandGenerator : Generator<CQRSApplicationUpdateCommandTemplate>
     {
         public override string DefaultBaseClass => "IRequest<int>";
     }
 
-    public class CQRSWebApiDeleteCommandGenerator : Generator<CQRSWebApiDeleteCommandTemplate>
+    public class CQRSApplicationDeleteCommandGenerator : Generator<CQRSApplicationDeleteCommandTemplate>
     {
         public override string DefaultBaseClass => "IRequest<int>";
     }
 
-    public class CQRSWebApiCreateCommandHandlerGenerator : Generator<CQRSWebApiCreateCommandHandlerTemplate>
+    public class CQRSApplicationCreateCommandHandlerGenerator : Generator<CQRSApplicationCreateCommandHandlerTemplate>
     {
         public override string DefaultBaseClass => "";
     }
 
-    public class CQRSWebApiUpdateCommandHandlerGenerator : Generator<CQRSWebApiUpdateCommandHandlerTemplate>
+    public class CQRSApplicationUpdateCommandHandlerGenerator : Generator<CQRSApplicationUpdateCommandHandlerTemplate>
     {
         public override string DefaultBaseClass => "";
     }
 
-    public class CQRSWebApiDeleteCommandHandlerGenerator : Generator<CQRSWebApiDeleteCommandHandlerTemplate>
+    public class CQRSApplicationDeleteCommandHandlerGenerator : Generator<CQRSApplicationDeleteCommandHandlerTemplate>
     {
         public override string DefaultBaseClass => "";
     }

@@ -1,0 +1,54 @@
+{
+  "Name": "Farmi",
+  "Folder": "c:\\files\\Farmi",
+  "Projects": [
+    {
+      "Name": "Farmi.Application",
+      "Folder": null,
+      "Namespace": null,
+      "ProjectDependencies": null,
+      "Generators": [
+        {
+          "Name": "Commands",
+          "BaseClass": null,
+          "GeneratorName": "CQRSWebApiCreateCommandGenerator"
+        },
+        {
+          "Name": "Commands",
+          "BaseClass": null,
+          "GeneratorName": "CQRSWebApiUpdateCommandGenerator"
+        }
+      ],
+      "ProjectType": "ClassLibrary"
+    },
+    {
+      "Name": "Farmi.Api",
+      "Folder": null,
+      "Namespace": null,
+      "ProjectDependencies": [
+        "Farmi.Application"
+      ],
+      "Generators": [
+        {
+          "Name": "Controllers",
+          "BaseClass": null,
+          "GeneratorName": "CQRSWebApiControllerGenerator"
+        }
+      ],
+      "ProjectType": "WebApi"
+    },
+    {
+      "Name": "Farmi.Domain",
+      "Folder": null,
+      "Namespace": null,
+      "Generators": [
+        {
+          "Name": "Controllers",
+          "BaseClass": null,
+          "GeneratorName": "CQRSWebApiControllerGenerator"
+        }
+      ],
+      "ProjectType": "ClassLibrary"
+    }
+  ]
+}

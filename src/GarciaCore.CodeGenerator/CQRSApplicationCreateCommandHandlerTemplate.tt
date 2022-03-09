@@ -31,7 +31,7 @@
 
 namespace <#= Namespace #>
 {
-    public partial class Update<#= Item.Name #>CommandHandler : IRequestHandler<Update<#= Item.Name #>Command, int>
+    public partial class Create<#= Item.Name #>CommandHandler : IRequestHandler<Create<#= Item.Name #>Command, int>
     {
         private I<#= Item.Name #>Repository _<#= Item.Name.ToCamelCase() #>Repository;
 <#
@@ -43,7 +43,7 @@ namespace <#= Namespace #>
     }
 #>
 
-        public Update<#= Item.Name #>CommandHandler(<#= repositoryString #>)
+        public Create<#= Item.Name #>CommandHandler(<#= repositoryString #>)
         {
              _<#= Item.Name.ToCamelCase() #>Repository =  <#= Item.Name.ToCamelCase() #>Repository;
 <#
@@ -56,14 +56,9 @@ namespace <#= Namespace #>
 #>
         }
 
-        public async Task<int> Handle(Update<#= Item.Name #>Command request, CancellationToken cancellationToken)
+        public async Task<int> Handle(Create<#= Item.Name #>Command request, CancellationToken cancellationToken)
         {
-            var item = await _<#= Item.Name #>Repository.GetByIdAsync(request.Id);
-
-            if (item == null)
-            {
-                throw new DomainNotFoundException($"<#= Item.Name #> {request.Id} not found");
-            }
+            var item = new <#= Item.Name #>();
 <#
     foreach (var property in Item.Properties.Where(x => x.Type != ItemPropertyType.Class))
     {
@@ -87,6 +82,7 @@ namespace <#= Namespace #>
 <#
     }
 #>
+
             var result = await _<#= Item.Name #>Repository.SaveAsync(item);
             return result;
         }
@@ -96,6 +92,6 @@ namespace <#= Namespace #>
 <#+
     protected override Generator CreateGenerator()
 	{
-		return new CQRSWebApiUpdateCommandHandlerGenerator();
+		return new CQRSApplicationCreateCommandHandlerGenerator();
 	}
 #>

@@ -30,12 +30,12 @@ namespace GarciaCore.CodeGenerator
 
             var application = new Project("TestSolution.Application", ProjectType.ClassLibrary);
             application.AddGenerator("Queries", "Queries", new CQRSWebApiQueryGenerator());
-            application.AddGenerator("CreateCommand", "Commands", new CQRSWebApiCreateCommandGenerator());
-            application.AddGenerator("UpdateCommand", "Commands", new CQRSWebApiUpdateCommandGenerator());
-            application.AddGenerator("DeleteCommand", "Commands", new CQRSWebApiDeleteCommandGenerator());
-            application.AddGenerator("CreateCommandHandler", "Commands", new CQRSWebApiCreateCommandHandlerGenerator());
-            application.AddGenerator("UpdateCommandHandler", "Commands", new CQRSWebApiUpdateCommandHandlerGenerator());
-            application.AddGenerator("DeleteCommandHandler", "Commands", new CQRSWebApiDeleteCommandHandlerGenerator());
+            application.AddGenerator("CreateCommand", "Commands", new CQRSApplicationCreateCommandGenerator());
+            application.AddGenerator("UpdateCommand", "Commands", new CQRSApplicationUpdateCommandGenerator());
+            application.AddGenerator("DeleteCommand", "Commands", new CQRSApplicationDeleteCommandGenerator());
+            application.AddGenerator("CreateCommandHandler", "Commands", new CQRSApplicationCreateCommandHandlerGenerator());
+            application.AddGenerator("UpdateCommandHandler", "Commands", new CQRSApplicationUpdateCommandHandlerGenerator());
+            application.AddGenerator("DeleteCommandHandler", "Commands", new CQRSApplicationDeleteCommandHandlerGenerator());
             solution.Projects.Add(application);
 
             return solution;
