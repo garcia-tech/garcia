@@ -96,7 +96,12 @@ namespace GarciaCore.CodeGenerator
                         messages.Add($"String \"{projectModel.ProjectType}\" could not be converted to ProjectType for project {projectModel.Name}. ProjectType.ClassLibrary will be used.");
                     }
 
-                    var project = new Project(projectModel.Name, projectModel.Folder, projectModel.Namespace, projectType);
+                    if (string.IsNullOrEmpty(projectModel.Folder))
+                    {
+                        projectModel.Folder = projectModel.Name;
+                    }
+
+                    var project = new Project(projectModel.Name, $"{solutionModel.Folder}\\{projectModel.Folder}".TrimEnd('\\'), projectModel.Namespace, projectType);
                     project.Uid = projectModel.Uid;
                     solution.Projects.Add(project);
                     allProjects.Add(project);

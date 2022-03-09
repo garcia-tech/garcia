@@ -132,7 +132,7 @@ namespace GarciaCore.CodeGenerator.Tests
         public async Task CreateSolutionFromFileAsync()
         {
             var json = await File.ReadAllTextAsync("TestSolution.json");
-            _output.WriteLine(json);
+            //_output.WriteLine(json);
             var solution = await _solutionService.CreateSolutionAsync(json);
             solution.ShouldNotBeNull();
             solution.Solution.ShouldNotBeNull();
