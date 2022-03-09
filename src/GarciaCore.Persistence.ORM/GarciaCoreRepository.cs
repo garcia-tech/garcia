@@ -41,7 +41,7 @@ namespace GarciaCore.Persistence.ORM
         }
 
         public async Task InitializeCacheAsync<T>()
-            where T : Entity
+            where T : Entity<long>
         {
             if (this.IsCachingEnabled<T>())
             {
@@ -59,13 +59,13 @@ namespace GarciaCore.Persistence.ORM
         }
 
         protected virtual bool IsCachingEnabled<T>()
-            where T : Entity
+            where T : Entity<long>
         {
             return CachingEnabled && cachingEnabledTypes.Contains(typeof(T));
         }
 
         public virtual async Task<List<T>> GetItemsAsync<T>(Dictionary<string, object> parameters)
-            where T : Entity
+            where T : Entity<long>
         {
             if (IsCachingEnabled<T>())
             {
@@ -76,7 +76,7 @@ namespace GarciaCore.Persistence.ORM
         }
 
         public virtual async Task<List<T>> GetItemsAsync<T>(string key, object value)
-            where T : Entity
+            where T : Entity<long>
         {
             var parameters = new Dictionary<string, object>();
             parameters.Add(key, value);
@@ -84,13 +84,13 @@ namespace GarciaCore.Persistence.ORM
         }
 
         public virtual async Task<List<T>> GetItemsAsync<T>()
-            where T : Entity
+            where T : Entity<long>
         {
             return await GetItemsAsync<T>(null);
         }
 
         public virtual async Task<T> GetItemAsync<T>(int id)
-            where T : Entity
+            where T : Entity<long>
         {
             if (id == 0)
             {
@@ -111,7 +111,7 @@ namespace GarciaCore.Persistence.ORM
         }
 
         protected virtual async Task<List<T>> GetItemsFromDbAsync<T>(Dictionary<string, object> parameters, string order = null)
-            where T : Entity
+            where T : Entity<long>
         {
             var items = new List<T>();
             var sql = new GarciaCoreStringBuilder("select * from ");
@@ -172,7 +172,7 @@ namespace GarciaCore.Persistence.ORM
         }
 
         protected virtual async Task<List<T>> GetItemsFromCacheAsync<T>()
-            where T : Entity
+            where T : Entity<long>
         {
             if (!IsCachingEnabled<T>())
             {
@@ -191,7 +191,7 @@ namespace GarciaCore.Persistence.ORM
         }
 
         protected virtual async Task<List<T>> GetItemsFromCacheAsync<T>(Dictionary<string, object> Parameters)
-            where T : Entity
+            where T : Entity<long>
         {
             var AllItems = await GetItemsFromCacheAsync<T>();
 
@@ -202,7 +202,7 @@ namespace GarciaCore.Persistence.ORM
 
             var FilteredItems = new List<T>();
 
-            foreach (Entity item in AllItems)
+            foreach (Entity<long> item in AllItems)
             {
                 var addItem = true;
                 IDictionaryEnumerator ienum = Parameters.GetEnumerator();
@@ -240,7 +240,7 @@ namespace GarciaCore.Persistence.ORM
         }
 
         public async Task<OperationResult<T>> SaveAsync<T>(T item)
-            where T : Entity
+            where T : Entity<long>
         {
             string script = string.Empty;
             var parameters = this.GetParameters(item);
@@ -275,7 +275,7 @@ namespace GarciaCore.Persistence.ORM
                     }
                 }
             }
-            else if (item.IsDeleted)
+            else if (item.Deleted)
             {
                 script = this.GenerateDeleteScript(item);
 
@@ -332,7 +332,7 @@ namespace GarciaCore.Persistence.ORM
             return new OperationResult<T>(item) { Success = success };
         }
 
-        protected virtual string GenerateDeleteScript<T>(T item) where T : Entity
+        protected virtual string GenerateDeleteScript<T>(T item) where T : Entity<long>
         {
             var sb = new GarciaCoreStringBuilder("update ");
             string entityTypeName = this.GetTypeName(item);
@@ -343,7 +343,7 @@ namespace GarciaCore.Persistence.ORM
             return sb.ToString();
         }
 
-        protected virtual PropertyInfo[] GetProperties(Entity Item)
+        protected virtual PropertyInfo[] GetProperties(Entity<long> Item)
         {
             var properties = Item.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
             return properties.Where(x => !Attribute.IsDefined(x, typeof(NotSavedAttribute)) && !x.PropertyType.IsIList() && !x.PropertyType.IsArray && x.CanRead && x.CanWrite &&
@@ -357,7 +357,7 @@ namespace GarciaCore.Persistence.ORM
             return _databaseConnection.TablePrefix + item.GetType().Name.PrepareName() + _databaseConnection.TablePrefix;
         }
 
-        private string GenerateInsertScript(Entity item)
+        private string GenerateInsertScript(Entity<long> item)
         {
             string script = String.Empty;
             PropertyInfo[] properties = this.GetProperties(item);
@@ -393,7 +393,7 @@ namespace GarciaCore.Persistence.ORM
             return script;
         }
 
-        private string GenerateUpdateScript(Entity item)
+        private string GenerateUpdateScript(Entity<long> item)
         {
             string script = String.Empty;
             PropertyInfo[] properties = this.GetProperties(item);
@@ -420,7 +420,7 @@ namespace GarciaCore.Persistence.ORM
             return script;
         }
 
-        internal virtual Dictionary<string, object> GetParameters(Entity t)
+        internal virtual Dictionary<string, object> GetParameters(Entity<long> t)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             PropertyInfo[] properties = this.GetProperties(t);

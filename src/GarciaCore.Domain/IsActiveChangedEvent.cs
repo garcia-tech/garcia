@@ -1,14 +1,15 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 
 namespace GarciaCore.Domain
 {
-    public class IsActiveChangedEvent : INotification
+    public class IsActiveChangedEvent<TKey> : INotification where TKey : IEquatable<TKey>
     {
-        public long Id { get; set; }
-        public Entity Entity { get; set; }
+        public TKey Id { get; set; }
+        public Entity<TKey> Entity { get; set; }
         public bool IsActive { get; set; }
 
-        public IsActiveChangedEvent(long id, Entity entity, bool isActive)
+        public IsActiveChangedEvent(TKey id, Entity<TKey> entity, bool isActive)
         {
             Id = id;
             Entity = entity;
