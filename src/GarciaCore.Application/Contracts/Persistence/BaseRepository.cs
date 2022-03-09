@@ -1,13 +1,13 @@
-﻿using GarciaCore.Application.Contracts.Persistence;
-using GarciaCore.Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using GarciaCore.Application.Contracts.Persistence;
+using GarciaCore.Domain;
 
 namespace GarciaCore.Application.Contracts.Persistence
 {
-    public abstract class BaseRepository<T> : IAsyncRepository<T, long> where T : Entity
+    public abstract class BaseRepository<T> : IAsyncRepository<T, long> where T : Entity<long>
     {
         public BaseRepository()
         {
@@ -31,7 +31,7 @@ namespace GarciaCore.Application.Contracts.Persistence
             {
                 return await AddAsync(entity);
             }
-            else if (entity.IsDeleted)
+            else if (entity.Deleted)
             {
                 return await DeleteAsync(entity);
             }

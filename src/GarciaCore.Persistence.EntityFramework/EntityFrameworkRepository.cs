@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GarciaCore.Persistence.EntityFramework
 {
-    public partial class EntityFrameworkRepository<T> : BaseRepository<T> where T : Entity
+    public partial class EntityFrameworkRepository<T> : BaseRepository<T> where T : Entity<long>
     {
         protected readonly DbContext _dbContext;
 

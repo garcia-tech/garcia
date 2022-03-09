@@ -81,7 +81,7 @@ namespace GarciaCore.Persistence.Tests
             Assert.Null(item);
 
             item = await _repository.GetByIdAsync(2);
-            item.IsDeleted = true;
+            item.Deleted = true;
             await _repository.SaveAsync(item);
             item = await _repository.GetByIdAsync(2);
             Assert.Null(item);

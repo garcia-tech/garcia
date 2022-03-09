@@ -1,10 +1,12 @@
-﻿using MongoDB.Bson;
+﻿using System;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using System;
+
 
 namespace GarciaCore.Domain.MongoDb
 {
-    public abstract class MongoDbEntity : IEntity<string>
+    [BsonIgnoreExtraElements]
+    public abstract class MongoDbEntity : Entity<string>
     {
         public MongoDbEntity()
         {
@@ -14,15 +16,17 @@ namespace GarciaCore.Domain.MongoDb
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonId]
         [BsonElement(Order = 0)]
-        public string Id { get; set; }
-        public bool Active { get; set; }
-        public bool Deleted { get; set; }
-        public int? CreatedBy { get; set; }
-        public DateTimeOffset CreatedOn { get; set; }
-        public int? LastUpdatedBy { get; set; }
-        public DateTimeOffset LastUpdatedOn { get; set; }
-        public int? DeletedBy { get; set; }
-        public DateTimeOffset DeletedOn { get; set; }
+        public override string Id { get; set; }
+
+        [BsonRepresentation(BsonType.DateTime)]
+        public override DateTimeOffset CreatedOn { get; set; }
+
+        [BsonRepresentation(BsonType.DateTime)]
+        public override DateTimeOffset LastUpdatedOn { get; set; }
+
+        [BsonRepresentation(BsonType.DateTime)]
+        public override DateTimeOffset DeletedOn { get; set; }
+
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -32,6 +36,7 @@ namespace GarciaCore.Domain.MongoDb
 
             return obj is MongoDbEntity && Id.Equals(((MongoDbEntity)obj).Id);
         }
+
         public override int GetHashCode() => base.GetHashCode();
 
     }
