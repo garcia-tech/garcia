@@ -43,7 +43,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Application.Mong
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Application.Redis", "src\GarciaCore.Application.Redis\GarciaCore.Application.Redis.csproj", "{5EE638E9-AA7A-45CE-B4E5-5E9723C181BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.CodeGenerator.Tests", "tests\GarciaCore.CodeGenerator.Tests\GarciaCore.CodeGenerator.Tests.csproj", "{063152EF-E163-4CED-9149-D771D2E704B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.CodeGenerator.Tests", "tests\GarciaCore.CodeGenerator.Tests\GarciaCore.CodeGenerator.Tests.csproj", "{063152EF-E163-4CED-9149-D771D2E704B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.Persistence.EntityFramework.SqlServer", "src\GarciaCore.Persistence.EntityFramework.SqlServer\GarciaCore.Persistence.EntityFramework.SqlServer.csproj", "{A8EDF73D-7FDE-4B19-A69B-EB858A0BF55C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.Persistence.EntityFramework.PostgreSql", "src\GarciaCore.Persistence.EntityFramework.PostgreSQL\GarciaCore.Persistence.EntityFramework.PostgreSql.csproj", "{F7B9CFE9-8EC8-4E2C-8A5C-D6E1E1F20D37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.Persistence.EntityFramework.MySql", "src\GarciaCore.Persistence.EntityFramework.MySql\GarciaCore.Persistence.EntityFramework.MySql.csproj", "{1A8D3C60-4E63-4CD6-8B64-A2E9AF1B97BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -135,6 +141,18 @@ Global
 		{063152EF-E163-4CED-9149-D771D2E704B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{063152EF-E163-4CED-9149-D771D2E704B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{063152EF-E163-4CED-9149-D771D2E704B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8EDF73D-7FDE-4B19-A69B-EB858A0BF55C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8EDF73D-7FDE-4B19-A69B-EB858A0BF55C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8EDF73D-7FDE-4B19-A69B-EB858A0BF55C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8EDF73D-7FDE-4B19-A69B-EB858A0BF55C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7B9CFE9-8EC8-4E2C-8A5C-D6E1E1F20D37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7B9CFE9-8EC8-4E2C-8A5C-D6E1E1F20D37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7B9CFE9-8EC8-4E2C-8A5C-D6E1E1F20D37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7B9CFE9-8EC8-4E2C-8A5C-D6E1E1F20D37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A8D3C60-4E63-4CD6-8B64-A2E9AF1B97BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A8D3C60-4E63-4CD6-8B64-A2E9AF1B97BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A8D3C60-4E63-4CD6-8B64-A2E9AF1B97BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A8D3C60-4E63-4CD6-8B64-A2E9AF1B97BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
