@@ -24,9 +24,6 @@
     <ProjectReference Include="..\GarciaCore.Infrastructure.MongoDb\GarciaCore.Infrastructure.MongoDb.csproj" />
     <ProjectReference Include="..\GarciaCore.Infrastructure.Redis\GarciaCore.Infrastructure.Redis.csproj" />
     <ProjectReference Include="..\GarciaCore.Infrastructure\GarciaCore.Infrastructure.csproj" />
-    <ProjectReference Include="..\GarciaCore.Persistence.EntityFramework.MySql\GarciaCore.Persistence.EntityFramework.MySql.csproj" />
-    <ProjectReference Include="..\GarciaCore.Persistence.EntityFramework.PostgreSQL\GarciaCore.Persistence.EntityFramework.PostgreSql.csproj" />
-    <ProjectReference Include="..\GarciaCore.Persistence.EntityFramework.SqlServer\GarciaCore.Persistence.EntityFramework.SqlServer.csproj" />
     <ProjectReference Include="..\GarciaCore.Persistence.EntityFramework\GarciaCore.Persistence.EntityFramework.csproj" />
     <ProjectReference Include="..\GarciaCore.Persistence.MongoDb\GarciaCore.Persistence.MongoDb.csproj" />
     <ProjectReference Include="..\GarciaCore.Persistence.Redis\GarciaCore.Persistence.Redis.csproj" />
