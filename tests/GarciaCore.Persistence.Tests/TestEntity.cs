@@ -2,7 +2,7 @@ using GarciaCore.Domain;
 
 namespace GarciaCore.Persistence.Tests
 {
-    public class TestEntity : Entity
+    public class TestEntity : Entity<long>
     {
         public TestEntity(int key, string name)
         {
