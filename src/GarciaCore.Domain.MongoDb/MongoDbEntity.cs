@@ -6,7 +6,7 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace GarciaCore.Domain.MongoDb
 {
     [BsonIgnoreExtraElements]
-    public abstract class MongoDbEntity : Entity<string>
+    public abstract class MongoDbEntity : IEntity<string>
     {
         public MongoDbEntity()
         {
@@ -16,16 +16,21 @@ namespace GarciaCore.Domain.MongoDb
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonId]
         [BsonElement(Order = 0)]
-        public override string Id { get; set; }
+        public string Id { get; set; }
 
         [BsonRepresentation(BsonType.String)]
-        public override DateTimeOffset CreatedOn { get; set; }
+        public DateTimeOffset CreatedOn { get; set; }
 
         [BsonRepresentation(BsonType.String)]
-        public override DateTimeOffset LastUpdatedOn { get; set; }
+        public DateTimeOffset LastUpdatedOn { get; set; }
 
         [BsonRepresentation(BsonType.String)]
-        public override DateTimeOffset DeletedOn { get; set; }
+        public DateTimeOffset DeletedOn { get; set; }
+        public bool Active { get; set; }
+        public bool Deleted { get; set; }
+        public int? CreatedBy { get; set; }
+        public int? LastUpdatedBy { get; set; }
+        public int? DeletedBy { get; set; }
 
         public override bool Equals(object obj)
         {
