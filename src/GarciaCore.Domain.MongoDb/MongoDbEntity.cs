@@ -18,13 +18,13 @@ namespace GarciaCore.Domain.MongoDb
         [BsonElement(Order = 0)]
         public override string Id { get; set; }
 
-        [BsonRepresentation(BsonType.DateTime)]
+        [BsonRepresentation(BsonType.String)]
         public override DateTimeOffset CreatedOn { get; set; }
 
-        [BsonRepresentation(BsonType.DateTime)]
+        [BsonRepresentation(BsonType.String)]
         public override DateTimeOffset LastUpdatedOn { get; set; }
 
-        [BsonRepresentation(BsonType.DateTime)]
+        [BsonRepresentation(BsonType.String)]
         public override DateTimeOffset DeletedOn { get; set; }
 
         public override bool Equals(object obj)
