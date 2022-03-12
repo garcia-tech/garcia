@@ -131,17 +131,72 @@ namespace GarciaCore.CodeGenerator.Tests
         [Fact]
         public async Task CreateSolutionFromFileAsync()
         {
-            var json = await File.ReadAllTextAsync("TestSolution.json");
+            var json = await File.ReadAllTextAsync("Farmi.json");
             //_output.WriteLine(json);
             var solution = await _solutionService.CreateSolutionAsync(json);
             solution.ShouldNotBeNull();
             solution.Solution.ShouldNotBeNull();
             solution.Messages.ShouldNotBeNull();
-            _output.WriteLine(JsonSerializer.Serialize(solution.Solution, new JsonSerializerOptions() { WriteIndented = true, ReferenceHandler = ReferenceHandler.Preserve }));
+            //_output.WriteLine(JsonSerializer.Serialize(solution.Solution, new JsonSerializerOptions() { WriteIndented = true, ReferenceHandler = ReferenceHandler.Preserve }));
 
             foreach (var message in solution.Messages)
             {
                 _output.WriteLine(message);
+            }
+
+            var items = new List<Item>()
+            {
+                new Item()
+                {
+                    Name = "Content",
+                    IdType = IdType.Int,
+                    Properties = new List<ItemProperty>()
+                    {
+                        new ItemProperty() { Name = "Date", Type = ItemPropertyType.DateTime, MappingType = ItemPropertyMappingType.Property },
+                        new ItemProperty() { Name = "Items", Type = ItemPropertyType.Class, MappingType = ItemPropertyMappingType.List, InnerType = new Item() { Name = "ContentItem" } },
+                    }
+                },
+                new Item()
+                {
+                    Name = "ContentItem",
+                    IdType = IdType.Int,
+                    Properties = new List<ItemProperty>()
+                    {
+                        new ItemProperty() { Name = "Date", Type = ItemPropertyType.DateTime, MappingType = ItemPropertyMappingType.Property },
+                        new ItemProperty() { Name = "Files", Type = ItemPropertyType.Class, MappingType = ItemPropertyMappingType.List, InnerType = new Item() { Name = "File" } },
+                    }
+                },
+                new Item()
+                {
+                    Name = "File",
+                    IdType = IdType.Int,
+                    Properties = new List<ItemProperty>()
+                    {
+                        new ItemProperty() { Name = "Url", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
+                        new ItemProperty() { Name = "Description", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
+                    }
+                }
+            };
+
+            var result = await solution.Solution.Generate(items);
+            result.ShouldNotBeNull();
+            result.ShouldNotBeEmpty();
+
+            foreach (var item in result)
+            {
+                item.Folder.ShouldNotBeNullOrEmpty();
+                item.Generator.ShouldNotBeNull();
+                item.Code.ShouldNotBeNullOrEmpty();
+                _output.WriteLine($"// Folder: {item.Folder}, Generator: {item.Generator.GetType().Name}");
+                _output.WriteLine(item.Code);
+            }
+
+            foreach (var item in result)
+            {
+                var allMessages = item.AllMessages;
+
+                if (!string.IsNullOrEmpty(allMessages))
+                    _output.WriteLine($"// Messages: {allMessages}");
             }
         }
     }

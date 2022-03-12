@@ -29,7 +29,7 @@ namespace GarciaCore.CodeGenerator
             solution.Projects.Add(api);
 
             var application = new Project("TestSolution.Application", ProjectType.ClassLibrary);
-            application.AddGenerator("Queries", "Queries", new CQRSWebApiQueryGenerator());
+            application.AddGenerator("Queries", "Queries", new CQRSApplicationQueryGenerator());
             application.AddGenerator("CreateCommand", "Commands", new CQRSApplicationCreateCommandGenerator());
             application.AddGenerator("UpdateCommand", "Commands", new CQRSApplicationUpdateCommandGenerator());
             application.AddGenerator("DeleteCommand", "Commands", new CQRSApplicationDeleteCommandGenerator());
@@ -55,8 +55,8 @@ namespace GarciaCore.CodeGenerator
                         // ProjectType = ProjectType.ClassLibrary.ToString(),
                         Generators = new List<ProjectGeneratorModel>
                         {
-                            new ProjectGeneratorModel() { Name = "Commands", GeneratorName = GeneratorNames.CQRSWebApiCreateCommandGenerator } ,
-                            new ProjectGeneratorModel() { Name = "Commands", GeneratorName = GeneratorNames.CQRSWebApiUpdateCommandGenerator }
+                            new ProjectGeneratorModel() { Name = "Commands", GeneratorName = GeneratorNames.CQRSApplicationCreateCommandGenerator } ,
+                            new ProjectGeneratorModel() { Name = "Commands", GeneratorName = GeneratorNames.CQRSApplicationUpdateCommandGenerator }
                         }
                     },
                     new ProjectModel()
@@ -119,7 +119,10 @@ namespace GarciaCore.CodeGenerator
                             else
                             {
                                 var generator = Activator.CreateInstance(type) as IGenerator;
-                                project.AddGenerator(generatorModel.Name, generatorModel.Name, generatorModel.Name, generatorModel.BaseClass, generator);
+                                var baseClass = !string.IsNullOrEmpty(generatorModel.BaseClass) ? generatorModel.BaseClass : generator.DefaultBaseClass;
+                                var @namespace = !string.IsNullOrEmpty(projectModel.Namespace) ? projectModel.Namespace : projectModel.Name;
+                                @namespace = $"{@namespace}.{generatorModel.Name}".TrimEnd('.');
+                                project.AddGenerator(generatorModel.Name, generatorModel.Name, @namespace, baseClass, generator);
                             }
                         }
                     }

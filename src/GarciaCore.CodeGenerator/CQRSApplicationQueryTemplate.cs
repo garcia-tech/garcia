@@ -179,7 +179,7 @@ using System.Threading.Tasks;");
 
     protected override Generator CreateGenerator()
 	{
-		return new CQRSWebApiQueryGenerator();
+		return new CQRSApplicationQueryGenerator();
 	}
 
         
