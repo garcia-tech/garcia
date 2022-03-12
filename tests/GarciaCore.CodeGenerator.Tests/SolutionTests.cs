@@ -187,7 +187,7 @@ namespace GarciaCore.CodeGenerator.Tests
                 item.Folder.ShouldNotBeNullOrEmpty();
                 item.Generator.ShouldNotBeNull();
                 item.Code.ShouldNotBeNullOrEmpty();
-                _output.WriteLine($"// Folder: {item.Folder}, Generator: {item.Generator.GetType().Name}");
+                _output.WriteLine($"// Folder: {item.Folder}, File: {item.File},  Generator: {item.Generator.GetType().Name}");
                 _output.WriteLine(item.Code);
             }
 

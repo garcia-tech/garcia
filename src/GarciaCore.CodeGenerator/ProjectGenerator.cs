@@ -37,7 +37,8 @@ namespace GarciaCore.CodeGenerator
             }
 
             var code = await Generator.Generate(item, Namespace, BaseClass);
-            var generationResult = new GenerationResult(Folder, Generator, code);
+            var file = await Generator.GetFileName(item);
+            var generationResult = new GenerationResult(Folder, Generator, code, file);
             return generationResult;
         }
     }

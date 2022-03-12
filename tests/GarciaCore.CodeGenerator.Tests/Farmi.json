@@ -6,7 +6,9 @@
       "Name": "Farmi.Application",
       "Folder": null,
       "Namespace": null,
-      "ProjectDependencies": null,
+      "ProjectDependencies": [
+        "Farmi.Domain"
+      ],
       "Generators": [
         {
           "Name": "Commands.Create",

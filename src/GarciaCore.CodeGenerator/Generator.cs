@@ -9,6 +9,10 @@ namespace GarciaCore.CodeGenerator
     {
         protected ItemPropertyType[] notNullablePropertyTypes = new ItemPropertyType[] { ItemPropertyType.String, ItemPropertyType.Class, ItemPropertyType.Unknown };
 
+        protected virtual string FileNamePrefix { get; } = string.Empty;
+        protected abstract string FileNamePostfix { get; }
+        protected abstract string FileExtension { get; }
+
         public virtual List<IGenerator> Dependencies { get; set; } = new List<IGenerator>();
 
         public abstract string DefaultBaseClass { get; }
@@ -156,5 +160,10 @@ namespace GarciaCore.CodeGenerator
         }
 
         public abstract Task<string> Generate(Item item, string @namespace, string baseClass);
+
+        public virtual async Task<string> GetFileName(Item item)
+        {
+            return $"{FileNamePrefix}{item.Name}{FileNamePostfix}.{FileExtension}";
+        }
     }
 }

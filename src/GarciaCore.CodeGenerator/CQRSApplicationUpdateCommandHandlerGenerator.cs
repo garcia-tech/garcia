@@ -1,7 +1,8 @@
 ﻿namespace GarciaCore.CodeGenerator
 {
-    public class CQRSApplicationUpdateCommandHandlerGenerator : Generator<CQRSApplicationUpdateCommandHandlerTemplate>
+    public class CQRSApplicationUpdateCommandHandlerGenerator : CommandHandlerGenerator<CQRSApplicationUpdateCommandHandlerTemplate>
     {
         public override string DefaultBaseClass => "";
+        protected override string FileNamePrefix => "Update";
     }
 }

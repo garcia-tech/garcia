@@ -4,11 +4,12 @@ namespace GarciaCore.CodeGenerator
 {
     public class GenerationResult
     {
-        public GenerationResult(string folder, IGenerator generator, string code)
+        public GenerationResult(string folder, IGenerator generator, string code, string file)
         {
             Folder = folder;
             Generator = generator;
             Code = code;
+            File = file;
         }
 
         public string Folder { get; set; }
@@ -16,5 +17,6 @@ namespace GarciaCore.CodeGenerator
         public string Code { get; set; }
         public List<string> Messages { get; set; } = new List<string>();
         public string AllMessages { get { return string.Join('\n', Messages); } }
+        public string File { get; set; }
     }
 }

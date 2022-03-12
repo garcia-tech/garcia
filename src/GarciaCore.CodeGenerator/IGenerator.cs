@@ -9,6 +9,7 @@ namespace GarciaCore.CodeGenerator
         Task<string> Generate(Item item, string @namespace, string baseClass);
         List<IGenerator> Dependencies { get; set; }
         List<string> Usings { get; set; }
+        public Task<string> GetFileName(Item item);
     }
 
     public interface IGenerator<T> : IGenerator where T : BaseTemplate

@@ -8,6 +8,8 @@
 <#@ import namespace="GarciaCore.Application" #>
 <#@ include file="IncludeWarning.t4" #>
 <#@ include file="IncludeUsings.t4" #>
+using MediatR;
+<#= GetUsings() #>
 <#
     var repositoryString = $"I{Item.Name}Repository {Item.Name.ToCamelCase()}Repository";
     var properties = Item.Properties.Where(x => x.Type == ItemPropertyType.Class);
