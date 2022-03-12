@@ -30,10 +30,11 @@ namespace GarciaCore.CodeGenerator
         /// </summary>
         public virtual string TransformText()
         {
+            this.Write("\r\n");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 8 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\BaseTemplate.tt"
+        #line 9 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\BaseTemplate.tt"
 
 protected Generator generator;
 
@@ -70,6 +71,22 @@ public GarciaCore.CodeGenerator.Item Item { get; set; }
 public string BaseClass { get; set; }
 public string Namespace { get; set; }
 public string Includes { get; set; }
+public List<string> Usings { get; set; }
+
+public string GetUsings()
+{
+    var text = "";
+
+    if (Usings != null)
+    {
+        foreach (var usingItem in Usings)
+        {
+            text += $"using {usingItem};\n";
+        }
+    }
+
+    return text.TrimEnd('\n');
+}
 
         
         #line default

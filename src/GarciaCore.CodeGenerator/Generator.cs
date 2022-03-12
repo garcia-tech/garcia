@@ -15,6 +15,8 @@ namespace GarciaCore.CodeGenerator
 
         public virtual string Name { get { return GetType().FullName; } }
 
+        public virtual List<string> Usings { get; set; }
+
         public virtual async Task<string> Generate<T>(Item item, string @namespace, string baseClass) where T : BaseTemplate
         {
             var template = CreateItem<T>();
@@ -22,6 +24,7 @@ namespace GarciaCore.CodeGenerator
             template.BaseClass = baseClass;
             template.Includes = baseClass;
             template.Namespace = @namespace;
+            template.Usings = Usings;
             var text = template.TransformText();
             return text;
         }

@@ -128,10 +128,14 @@ namespace GarciaCore.CodeGenerator
                     }
                 }
 
+                Dictionary<Guid, List<string>> namespaces = new Dictionary<Guid, List<string>>();
+
                 foreach (var projectModel in solutionModel.Projects)
                 {
                     if (projectModel.ProjectDependencies != null)
                     {
+                        var projectNamespaces = new List<string>();
+
                         foreach (var projectDependency in projectModel.ProjectDependencies)
                         {
                             var dependentProject = allProjects.FirstOrDefault(x => x.Name == projectDependency);
@@ -147,7 +151,32 @@ namespace GarciaCore.CodeGenerator
                                     messages.Add($"Project with Uid {projectModel.Uid} could not be found in projects.");
                                 else
                                     project.ProjectDependencies.Add(dependentProject);
+
+                                foreach (var dependentProjectGenerator in dependentProject.Generators)
+                                {
+                                    if (!projectNamespaces.Contains(dependentProjectGenerator.Namespace))
+                                        projectNamespaces.Add(dependentProjectGenerator.Namespace);
+                                }
                             }
+                        }
+
+                        namespaces.Add(projectModel.Uid, projectNamespaces);
+                    }
+                    else
+                    {
+                        namespaces.Add(projectModel.Uid, new List<string>());
+                    }
+                }
+
+                foreach (var project in allProjects)
+                {
+                    var usings = namespaces.FirstOrDefault(x => x.Key == project.Uid).Value;
+
+                    if (usings.Count != 0)
+                    {
+                        foreach (var generator in project.Generators)
+                        {
+                            generator.Generator.Usings = usings;
                         }
                     }
                 }
