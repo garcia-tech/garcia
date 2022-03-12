@@ -12,38 +12,20 @@ using MediatR;
 
 namespace <#= Namespace #>
 {
-    public partial class <#= Item.Name #>Query
+    public interface I<#= Item.Name #>Query
+    {
+    }
+
+    public partial class <#= Item.Name #>Query : I<#= Item.Name #>Query
     {
         private Settings _settings;
-        private I<#= Item.Name #>Service _<#= Item.Name.ToCamelCase() #>Service;
         private I<#= Item.Name #>Repository _<#= Item.Name.ToCamelCase() #>Repository;
 
-        public <#= Item.Name #>Controller(IOptions<Settings> settings, <#= Item.Name #>Repository <#= Item.Name #>Repository)
+        public <#= Item.Name #>Query(IOptions<Settings> settings, <#= Item.Name #>Repository <#= Item.Name #>Repository)
         {
             _settings = settings.Value;
             _<#= Item.Name.ToCamelCase() #>Repository = <#= Item.Name.ToCamelCase() #>Repository;
         }
-
-<#
-        foreach (var property in Item.Properties.Where(x => x.MappingType == ItemPropertyMappingType.List && x.Type == ItemPropertyType.Class))
-	    {
-            string innerTypeName = this.generator.GetInnerTypeName(property);
-#>
-        
-        public async Task<<#= innerTypeName #>> Get<#= property.Name.ToPascalCase() #>(<#= IdTypeName #> id)
-        {
-            var item = await _repository.GetAsync(id);
-
-            if (item != null)
-            {
-                return item.<#= property.Name #>;
-            }
-
-            return null();
-        }
-<#
-        }
-#>
     }
 }
 

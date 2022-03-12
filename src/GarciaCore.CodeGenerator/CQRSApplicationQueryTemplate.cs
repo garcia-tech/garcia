@@ -52,130 +52,81 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write("\r\n{\r\n    public partial class ");
+            this.Write("\r\n{\r\n    public interface I");
             
             #line 15 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
-            this.Write("Query\r\n    {\r\n        private Settings _settings;\r\n        private I");
+            this.Write("Query\r\n    {\r\n    }\r\n\r\n    public partial class ");
             
-            #line 18 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
+            #line 19 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
-            this.Write("Service _");
+            this.Write("Query : I");
             
-            #line 18 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
+            #line 19 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
-            this.Write("Service;\r\n        private I");
+            this.Write("Query\r\n    {\r\n        private Settings _settings;\r\n        private I");
             
-            #line 19 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
+            #line 22 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("Repository _");
             
-            #line 19 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
+            #line 22 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Repository;\r\n\r\n        public ");
             
-            #line 21 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
+            #line 24 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
-            this.Write("Controller(IOptions<Settings> settings, ");
+            this.Write("Query(IOptions<Settings> settings, ");
             
-            #line 21 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
+            #line 24 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("Repository ");
             
-            #line 21 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
+            #line 24 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("Repository)\r\n        {\r\n            _settings = settings.Value;\r\n            _");
             
-            #line 24 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
+            #line 27 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Repository = ");
             
-            #line 24 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
+            #line 27 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
             
             #line default
             #line hidden
-            this.Write("Repository;\r\n        }\r\n\r\n");
-            
-            #line 27 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
-
-        foreach (var property in Item.Properties.Where(x => x.MappingType == ItemPropertyMappingType.List && x.Type == ItemPropertyType.Class))
-	    {
-            string innerTypeName = this.generator.GetInnerTypeName(property);
-
-            
-            #line default
-            #line hidden
-            this.Write("        \r\n        public async Task<");
-            
-            #line 33 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(innerTypeName));
-            
-            #line default
-            #line hidden
-            this.Write("> Get");
-            
-            #line 33 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToPascalCase()));
-            
-            #line default
-            #line hidden
-            this.Write("(");
-            
-            #line 33 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(IdTypeName));
-            
-            #line default
-            #line hidden
-            this.Write(" id)\r\n        {\r\n            var item = await _repository.GetAsync(id);\r\n\r\n      " +
-                    "      if (item != null)\r\n            {\r\n                return item.");
-            
-            #line 39 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            
-            #line default
-            #line hidden
-            this.Write(";\r\n            }\r\n\r\n            return null();\r\n        }\r\n");
-            
-            #line 44 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
-
-        }
-
-            
-            #line default
-            #line hidden
-            this.Write("    }\r\n}\r\n\r\n");
+            this.Write("Repository;\r\n        }\r\n    }\r\n}\r\n\r\n");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 50 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
+        #line 32 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationQueryTemplate.tt"
 
     protected override Generator CreateGenerator()
 	{

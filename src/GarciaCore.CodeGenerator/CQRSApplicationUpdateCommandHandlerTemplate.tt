@@ -45,7 +45,7 @@ namespace <#= Namespace #>
 
         public Update<#= Item.Name #>CommandHandler(<#= repositoryString #>)
         {
-             _<#= Item.Name.ToCamelCase() #>Repository =  <#= Item.Name.ToCamelCase() #>Repository;
+            _<#= Item.Name.ToCamelCase() #>Repository =  <#= Item.Name.ToCamelCase() #>Repository;
 <#
     foreach (var repository in repositories)
     {

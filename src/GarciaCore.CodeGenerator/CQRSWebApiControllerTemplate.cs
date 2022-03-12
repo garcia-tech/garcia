@@ -73,115 +73,157 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write("Service _");
+            this.Write("Query _");
             
             #line 17 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
             
             #line default
             #line hidden
-            this.Write("Service;\r\n        private I");
+            this.Write("Query;\r\n        private I");
             
             #line 18 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Service _");
+            
+            #line 18 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("Service;\r\n        private I");
+            
+            #line 19 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("Repository _");
             
-            #line 18 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 19 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Repository;\r\n\r\n        public ");
             
-            #line 20 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 21 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("Controller(IOptions<Settings> settings, ");
             
-            #line 20 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 21 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("Repository ");
             
-            #line 20 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 21 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("Repository, I");
             
-            #line 20 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 21 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Query ");
+            
+            #line 21 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Query, I");
+            
+            #line 21 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("Service ");
             
-            #line 20 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 21 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
-            this.Write("Service, IMediator mediator, IQrCodeService qrCodeService) : base(settings, repos" +
-                    "itory, mediator)\r\n        {\r\n            _");
+            this.Write("Service, IMediator mediator) : base(settings, repository, mediator)\r\n        {\r\n " +
+                    "           _");
             
-            #line 22 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 23 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("Query = ");
+            
+            #line 23 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("Query;\r\n            _");
+            
+            #line 24 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Service = ");
             
-            #line 22 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 24 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Service;\r\n            _");
             
-            #line 23 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 25 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Repository = ");
             
-            #line 23 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 25 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Repository;\r\n        }\r\n\r\n        [HttpPost(Name = \"Create");
             
-            #line 26 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 28 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("\")]\r\n        public async Task<ActionResult<");
             
-            #line 27 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 29 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write(">> Create");
             
-            #line 27 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 29 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("Command(Create");
             
-            #line 27 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 29 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
@@ -197,35 +239,35 @@ using System.Threading.Tasks;");
 
             return Created($""/");
             
-            #line 36 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 38 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("s/{command.Id}\", response.Result);\r\n        }\r\n\r\n        [HttpPut(Name = \"Update");
             
-            #line 39 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 41 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("\")]\r\n        public async Task<ActionResult<");
             
-            #line 40 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 42 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write(">> Update");
             
-            #line 40 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 42 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("Command(Update");
             
-            #line 40 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 42 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
@@ -241,7 +283,7 @@ using System.Threading.Tasks;");
 
             return Created($""/");
             
-            #line 49 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 51 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
@@ -249,28 +291,28 @@ using System.Threading.Tasks;");
             this.Write("s/{command.Id}\", response.Result);\r\n        }\r\n\r\n        [HttpDelete(\"{id}\", Name" +
                     " = \"Delete");
             
-            #line 52 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 54 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("\")]\r\n        public async Task<ActionResult<");
             
-            #line 53 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 55 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write(">> Delete");
             
-            #line 53 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 55 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("Command(Delete");
             
-            #line 53 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 55 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
@@ -289,73 +331,87 @@ using System.Threading.Tasks;");
 
         [HttpGet(""api/");
             
-            #line 65 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 67 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("\", Name = \"GetAll");
             
-            #line 65 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 67 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("s\")]\r\n        public async Task<List<");
             
-            #line 66 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 68 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write(">> GetAll");
             
-            #line 66 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 68 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
-            this.Write("s()\r\n        {\r\n            var items = await _repository.GetAllAsync();\r\n       " +
-                    "     return Ok(items);\r\n        }\r\n\r\n        [HttpGet(\"api/");
+            this.Write("s()\r\n        {\r\n            var items = await _");
             
-            #line 72 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 70 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("Service.GetAllAsync();\r\n            return Ok(items);\r\n        }\r\n\r\n        [Http" +
+                    "Get(\"api/");
+            
+            #line 74 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("/{id}\", Name = \"Get");
             
-            #line 72 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 74 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("\")]\r\n        public async Task<");
             
-            #line 73 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 75 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("> Get");
             
-            #line 73 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 75 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 73 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 75 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(IdTypeName));
             
             #line default
             #line hidden
-            this.Write(" id)\r\n        {\r\n            var item = await _repository.GetAsync(id);\r\n\r\n      " +
-                    "      if (item != null)\r\n            {\r\n                return Ok(item);\r\n      " +
-                    "      }\r\n\r\n            return NotFound();\r\n        }\r\n");
+            this.Write(" id)\r\n        {\r\n            var item = await _");
             
-            #line 84 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 77 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("Service.GetAsync(id);\r\n\r\n            if (item != null)\r\n            {\r\n          " +
+                    "      return Ok(item);\r\n            }\r\n\r\n            return NotFound();\r\n       " +
+                    " }\r\n");
+            
+            #line 86 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
 
         foreach (var property in Item.Properties.Where(x => x.MappingType == ItemPropertyMappingType.List && x.Type == ItemPropertyType.Class))
 	    {
@@ -366,50 +422,57 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("        \r\n        [HttpGet(\"api/");
             
-            #line 90 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 92 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("/{id}/");
             
-            #line 90 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 92 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToPascalCase()));
             
             #line default
             #line hidden
             this.Write("\")]\r\n        public async Task<");
             
-            #line 91 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 93 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(innerTypeName));
             
             #line default
             #line hidden
             this.Write("> Get");
             
-            #line 91 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 93 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToPascalCase()));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 91 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 93 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(IdTypeName));
             
             #line default
             #line hidden
-            this.Write(" id)\r\n        {\r\n            var item = await _repository.GetAsync(id);\r\n\r\n      " +
-                    "      if (item != null)\r\n            {\r\n                return Ok(item.");
+            this.Write(" id)\r\n        {\r\n            var item = await _");
             
-            #line 97 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 95 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("Service.GetAsync(id);\r\n\r\n            if (item != null)\r\n            {\r\n          " +
+                    "      return Ok(item.");
+            
+            #line 99 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(");\r\n            }\r\n\r\n            return NotFound();\r\n        }\r\n");
             
-            #line 102 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            #line 104 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
 
         }
 
@@ -420,7 +483,7 @@ using System.Threading.Tasks;");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 108 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+        #line 110 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
 
     protected override Generator CreateGenerator()
 	{

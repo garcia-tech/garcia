@@ -153,7 +153,7 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write(")\r\n        {\r\n             _");
+            this.Write(")\r\n        {\r\n            _");
             
             #line 48 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
