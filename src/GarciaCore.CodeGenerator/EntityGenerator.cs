@@ -9,5 +9,6 @@
     {
         public override string DefaultBaseClass => "Entity";
         protected override string FileNamePostfix => "";
+        public override GeneratorType GeneratorType => GeneratorType.Domain;
     }
 }

@@ -154,7 +154,8 @@ namespace GarciaCore.CodeGenerator.Tests
                     {
                         new ItemProperty() { Name = "Date", Type = ItemPropertyType.DateTime, MappingType = ItemPropertyMappingType.Property },
                         new ItemProperty() { Name = "Items", Type = ItemPropertyType.Class, MappingType = ItemPropertyMappingType.List, InnerType = new Item() { Name = "ContentItem" } },
-                    }
+                    },
+                    AddApplication = true
                 },
                 new Item()
                 {
