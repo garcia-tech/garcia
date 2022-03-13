@@ -1,0 +1,79 @@
+{
+  "Name": "Farmi",
+  "Folder": "c:\\files\\Farmi",
+  "Projects": [
+    {
+      "Name": "Farmi.Application",
+      "Folder": null,
+      "Namespace": null,
+      "ProjectDependencies": [
+        "Farmi.Domain"
+      ],
+      "Generators": [
+        {
+          "Name": "Commands.Create",
+          "GeneratorName": "CQRSApplicationCreateCommandGenerator"
+        },
+        {
+          "Name": "Commands.Create",
+          "GeneratorName": "CQRSApplicationCreateCommandHandlerGenerator"
+        },
+        {
+          "Name": "Commands.Delete",
+          "GeneratorName": "CQRSApplicationDeleteCommandGenerator"
+        },
+        {
+          "Name": "Commands.Delete",
+          "GeneratorName": "CQRSApplicationDeleteCommandHandlerGenerator"
+        },
+        {
+          "Name": "Commands.Update",
+          "GeneratorName": "CQRSApplicationUpdateCommandGenerator"
+        },
+        {
+          "Name": "Commands.Update",
+          "GeneratorName": "CQRSApplicationUpdateCommandHandlerGenerator"
+        },
+        {
+          "Name": "Queries",
+          "GeneratorName": "CQRSApplicationQueryGenerator"
+        },
+        {
+          "Name": "Services",
+          "GeneratorName": "CQRSApplicationServiceGenerator"
+        }
+      ],
+      "ProjectType": "ClassLibrary"
+    },
+    {
+      "Name": "Farmi.Api",
+      "Folder": null,
+      "Namespace": null,
+      "ProjectDependencies": [
+        "Farmi.Application",
+        "Farmi.Domain"
+      ],
+      "Generators": [
+        {
+          "Name": "Controllers",
+          "BaseClass": null,
+          "GeneratorName": "CQRSWebApiControllerGenerator"
+        }
+      ],
+      "ProjectType": "WebApi"
+    },
+    {
+      "Name": "Farmi.Domain",
+      "Folder": null,
+      "Namespace": null,
+      "Generators": [
+        {
+          "Name": "Entities",
+          "BaseClass": null,
+          "GeneratorName": "EntityGenerator"
+        }
+      ],
+      "ProjectType": "ClassLibrary"
+    }
+  ]
+}

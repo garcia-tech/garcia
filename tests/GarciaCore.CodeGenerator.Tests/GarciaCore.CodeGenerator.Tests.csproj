@@ -25,4 +25,16 @@
     <ProjectReference Include="..\..\src\GarciaCore.CodeGenerator\GarciaCore.CodeGenerator.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Farmi - Copy.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Farmi.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestSolution.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

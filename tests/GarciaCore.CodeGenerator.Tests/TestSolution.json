@@ -1,0 +1,41 @@
+{
+  "Name": "TestSolution",
+  "Folder": "c:\\files\\garciacoretest",
+  "Projects": [
+    {
+      "Name": "TestSolution.Application",
+      "Folder": null,
+      "Namespace": null,
+      "ProjectDependencies": null,
+      "Generators": [
+        {
+          "Name": "Commands",
+          "BaseClass": null,
+          "GeneratorName": "CQRSWebApiCreateCommandGenerator"
+        },
+        {
+          "Name": "Commands",
+          "BaseClass": null,
+          "GeneratorName": "CQRSWebApiUpdateCommandGenerator"
+        }
+      ],
+      "ProjectType": null
+    },
+    {
+      "Name": "TestSolution.Api",
+      "Folder": null,
+      "Namespace": null,
+      "ProjectDependencies": [
+        "TestSolution.Application"
+      ],
+      "Generators": [
+        {
+          "Name": "Controllers",
+          "BaseClass": null,
+          "GeneratorName": "CQRSWebApiControllerGenerator"
+        }
+      ],
+      "ProjectType": "WebApi"
+    }
+  ]
+}

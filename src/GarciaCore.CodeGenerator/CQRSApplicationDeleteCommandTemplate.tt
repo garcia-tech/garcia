@@ -9,6 +9,7 @@
 <#@ include file="IncludeWarning.t4" #>
 <#@ include file="IncludeUsings.t4" #>  
 using MediatR;
+<#= GetUsings() #>
 
 namespace <#= Namespace #>
 {
@@ -21,6 +22,6 @@ namespace <#= Namespace #>
 <#+
     protected override Generator CreateGenerator()
 	{
-		return new CQRSWebApiDeleteCommandGenerator();
+		return new CQRSApplicationDeleteCommandGenerator();
 	}
 #>

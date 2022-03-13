@@ -9,16 +9,19 @@
 <#@ include file="IncludeWarning.t4" #>
 <#@ include file="IncludeUsings.t4" #>
 using MediatR;
+<#= GetUsings() #>
 
 namespace <#= Namespace #>
 {
     public partial class <#= Item.Name #>Controller : <#= BaseClass #>
     {
+        private I<#= Item.Name #>Query _<#= Item.Name.ToCamelCase() #>Query;
         private I<#= Item.Name #>Service _<#= Item.Name.ToCamelCase() #>Service;
         private I<#= Item.Name #>Repository _<#= Item.Name.ToCamelCase() #>Repository;
 
-        public <#= Item.Name #>Controller(IOptions<Settings> settings, <#= Item.Name #>Repository <#= Item.Name #>Repository, I<#= Item.Name #>Service <#= Item.Name #>Service, IMediator mediator, IQrCodeService qrCodeService) : base(settings, repository, mediator)
+        public <#= Item.Name #>Controller(IOptions<Settings> settings, <#= Item.Name #>Repository <#= Item.Name #>Repository, I<#= Item.Name #>Query <#= Item.Name #>Query, I<#= Item.Name #>Service <#= Item.Name #>Service, IMediator mediator) : base(settings, repository, mediator)
         {
+            _<#= Item.Name.ToCamelCase() #>Query = <#= Item.Name.ToCamelCase() #>Query;
             _<#= Item.Name.ToCamelCase() #>Service = <#= Item.Name.ToCamelCase() #>Service;
             _<#= Item.Name.ToCamelCase() #>Repository = <#= Item.Name.ToCamelCase() #>Repository;
         }
@@ -65,14 +68,14 @@ namespace <#= Namespace #>
         [HttpGet("api/<#= Item.Name #>", Name = "GetAll<#= Item.Name #>s")]
         public async Task<List<<#= Item.Name #>>> GetAll<#= Item.Name #>s()
         {
-            var items = await _repository.GetAllAsync();
+            var items = await _<#= Item.Name.ToCamelCase() #>Service.GetAllAsync();
             return Ok(items);
         }
 
         [HttpGet("api/<#= Item.Name #>/{id}", Name = "Get<#= Item.Name #>")]
         public async Task<<#= Item.Name #>> Get<#= Item.Name #>(<#= IdTypeName #> id)
         {
-            var item = await _repository.GetAsync(id);
+            var item = await _<#= Item.Name.ToCamelCase() #>Service.GetAsync(id);
 
             if (item != null)
             {
@@ -90,7 +93,7 @@ namespace <#= Namespace #>
         [HttpGet("api/<#= Item.Name #>/{id}/<#= property.Name.ToPascalCase() #>")]
         public async Task<<#= innerTypeName #>> Get<#= property.Name.ToPascalCase() #>(<#= IdTypeName #> id)
         {
-            var item = await _repository.GetAsync(id);
+            var item = await _<#= Item.Name.ToCamelCase() #>Service.GetAsync(id);
 
             if (item != null)
             {

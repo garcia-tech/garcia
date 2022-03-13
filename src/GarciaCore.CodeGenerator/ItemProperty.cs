@@ -1,20 +1,5 @@
-using System.Collections.Generic;
-
-namespace GarciaCore.CodeGenerator
+﻿namespace GarciaCore.CodeGenerator
 {
-    public class Item
-    {
-        public string Name { get; set; }
-        public List<ItemProperty> Properties { get; set; } = new List<ItemProperty>();
-        public bool IsEnum { get; set; }
-        public IdType IdType { get; set; }
-
-        public override string ToString()
-        {
-            return this.Name;
-        }
-    }
-
     public class ItemProperty
     {
         public string Name { get; set; }
@@ -37,45 +22,5 @@ namespace GarciaCore.CodeGenerator
         //public string FieldName { get; set; }
         //public bool AddOnChange { get; set; }
         //public string EditGroupName { get; set; }
-    }
-
-    public enum IdType
-    {
-        Int = 0,
-        Long,
-        Guid,
-        ObjectId
-    }
-
-    public enum ItemPropertyType
-    {
-        Integer = 0,
-        Double,
-        Float,
-        Decimal,
-        DateTime,
-        TimeSpan,
-        String,
-        Char,
-        Class,
-        Unknown,
-        Boolean,
-        Enum
-    }
-
-    public enum ItemPropertyMappingType
-    {
-        Property = 0,
-        List,
-        Array
-    }
-
-    public enum AccessorType
-    {
-        Public = 0,
-        Private,
-        Protected,
-        Internal,
-        ProtectedInternal
     }
 }

@@ -47,6 +47,6 @@ namespace <#= Namespace #>
 <#+
     protected override Generator CreateGenerator()
 	{
-		return new CQRSWebApiCreateCommandGenerator();
+		return new CQRSApplicationCreateCommandGenerator();
 	}
 #>

@@ -8,5 +8,6 @@
     public class RepositoryGenerator : Generator<RepositoryTemplate>
     {
         public override string DefaultBaseClass => "Repository";
+        protected override string FileNamePostfix => "Repository";
     }
 }

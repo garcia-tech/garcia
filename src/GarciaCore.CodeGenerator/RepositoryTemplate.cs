@@ -34,33 +34,47 @@ namespace GarciaCore.CodeGenerator
                     "nually. \r\n\tAdd a new partial class with the same name if you want to add extra f" +
                     "unctionality.\r\n*/");
             this.Write("\r\n");
-            this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing System.Data;\r\nusing Syste" +
-                    "m.Linq;\r\nusing System.ComponentModel.DataAnnotations;\r\nusing GarciaCore.Infrastr" +
-                    "ucture;\r\nusing GarciaCore.Domain;\r\nusing GarciaCore.Persistence;");
+            this.Write(@"using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.ComponentModel.DataAnnotations;
+using GarciaCore.Infrastructure;
+using GarciaCore.Domain;
+using GarciaCore.Persistence;
+using System.Threading;
+using System.Threading.Tasks;");
+            this.Write("\r\n");
+            
+            #line 10 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(GetUsings()));
+            
+            #line default
+            #line hidden
             this.Write("\r\n\r\nnamespace ");
             
-            #line 11 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
+            #line 12 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public interface I");
             
-            #line 13 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
+            #line 14 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("Repository : IAsyncRepository<");
             
-            #line 13 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
+            #line 14 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write(">\r\n    {\r\n");
             
-            #line 15 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
+            #line 16 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
 
         if (Item.Properties.Count(x => x.InnerType != null) > 0)
 	    {
@@ -70,14 +84,14 @@ namespace GarciaCore.CodeGenerator
             #line hidden
             this.Write("        Task<List<");
             
-            #line 19 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
+            #line 20 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write(">> GetByIdWithIncludes(long id);\r\n");
             
-            #line 20 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
+            #line 21 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
 
         }
 
@@ -86,28 +100,28 @@ namespace GarciaCore.CodeGenerator
             #line hidden
             this.Write("    }\r\n\r\n    public partial class ");
             
-            #line 25 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
+            #line 26 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("Repository : ");
             
-            #line 25 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
+            #line 26 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(BaseClass));
             
             #line default
             #line hidden
             this.Write("<");
             
-            #line 25 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
+            #line 26 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write(">, I");
             
-            #line 25 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
+            #line 26 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
@@ -115,7 +129,7 @@ namespace GarciaCore.CodeGenerator
             this.Write("Repository\r\n    {\r\n        public LockerRepository(DbContext dbContext) : base(db" +
                     "Context) { }\r\n");
             
-            #line 28 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
+            #line 29 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
 
         if (Item.Properties.Count(x => x.InnerType != null) > 0)
 	    {
@@ -125,28 +139,28 @@ namespace GarciaCore.CodeGenerator
             #line hidden
             this.Write("        public async Task<List<");
             
-            #line 32 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
+            #line 33 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write(">> GetByIdWithIncludes( ");
             
-            #line 32 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
+            #line 33 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(IdTypeName));
             
             #line default
             #line hidden
             this.Write(" id)\r\n        {\r\n            return await _dbContext.");
             
-            #line 34 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
+            #line 35 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("s\r\n");
             
-            #line 35 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
+            #line 36 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
 
         foreach (var property in Item.Properties.Where(x => x.InnerType != null))
 	    {
@@ -157,14 +171,14 @@ namespace GarciaCore.CodeGenerator
             #line hidden
             this.Write("                .Include(i => i.");
             
-            #line 40 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
+            #line 41 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(")\r\n");
             
-            #line 41 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
+            #line 42 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
 
         }
 
@@ -174,7 +188,7 @@ namespace GarciaCore.CodeGenerator
             this.Write("                .Where(i => i.Id == id)\r\n                .AsNoTracking()\r\n       " +
                     "         .ToListAsync();\r\n        }\r\n");
             
-            #line 48 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
+            #line 49 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
 
         }
 
@@ -185,7 +199,7 @@ namespace GarciaCore.CodeGenerator
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 54 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
+        #line 55 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
 
     protected override Generator CreateGenerator()
 	{
