@@ -123,9 +123,9 @@ namespace GarciaCore.CodeGenerator
                     case ItemPropertyMappingType.List:
                         typeName = "List<" + typeName + ">";
                         break;
-                    case ItemPropertyMappingType.Array:
-                        typeName = typeName + "[]";
-                        break;
+                    //case ItemPropertyMappingType.Array:
+                    //    typeName = typeName + "[]";
+                    //    break;
                 }
             }
 
