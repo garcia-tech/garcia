@@ -41,14 +41,8 @@ public class CLI
         switch (_args[0])
         {
             case "migrate":
-                var migrationName1 = CreateAndCopyMigrationName(false);
-                Response result1 = _shellHelper.RunInternalCommand(migrationName1);
-                _consoleWrapper.WriteLine(result1);
-                break;
             case "migrateandupdatedatabase":
-                var migrationName2 = CreateAndCopyMigrationName(true);
-                Response result2 = _shellHelper.RunInternalCommand(migrationName2);
-                _consoleWrapper.WriteLine(result2);
+                RunMigration(_args[0]);
                 break;
             case "generate":
                 var item = new Item()
@@ -63,37 +57,43 @@ public class CLI
                 //var text = Generate(item);
                 //Console.WriteLine(text);
                 break;
-            default:
-                break;
         }
     }
 
-    static void CreateMigration()
+    private void RunMigration(string option)
     {
-        var migrationName = "Migrations_" + Guid.NewGuid().ToString().Replace("-", "").Substring(0, 5);
-        Console.WriteLine(migrationName);
-        Clipboard clipboard = new();
-        clipboard.SetText("add-migration " + migrationName + ";update-database");
-    }
-
-    string CreateAndCopyMigrationName(bool updateaDatabase)
-    {
+        var updateDatabase = option == "migrateandupdatedatabase";
         var migrationName = CreateMigrationName();
-        var text = "add-migration " + migrationName;
-
-        if (updateaDatabase)
-        {
-            text += ";update-database";
-        }
-
-        _consoleWrapper.WriteLine(text);
-        _clipboard.SetText(text);
-        return text;
+        var command = CreateCommand(migrationName, updateDatabase);
+        CopyCommand(command);
+        RunCommand(command);
     }
 
-    internal virtual string CreateMigrationName()
+    private void CopyCommand(string command)
     {
-        var migrationName = "Migrations_" + Guid.NewGuid().ToString().Replace("-", "").Substring(0, 5);
-        return migrationName;
+        _consoleWrapper.WriteLine(command);
+        _clipboard.SetText(command);
     }
+
+    private void RunCommand(string command)
+    {
+        Response response = _shellHelper.RunInternalCommand(command);
+        _consoleWrapper.WriteLine(response);
+    }
+
+    string CreateCommand(string migrationName, bool updateDatabase)
+    {
+        var command = "add-migration " + migrationName;
+
+        if (updateDatabase)
+        {
+            command += ";update-database";
+        }
+        
+        return command;
+    }
+
+    internal virtual string CreateMigrationName() 
+        => "Migrations_" + Guid.NewGuid().ToString().Replace("-", "")
+                                                    .Substring(0, 5);
 }

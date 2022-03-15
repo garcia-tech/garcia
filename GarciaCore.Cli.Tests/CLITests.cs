@@ -1,6 +1,5 @@
 using System;
 using System.Text;
-using System.Threading.Tasks;
 using GarciaCore.Cli;
 using GarciaCore.CodeGenerator;
 using GarciaCore.Infrastructure;
