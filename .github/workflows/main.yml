@@ -119,6 +119,24 @@ jobs:
           PROJECT_FILE_PATH: src/GarciaCore.Persistence.Redis/GarciaCore.Persistence.Redis.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
+    - name: Publish GarciaCore.Persistence.EntityFramework.MySql
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: src/GarciaCore.Persistence.EntityFramework.MySql/GarciaCore.Persistence.EntityFramework.MySql.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
+    - name: Publish GarciaCore.Persistence.EntityFramework.PostgreSQL
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: src/GarciaCore.Persistence.EntityFramework.PostgreSQL/GarciaCore.Persistence.EntityFramework.PostgreSQL.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
+    - name: Publish GarciaCore.Persistence.EntityFramework.SqlServer
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: src/GarciaCore.Persistence.EntityFramework.SqlServer/GarciaCore.Persistence.EntityFramework.SqlServer.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
     - name: Publish GarciaCore
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
