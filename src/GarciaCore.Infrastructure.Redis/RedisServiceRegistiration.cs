@@ -19,6 +19,7 @@ namespace GarciaCore.Infrastructure.Redis
                 o.CacheExpirationInMinutes = options.Value.CacheExpirationInMinutes;
                 o.Host = options.Value.Host;
                 o.Port = options.Value.Port;
+                o.Password = options.Value.Password;
             });
 
             services.AddSingleton<RedisConnectionFactory>();
@@ -32,6 +33,7 @@ namespace GarciaCore.Infrastructure.Redis
                 o.CacheExpirationInMinutes = Convert.ToInt32(configuration.GetSection(o.GetNodeValue() + ":" + o.GetCacheExpirationInMinutesKeyValue()).Value);
                 o.Host = configuration.GetSection(o.GetNodeValue() + ":" + o.GetHostKeyValue()).Value;
                 o.Port = configuration.GetSection(o.GetNodeValue() + ":" + o.GetPortKeyValue()).Value;
+                o.Password = configuration.GetSection(o.GetNodeValue() + ":" + o.GetPasswordKeyValue()).Value;
             });
 
             services.AddSingleton<RedisConnectionFactory>();
