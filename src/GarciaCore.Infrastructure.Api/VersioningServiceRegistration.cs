@@ -5,8 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using GarciaCore.Application;
 using GarciaCore.Infrastructure.Api.Providers;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.Extensions.Options;
-using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace GarciaCore.Infrastructure.Api
 {
