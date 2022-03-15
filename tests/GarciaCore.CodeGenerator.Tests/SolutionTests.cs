@@ -113,7 +113,7 @@ namespace GarciaCore.CodeGenerator.Tests
             var result = await _solutionService.CreateSampleSolution2Async();
             result.ShouldNotBeNull();
             result.Projects.ShouldNotBeNull();
-            var json = JsonSerializer.Serialize(result, new JsonSerializerOptions() { WriteIndented = true});
+            var json = JsonSerializer.Serialize(result, new JsonSerializerOptions() { WriteIndented = true });
             _output.WriteLine(json);
 
             var solution = await _solutionService.CreateSolutionAsync(json);
@@ -190,6 +190,8 @@ namespace GarciaCore.CodeGenerator.Tests
                 item.Code.ShouldNotBeNullOrEmpty();
                 _output.WriteLine($"// Folder: {item.Folder}, File: {item.File},  Generator: {item.Generator.GetType().Name}");
                 _output.WriteLine(item.Code);
+                Directory.CreateDirectory(item.Folder);
+                await File.WriteAllTextAsync($"{item.Folder}\\{item.File}", item.Code);
             }
 
             foreach (var item in result)
