@@ -10,6 +10,7 @@
       <None Remove="CQRSApplicationCreateCommandTemplate.tt" />
       <None Remove="CQRSApplicationDeleteCommandHandlerTemplate.tt" />
       <None Remove="CQRSApplicationDeleteCommandTemplate.tt" />
+      <None Remove="CQRSApplicationModelTemplate.tt" />
       <None Remove="CQRSApplicationQueryTemplate.tt" />
       <None Remove="CQRSApplicationServiceTemplate.tt" />
       <None Remove="CQRSApplicationUpdateCommandHandlerTemplate.tt" />
@@ -23,6 +24,11 @@
         <AutoGen>True</AutoGen>
         <DesignTime>True</DesignTime>
         <DependentUpon>BaseTemplate.tt</DependentUpon>
+      </Compile>
+      <Compile Update="CQRSApplicationModelTemplate.cs">
+        <DependentUpon>CQRSApplicationModelTemplate.tt</DependentUpon>
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
       </Compile>
       <Compile Update="CQRSApplicationServiceTemplate.cs">
         <DependentUpon>CQRSApplicationServiceTemplate.tt</DependentUpon>
@@ -85,6 +91,10 @@
       <Content Include="BaseTemplate.tt">
         <Generator>TextTemplatingFilePreprocessor</Generator>
         <LastGenOutput>BaseTemplate.cs</LastGenOutput>
+      </Content>
+      <Content Include="CQRSApplicationModelTemplate.tt">
+        <LastGenOutput>CQRSApplicationModelTemplate.cs</LastGenOutput>
+        <Generator>TextTemplatingFilePreprocessor</Generator>
       </Content>
       <Content Include="CQRSApplicationServiceTemplate.tt">
         <LastGenOutput>CQRSApplicationServiceTemplate.cs</LastGenOutput>

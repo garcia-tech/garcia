@@ -4,5 +4,6 @@
     {
         public override string DefaultBaseClass => "";
         protected override string FileNamePostfix => "Service";
+        public override GeneratorType GeneratorType => GeneratorType.Service;
     }
 }

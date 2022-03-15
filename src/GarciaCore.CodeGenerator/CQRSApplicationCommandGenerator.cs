@@ -4,7 +4,7 @@
         where T : BaseTemplate
     {
         public override string DefaultBaseClass => "IRequest<int>";
-
         protected override string FileNamePostfix => "Command";
+        public override GeneratorType GeneratorType => GeneratorType.Command;
     }
 }

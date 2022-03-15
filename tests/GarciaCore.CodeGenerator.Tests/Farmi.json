@@ -11,6 +11,10 @@
       ],
       "Generators": [
         {
+          "Name": "Models",
+          "GeneratorName": "CQRSApplicationModelGenerator"
+        },
+        {
           "Name": "Commands.Create",
           "GeneratorName": "CQRSApplicationCreateCommandGenerator"
         },

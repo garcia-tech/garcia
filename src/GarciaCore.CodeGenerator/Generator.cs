@@ -12,6 +12,7 @@ namespace GarciaCore.CodeGenerator
         protected virtual string FileNamePrefix { get; } = string.Empty;
         protected abstract string FileNamePostfix { get; }
         protected abstract string FileExtension { get; }
+        public abstract GeneratorType GeneratorType { get; }
 
         public virtual List<IGenerator> Dependencies { get; set; } = new List<IGenerator>();
 
@@ -44,7 +45,7 @@ namespace GarciaCore.CodeGenerator
             return innerTypeName;
         }
 
-        public virtual string GetInnerTypeName(ItemProperty property, bool useCollections = true)
+        public virtual string GetInnerTypeName(ItemProperty property, bool useCollections = true, string postfix = "")
         {
             string typeName = "";
 
@@ -103,7 +104,7 @@ namespace GarciaCore.CodeGenerator
                     //}
                     //else
                     {
-                        typeName = name;
+                        typeName = name + postfix;
                     }
                     break;
             }
@@ -122,9 +123,9 @@ namespace GarciaCore.CodeGenerator
                     case ItemPropertyMappingType.List:
                         typeName = "List<" + typeName + ">";
                         break;
-                    case ItemPropertyMappingType.Array:
-                        typeName = typeName + "[]";
-                        break;
+                    //case ItemPropertyMappingType.Array:
+                    //    typeName = typeName + "[]";
+                    //    break;
                 }
             }
 
@@ -164,6 +165,11 @@ namespace GarciaCore.CodeGenerator
         public virtual async Task<string> GetFileName(Item item)
         {
             return $"{FileNamePrefix}{item.Name}{FileNamePostfix}.{FileExtension}";
+        }
+
+        public virtual bool IsApplicationGenerator()
+        {
+            return GeneratorType.HasFlag(GeneratorType.Api) || GeneratorType.HasFlag(GeneratorType.Command) || GeneratorType.HasFlag(GeneratorType.CommandHandler) || GeneratorType.HasFlag(GeneratorType.Query) || GeneratorType.HasFlag(GeneratorType.Service);
         }
     }
 }
