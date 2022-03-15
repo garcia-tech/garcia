@@ -9,10 +9,12 @@ namespace GarciaCore.Infrastructure.Api.Filters
     public class ValidationFilter<T> : IAsyncActionFilter where T : ApiError, new()
     {
         protected T Response { get; } = new();
+
         public ValidationFilter()
         {
             Response.Title = "Request model state is invalid";
         }
+
         public virtual async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             if (context.ModelState.IsValid)
