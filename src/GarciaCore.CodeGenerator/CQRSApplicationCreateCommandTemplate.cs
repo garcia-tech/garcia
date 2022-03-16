@@ -97,7 +97,7 @@ using System.Threading.Tasks;");
 
     foreach (var property in Item.Properties.Where(x => x.Type != ItemPropertyType.Class || x.MappingType == ItemPropertyMappingType.List))
 	{
-        string innerTypeName = generator.GetInnerTypeName(property);
+        string innerTypeName = generator.GetInnerTypeName(property, postfix: "Model");
 
             
             #line default
@@ -109,7 +109,7 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write(" ");
+            this.Write("Model ");
             
             #line 30 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToPascalCase()));
@@ -130,7 +130,7 @@ using System.Threading.Tasks;");
 
     foreach (var property in Item.Properties.Where(x => x.Type == ItemPropertyType.Class && x.MappingType != ItemPropertyMappingType.List))
 	{
-        string innerTypeName = generator.GetInnerTypeName(property);
+        string innerTypeName = generator.GetInnerTypeName(property, postfix: "Model");
         var idPostfix = property.Type == ItemPropertyType.Class && property.MappingType != ItemPropertyMappingType.List ? "Id" : string.Empty;
 
             

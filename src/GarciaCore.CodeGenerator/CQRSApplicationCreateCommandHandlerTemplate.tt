@@ -70,7 +70,7 @@ namespace <#= Namespace #>
     }
 #>
 <#
-    foreach (var property in properties)
+    foreach (var property in properties.Where(x => x.MappingType == ItemPropertyMappingType.Property))
     {
 #>
             var <#= property.Name.ToCamelCase() #> = await _<#= property.InnerType.Name.ToCamelCase() #>Repository.GetByIdAsync(request.<#= property.Name #>Id);
@@ -81,6 +81,22 @@ namespace <#= Namespace #>
             }
 
             item.<#= property.Name #> = <#= property.Name.ToCamelCase() #>;
+<#
+    }
+
+    foreach (var property in properties.Where(x => x.MappingType == ItemPropertyMappingType.List))
+    {
+#>
+            
+            foreach (var <#= property.InnerType.Name.ToCamelCase() #> in request.<#= property.Name #>)
+            {
+                var new<#= property.InnerType.Name #> = new <#= property.InnerType.Name #>()
+                {
+                    // TODO
+                };
+
+                item.<#= property.Name #>.Add(new<#= property.InnerType.Name #>);
+            }
 <#
     }
 #>

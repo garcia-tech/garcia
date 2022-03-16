@@ -258,7 +258,7 @@ using System.Threading.Tasks;");
             
             #line 72 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
 
-    foreach (var property in properties)
+    foreach (var property in properties.Where(x => x.MappingType == ItemPropertyMappingType.Property))
     {
 
             
@@ -326,12 +326,67 @@ using System.Threading.Tasks;");
 
     }
 
+    foreach (var property in properties.Where(x => x.MappingType == ItemPropertyMappingType.List))
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("            \r\n            foreach (var ");
+            
+            #line 91 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.InnerType.Name.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write(" in request.");
+            
+            #line 91 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
+            
+            #line default
+            #line hidden
+            this.Write(")\r\n            {\r\n                var new");
+            
+            #line 93 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.InnerType.Name));
+            
+            #line default
+            #line hidden
+            this.Write(" = new ");
+            
+            #line 93 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.InnerType.Name));
+            
+            #line default
+            #line hidden
+            this.Write("()\r\n                {\r\n                    // TODO\r\n                };\r\n\r\n       " +
+                    "         item.");
+            
+            #line 98 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
+            
+            #line default
+            #line hidden
+            this.Write(".Add(new");
+            
+            #line 98 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.InnerType.Name));
+            
+            #line default
+            #line hidden
+            this.Write(");\r\n            }\r\n");
+            
+            #line 100 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
+
+    }
+
             
             #line default
             #line hidden
             this.Write("\r\n            var result = await _");
             
-            #line 88 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
+            #line 104 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
@@ -340,7 +395,7 @@ using System.Threading.Tasks;");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 94 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
+        #line 110 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
 
     protected override Generator CreateGenerator()
 	{

@@ -122,7 +122,7 @@ namespace GarciaCore.CodeGenerator
                                 var baseClass = !string.IsNullOrEmpty(generatorModel.BaseClass) ? generatorModel.BaseClass : generator.DefaultBaseClass;
                                 var @namespace = !string.IsNullOrEmpty(projectModel.Namespace) ? projectModel.Namespace : projectModel.Name;
                                 @namespace = $"{@namespace}.{generatorModel.Name}".TrimEnd('.');
-                                project.AddGenerator(generatorModel.Name, generatorModel.Name, @namespace, baseClass, generator);
+                                project.AddGenerator(generatorModel.Name, generatorModel.Name.Replace('.', '\\'), @namespace, baseClass, generator);
                             }
                         }
                     }

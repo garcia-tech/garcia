@@ -4,5 +4,6 @@
     {
         public override string DefaultBaseClass => "ApiController";
         protected override string FileNamePostfix => "Controller";
+        public override GeneratorType GeneratorType => GeneratorType.Api;
     }
 }

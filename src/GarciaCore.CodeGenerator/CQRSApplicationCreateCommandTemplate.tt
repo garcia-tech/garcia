@@ -25,16 +25,16 @@ namespace <#= Namespace #>
 <#
     foreach (var property in Item.Properties.Where(x => x.Type != ItemPropertyType.Class || x.MappingType == ItemPropertyMappingType.List))
 	{
-        string innerTypeName = generator.GetInnerTypeName(property);
+        string innerTypeName = generator.GetInnerTypeName(property, postfix: "Model");
 #>
-        public <#= innerTypeName #> <#= property.Name.ToPascalCase() #> { get; set; }
+        public <#= innerTypeName #>Model <#= property.Name.ToPascalCase() #> { get; set; }
 <#
     }
 #>
 <#
     foreach (var property in Item.Properties.Where(x => x.Type == ItemPropertyType.Class && x.MappingType != ItemPropertyMappingType.List))
 	{
-        string innerTypeName = generator.GetInnerTypeName(property);
+        string innerTypeName = generator.GetInnerTypeName(property, postfix: "Model");
         var idPostfix = property.Type == ItemPropertyType.Class && property.MappingType != ItemPropertyMappingType.List ? "Id" : string.Empty;
 #>
         public <#= IdTypeName #> <#= property.Name.ToPascalCase() #><#= idPostfix #> { get; set; }

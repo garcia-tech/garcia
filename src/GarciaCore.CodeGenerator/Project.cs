@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using GarciaCore.Application;
 
@@ -53,11 +54,20 @@ namespace GarciaCore.CodeGenerator
         public virtual async Task<List<GenerationResult>> Generate(Item item)
         {
             var generationResults = new List<GenerationResult>();
-
-            foreach (var generator in Generators)
+            
+            foreach (var generator in Generators.Where(x => !x.Generator.IsApplicationGenerator()))
             {
                 var generationResult = await generator.Generate(item);
                 generationResults.Add(generationResult);
+            }
+
+            if (item.AddApplication)
+            {
+                foreach (var generator in Generators.Where(x => x.Generator.IsApplicationGenerator()))
+                {
+                    var generationResult = await generator.Generate(item);
+                    generationResults.Add(generationResult);
+                }
             }
 
             return generationResults;

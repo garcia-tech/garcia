@@ -8,6 +8,7 @@ namespace GarciaCore.CodeGenerator
         public List<ItemProperty> Properties { get; set; } = new List<ItemProperty>();
         public bool IsEnum { get; set; }
         public IdType IdType { get; set; }
+        public bool AddApplication { get; set; }
 
         public override string ToString()
         {
