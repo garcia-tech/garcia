@@ -278,6 +278,49 @@ namespace GarciaCore.Application
                 return Value;
             }
         }
+
+        public static TDestination BasicMap<TDestination, TSource>(TSource source) where TSource : class
+        {
+            if (source is null)
+            {
+                return default;
+            }
+
+            var dest = Activator.CreateInstance<TDestination>();
+            var sourceProps = source!.GetType().GetProperties();
+
+            foreach (var t in sourceProps)
+            {
+                if (t.GetValue(source) == null) continue;
+
+                var propName = t.Name;
+
+                dest!.GetType().GetProperty(propName)?.SetValue(dest, t.GetValue(source));
+            }
+
+            return dest;
+        }
+
+        public static TDestination BasicMap<TDestination, TSource>(TDestination destination, TSource source) where TSource : class
+        {
+            if (destination is null || source is null)
+            {
+                return default;
+            }
+
+            var sourceProps = source!.GetType().GetProperties();
+
+            foreach (var t in sourceProps)
+            {
+                if (t.GetValue(source) == null) continue;
+
+                var propName = t.Name;
+
+                destination!.GetType().GetProperty(propName)?.SetValue(destination, t.GetValue(source));
+            }
+
+            return destination;
+        }
     }
 
     public enum HashAlgorithm
