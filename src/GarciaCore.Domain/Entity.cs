@@ -19,7 +19,7 @@ namespace GarciaCore.Domain
         public virtual DateTimeOffset DeletedOn { get; set; }
         [JsonIgnore]
         public virtual bool Deleted { get; set; }
-        private List<INotification> _domainEvents = new List<INotification>();
+        private List<INotification> _domainEvents;
         [JsonIgnore]
         public IReadOnlyCollection<INotification> DomainEvents => _domainEvents?.AsReadOnly();
 
@@ -31,7 +31,6 @@ namespace GarciaCore.Domain
 
         public void AddDomainEvent(INotification eventItem)
         {
-            _domainEvents = _domainEvents ?? new List<INotification>();
             _domainEvents.Add(eventItem);
         }
 
@@ -49,6 +48,8 @@ namespace GarciaCore.Domain
         {
             if (Active != isActive)
             {
+                // Question
+                
                 Active = isActive;
                 AddIsActiveChangedDomainEvent(isActive);
             }
