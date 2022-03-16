@@ -11,7 +11,7 @@ namespace GarciaCore.CodeGenerator
     {
         public async Task<Solution> CreateSampleSolutionAsync()
         {
-            var solution = new Solution("TestSolution", "c:\\files\\garciacoretest");
+            var solution = new Solution("TestSolution", "/Users/gokhan/Documents");
 
             var infrastructure = new Project("TestSolution.Infrastructure", ProjectType.ClassLibrary);
             infrastructure.AddGenerator("Repository", "Repository", new RepositoryGenerator());
@@ -46,7 +46,7 @@ namespace GarciaCore.CodeGenerator
             var model = new SolutionModel()
             {
                 Name = "TestSolution",
-                Folder = "c:\\files\\garciacoretest",
+                Folder = "/Users/gokhan/Documents",
                 Projects = new List<ProjectModel>()
                 {
                     new ProjectModel()

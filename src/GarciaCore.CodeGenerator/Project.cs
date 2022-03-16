@@ -83,7 +83,8 @@ namespace GarciaCore.CodeGenerator
     {
         ClassLibrary = 0,
         WebApi,
-        Console
+        Console,
+        Test
     }
 
     public class SolutionModel
