@@ -27,7 +27,7 @@ namespace <#= Namespace #>
         }
 
         [HttpPost(Name = "Create<#= Item.Name #>")]
-        public async Task<ActionResult<<#= Item.Name #>>> Create<#= Item.Name #>Command(Create<#= Item.Name #>Command command)
+        public async Task<ActionResult<Create<#= Item.Name #>Command>> Create<#= Item.Name #>Command(Create<#= Item.Name #>Command command)
         {
             var response = await _mediator.Send(command);
 
@@ -40,7 +40,7 @@ namespace <#= Namespace #>
         }
 
         [HttpPut(Name = "Update<#= Item.Name #>")]
-        public async Task<ActionResult<<#= Item.Name #>>> Update<#= Item.Name #>Command(Update<#= Item.Name #>Command command)
+        public async Task<ActionResult<Update<#= Item.Name #>Command> Update<#= Item.Name #>Command(Update<#= Item.Name #>Command command)
         {
             var response = await _mediator.Send(command);
 
@@ -53,7 +53,7 @@ namespace <#= Namespace #>
         }
 
         [HttpDelete("{id}", Name = "Delete<#= Item.Name #>")]
-        public async Task<ActionResult<<#= Item.Name #>>> Delete<#= Item.Name #>Command(Delete<#= Item.Name #>Command command)
+        public async Task<ActionResult<Delete<#= Item.Name #>Command>> Delete<#= Item.Name #>Command(Delete<#= Item.Name #>Command command)
         {
             var response = await _mediator.Send(command);
 
@@ -66,14 +66,14 @@ namespace <#= Namespace #>
         }
 
         [HttpGet("api/<#= Item.Name #>", Name = "GetAll<#= Item.Name #>s")]
-        public async Task<List<<#= Item.Name #>>> GetAll<#= Item.Name #>s()
+        public async Task<List<<#= Item.Name #><#= GeneratorRepository.ApplicationModelDtoPostfix #>>> GetAll<#= Item.Name #>s()
         {
             var items = await _<#= Item.Name.ToCamelCase() #>Service.GetAllAsync();
             return Ok(items);
         }
 
         [HttpGet("api/<#= Item.Name #>/{id}", Name = "Get<#= Item.Name #>")]
-        public async Task<<#= Item.Name #>> Get<#= Item.Name #>(<#= IdTypeName #> id)
+        public async Task<<#= Item.Name #><#= GeneratorRepository.ApplicationModelDtoPostfix #>> Get<#= Item.Name #>(<#= IdTypeName #> id)
         {
             var item = await _<#= Item.Name.ToCamelCase() #>Service.GetAsync(id);
 
@@ -87,7 +87,7 @@ namespace <#= Namespace #>
 <#
         foreach (var property in Item.Properties.Where(x => x.MappingType == ItemPropertyMappingType.List && x.Type == ItemPropertyType.Class))
 	    {
-            string innerTypeName = this.generator.GetInnerTypeName(property);
+            string innerTypeName = this.generator.GetInnerTypeName(property, postfix: GeneratorRepository.ApplicationModelDtoPostfix);
 #>
         
         [HttpGet("api/<#= Item.Name #>/{id}/<#= property.Name.ToPascalCase() #>")]

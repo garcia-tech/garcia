@@ -13,5 +13,6 @@ namespace GarciaCore.CodeGenerator
         Query = 32,
         Service = 64,
         Model = 128,
+        MappingProfile = 256,
     }
 }

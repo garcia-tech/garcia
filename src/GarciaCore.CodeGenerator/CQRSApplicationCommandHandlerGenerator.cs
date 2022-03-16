@@ -4,7 +4,6 @@
       where T : BaseTemplate
     {
         public override string DefaultBaseClass => string.Empty;
-
         protected override string FileNamePostfix => "CommandHandler";
         public override GeneratorType GeneratorType => GeneratorType.CommandHandler;
     }

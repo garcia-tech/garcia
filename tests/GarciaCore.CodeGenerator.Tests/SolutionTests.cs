@@ -185,6 +185,14 @@ namespace GarciaCore.CodeGenerator.Tests
 
             foreach (var item in result)
             {
+                var allMessages = item.AllMessages;
+
+                if (!string.IsNullOrEmpty(allMessages))
+                    _output.WriteLine($"// Messages: {allMessages}");
+            }
+
+            foreach (var item in result)
+            {
                 item.Folder.ShouldNotBeNullOrEmpty();
                 item.Generator.ShouldNotBeNull();
                 item.Code.ShouldNotBeNullOrEmpty();
@@ -192,14 +200,6 @@ namespace GarciaCore.CodeGenerator.Tests
                 _output.WriteLine(item.Code);
                 Directory.CreateDirectory(item.Folder);
                 await File.WriteAllTextAsync($"{item.Folder}\\{item.File}", item.Code);
-            }
-
-            foreach (var item in result)
-            {
-                var allMessages = item.AllMessages;
-
-                if (!string.IsNullOrEmpty(allMessages))
-                    _output.WriteLine($"// Messages: {allMessages}");
             }
         }
     }

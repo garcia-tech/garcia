@@ -31,9 +31,7 @@ namespace GarciaCore.CodeGenerator
         /// </summary>
         public override string TransformText()
         {
-            this.Write("/*\r\n\tThis file was generated automatically by Garcia Framework. \r\n\tDo not edit ma" +
-                    "nually. \r\n\tAdd a new partial class with the same name if you want to add extra f" +
-                    "unctionality.\r\n*/");
+            this.Write("/*\r\n\tThis file was generated automatically by Garcia Framework.\r\n*/");
             this.Write("\r\n");
             this.Write(@"using System;
 using System.Collections.Generic;
@@ -214,14 +212,14 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write("\")]\r\n        public async Task<ActionResult<");
+            this.Write("\")]\r\n        public async Task<ActionResult<Create");
             
             #line 30 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
-            this.Write(">> Create");
+            this.Write("Command>> Create");
             
             #line 30 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
@@ -258,14 +256,14 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write("\")]\r\n        public async Task<ActionResult<");
+            this.Write("\")]\r\n        public async Task<ActionResult<Update");
             
             #line 43 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
-            this.Write(">> Update");
+            this.Write("Command> Update");
             
             #line 43 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
@@ -303,14 +301,14 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write("\")]\r\n        public async Task<ActionResult<");
+            this.Write("\")]\r\n        public async Task<ActionResult<Delete");
             
             #line 56 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
-            this.Write(">> Delete");
+            this.Write("Command>> Delete");
             
             #line 56 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
@@ -357,6 +355,12 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
+            
+            #line 69 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorRepository.ApplicationModelDtoPostfix));
+            
+            #line default
+            #line hidden
             this.Write(">> GetAll");
             
             #line 69 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
@@ -393,6 +397,12 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
+            
+            #line 76 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorRepository.ApplicationModelDtoPostfix));
+            
+            #line default
+            #line hidden
             this.Write("> Get");
             
             #line 76 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
@@ -422,7 +432,7 @@ using System.Threading.Tasks;");
 
         foreach (var property in Item.Properties.Where(x => x.MappingType == ItemPropertyMappingType.List && x.Type == ItemPropertyType.Class))
 	    {
-            string innerTypeName = this.generator.GetInnerTypeName(property);
+            string innerTypeName = this.generator.GetInnerTypeName(property, postfix: GeneratorRepository.ApplicationModelDtoPostfix);
 
             
             #line default

@@ -75,17 +75,23 @@ namespace GarciaCore.CodeGenerator
 
         public void AddGenerator(string name, string folder, string @namespace, string baseClass, IGenerator generator)
         {
-            this.Generators.Add(new ProjectGenerator(this, name, $"{Folder}\\{folder}".Trim('\\'), $"{Namespace}.{@namespace}".Trim('.'), baseClass, generator));
+            var projectGenerator = new ProjectGenerator(this, name, $"{Folder}\\{folder}".Trim('\\'), $"{Namespace}.{@namespace}".Trim('.'), baseClass, generator);
+            this.Generators.Add(projectGenerator);
+            GeneratorRepository.AddGenerator(projectGenerator.Generator);
         }
 
         public void AddGenerator(string name, string @namespace, string baseClass, IGenerator generator)
         {
-            this.Generators.Add(new ProjectGenerator(this, name, Folder, $"{Namespace}.{@namespace}".Trim('.'), baseClass, generator));
+            var projectGenerator = new ProjectGenerator(this, name, Folder, $"{Namespace}.{@namespace}".Trim('.'), baseClass, generator);
+            this.Generators.Add(projectGenerator);
+            GeneratorRepository.AddGenerator(projectGenerator.Generator);
         }
 
         public void AddGenerator(string name, string folder, IGenerator generator)
         {
-            this.Generators.Add(new ProjectGenerator(this, name, $"{Folder}\\{folder}".Trim('\\'), $"{Namespace}.{folder.Replace("\\", ".")}".Trim('.'), generator.DefaultBaseClass, generator));
+            var projectGenerator = new ProjectGenerator(this, name, $"{Folder}\\{folder}".Trim('\\'), $"{Namespace}.{folder.Replace("\\", ".")}".Trim('.'), generator.DefaultBaseClass, generator);
+            this.Generators.Add(projectGenerator);
+            GeneratorRepository.AddGenerator(projectGenerator.Generator);
         }
     }
 

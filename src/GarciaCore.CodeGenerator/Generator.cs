@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace GarciaCore.CodeGenerator
 {
+
     public abstract class Generator : IGenerator
     {
         protected ItemPropertyType[] notNullablePropertyTypes = new ItemPropertyType[] { ItemPropertyType.String, ItemPropertyType.Class, ItemPropertyType.Unknown };
@@ -123,9 +124,9 @@ namespace GarciaCore.CodeGenerator
                     case ItemPropertyMappingType.List:
                         typeName = "List<" + typeName + ">";
                         break;
-                    //case ItemPropertyMappingType.Array:
-                    //    typeName = typeName + "[]";
-                    //    break;
+                        //case ItemPropertyMappingType.Array:
+                        //    typeName = typeName + "[]";
+                        //    break;
                 }
             }
 

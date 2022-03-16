@@ -31,9 +31,7 @@ namespace GarciaCore.CodeGenerator
         /// </summary>
         public override string TransformText()
         {
-            this.Write("/*\r\n\tThis file was generated automatically by Garcia Framework. \r\n\tDo not edit ma" +
-                    "nually. \r\n\tAdd a new partial class with the same name if you want to add extra f" +
-                    "unctionality.\r\n*/");
+            this.Write("/*\r\n\tThis file was generated automatically by Garcia Framework.\r\n*/");
             this.Write("\r\n");
             this.Write(@"using System;
 using System.Collections.Generic;
@@ -99,7 +97,7 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write("Command, int>\r\n    {\r\n        private I");
+            this.Write("Command, int>\r\n    {\r\n        private readonly I");
             
             #line 38 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
@@ -123,7 +121,7 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write("        private I");
+            this.Write("        private readonly I");
             
             #line 43 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(repository));
@@ -185,7 +183,7 @@ using System.Threading.Tasks;");
                     " item = await _");
             
             #line 55 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
             
             #line default
             #line hidden
@@ -201,7 +199,7 @@ using System.Threading.Tasks;");
                     "ed = true;\r\n            var result = await _");
             
             #line 63 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
             
             #line default
             #line hidden

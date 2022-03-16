@@ -9,6 +9,7 @@
 <#@ include file="IncludeWarning.t4" #>
 <#@ include file="IncludeUsings.t4" #>
 using MediatR;
+using AutoMapper;
 <#= GetUsings() #>
 <#
     var repositoryString = $"I{Item.Name}Repository {Item.Name.ToCamelCase()}Repository";
@@ -33,9 +34,10 @@ using MediatR;
 
 namespace <#= Namespace #>
 {
-    public partial class Delete<#= Item.Name #>CommandHandler : IRequestHandler<Delete<#= Item.Name #>Command, int>
+    public partial class Update<#= Item.Name #>CommandHandler : IRequestHandler<Update<#= Item.Name #>Command, int>
     {
         private readonly I<#= Item.Name #>Repository _<#= Item.Name.ToCamelCase() #>Repository;
+        private readonly IMapper _mapper;
 <#
     foreach (var repository in repositories)
     {
@@ -45,12 +47,21 @@ namespace <#= Namespace #>
     }
 #>
 
-        public Delete<#= Item.Name #>CommandHandler(<#= repositoryString #>)
+        public Update<#= Item.Name #>CommandHandler(<#= repositoryString #>, IMapper mapper)
         {
             _<#= Item.Name.ToCamelCase() #>Repository =  <#= Item.Name.ToCamelCase() #>Repository;
+            _mapper = mapper;
+<#
+    foreach (var repository in repositories)
+    {
+#>
+            _<#= repository.ToCamelCase() #>Repository =  <#= repository.ToCamelCase() #>Repository;
+<#
+    }
+#>
         }
 
-        public async Task<int> Handle(Delete<#= Item.Name #>Command request, CancellationToken cancellationToken)
+        public async Task<int> Handle(Update<#= Item.Name #>Command request, CancellationToken cancellationToken)
         {
             var item = await _<#= Item.Name.ToCamelCase() #>Repository.GetByIdAsync(request.Id);
 
@@ -58,8 +69,42 @@ namespace <#= Namespace #>
             {
                 throw new DomainNotFoundException($"<#= Item.Name #> {request.Id} not found");
             }
+
+<#
+    foreach (var property in Item.Properties.Where(x => x.Type != ItemPropertyType.Class))
+    {
+#>
+            item.<#= property.Name #> = request.<#= property.Name #>;
+<#
+    }
+#>
+<#
+    foreach (var property in properties.Where(x => x.MappingType == ItemPropertyMappingType.Property))
+    {
+#>
+            var <#= property.Name.ToCamelCase() #> = await _<#= property.InnerType.Name.ToCamelCase() #>Repository.GetByIdAsync(request.<#= property.Name #>Id);
+
+            if (<#= property.Name.ToCamelCase() #> == null)
+            {
+                throw new DomainNotFoundException($"<#= property.InnerType.Name #> {request.<#= property.Name #>Id} not found");
+            }
+
+            item.<#= property.Name #> = <#= property.Name.ToCamelCase() #>;
+<#
+    }
+
+    foreach (var property in properties.Where(x => x.MappingType == ItemPropertyMappingType.List))
+    {
+#>
             
-            item.IsDeleted = true;
+            foreach (var <#= property.InnerType.Name.ToCamelCase() #> in request.<#= property.Name #>)
+            {
+                // TODO
+            }
+<#
+    }
+#>
+            
             var result = await _<#= Item.Name.ToCamelCase() #>Repository.SaveAsync(item);
             return result;
         }
@@ -69,6 +114,6 @@ namespace <#= Namespace #>
 <#+
     protected override Generator CreateGenerator()
 	{
-		return new CQRSApplicationDeleteCommandHandlerGenerator();
+		return new CQRSApplicationUpdateCommandHandlerGenerator();
 	}
 #>

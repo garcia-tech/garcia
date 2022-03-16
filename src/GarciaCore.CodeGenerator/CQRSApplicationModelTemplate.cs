@@ -31,9 +31,7 @@ namespace GarciaCore.CodeGenerator
         /// </summary>
         public override string TransformText()
         {
-            this.Write("/*\r\n\tThis file was generated automatically by Garcia Framework. \r\n\tDo not edit ma" +
-                    "nually. \r\n\tAdd a new partial class with the same name if you want to add extra f" +
-                    "unctionality.\r\n*/");
+            this.Write("/*\r\n\tThis file was generated automatically by Garcia Framework.\r\n*/");
             this.Write("\r\n");
             this.Write(@"using System;
 using System.Collections.Generic;
@@ -90,7 +88,7 @@ using System.Threading.Tasks;");
 
     foreach (var property in Item.Properties.Where(x => x.Type != ItemPropertyType.Class || x.MappingType == ItemPropertyMappingType.List))
 	{
-        string innerTypeName = generator.GetInnerTypeName(property, postfix: "Model");
+        string innerTypeName = generator.GetInnerTypeName(property, postfix: GeneratorRepository.ApplicationModelDtoPostfix);
 
             
             #line default
