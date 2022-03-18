@@ -54,8 +54,17 @@ namespace GarciaCore.Test.Utils
                 });
 
             repository.Setup(x => x.GetByIdAsync(testId))
-                .ReturnsAsync(mockDataSet.FirstOrDefault(x => x.Id.Equals(testId)));
-            repository.Setup(x => x.GetAllAsync()).ReturnsAsync(mockDataSet);
+                .ReturnsAsync(() => 
+                {
+                    return mockDataSet.FirstOrDefault(x => x.Id.Equals(testId));
+                });
+
+            repository.Setup(x => x.GetAllAsync())
+                .ReturnsAsync(() =>
+                {
+                    return mockDataSet;
+                });
+
             return repository;
         }
 
