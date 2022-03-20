@@ -9,6 +9,7 @@
 <#@ include file="IncludeWarning.t4" #>
 <#@ include file="IncludeUsings.t4" #>
 using GarciaCore.Application;
+using GarciaCore.Application.Contracts.Persistence;
 using MediatR;
 using AutoMapper;
 <#= GetUsings() #>
@@ -65,7 +66,7 @@ namespace <#= Namespace #>
         public async Task<BaseResponse<<#= IdTypeName #>>> Handle(Create<#= Item.Name #>Command request, CancellationToken cancellationToken)
         {
             var item = _mapper.Map<<#= Item.Name #>>(request);
-            var result = await _<#= Item.Name.ToCamelCase() #>Repository.SaveAsync(item);
+            var result = await _<#= Item.Name.ToCamelCase() #>Repository.AddAsync(item);
             
             if (result > 0)
             {

@@ -9,6 +9,7 @@
 <#@ include file="IncludeWarning.t4" #>
 <#@ include file="IncludeUsings.t4" #>
 using GarciaCore.Application;
+using GarciaCore.Application.Contracts.Persistence;
 using MediatR;
 <#= GetUsings() #>
 <#
@@ -34,7 +35,7 @@ using MediatR;
 
 namespace <#= Namespace #>
 {
-    public partial class Delete<#= Item.Name #>CommandHandler : IRequestHandler<Delete<#= Item.Name #>Command, int>
+    public partial class Delete<#= Item.Name #>CommandHandler : IRequestHandler<Delete<#= Item.Name #>Command, BaseResponse<<#= IdTypeName #>>>
     {
         private readonly I<#= GetRepositoryType(Item.Name) #> _<#= Item.Name.ToCamelCase() #>Repository;
 <#
@@ -68,12 +69,11 @@ namespace <#= Namespace #>
                 throw new DomainNotFoundException($"<#= Item.Name #> {request.Id} not found");
             }
             
-            item.IsDeleted = true;
-            var result = await _<#= Item.Name.ToCamelCase() #>Repository.SaveAsync(item);
+            var result = await _<#= Item.Name.ToCamelCase() #>Repository.DeleteAsync(item);
             
             if (result > 0)
             {
-                return new BaseResponse<<#= IdTypeName #>>(item.Id, System.Net.HttpStatusCode.Created);
+                return new BaseResponse<<#= IdTypeName #>>(item.Id, System.Net.HttpStatusCode.OK);
             }
 
             return new BaseResponse<<#= IdTypeName #>>(item.Id, new ApiError("Something went wrong!", "<#= Item.Name #> cannot be deleted."));

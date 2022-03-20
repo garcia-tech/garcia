@@ -32,50 +32,32 @@ namespace <#= Namespace #>
         public async Task<ActionResult<BaseResponse<Create<#= Item.Name #>Command>>> Create<#= Item.Name #>Command(Create<#= Item.Name #>Command command)
         {
             var response = await _mediator.Send(command);
-
-            if (response.IsValidResponse)
-            {
-                return StatusCode(response.StatusCode, response.Error);
-            }
-
-            return Created($"/<#= Item.Name #>s/{command.Id}", response.Result);
+            return StatusCode(response.StatusCode, response.Result);
         }
 
         [HttpPut(Name = "Update<#= Item.Name #>")]
         public async Task<ActionResult<BaseResponse<Update<#= Item.Name #>Command>>> Update<#= Item.Name #>Command(Update<#= Item.Name #>Command command)
         {
             var response = await _mediator.Send(command);
-
-            if (response.IsValidResponse)
-            {
-                return StatusCode(response.StatusCode, response.Error);
-            }
-
-            return Created($"/<#= Item.Name #>s/{command.Id}", response.Result);
+            return StatusCode(response.StatusCode, response.Result);
         }
 
         [HttpDelete("{id}", Name = "Delete<#= Item.Name #>")]
         public async Task<ActionResult<BaseResponse<Delete<#= Item.Name #>Command>>> Delete<#= Item.Name #>Command(Delete<#= Item.Name #>Command command)
         {
             var response = await _mediator.Send(command);
-
-            if (response.IsValidResponse)
-            {
-                return StatusCode(response.StatusCode, response.Error);
-            }
-
-            return NoContent();
+            return StatusCode(response.StatusCode, response.Result);
         }
 
         [HttpGet("api/<#= Item.Name #>", Name = "GetAll<#= Item.Name #>s")]
-        public async Task<List<<#= Item.Name #><#= GeneratorRepository.ApplicationModelDtoPostfix #>>> GetAll<#= Item.Name #>s()
+        public async Task<ActionResult<List<<#= Item.Name #><#= GeneratorRepository.ApplicationModelDtoPostfix #>>>> GetAll<#= Item.Name #>s()
         {
             var items = await _<#= Item.Name.ToCamelCase() #>Service.GetAllAsync();
             return Ok(items);
         }
 
         [HttpGet("api/<#= Item.Name #>/{id}", Name = "Get<#= Item.Name #>")]
-        public async Task<<#= Item.Name #><#= GeneratorRepository.ApplicationModelDtoPostfix #>> Get<#= Item.Name #>(<#= IdTypeName #> id)
+        public async Task<ActionResult<<#= Item.Name #><#= GeneratorRepository.ApplicationModelDtoPostfix #>>> Get<#= Item.Name #>(<#= IdTypeName #> id)
         {
             var item = await _<#= Item.Name.ToCamelCase() #>Service.GetAsync(id);
 
@@ -93,7 +75,7 @@ namespace <#= Namespace #>
 #>
         
         [HttpGet("api/<#= Item.Name #>/{id}/<#= property.Name.ToPascalCase() #>")]
-        public async Task<<#= innerTypeName #>> Get<#= property.Name.ToPascalCase() #>(<#= IdTypeName #> id)
+        public async Task<ActionResult<<#= innerTypeName #>>> Get<#= property.Name.ToPascalCase() #>(<#= IdTypeName #> id)
         {
             var item = await _<#= Item.Name.ToCamelCase() #>Service.GetAsync(id);
 
