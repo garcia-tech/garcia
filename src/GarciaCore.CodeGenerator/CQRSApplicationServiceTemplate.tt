@@ -29,15 +29,15 @@ namespace <#= Namespace #>
     public partial class <#= Item.Name #>Service : I<#= Item.Name #>Service
     {
         private Settings _settings;
-        private I<#= Item.Name #>Repository _<#= Item.Name.ToCamelCase() #>Repository;
+        private I<#= GetRepositoryType(Item.Name) #> _<#= Item.Name.ToCamelCase() #>Repository;
         private readonly IMapper _mapper;
 
 
-        public <#= Item.Name #>Service(IOptions<Settings> settings, <#= Item.Name #>Repository <#= Item.Name #>Repository, IMapper mapper)
+        public <#= Item.Name #>Service(IOptions<Settings> settings, IMapper mapper, I<#= GetRepositoryType(Item.Name) #> <#= Item.Name #>Repository)
         {
             _settings = settings.Value;
-            _<#= Item.Name.ToCamelCase() #>Repository = <#= Item.Name.ToCamelCase() #>Repository;
             _mapper = mapper;
+            _<#= Item.Name.ToCamelCase() #>Repository = <#= Item.Name.ToCamelCase() #>Repository;
         }
 
 <#

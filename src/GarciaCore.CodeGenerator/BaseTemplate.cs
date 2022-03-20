@@ -88,6 +88,11 @@ public string GetUsings()
     return text.TrimEnd('\n');
 }
 
+protected string GetRepositoryType(string repository)
+{
+    return GeneratorRepository.ContainsGenerator(GeneratorType.Repository) ? repository + "Repository" : "AsyncRepository<" + repository + ">";
+}
+
         
         #line default
         #line hidden

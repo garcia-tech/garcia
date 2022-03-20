@@ -9,7 +9,6 @@
 <#@ include file="IncludeWarning.t4" #>
 <#@ include file="IncludeUsings.t4" #>  
 <#= GetUsings() #>
-
 namespace <#= Namespace #>
 {
     public partial class <#= Item.Name #> : <#= BaseClass #>
@@ -25,7 +24,6 @@ namespace <#= Namespace #>
 #>
     }
 }
-
 <#+
     protected override Generator CreateGenerator()
 	{

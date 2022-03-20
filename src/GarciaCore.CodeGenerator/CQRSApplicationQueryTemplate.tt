@@ -8,7 +8,7 @@
 <#@ import namespace="GarciaCore.Application" #>
 <#@ include file="IncludeWarning.t4" #>
 <#@ include file="IncludeUsings.t4" #>
-using MediatR;
+using AutoMapper;
 <#= GetUsings() #>
 
 namespace <#= Namespace #>
@@ -20,11 +20,12 @@ namespace <#= Namespace #>
     public partial class <#= Item.Name #>Query : I<#= Item.Name #>Query
     {
         private Settings _settings;
-        private I<#= Item.Name #>Repository _<#= Item.Name.ToCamelCase() #>Repository;
+        private I<#= GetRepositoryType(Item.Name) #> _<#= Item.Name.ToCamelCase() #>Repository;
 
-        public <#= Item.Name #>Query(IOptions<Settings> settings, <#= Item.Name #>Repository <#= Item.Name #>Repository)
+        public <#= Item.Name #>Query(IOptions<Settings> settings, IMapper mapper, I<#= GetRepositoryType(Item.Name) #> <#= Item.Name #>Repository)
         {
             _settings = settings.Value;
+            _mapper = mapper;
             _<#= Item.Name.ToCamelCase() #>Repository = <#= Item.Name.ToCamelCase() #>Repository;
         }
     }

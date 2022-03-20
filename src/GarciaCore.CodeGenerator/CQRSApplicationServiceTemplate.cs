@@ -122,11 +122,11 @@ using System.Threading.Tasks;");
             this.Write("Service\r\n    {\r\n        private Settings _settings;\r\n        private I");
             
             #line 32 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
+            this.Write(this.ToStringHelper.ToStringWithCulture(GetRepositoryType(Item.Name)));
             
             #line default
             #line hidden
-            this.Write("Repository _");
+            this.Write(" _");
             
             #line 32 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
@@ -140,36 +140,36 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write("Service(IOptions<Settings> settings, ");
+            this.Write("Service(IOptions<Settings> settings, IMapper mapper, I");
+            
+            #line 36 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(GetRepositoryType(Item.Name)));
+            
+            #line default
+            #line hidden
+            this.Write(" ");
             
             #line 36 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
-            this.Write("Repository ");
+            this.Write("Repository)\r\n        {\r\n            _settings = settings.Value;\r\n            _map" +
+                    "per = mapper;\r\n            _");
             
-            #line 36 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
-            
-            #line default
-            #line hidden
-            this.Write("Repository, IMapper mapper)\r\n        {\r\n            _settings = settings.Value;\r\n" +
-                    "            _");
-            
-            #line 39 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
+            #line 40 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Repository = ");
             
-            #line 39 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
+            #line 40 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
             
             #line default
             #line hidden
-            this.Write("Repository;\r\n            _mapper = mapper;\r\n        }\r\n\r\n");
+            this.Write("Repository;\r\n        }\r\n\r\n");
             
             #line 43 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
 

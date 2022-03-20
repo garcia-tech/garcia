@@ -12,7 +12,7 @@ using MediatR;
 using AutoMapper;
 <#= GetUsings() #>
 <#
-    var repositoryString = $"I{Item.Name}Repository {Item.Name.ToCamelCase()}Repository";
+    var repositoryString = $"I{GetRepositoryType(Item.Name)} {Item.Name.ToCamelCase()}Repository";
     var properties = Item.Properties.Where(x => x.Type == ItemPropertyType.Class);
     var repositories = new List<string>();
 
@@ -26,7 +26,7 @@ using AutoMapper;
 
     foreach (var repository in repositories)
     {
-        repositoryString += $", I{repository}Repository {repository.ToCamelCase()}Repository";
+        repositoryString += $", I{GetRepositoryType(repository)} {repository.ToCamelCase()}Repository";
     }
 
     repositoryString = repositoryString.Trim().TrimEnd(',');
@@ -36,21 +36,21 @@ namespace <#= Namespace #>
 {
     public partial class Update<#= Item.Name #>CommandHandler : IRequestHandler<Update<#= Item.Name #>Command, BaseResponse<<#= IdTypeName #>>>
     {
-        private readonly I<#= Item.Name #>Repository _<#= Item.Name.ToCamelCase() #>Repository;
         private readonly IMapper _mapper;
+        private readonly I<#= GetRepositoryType(Item.Name) #> _<#= Item.Name.ToCamelCase() #>Repository;
 <#
     foreach (var repository in repositories)
     {
 #>
-        private readonly I<#= repository #>Repository _<#= repository.ToCamelCase() #>Repository;
+        private readonly I<#= GetRepositoryType(repository) #> _<#= repository.ToCamelCase() #>Repository;
 <#
     }
 #>
 
-        public Update<#= Item.Name #>CommandHandler(<#= repositoryString #>, IMapper mapper)
+        public Update<#= Item.Name #>CommandHandler(IMapper mapper, <#= repositoryString #>)
         {
-            _<#= Item.Name.ToCamelCase() #>Repository = <#= Item.Name.ToCamelCase() #>Repository;
             _mapper = mapper;
+            _<#= Item.Name.ToCamelCase() #>Repository = <#= Item.Name.ToCamelCase() #>Repository;
 <#
     foreach (var repository in repositories)
     {
