@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace GarciaCore.CodeGenerator
 {
@@ -8,5 +9,6 @@ namespace GarciaCore.CodeGenerator
         protected override string FileNamePostfix => "ApplicationServiceRegistration";
         public override GeneratorType GeneratorType => GeneratorType.ApplicationServiceRegistration;
         public override bool IsItemLevel => false;
+        public override List<string> GarciaCoreDependencies => new List<string>() { };
     }
 }

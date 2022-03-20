@@ -23,6 +23,7 @@ namespace GarciaCore.CodeGenerator
 
         public virtual List<string> Usings { get; set; }
         public virtual bool IsItemLevel { get; } = true;
+        public abstract List<string> GarciaCoreDependencies { get; }
 
         public virtual async Task<string> Generate<T>(Item item, string @namespace, string baseClass) where T : BaseTemplate
         {
@@ -32,6 +33,23 @@ namespace GarciaCore.CodeGenerator
             template.Includes = baseClass;
             template.Namespace = @namespace;
             template.Usings = Usings;
+
+            if (template.Usings == null)
+            {
+                template.Usings = new List<string>();
+            }
+
+            //if (GarciaCoreDependencies != null)
+            //{
+            //    foreach (var dependency in GarciaCoreDependencies)
+            //    {
+            //        if (!template.Usings.Contains(dependency))
+            //        {
+            //            template.Usings.Add(dependency);
+            //        }
+            //    }
+            //}
+
             var text = template.TransformText();
             return text;
         }

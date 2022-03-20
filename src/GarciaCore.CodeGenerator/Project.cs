@@ -35,6 +35,29 @@ namespace GarciaCore.CodeGenerator
         public List<Project> ProjectDependencies { get; set; } = new List<Project>();
         public ProjectType ProjectType { get; set; }
         protected internal Guid Uid { get; set; }
+        public List<string> GarciaCoreDependencies
+        {
+            get
+            {
+                var dependencies = new List<string>();
+
+                if (Generators != null)
+                {
+                    foreach (var generator in Generators.Where(x => x.Generator != null))
+                    {
+                        foreach (var dependency in generator.Generator.GarciaCoreDependencies)
+                        {
+                            if (!dependencies.Contains(dependency))
+                            {
+                                dependencies.Add(dependency);
+                            }
+                        }
+                    }
+                }
+
+                return dependencies;
+            }
+        }
 
         public virtual ValidationResults Validate()
         {
@@ -54,7 +77,7 @@ namespace GarciaCore.CodeGenerator
         public virtual async Task<List<GenerationResult>> Generate(Item item)
         {
             var generationResults = new List<GenerationResult>();
-            
+
             foreach (var generator in Generators.Where(x => x.Generator.IsItemLevel && !x.Generator.IsApplicationGenerator()))
             {
                 var generationResult = await generator.Generate(item);

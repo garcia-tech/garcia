@@ -14,6 +14,7 @@ namespace GarciaCore.CodeGenerator
         public Task<string> GetFileName(Item item);
         bool IsApplicationGenerator();
         bool IsItemLevel { get; }
+        List<string> GarciaCoreDependencies { get; }
     }
 
     public interface IGenerator<T> : IGenerator where T : BaseTemplate
