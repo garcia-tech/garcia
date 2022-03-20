@@ -12,12 +12,13 @@ namespace GarciaCore.Application
     {
         private readonly ApiError _error;
         protected int _statusCode => (int)Status;
-        protected BaseResponse(ApiError error = null)
+
+        public BaseResponse(ApiError error = null)
         {
             _error = error;
         }
 
-        protected BaseResponse(HttpStatusCode status, ApiError error = null)
+        public BaseResponse(HttpStatusCode status, ApiError error = null)
         {
             Status = status;
         }
@@ -46,5 +47,17 @@ namespace GarciaCore.Application
         }
 
         public TModel Result { get; }
+    }
+
+    public class BaseResponse<TModel, TError> : BaseResponse<TModel>, IBaseResponse<TModel>
+        where TError : ApiError
+    {
+        public BaseResponse(TModel model, TError error = null) : base(model, error)
+        {
+        }
+
+        public BaseResponse(TModel model, HttpStatusCode status, TError error = null) : base(model, status, error)
+        {
+        }
     }
 }

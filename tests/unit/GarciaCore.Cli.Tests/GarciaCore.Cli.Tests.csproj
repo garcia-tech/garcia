@@ -1,7 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
 
         <IsPackable>false</IsPackable>
@@ -24,7 +23,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\src\GarciaCore.Cli\GarciaCore.Cli.csproj" />
+      <ProjectReference Include="..\..\..\src\GarciaCore.Cli\GarciaCore.Cli.csproj" />
+      <ProjectReference Include="..\..\..\src\GarciaCore.Infrastructure\GarciaCore.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>
