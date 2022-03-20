@@ -8,6 +8,8 @@
 <#@ import namespace="GarciaCore.Application" #>
 <#@ include file="IncludeWarning.t4" #>
 <#@ include file="IncludeUsings.t4" #>
+using GarciaCore.Application;
+using GarciaCore.Application.Contracts.Persistence;
 using MediatR;
 using AutoMapper;
 <#= GetUsings() #>
@@ -61,7 +63,7 @@ namespace <#= Namespace #>
 #>
         }
 
-        public async Task<<#= IdTypeName #>> Handle(Update<#= Item.Name #>Command request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<<#= IdTypeName #>>> Handle(Update<#= Item.Name #>Command request, CancellationToken cancellationToken)
         {
             var item = await _<#= Item.Name.ToCamelCase() #>Repository.GetByIdAsync(request.Id);
 
@@ -69,10 +71,13 @@ namespace <#= Namespace #>
             {
                 throw new DomainNotFoundException($"<#= Item.Name #> {request.Id} not found");
             }
+
+            var updatedItem = Helpers.BasicMap(item, request);
+            var result = await _<#= Item.Name.ToCamelCase() #>Repository.UpdateAsync(updatedItem);
             
             if (result > 0)
             {
-                return new BaseResponse<<#= IdTypeName #>>(item.Id, System.Net.HttpStatusCode.Created);
+                return new BaseResponse<<#= IdTypeName #>>(item.Id, System.Net.HttpStatusCode.OK);
             }
 
             return new BaseResponse<<#= IdTypeName #>>(item.Id, new ApiError("Something went wrong!", "<#= Item.Name #> cannot be updated."));

@@ -8,6 +8,7 @@
 <#@ import namespace="GarciaCore.Application" #>
 <#@ include file="IncludeWarning.t4" #>
 <#@ include file="IncludeUsings.t4" #>
+using GarciaCore.Application.Contracts.Persistence;
 using Microsoft.Extensions.Options;
 using AutoMapper;
 <#= GetUsings() #>

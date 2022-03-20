@@ -8,6 +8,7 @@
 <#@ import namespace="GarciaCore.Application" #>
 <#@ include file="IncludeWarning.t4" #>
 <#@ include file="IncludeUsings.t4" #>
+using GarciaCore.Application.Contracts.Persistence;
 using AutoMapper;
 using Microsoft.Extensions.Options;
 <#= GetUsings() #>
@@ -23,6 +24,7 @@ namespace <#= Namespace #>
 {
     public interface I<#= Item.Name #>Service
     {
+        Task<<#= Item.Name #><#= GeneratorRepository.ApplicationModelDtoPostfix #>> GetAsync(<#= IdTypeName #> id);
 <#
         foreach (var property in Item.Properties.Where(x => x.MappingType == ItemPropertyMappingType.List && x.Type == ItemPropertyType.Class))
 	    {
@@ -49,6 +51,13 @@ namespace <#= Namespace #>
             _<#= Item.Name.ToCamelCase() #>Repository = <#= Item.Name.ToCamelCase() #>Repository;
         }
 
+        public async Task<<#= Item.Name #><#= GeneratorRepository.ApplicationModelDtoPostfix #>> GetAsync(<#= IdTypeName #> id)
+        {
+            var item = await _<#= Item.Name.ToCamelCase() #>Repository.GetByIdAsync(id);
+            var model = _mapper.Map<<#= Item.Name #><#= GeneratorRepository.ApplicationModelDtoPostfix #>>(item);
+            return model;
+        }
+
 <#
         foreach (var property in Item.Properties.Where(x => x.MappingType == ItemPropertyMappingType.List && x.Type == ItemPropertyType.Class))
 	    {
@@ -57,14 +66,12 @@ namespace <#= Namespace #>
         public async Task<<#= innerTypeName #>> GetAllAsync()
         {
             var items = await _<#= Item.Name.ToCamelCase() #>Repository.GetAllAsync();
-            var models = new List<<#= innerTypeName #>>();
-            items.ForEach(x => models.Add(_mapper.Map<<#= innerTypeName #>>(x)));
-            return items;
+            return _mapper.Map<<#= innerTypeName #>>(items);
         }
         
         public async Task<<#= innerTypeName #>> Get<#= property.Name.ToPascalCase() #>Async(<#= IdTypeName #> id)
         {
-            var item = await _<#= Item.Name.ToCamelCase() #>Repository.GetAsync(id);
+            var item = await _<#= Item.Name.ToCamelCase() #>Repository.GetByIdAsync(id);
 
             if (item != null)
             {

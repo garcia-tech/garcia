@@ -43,16 +43,17 @@ using GarciaCore.Domain;
 using GarciaCore.Persistence;
 using System.Threading;
 using System.Threading.Tasks;");
-            this.Write("\r\nusing MediatR;\r\nusing AutoMapper;\r\n");
+            this.Write("\r\nusing GarciaCore.Application;\r\nusing GarciaCore.Application.Contracts.Persisten" +
+                    "ce;\r\nusing MediatR;\r\nusing AutoMapper;\r\n");
             
-            #line 13 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 15 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GetUsings()));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 14 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 16 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
 
     var repositoryString = $"I{GetRepositoryType(Item.Name)} {Item.Name.ToCamelCase()}Repository";
     var properties = Item.Properties.Where(x => x.Type == ItemPropertyType.Class);
@@ -78,49 +79,49 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("\r\nnamespace ");
             
-            #line 35 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 37 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public partial class Update");
             
-            #line 37 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 39 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("CommandHandler : IRequestHandler<Update");
             
-            #line 37 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 39 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("Command, BaseResponse<");
             
-            #line 37 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 39 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(IdTypeName));
             
             #line default
             #line hidden
             this.Write(">>\r\n    {\r\n        private readonly IMapper _mapper;\r\n        private readonly I");
             
-            #line 40 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 42 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GetRepositoryType(Item.Name)));
             
             #line default
             #line hidden
             this.Write(" _");
             
-            #line 40 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 42 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Repository;\r\n");
             
-            #line 41 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 43 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
 
     foreach (var repository in repositories)
     {
@@ -130,21 +131,21 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("        private readonly I");
             
-            #line 45 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 47 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GetRepositoryType(repository)));
             
             #line default
             #line hidden
             this.Write(" _");
             
-            #line 45 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 47 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(repository.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Repository;\r\n");
             
-            #line 46 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 48 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
 
     }
 
@@ -153,35 +154,35 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("\r\n        public Update");
             
-            #line 50 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 52 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("CommandHandler(IMapper mapper, ");
             
-            #line 50 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 52 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(repositoryString));
             
             #line default
             #line hidden
             this.Write(")\r\n        {\r\n            _mapper = mapper;\r\n            _");
             
-            #line 53 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 55 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Repository = ");
             
-            #line 53 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 55 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Repository;\r\n");
             
-            #line 54 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 56 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
 
     foreach (var repository in repositories)
     {
@@ -191,37 +192,37 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("            _");
             
-            #line 58 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 60 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(repository.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Repository = ");
             
-            #line 58 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 60 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(repository.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Repository;\r\n");
             
-            #line 59 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 61 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
 
     }
 
             
             #line default
             #line hidden
-            this.Write("        }\r\n\r\n        public async Task<");
+            this.Write("        }\r\n\r\n        public async Task<BaseResponse<");
             
-            #line 64 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 66 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(IdTypeName));
             
             #line default
             #line hidden
-            this.Write("> Handle(Update");
+            this.Write(">> Handle(Update");
             
-            #line 64 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 66 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
@@ -229,7 +230,7 @@ using System.Threading.Tasks;");
             this.Write("Command request, CancellationToken cancellationToken)\r\n        {\r\n            var" +
                     " item = await _");
             
-            #line 66 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 68 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
             
             #line default
@@ -237,30 +238,38 @@ using System.Threading.Tasks;");
             this.Write("Repository.GetByIdAsync(request.Id);\r\n\r\n            if (item == null)\r\n          " +
                     "  {\r\n                throw new DomainNotFoundException($\"");
             
-            #line 70 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 72 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
-            this.Write(" {request.Id} not found\");\r\n            }\r\n            \r\n            if (result >" +
-                    " 0)\r\n            {\r\n                return new BaseResponse<");
+            this.Write(" {request.Id} not found\");\r\n            }\r\n\r\n            var updatedItem = Helper" +
+                    "s.BasicMap(item, request);\r\n            var result = await _");
             
-            #line 75 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 76 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("Repository.UpdateAsync(updatedItem);\r\n            \r\n            if (result > 0)\r\n" +
+                    "            {\r\n                return new BaseResponse<");
+            
+            #line 80 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(IdTypeName));
             
             #line default
             #line hidden
-            this.Write(">(item.Id, System.Net.HttpStatusCode.Created);\r\n            }\r\n\r\n            retu" +
-                    "rn new BaseResponse<");
+            this.Write(">(item.Id, System.Net.HttpStatusCode.OK);\r\n            }\r\n\r\n            return ne" +
+                    "w BaseResponse<");
             
-            #line 78 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 83 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(IdTypeName));
             
             #line default
             #line hidden
             this.Write(">(item.Id, new ApiError(\"Something went wrong!\", \"");
             
-            #line 78 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+            #line 83 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
@@ -269,7 +278,7 @@ using System.Threading.Tasks;");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 83 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
+        #line 88 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationUpdateCommandHandlerTemplate.tt"
 
     protected override Generator CreateGenerator()
 	{

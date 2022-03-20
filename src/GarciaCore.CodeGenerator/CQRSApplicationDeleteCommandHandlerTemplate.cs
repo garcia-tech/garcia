@@ -43,16 +43,17 @@ using GarciaCore.Domain;
 using GarciaCore.Persistence;
 using System.Threading;
 using System.Threading.Tasks;");
-            this.Write("\r\nusing GarciaCore.Application;\r\nusing MediatR;\r\n");
+            this.Write("\r\nusing GarciaCore.Application;\r\nusing GarciaCore.Application.Contracts.Persisten" +
+                    "ce;\r\nusing MediatR;\r\n");
             
-            #line 13 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
+            #line 14 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GetUsings()));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 14 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
+            #line 15 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
 
     var repositoryString = $"I{GetRepositoryType(Item.Name)} {Item.Name.ToCamelCase()}Repository";
     var properties = Item.Properties.Where(x => x.Type == ItemPropertyType.Class);
@@ -78,42 +79,49 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("\r\nnamespace ");
             
-            #line 35 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
+            #line 36 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public partial class Delete");
             
-            #line 37 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
+            #line 38 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("CommandHandler : IRequestHandler<Delete");
             
-            #line 37 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
+            #line 38 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
-            this.Write("Command, int>\r\n    {\r\n        private readonly I");
+            this.Write("Command, BaseResponse<");
             
-            #line 39 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
+            #line 38 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(IdTypeName));
+            
+            #line default
+            #line hidden
+            this.Write(">>\r\n    {\r\n        private readonly I");
+            
+            #line 40 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GetRepositoryType(Item.Name)));
             
             #line default
             #line hidden
             this.Write(" _");
             
-            #line 39 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
+            #line 40 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Repository;\r\n");
             
-            #line 40 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
+            #line 41 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
 
     foreach (var repository in repositories)
     {
@@ -123,21 +131,21 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("        private readonly I");
             
-            #line 44 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
+            #line 45 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GetRepositoryType(repository)));
             
             #line default
             #line hidden
             this.Write(" _");
             
-            #line 44 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
+            #line 45 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(repository.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Repository;\r\n");
             
-            #line 45 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
+            #line 46 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
 
     }
 
@@ -146,35 +154,35 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("\r\n        public Delete");
             
-            #line 49 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
+            #line 50 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write("CommandHandler(");
             
-            #line 49 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
+            #line 50 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(repositoryString));
             
             #line default
             #line hidden
             this.Write(")\r\n        {\r\n            _");
             
-            #line 51 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
+            #line 52 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Repository =  ");
             
-            #line 51 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
+            #line 52 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Repository;\r\n");
             
-            #line 52 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
+            #line 53 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
 
     foreach (var repository in repositories)
     {
@@ -184,21 +192,21 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("            _");
             
-            #line 56 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
+            #line 57 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(repository.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Repository = ");
             
-            #line 56 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
+            #line 57 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(repository.ToCamelCase()));
             
             #line default
             #line hidden
             this.Write("Repository;\r\n");
             
-            #line 57 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
+            #line 58 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
 
     }
 
@@ -207,14 +215,14 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("        }\r\n\r\n        public async Task<BaseResponse<");
             
-            #line 62 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
+            #line 63 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(IdTypeName));
             
             #line default
             #line hidden
             this.Write(">> Handle(Delete");
             
-            #line 62 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
+            #line 63 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
@@ -222,7 +230,7 @@ using System.Threading.Tasks;");
             this.Write("Command request, CancellationToken cancellationToken)\r\n        {\r\n            var" +
                     " item = await _");
             
-            #line 64 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
+            #line 65 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
             
             #line default
@@ -230,29 +238,29 @@ using System.Threading.Tasks;");
             this.Write("Repository.GetByIdAsync(request.Id);\r\n\r\n            if (item == null)\r\n          " +
                     "  {\r\n                throw new DomainNotFoundException($\"");
             
-            #line 68 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
+            #line 69 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
-            this.Write(" {request.Id} not found\");\r\n            }\r\n            \r\n            item.IsDelet" +
-                    "ed = true;\r\n            var result = await _");
+            this.Write(" {request.Id} not found\");\r\n            }\r\n            \r\n            var result =" +
+                    " await _");
             
             #line 72 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
             
             #line default
             #line hidden
-            this.Write("Repository.SaveAsync(item);\r\n            \r\n            if (result > 0)\r\n         " +
-                    "   {\r\n                return new BaseResponse<");
+            this.Write("Repository.DeleteAsync(item);\r\n            \r\n            if (result > 0)\r\n       " +
+                    "     {\r\n                return new BaseResponse<");
             
             #line 76 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(IdTypeName));
             
             #line default
             #line hidden
-            this.Write(">(item.Id, System.Net.HttpStatusCode.Created);\r\n            }\r\n\r\n            retu" +
-                    "rn new BaseResponse<");
+            this.Write(">(item.Id, System.Net.HttpStatusCode.OK);\r\n            }\r\n\r\n            return ne" +
+                    "w BaseResponse<");
             
             #line 79 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(IdTypeName));
