@@ -1,6 +1,6 @@
 {
   "Name": "Farmi",
-  "Folder": "c:\\files\\Farmi",
+  "Folder": "C:\\Users\\vehbi\\source\\repos\\forfarming\\farmibackend\\src",
   "Projects": [
     {
       "Name": "Farmi.Application",
@@ -15,27 +15,27 @@
           "GeneratorName": "CQRSApplicationModelGenerator"
         },
         {
-          "Name": "Commands.Create",
+          "Name": "Commands",
           "GeneratorName": "CQRSApplicationCreateCommandGenerator"
         },
         {
-          "Name": "Commands.Create",
+          "Name": "Commands",
           "GeneratorName": "CQRSApplicationCreateCommandHandlerGenerator"
         },
         {
-          "Name": "Commands.Delete",
+          "Name": "Commands",
           "GeneratorName": "CQRSApplicationDeleteCommandGenerator"
         },
         {
-          "Name": "Commands.Delete",
+          "Name": "Commands",
           "GeneratorName": "CQRSApplicationDeleteCommandHandlerGenerator"
         },
         {
-          "Name": "Commands.Update",
+          "Name": "Commands",
           "GeneratorName": "CQRSApplicationUpdateCommandGenerator"
         },
         {
-          "Name": "Commands.Update",
+          "Name": "Commands",
           "GeneratorName": "CQRSApplicationUpdateCommandHandlerGenerator"
         },
         {
@@ -45,6 +45,10 @@
         {
           "Name": "Services",
           "GeneratorName": "CQRSApplicationServiceGenerator"
+        },
+        {
+          "Name": "Mappings",
+          "GeneratorName": "MappingProfileGenerator"
         }
       ],
       "ProjectType": "ClassLibrary"
@@ -62,6 +66,16 @@
           "Name": "Controllers",
           "BaseClass": null,
           "GeneratorName": "CQRSWebApiControllerGenerator"
+        },
+        {
+          "Name": "",
+          "BaseClass": null,
+          "GeneratorName": "ApplicationServiceRegistrationGenerator"
+        },
+        {
+          "Name": "",
+          "BaseClass": null,
+          "GeneratorName": "CQRSWebApiProgramGenerator"
         }
       ],
       "ProjectType": "WebApi"

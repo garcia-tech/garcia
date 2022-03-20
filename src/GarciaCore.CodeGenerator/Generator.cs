@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace GarciaCore.CodeGenerator
 {
+
     public abstract class Generator : IGenerator
     {
         protected ItemPropertyType[] notNullablePropertyTypes = new ItemPropertyType[] { ItemPropertyType.String, ItemPropertyType.Class, ItemPropertyType.Unknown };
@@ -21,6 +22,8 @@ namespace GarciaCore.CodeGenerator
         public virtual string Name { get { return GetType().FullName; } }
 
         public virtual List<string> Usings { get; set; }
+        public virtual bool IsItemLevel { get; } = true;
+        public abstract List<string> GarciaCoreDependencies { get; }
 
         public virtual async Task<string> Generate<T>(Item item, string @namespace, string baseClass) where T : BaseTemplate
         {
@@ -30,6 +33,23 @@ namespace GarciaCore.CodeGenerator
             template.Includes = baseClass;
             template.Namespace = @namespace;
             template.Usings = Usings;
+
+            if (template.Usings == null)
+            {
+                template.Usings = new List<string>();
+            }
+
+            //if (GarciaCoreDependencies != null)
+            //{
+            //    foreach (var dependency in GarciaCoreDependencies)
+            //    {
+            //        if (!template.Usings.Contains(dependency))
+            //        {
+            //            template.Usings.Add(dependency);
+            //        }
+            //    }
+            //}
+
             var text = template.TransformText();
             return text;
         }
@@ -123,9 +143,9 @@ namespace GarciaCore.CodeGenerator
                     case ItemPropertyMappingType.List:
                         typeName = "List<" + typeName + ">";
                         break;
-                    //case ItemPropertyMappingType.Array:
-                    //    typeName = typeName + "[]";
-                    //    break;
+                        //case ItemPropertyMappingType.Array:
+                        //    typeName = typeName + "[]";
+                        //    break;
                 }
             }
 
@@ -164,7 +184,7 @@ namespace GarciaCore.CodeGenerator
 
         public virtual async Task<string> GetFileName(Item item)
         {
-            return $"{FileNamePrefix}{item.Name}{FileNamePostfix}.{FileExtension}";
+            return $"{FileNamePrefix}{item?.Name}{FileNamePostfix}.{FileExtension}";
         }
 
         public virtual bool IsApplicationGenerator()

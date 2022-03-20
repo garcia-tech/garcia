@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GarciaCore.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -67,5 +68,9 @@ namespace GarciaCore.Application.Contracts.Persistence
         /// <returns></returns>
         Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> filter);
         //Task<IReadOnlyList<T>> GetAsync(Dictionary<string, object> filter);
+    }
+
+    public interface IAsyncRepository<T> : IAsyncRepository<T, long> where T : Entity<long>
+    {
     }
 }

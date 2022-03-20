@@ -16,18 +16,18 @@ namespace GarciaCore.CodeGenerator
         public string Folder { get; set; }
         public List<Project> Projects { get; set; } = new List<Project>();
 
-        protected virtual async Task<List<GenerationResult>> Generate(Item item)
-        {
-            var generationResults = new List<GenerationResult>();
+        //protected virtual async Task<List<GenerationResult>> Generate(Item item)
+        //{
+        //    var generationResults = new List<GenerationResult>();
 
-            foreach (var project in Projects)
-            {
-                var generationResult = await project.Generate(item);
-                generationResults.AddRange(generationResult);
-            }
+        //    foreach (var project in Projects)
+        //    {
+        //        var generationResult = await project.Generate(item);
+        //        generationResults.AddRange(generationResult);
+        //    }
 
-            return generationResults;
-        }
+        //    return generationResults;
+        //}
 
         public virtual async Task<List<GenerationResult>> Generate(List<Item> items)
         {
@@ -35,6 +35,8 @@ namespace GarciaCore.CodeGenerator
 
             foreach (var item in items)
             {
+                GeneratorRepository.AddItem(item);
+
                 foreach (var project in Projects)
                 {
                     var generationResult = await project.Generate(item);
@@ -48,6 +50,12 @@ namespace GarciaCore.CodeGenerator
                         generationResults.ForEach(x => x.Messages.Add($"Item {property.InnerType.Name} does not exist in item collection, possible build error."));
                     }
                 }
+            }
+
+            foreach (var project in Projects)
+            {
+                var generationResult = await project.Generate();
+                generationResults.AddRange(generationResult);
             }
 
             return generationResults;

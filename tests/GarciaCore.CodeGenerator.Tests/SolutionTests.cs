@@ -149,7 +149,7 @@ namespace GarciaCore.CodeGenerator.Tests
                 new Item()
                 {
                     Name = "Content",
-                    IdType = IdType.Int,
+                    IdType = IdType.Long,
                     Properties = new List<ItemProperty>()
                     {
                         new ItemProperty() { Name = "Date", Type = ItemPropertyType.DateTime, MappingType = ItemPropertyMappingType.Property },
@@ -160,7 +160,7 @@ namespace GarciaCore.CodeGenerator.Tests
                 new Item()
                 {
                     Name = "ContentItem",
-                    IdType = IdType.Int,
+                    IdType = IdType.Long,
                     Properties = new List<ItemProperty>()
                     {
                         new ItemProperty() { Name = "Date", Type = ItemPropertyType.DateTime, MappingType = ItemPropertyMappingType.Property },
@@ -170,7 +170,7 @@ namespace GarciaCore.CodeGenerator.Tests
                 new Item()
                 {
                     Name = "File",
-                    IdType = IdType.Int,
+                    IdType = IdType.Long,
                     Properties = new List<ItemProperty>()
                     {
                         new ItemProperty() { Name = "Url", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
@@ -185,6 +185,14 @@ namespace GarciaCore.CodeGenerator.Tests
 
             foreach (var item in result)
             {
+                var allMessages = item.AllMessages;
+
+                if (!string.IsNullOrEmpty(allMessages))
+                    _output.WriteLine($"// Messages: {allMessages}");
+            }
+
+            foreach (var item in result)
+            {
                 item.Folder.ShouldNotBeNullOrEmpty();
                 item.Generator.ShouldNotBeNull();
                 item.Code.ShouldNotBeNullOrEmpty();
@@ -192,14 +200,6 @@ namespace GarciaCore.CodeGenerator.Tests
                 _output.WriteLine(item.Code);
                 Directory.CreateDirectory(item.Folder);
                 await File.WriteAllTextAsync($"{item.Folder}\\{item.File}", item.Code);
-            }
-
-            foreach (var item in result)
-            {
-                var allMessages = item.AllMessages;
-
-                if (!string.IsNullOrEmpty(allMessages))
-                    _output.WriteLine($"// Messages: {allMessages}");
             }
         }
     }

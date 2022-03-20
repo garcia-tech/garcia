@@ -2,11 +2,12 @@
 
 namespace GarciaCore.CodeGenerator
 {
-    public class EntityGenerator : Generator<EntityTemplate>
+    public class BaseEntityGenerator : Generator<BaseEntityTemplate>
     {
-        public override string DefaultBaseClass => "Entity";
-        protected override string FileNamePostfix => "";
+        public override string DefaultBaseClass => "";
+        protected override string FileNamePostfix => "BaseEntity";
         public override GeneratorType GeneratorType => GeneratorType.Domain;
         public override List<string> GarciaCoreDependencies => new List<string>() { };
+        public override bool IsItemLevel => false;
     }
 }

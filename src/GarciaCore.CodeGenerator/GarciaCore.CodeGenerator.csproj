@@ -5,8 +5,11 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="ApplicationServiceRegistrationTemplate.tt" />
+      <None Remove="BaseEntityTemplate.tt" />
       <None Remove="BaseTemplate.tt" />
       <None Remove="CQRSApplicationCreateCommandHandlerTemplate.tt" />
+      <None Remove="CQRSApplicationCreateCommandHandlerTemplate2.tt" />
       <None Remove="CQRSApplicationCreateCommandTemplate.tt" />
       <None Remove="CQRSApplicationDeleteCommandHandlerTemplate.tt" />
       <None Remove="CQRSApplicationDeleteCommandTemplate.tt" />
@@ -14,9 +17,12 @@
       <None Remove="CQRSApplicationQueryTemplate.tt" />
       <None Remove="CQRSApplicationServiceTemplate.tt" />
       <None Remove="CQRSApplicationUpdateCommandHandlerTemplate.tt" />
+      <None Remove="CQRSApplicationUpdateCommandHandlerTemplate2.tt" />
       <None Remove="CQRSApplicationUpdateCommandTemplate.tt" />
       <None Remove="CQRSWebApiControllerTemplate.tt" />
+      <None Remove="CQRSWebApiProgramTemplate.tt" />
       <None Remove="EntityTemplate.tt" />
+      <None Remove="MappingProfileTemplate.tt" />
       <None Remove="RepositoryTemplate.tt" />
     </ItemGroup>
     <ItemGroup>
@@ -25,8 +31,33 @@
         <DesignTime>True</DesignTime>
         <DependentUpon>BaseTemplate.tt</DependentUpon>
       </Compile>
+      <Compile Update="CQRSApplicationCreateCommandHandlerTemplate2.cs">
+        <DependentUpon>CQRSApplicationCreateCommandHandlerTemplate2.tt</DependentUpon>
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+      </Compile>
       <Compile Update="CQRSApplicationModelTemplate.cs">
         <DependentUpon>CQRSApplicationModelTemplate.tt</DependentUpon>
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+      </Compile>
+      <Compile Update="CQRSApplicationUpdateCommandHandlerTemplate2.cs">
+        <DependentUpon>CQRSApplicationUpdateCommandHandlerTemplate2.tt</DependentUpon>
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+      </Compile>
+      <Compile Update="ApplicationServiceRegistrationTemplate.cs">
+        <DependentUpon>ApplicationServiceRegistrationTemplate.tt</DependentUpon>
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+      </Compile>
+      <Compile Update="BaseEntityTemplate.cs">
+        <DependentUpon>BaseEntityTemplate.tt</DependentUpon>
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+      </Compile>
+      <Compile Update="MappingProfileTemplate.cs">
+        <DependentUpon>MappingProfileTemplate.tt</DependentUpon>
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
       </Compile>
@@ -75,6 +106,11 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
       </Compile>
+      <Compile Update="CQRSWebApiProgramTemplate.cs">
+        <DependentUpon>CQRSWebApiProgramTemplate.tt</DependentUpon>
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+      </Compile>
       <Compile Update="RepositoryTemplate.cs">
         <DependentUpon>RepositoryTemplate.tt</DependentUpon>
         <DesignTime>True</DesignTime>
@@ -92,8 +128,28 @@
         <Generator>TextTemplatingFilePreprocessor</Generator>
         <LastGenOutput>BaseTemplate.cs</LastGenOutput>
       </Content>
+      <Content Include="CQRSApplicationCreateCommandHandlerTemplate2.tt">
+        <LastGenOutput>CQRSApplicationCreateCommandHandlerTemplate2.cs</LastGenOutput>
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+      </Content>
       <Content Include="CQRSApplicationModelTemplate.tt">
         <LastGenOutput>CQRSApplicationModelTemplate.cs</LastGenOutput>
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+      </Content>
+      <Content Include="CQRSApplicationUpdateCommandHandlerTemplate2.tt">
+        <LastGenOutput>CQRSApplicationUpdateCommandHandlerTemplate2.cs</LastGenOutput>
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+      </Content>
+      <Content Include="ApplicationServiceRegistrationTemplate.tt">
+        <LastGenOutput>ApplicationServiceRegistrationTemplate.cs</LastGenOutput>
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+      </Content>
+      <Content Include="BaseEntityTemplate.tt">
+        <LastGenOutput>BaseEntityTemplate.cs</LastGenOutput>
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+      </Content>
+      <Content Include="MappingProfileTemplate.tt">
+        <LastGenOutput>MappingProfileTemplate.cs</LastGenOutput>
         <Generator>TextTemplatingFilePreprocessor</Generator>
       </Content>
       <Content Include="CQRSApplicationServiceTemplate.tt">
@@ -130,6 +186,10 @@
       </Content>
       <Content Include="CQRSWebApiControllerTemplate.tt">
         <LastGenOutput>CQRSWebApiControllerTemplate.cs</LastGenOutput>
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+      </Content>
+      <Content Include="CQRSWebApiProgramTemplate.tt">
+        <LastGenOutput>CQRSWebApiProgramTemplate.cs</LastGenOutput>
         <Generator>TextTemplatingFilePreprocessor</Generator>
       </Content>
       <Content Include="RepositoryTemplate.tt">

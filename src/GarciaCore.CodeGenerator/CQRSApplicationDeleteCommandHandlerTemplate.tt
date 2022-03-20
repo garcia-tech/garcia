@@ -8,10 +8,11 @@
 <#@ import namespace="GarciaCore.Application" #>
 <#@ include file="IncludeWarning.t4" #>
 <#@ include file="IncludeUsings.t4" #>
+using GarciaCore.Application;
 using MediatR;
 <#= GetUsings() #>
 <#
-    var repositoryString = $"I{Item.Name}Repository {Item.Name.ToCamelCase()}Repository";
+    var repositoryString = $"I{GetRepositoryType(Item.Name)} {Item.Name.ToCamelCase()}Repository";
     var properties = Item.Properties.Where(x => x.Type == ItemPropertyType.Class);
     var repositories = new List<string>();
 
@@ -25,7 +26,7 @@ using MediatR;
 
     foreach (var repository in repositories)
     {
-        repositoryString += $", I{repository}Repository {repository.ToCamelCase()}Repository";
+        repositoryString += $", I{GetRepositoryType(repository)} {repository.ToCamelCase()}Repository";
     }
 
     repositoryString = repositoryString.Trim().TrimEnd(',');
@@ -35,12 +36,12 @@ namespace <#= Namespace #>
 {
     public partial class Delete<#= Item.Name #>CommandHandler : IRequestHandler<Delete<#= Item.Name #>Command, int>
     {
-        private I<#= Item.Name #>Repository _<#= Item.Name.ToCamelCase() #>Repository;
+        private readonly I<#= GetRepositoryType(Item.Name) #> _<#= Item.Name.ToCamelCase() #>Repository;
 <#
     foreach (var repository in repositories)
     {
 #>
-        private I<#= repository #>Repository _<#= repository.ToCamelCase() #>Repository;
+        private readonly I<#= GetRepositoryType(repository) #> _<#= repository.ToCamelCase() #>Repository;
 <#
     }
 #>
@@ -48,11 +49,19 @@ namespace <#= Namespace #>
         public Delete<#= Item.Name #>CommandHandler(<#= repositoryString #>)
         {
             _<#= Item.Name.ToCamelCase() #>Repository =  <#= Item.Name.ToCamelCase() #>Repository;
+<#
+    foreach (var repository in repositories)
+    {
+#>
+            _<#= repository.ToCamelCase() #>Repository = <#= repository.ToCamelCase() #>Repository;
+<#
+    }
+#>
         }
 
-        public async Task<int> Handle(Delete<#= Item.Name #>Command request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<<#= IdTypeName #>>> Handle(Delete<#= Item.Name #>Command request, CancellationToken cancellationToken)
         {
-            var item = await _<#= Item.Name #>Repository.GetByIdAsync(request.Id);
+            var item = await _<#= Item.Name.ToCamelCase() #>Repository.GetByIdAsync(request.Id);
 
             if (item == null)
             {
@@ -60,8 +69,14 @@ namespace <#= Namespace #>
             }
             
             item.IsDeleted = true;
-            var result = await _<#= Item.Name #>Repository.SaveAsync(item);
-            return result;
+            var result = await _<#= Item.Name.ToCamelCase() #>Repository.SaveAsync(item);
+            
+            if (result > 0)
+            {
+                return new BaseResponse<<#= IdTypeName #>>(item.Id, System.Net.HttpStatusCode.Created);
+            }
+
+            return new BaseResponse<<#= IdTypeName #>>(item.Id, new ApiError("Something went wrong!", "<#= Item.Name #> cannot be deleted."));
         }
     }
 }

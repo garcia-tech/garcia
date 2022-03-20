@@ -1,0 +1,69 @@
+<#@ template language="C#" inherits="BaseTemplate" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="GarciaCore.CodeGenerator" #>
+<#@ import namespace="GarciaCore.Infrastructure" #>
+<#@ import namespace="GarciaCore.Application" #>
+<#@ include file="IncludeWarning.t4" #>
+<#@ include file="IncludeUsings.t4" #>
+using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
+using MediatR;
+<#= GetUsings() #>
+
+namespace <#= Namespace #>
+{
+    public static class ApplicationServiceRegistration
+    {
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+        {
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+<#
+    if (GeneratorRepository.ContainsGenerator(GeneratorType.Repository))
+    {
+        foreach (var item in GeneratorRepository.Items)
+        {
+#>
+            services.AddScoped<I<#= GetRepositoryType(item.Name) #>, <#= GetRepositoryType(item.Name) #>>();
+<#
+        }
+#>
+<#
+    }
+    if (GeneratorRepository.ContainsGenerator(GeneratorType.Service))
+    {
+        foreach (var item in GeneratorRepository.Items.Where(x => x.AddApplication))
+        {
+#>
+            services.AddScoped<I<#= item.Name #>Service, <#= item.Name #>Service>();
+<#
+        }
+#>
+<#
+    }
+    if (GeneratorRepository.ContainsGenerator(GeneratorType.Query))
+    {
+        foreach (var item in GeneratorRepository.Items.Where(x => x.AddApplication))
+        {
+#>
+            services.AddScoped<I<#= item.Name #>Query, <#= item.Name #>Query>();
+<#
+        }
+#>
+<#
+    }
+#>
+            return services;
+        }
+    }
+}
+
+<#+
+    protected override Generator CreateGenerator()
+	{
+		return new ApplicationServiceRegistrationGenerator();
+	}
+#>

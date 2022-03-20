@@ -8,6 +8,10 @@
 <#@ import namespace="GarciaCore.Application" #>
 <#@ include file="IncludeWarning.t4" #>
 <#@ include file="IncludeUsings.t4" #>
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Mvc;
+using GarciaCore.Infrastructure.Api;
+using GarciaCore.Application;
 using MediatR;
 <#= GetUsings() #>
 
@@ -17,17 +21,15 @@ namespace <#= Namespace #>
     {
         private I<#= Item.Name #>Query _<#= Item.Name.ToCamelCase() #>Query;
         private I<#= Item.Name #>Service _<#= Item.Name.ToCamelCase() #>Service;
-        private I<#= Item.Name #>Repository _<#= Item.Name.ToCamelCase() #>Repository;
 
-        public <#= Item.Name #>Controller(IOptions<Settings> settings, <#= Item.Name #>Repository <#= Item.Name #>Repository, I<#= Item.Name #>Query <#= Item.Name #>Query, I<#= Item.Name #>Service <#= Item.Name #>Service, IMediator mediator) : base(settings, repository, mediator)
+        public <#= Item.Name #>Controller(IOptions<GarciaCoreInfrastructureApiSettings> settings, I<#= Item.Name #>Query <#= Item.Name.ToCamelCase() #>Query, I<#= Item.Name #>Service <#= Item.Name.ToCamelCase() #>Service, IMediator mediator) : base(settings, null, mediator)
         {
             _<#= Item.Name.ToCamelCase() #>Query = <#= Item.Name.ToCamelCase() #>Query;
             _<#= Item.Name.ToCamelCase() #>Service = <#= Item.Name.ToCamelCase() #>Service;
-            _<#= Item.Name.ToCamelCase() #>Repository = <#= Item.Name.ToCamelCase() #>Repository;
         }
 
         [HttpPost(Name = "Create<#= Item.Name #>")]
-        public async Task<ActionResult<<#= Item.Name #>>> Create<#= Item.Name #>Command(Create<#= Item.Name #>Command command)
+        public async Task<ActionResult<BaseResponse<Create<#= Item.Name #>Command>>> Create<#= Item.Name #>Command(Create<#= Item.Name #>Command command)
         {
             var response = await _mediator.Send(command);
 
@@ -40,7 +42,7 @@ namespace <#= Namespace #>
         }
 
         [HttpPut(Name = "Update<#= Item.Name #>")]
-        public async Task<ActionResult<<#= Item.Name #>>> Update<#= Item.Name #>Command(Update<#= Item.Name #>Command command)
+        public async Task<ActionResult<BaseResponse<Update<#= Item.Name #>Command>>> Update<#= Item.Name #>Command(Update<#= Item.Name #>Command command)
         {
             var response = await _mediator.Send(command);
 
@@ -53,7 +55,7 @@ namespace <#= Namespace #>
         }
 
         [HttpDelete("{id}", Name = "Delete<#= Item.Name #>")]
-        public async Task<ActionResult<<#= Item.Name #>>> Delete<#= Item.Name #>Command(Delete<#= Item.Name #>Command command)
+        public async Task<ActionResult<BaseResponse<Delete<#= Item.Name #>Command>>> Delete<#= Item.Name #>Command(Delete<#= Item.Name #>Command command)
         {
             var response = await _mediator.Send(command);
 
@@ -66,14 +68,14 @@ namespace <#= Namespace #>
         }
 
         [HttpGet("api/<#= Item.Name #>", Name = "GetAll<#= Item.Name #>s")]
-        public async Task<List<<#= Item.Name #>>> GetAll<#= Item.Name #>s()
+        public async Task<List<<#= Item.Name #><#= GeneratorRepository.ApplicationModelDtoPostfix #>>> GetAll<#= Item.Name #>s()
         {
             var items = await _<#= Item.Name.ToCamelCase() #>Service.GetAllAsync();
             return Ok(items);
         }
 
         [HttpGet("api/<#= Item.Name #>/{id}", Name = "Get<#= Item.Name #>")]
-        public async Task<<#= Item.Name #>> Get<#= Item.Name #>(<#= IdTypeName #> id)
+        public async Task<<#= Item.Name #><#= GeneratorRepository.ApplicationModelDtoPostfix #>> Get<#= Item.Name #>(<#= IdTypeName #> id)
         {
             var item = await _<#= Item.Name.ToCamelCase() #>Service.GetAsync(id);
 
@@ -87,7 +89,7 @@ namespace <#= Namespace #>
 <#
         foreach (var property in Item.Properties.Where(x => x.MappingType == ItemPropertyMappingType.List && x.Type == ItemPropertyType.Class))
 	    {
-            string innerTypeName = this.generator.GetInnerTypeName(property);
+            string innerTypeName = this.generator.GetInnerTypeName(property, postfix: GeneratorRepository.ApplicationModelDtoPostfix);
 #>
         
         [HttpGet("api/<#= Item.Name #>/{id}/<#= property.Name.ToPascalCase() #>")]

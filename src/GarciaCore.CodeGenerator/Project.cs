@@ -35,6 +35,29 @@ namespace GarciaCore.CodeGenerator
         public List<Project> ProjectDependencies { get; set; } = new List<Project>();
         public ProjectType ProjectType { get; set; }
         protected internal Guid Uid { get; set; }
+        public List<string> GarciaCoreDependencies
+        {
+            get
+            {
+                var dependencies = new List<string>();
+
+                if (Generators != null)
+                {
+                    foreach (var generator in Generators.Where(x => x.Generator != null))
+                    {
+                        foreach (var dependency in generator.Generator.GarciaCoreDependencies)
+                        {
+                            if (!dependencies.Contains(dependency))
+                            {
+                                dependencies.Add(dependency);
+                            }
+                        }
+                    }
+                }
+
+                return dependencies;
+            }
+        }
 
         public virtual ValidationResults Validate()
         {
@@ -54,8 +77,8 @@ namespace GarciaCore.CodeGenerator
         public virtual async Task<List<GenerationResult>> Generate(Item item)
         {
             var generationResults = new List<GenerationResult>();
-            
-            foreach (var generator in Generators.Where(x => !x.Generator.IsApplicationGenerator()))
+
+            foreach (var generator in Generators.Where(x => x.Generator.IsItemLevel && !x.Generator.IsApplicationGenerator()))
             {
                 var generationResult = await generator.Generate(item);
                 generationResults.Add(generationResult);
@@ -63,7 +86,7 @@ namespace GarciaCore.CodeGenerator
 
             if (item.AddApplication)
             {
-                foreach (var generator in Generators.Where(x => x.Generator.IsApplicationGenerator()))
+                foreach (var generator in Generators.Where(x => x.Generator.IsItemLevel && x.Generator.IsApplicationGenerator()))
                 {
                     var generationResult = await generator.Generate(item);
                     generationResults.Add(generationResult);
@@ -73,53 +96,38 @@ namespace GarciaCore.CodeGenerator
             return generationResults;
         }
 
+        public virtual async Task<List<GenerationResult>> Generate()
+        {
+            var generationResults = new List<GenerationResult>();
+
+            foreach (var generator in Generators.Where(x => !x.Generator.IsItemLevel))
+            {
+                var generationResult = await generator.Generate(null);
+                generationResults.Add(generationResult);
+            }
+
+            return generationResults;
+        }
+
         public void AddGenerator(string name, string folder, string @namespace, string baseClass, IGenerator generator)
         {
-            this.Generators.Add(new ProjectGenerator(this, name, $"{Folder}\\{folder}".Trim('\\'), $"{Namespace}.{@namespace}".Trim('.'), baseClass, generator));
+            var projectGenerator = new ProjectGenerator(this, name, $"{Folder}\\{folder}".Trim('\\'), $"{Namespace}.{@namespace}".Trim('.'), baseClass, generator);
+            this.Generators.Add(projectGenerator);
+            GeneratorRepository.AddGenerator(projectGenerator.Generator);
         }
 
         public void AddGenerator(string name, string @namespace, string baseClass, IGenerator generator)
         {
-            this.Generators.Add(new ProjectGenerator(this, name, Folder, $"{Namespace}.{@namespace}".Trim('.'), baseClass, generator));
+            var projectGenerator = new ProjectGenerator(this, name, Folder, $"{Namespace}.{@namespace}".Trim('.'), baseClass, generator);
+            this.Generators.Add(projectGenerator);
+            GeneratorRepository.AddGenerator(projectGenerator.Generator);
         }
 
         public void AddGenerator(string name, string folder, IGenerator generator)
         {
-            this.Generators.Add(new ProjectGenerator(this, name, $"{Folder}\\{folder}".Trim('\\'), $"{Namespace}.{folder.Replace("\\", ".")}".Trim('.'), generator.DefaultBaseClass, generator));
+            var projectGenerator = new ProjectGenerator(this, name, $"{Folder}\\{folder}".Trim('\\'), $"{Namespace}.{folder.Replace("\\", ".")}".Trim('.'), generator.DefaultBaseClass, generator);
+            this.Generators.Add(projectGenerator);
+            GeneratorRepository.AddGenerator(projectGenerator.Generator);
         }
-    }
-
-    public enum ProjectType
-    {
-        ClassLibrary = 0,
-        WebApi,
-        Console
-    }
-
-    public class SolutionModel
-    {
-        public string Name { get; set; }
-        public string Folder { get; set; }
-        public List<ProjectModel> Projects { get; set; }
-    }
-
-    public class ProjectModel
-    {
-        public string Name { get; set; }
-        public string Folder { get; set; }
-        public string Namespace { get; set; }
-        public List<string> ProjectDependencies { get; set; }
-        public List<ProjectGeneratorModel> Generators { get; set; }
-        public string ProjectType { get; set; }
-        protected internal Guid Uid { get; protected set; } = Guid.NewGuid();
-    }
-
-    public class ProjectGeneratorModel
-    {
-        public string Name { get; set; }
-        //public string Folder { get; set; }
-        //public string Namespace { get; }
-        public string BaseClass { get; }
-        public string GeneratorName { get; set; }
     }
 }

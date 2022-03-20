@@ -8,7 +8,16 @@
 <#@ import namespace="GarciaCore.Application" #>
 <#@ include file="IncludeWarning.t4" #>
 <#@ include file="IncludeUsings.t4" #>
+using AutoMapper;
+using Microsoft.Extensions.Options;
 <#= GetUsings() #>
+<#
+    if (GeneratorRepository.ContainsGenerator(GeneratorType.Model))
+    {
+#>
+<#
+    }
+#>
 
 namespace <#= Namespace #>
 {
@@ -17,9 +26,10 @@ namespace <#= Namespace #>
 <#
         foreach (var property in Item.Properties.Where(x => x.MappingType == ItemPropertyMappingType.List && x.Type == ItemPropertyType.Class))
 	    {
-            string innerTypeName = this.generator.GetInnerTypeName(property);
+            string innerTypeName = this.generator.GetInnerTypeName(property, postfix: GeneratorRepository.ApplicationModelDtoPostfix);
 #>
-        Task<<#= innerTypeName #>> Get<#= property.Name.ToPascalCase() #>(<#= IdTypeName #> id);
+        Task<<#= innerTypeName #>> GetAllAsync();
+        Task<<#= innerTypeName #>> Get<#= property.Name.ToPascalCase() #>Async(<#= IdTypeName #> id);
 <#
         }
 #>
@@ -28,22 +38,27 @@ namespace <#= Namespace #>
     public partial class <#= Item.Name #>Service : I<#= Item.Name #>Service
     {
         private Settings _settings;
-        private I<#= Item.Name #>Repository _<#= Item.Name.ToCamelCase() #>Repository;
+        private I<#= GetRepositoryType(Item.Name) #> _<#= Item.Name.ToCamelCase() #>Repository;
+        private readonly IMapper _mapper;
 
-        public <#= Item.Name #>Service(IOptions<Settings> settings, <#= Item.Name #>Repository <#= Item.Name #>Repository)
+
+        public <#= Item.Name #>Service(IOptions<Settings> settings, IMapper mapper, I<#= GetRepositoryType(Item.Name) #> <#= Item.Name.ToCamelCase() #>Repository)
         {
             _settings = settings.Value;
+            _mapper = mapper;
             _<#= Item.Name.ToCamelCase() #>Repository = <#= Item.Name.ToCamelCase() #>Repository;
         }
 
 <#
         foreach (var property in Item.Properties.Where(x => x.MappingType == ItemPropertyMappingType.List && x.Type == ItemPropertyType.Class))
 	    {
-            string innerTypeName = this.generator.GetInnerTypeName(property);
+            string innerTypeName = this.generator.GetInnerTypeName(property, postfix: GeneratorRepository.ApplicationModelDtoPostfix);
 #>
         public async Task<<#= innerTypeName #>> GetAllAsync()
         {
             var items = await _<#= Item.Name.ToCamelCase() #>Repository.GetAllAsync();
+            var models = new List<<#= innerTypeName #>>();
+            items.ForEach(x => models.Add(_mapper.Map<<#= innerTypeName #>>(x)));
             return items;
         }
         
@@ -53,7 +68,8 @@ namespace <#= Namespace #>
 
             if (item != null)
             {
-                return item.<#= property.Name #>;
+                var result = _mapper.Map<<#= innerTypeName #>>(item.<#= property.Name #>);
+                return result;
             }
 
             return null;

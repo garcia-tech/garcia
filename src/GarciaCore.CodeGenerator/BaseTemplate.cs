@@ -79,13 +79,18 @@ public string GetUsings()
 
     if (Usings != null)
     {
-        foreach (var usingItem in Usings)
+        foreach (var usingItem in Usings.Where(x => x != Namespace))
         {
             text += $"using {usingItem};\n";
         }
     }
 
     return text.TrimEnd('\n');
+}
+
+protected string GetRepositoryType(string repository)
+{
+    return GeneratorRepository.ContainsGenerator(GeneratorType.Repository) ? repository + "Repository" : "AsyncRepository<" + repository + ">";
 }
 
         
