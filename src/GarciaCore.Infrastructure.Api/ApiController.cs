@@ -22,6 +22,10 @@ namespace GarciaCore.Infrastructure.Api
             _mediator = mediator;
         }
 
+        public ApiController(IOptions<GarciaCoreInfrastructureApiSettings> settings, IMediator mediator) : this(settings, null, mediator)
+        {
+        }
+
         protected IActionResult CreateResponse<T>(T item)
         {
             if (item == null)

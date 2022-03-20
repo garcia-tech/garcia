@@ -34,7 +34,7 @@ using AutoMapper;
 
 namespace <#= Namespace #>
 {
-    public partial class Create<#= Item.Name #>CommandHandler : IRequestHandler<Create<#= Item.Name #>Command, int>
+    public partial class Create<#= Item.Name #>CommandHandler : IRequestHandler<Create<#= Item.Name #>Command, BaseResponse<<#= IdTypeName #>>>
     {
         private readonly I<#= Item.Name #>Repository _<#= Item.Name.ToCamelCase() #>Repository;
         private readonly IMapper _mapper;
@@ -65,7 +65,7 @@ namespace <#= Namespace #>
         {
             var item = _mapper.Map<<#= Item.Name #>>(request);
             var result = await _<#= Item.Name.ToCamelCase() #>Repository.SaveAsync(item);
-            return result;
+            return new BaseResponse<<#= IdTypeName #>>(basket.Id, System.Net.HttpStatusCode.Created);
         }
     }
 }

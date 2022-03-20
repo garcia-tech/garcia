@@ -8,6 +8,9 @@
 <#@ import namespace="GarciaCore.Application" #>
 <#@ include file="IncludeWarning.t4" #>
 <#@ include file="IncludeUsings.t4" #>
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Mvc;
+using GarciaCore.Infrastructure.Api;
 using MediatR;
 <#= GetUsings() #>
 
@@ -19,15 +22,14 @@ namespace <#= Namespace #>
         private I<#= Item.Name #>Service _<#= Item.Name.ToCamelCase() #>Service;
         private I<#= Item.Name #>Repository _<#= Item.Name.ToCamelCase() #>Repository;
 
-        public <#= Item.Name #>Controller(IOptions<Settings> settings, <#= Item.Name #>Repository <#= Item.Name #>Repository, I<#= Item.Name #>Query <#= Item.Name #>Query, I<#= Item.Name #>Service <#= Item.Name #>Service, IMediator mediator) : base(settings, repository, mediator)
+        public <#= Item.Name #>Controller(IOptions<GarciaCoreInfrastructureApiSettings> settings, I<#= Item.Name #>Query <#= Item.Name #>Query, I<#= Item.Name #>Service <#= Item.Name #>Service, IMediator mediator) : base(settings, mediator)
         {
             _<#= Item.Name.ToCamelCase() #>Query = <#= Item.Name.ToCamelCase() #>Query;
             _<#= Item.Name.ToCamelCase() #>Service = <#= Item.Name.ToCamelCase() #>Service;
-            _<#= Item.Name.ToCamelCase() #>Repository = <#= Item.Name.ToCamelCase() #>Repository;
         }
 
         [HttpPost(Name = "Create<#= Item.Name #>")]
-        public async Task<ActionResult<Create<#= Item.Name #>Command>> Create<#= Item.Name #>Command(Create<#= Item.Name #>Command command)
+        public async Task<ActionResult<BaseResponse<Create<#= Item.Name #>Command>>> Create<#= Item.Name #>Command(Create<#= Item.Name #>Command command)
         {
             var response = await _mediator.Send(command);
 
@@ -40,7 +42,7 @@ namespace <#= Namespace #>
         }
 
         [HttpPut(Name = "Update<#= Item.Name #>")]
-        public async Task<ActionResult<Update<#= Item.Name #>Command> Update<#= Item.Name #>Command(Update<#= Item.Name #>Command command)
+        public async Task<ActionResult<BaseResponse<Update<#= Item.Name #>Command>>> Update<#= Item.Name #>Command(Update<#= Item.Name #>Command command)
         {
             var response = await _mediator.Send(command);
 
@@ -53,7 +55,7 @@ namespace <#= Namespace #>
         }
 
         [HttpDelete("{id}", Name = "Delete<#= Item.Name #>")]
-        public async Task<ActionResult<Delete<#= Item.Name #>Command>> Delete<#= Item.Name #>Command(Delete<#= Item.Name #>Command command)
+        public async Task<ActionResult<BaseResponse<Delete<#= Item.Name #>Command>>> Delete<#= Item.Name #>Command(Delete<#= Item.Name #>Command command)
         {
             var response = await _mediator.Send(command);
 
