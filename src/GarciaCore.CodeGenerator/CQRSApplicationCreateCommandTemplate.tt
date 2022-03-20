@@ -27,7 +27,7 @@ namespace <#= Namespace #>
 	{
         string innerTypeName = generator.GetInnerTypeName(property, postfix: GeneratorRepository.ApplicationModelDtoPostfix);
 #>
-        public <#= innerTypeName #>Model <#= property.Name.ToPascalCase() #> { get; set; }
+        public <#= innerTypeName #> <#= property.Name.ToPascalCase() #> { get; set; }
 <#
     }
 #>

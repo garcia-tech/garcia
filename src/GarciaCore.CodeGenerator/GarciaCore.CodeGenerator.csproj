@@ -19,6 +19,7 @@
       <None Remove="CQRSApplicationUpdateCommandHandlerTemplate2.tt" />
       <None Remove="CQRSApplicationUpdateCommandTemplate.tt" />
       <None Remove="CQRSWebApiControllerTemplate.tt" />
+      <None Remove="CQRSWebApiProgramTemplate.tt" />
       <None Remove="EntityTemplate.tt" />
       <None Remove="MappingProfileTemplate.tt" />
       <None Remove="RepositoryTemplate.tt" />
@@ -99,6 +100,11 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
       </Compile>
+      <Compile Update="CQRSWebApiProgramTemplate.cs">
+        <DependentUpon>CQRSWebApiProgramTemplate.tt</DependentUpon>
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+      </Compile>
       <Compile Update="RepositoryTemplate.cs">
         <DependentUpon>RepositoryTemplate.tt</DependentUpon>
         <DesignTime>True</DesignTime>
@@ -170,6 +176,10 @@
       </Content>
       <Content Include="CQRSWebApiControllerTemplate.tt">
         <LastGenOutput>CQRSWebApiControllerTemplate.cs</LastGenOutput>
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+      </Content>
+      <Content Include="CQRSWebApiProgramTemplate.tt">
+        <LastGenOutput>CQRSWebApiProgramTemplate.cs</LastGenOutput>
         <Generator>TextTemplatingFilePreprocessor</Generator>
       </Content>
       <Content Include="RepositoryTemplate.tt">

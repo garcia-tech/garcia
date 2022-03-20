@@ -71,6 +71,11 @@
           "Name": "",
           "BaseClass": null,
           "GeneratorName": "ApplicationServiceRegistrationGenerator"
+        },
+        {
+          "Name": "",
+          "BaseClass": null,
+          "GeneratorName": "CQRSWebApiProgramGenerator"
         }
       ],
       "ProjectType": "WebApi"

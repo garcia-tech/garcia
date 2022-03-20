@@ -107,7 +107,7 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write("Model ");
+            this.Write(" ");
             
             #line 30 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToPascalCase()));
