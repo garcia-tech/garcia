@@ -55,7 +55,7 @@ namespace GarciaCore.CodeGenerator
         {
             var generationResults = new List<GenerationResult>();
             
-            foreach (var generator in Generators.Where(x => !x.Generator.IsApplicationGenerator()))
+            foreach (var generator in Generators.Where(x => x.Generator.IsItemLevel && !x.Generator.IsApplicationGenerator()))
             {
                 var generationResult = await generator.Generate(item);
                 generationResults.Add(generationResult);
@@ -63,11 +63,24 @@ namespace GarciaCore.CodeGenerator
 
             if (item.AddApplication)
             {
-                foreach (var generator in Generators.Where(x => x.Generator.IsApplicationGenerator()))
+                foreach (var generator in Generators.Where(x => x.Generator.IsItemLevel && x.Generator.IsApplicationGenerator()))
                 {
                     var generationResult = await generator.Generate(item);
                     generationResults.Add(generationResult);
                 }
+            }
+
+            return generationResults;
+        }
+
+        public virtual async Task<List<GenerationResult>> Generate()
+        {
+            var generationResults = new List<GenerationResult>();
+
+            foreach (var generator in Generators.Where(x => !x.Generator.IsItemLevel))
+            {
+                var generationResult = await generator.Generate(null);
+                generationResults.Add(generationResult);
             }
 
             return generationResults;
@@ -93,39 +106,5 @@ namespace GarciaCore.CodeGenerator
             this.Generators.Add(projectGenerator);
             GeneratorRepository.AddGenerator(projectGenerator.Generator);
         }
-    }
-
-    public enum ProjectType
-    {
-        ClassLibrary = 0,
-        WebApi,
-        Console
-    }
-
-    public class SolutionModel
-    {
-        public string Name { get; set; }
-        public string Folder { get; set; }
-        public List<ProjectModel> Projects { get; set; }
-    }
-
-    public class ProjectModel
-    {
-        public string Name { get; set; }
-        public string Folder { get; set; }
-        public string Namespace { get; set; }
-        public List<string> ProjectDependencies { get; set; }
-        public List<ProjectGeneratorModel> Generators { get; set; }
-        public string ProjectType { get; set; }
-        protected internal Guid Uid { get; protected set; } = Guid.NewGuid();
-    }
-
-    public class ProjectGeneratorModel
-    {
-        public string Name { get; set; }
-        //public string Folder { get; set; }
-        //public string Namespace { get; }
-        public string BaseClass { get; }
-        public string GeneratorName { get; set; }
     }
 }

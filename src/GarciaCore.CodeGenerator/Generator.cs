@@ -22,6 +22,7 @@ namespace GarciaCore.CodeGenerator
         public virtual string Name { get { return GetType().FullName; } }
 
         public virtual List<string> Usings { get; set; }
+        public virtual bool IsItemLevel { get; } = true;
 
         public virtual async Task<string> Generate<T>(Item item, string @namespace, string baseClass) where T : BaseTemplate
         {
@@ -165,7 +166,7 @@ namespace GarciaCore.CodeGenerator
 
         public virtual async Task<string> GetFileName(Item item)
         {
-            return $"{FileNamePrefix}{item.Name}{FileNamePostfix}.{FileExtension}";
+            return $"{FileNamePrefix}{item?.Name}{FileNamePostfix}.{FileExtension}";
         }
 
         public virtual bool IsApplicationGenerator()

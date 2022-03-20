@@ -6,7 +6,7 @@ namespace GarciaCore.CodeGenerator
     public static class GeneratorRepository
     {
         private static List<IGenerator> Generators { get; set; } = new();
-        private static List<Item> Items { get; set; } = new();
+        public static List<Item> Items { get; set; } = new();
 
         public static void AddGenerator(IGenerator generator)
         {

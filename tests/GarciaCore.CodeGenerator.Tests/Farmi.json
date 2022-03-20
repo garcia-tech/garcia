@@ -66,6 +66,11 @@
           "Name": "Controllers",
           "BaseClass": null,
           "GeneratorName": "CQRSWebApiControllerGenerator"
+        },
+        {
+          "Name": "",
+          "BaseClass": null,
+          "GeneratorName": "ApplicationServiceRegistrationGenerator"
         }
       ],
       "ProjectType": "WebApi"
