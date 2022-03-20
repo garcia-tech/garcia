@@ -64,14 +64,14 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write(" : ");
+            this.Write(" : Entity<");
             
             #line 14 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(BaseClass));
+            this.Write(this.ToStringHelper.ToStringWithCulture(IdTypeName));
             
             #line default
             #line hidden
-            this.Write("\r\n    {\r\n");
+            this.Write(">\r\n    {\r\n");
             
             #line 16 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
 

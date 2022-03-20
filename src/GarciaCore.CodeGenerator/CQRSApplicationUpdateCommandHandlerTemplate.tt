@@ -61,7 +61,7 @@ namespace <#= Namespace #>
 #>
         }
 
-        public async Task<int> Handle(Update<#= Item.Name #>Command request, CancellationToken cancellationToken)
+        public async Task<<#= IdTypeName #>> Handle(Update<#= Item.Name #>Command request, CancellationToken cancellationToken)
         {
             var item = await _<#= Item.Name.ToCamelCase() #>Repository.GetByIdAsync(request.Id);
 
@@ -70,9 +70,12 @@ namespace <#= Namespace #>
                 throw new DomainNotFoundException($"<#= Item.Name #> {request.Id} not found");
             }
             
-            var result = await _<#= Item.Name.ToCamelCase() #>Repository.SaveAsync(item);
-            return new BaseResponse<<#= IdTypeName #>>(basket.Id, System.Net.HttpStatusCode.Created);
+            if (result > 0)
+            {
+                return new BaseResponse<<#= IdTypeName #>>(item.Id, System.Net.HttpStatusCode.Created);
+            }
 
+            return new BaseResponse<<#= IdTypeName #>>(item.Id, new ApiError("Something went wrong!", "<#= Item.Name #> cannot be updated."));
         }
     }
 }

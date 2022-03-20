@@ -43,30 +43,37 @@ using GarciaCore.Domain;
 using GarciaCore.Persistence;
 using System.Threading;
 using System.Threading.Tasks;");
-            this.Write("  \r\nusing MediatR;\r\n\r\nnamespace ");
+            this.Write("  \r\nusing GarciaCore.Application;\r\nusing MediatR;\r\n");
             
             #line 13 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(GetUsings()));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\r\nnamespace ");
+            
+            #line 15 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public partial class Create");
             
-            #line 15 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
+            #line 17 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
-            this.Write("Command : ");
+            this.Write("Command : IRequest<BaseResponse<");
             
-            #line 15 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(BaseClass));
+            #line 17 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(IdTypeName));
             
             #line default
             #line hidden
-            this.Write("\r\n    {\r\n");
+            this.Write(">>\r\n    {\r\n");
             
-            #line 17 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
+            #line 19 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
   
     if (!string.IsNullOrEmpty(IdTypeName))
     {
@@ -76,14 +83,14 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("        public ");
             
-            #line 21 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
+            #line 23 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(IdTypeName));
             
             #line default
             #line hidden
             this.Write(" Id { get; set; }\r\n");
             
-            #line 22 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
+            #line 24 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
 
     }
 
@@ -91,7 +98,7 @@ using System.Threading.Tasks;");
             #line default
             #line hidden
             
-            #line 25 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
+            #line 27 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
 
     foreach (var property in Item.Properties.Where(x => x.Type != ItemPropertyType.Class || x.MappingType == ItemPropertyMappingType.List))
 	{
@@ -102,21 +109,21 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("        public ");
             
-            #line 30 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
+            #line 32 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(innerTypeName));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 30 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
+            #line 32 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToPascalCase()));
             
             #line default
             #line hidden
             this.Write(" { get; set; }\r\n");
             
-            #line 31 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
+            #line 33 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
 
     }
 
@@ -124,7 +131,7 @@ using System.Threading.Tasks;");
             #line default
             #line hidden
             
-            #line 34 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
+            #line 36 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
 
     foreach (var property in Item.Properties.Where(x => x.Type == ItemPropertyType.Class && x.MappingType != ItemPropertyMappingType.List))
 	{
@@ -136,27 +143,27 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("        public ");
             
-            #line 40 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
+            #line 42 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(IdTypeName));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 40 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
+            #line 42 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToPascalCase()));
             
             #line default
             #line hidden
             
-            #line 40 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
+            #line 42 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(idPostfix));
             
             #line default
             #line hidden
             this.Write(" { get; set; }\r\n");
             
-            #line 41 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
+            #line 43 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
 
     }
 
@@ -167,7 +174,7 @@ using System.Threading.Tasks;");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 47 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
+        #line 49 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandTemplate.tt"
 
     protected override Generator CreateGenerator()
 	{

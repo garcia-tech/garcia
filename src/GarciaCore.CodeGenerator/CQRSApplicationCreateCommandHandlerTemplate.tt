@@ -8,6 +8,7 @@
 <#@ import namespace="GarciaCore.Application" #>
 <#@ include file="IncludeWarning.t4" #>
 <#@ include file="IncludeUsings.t4" #>
+using GarciaCore.Application;
 using MediatR;
 using AutoMapper;
 <#= GetUsings() #>
@@ -61,11 +62,17 @@ namespace <#= Namespace #>
 #>
         }
 
-        public async Task<int> Handle(Create<#= Item.Name #>Command request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<<#= IdTypeName #>>> Handle(Create<#= Item.Name #>Command request, CancellationToken cancellationToken)
         {
             var item = _mapper.Map<<#= Item.Name #>>(request);
             var result = await _<#= Item.Name.ToCamelCase() #>Repository.SaveAsync(item);
-            return new BaseResponse<<#= IdTypeName #>>(basket.Id, System.Net.HttpStatusCode.Created);
+            
+            if (result > 0)
+            {
+                return new BaseResponse<<#= IdTypeName #>>(item.Id, System.Net.HttpStatusCode.Created);
+            }
+
+            return new BaseResponse<<#= IdTypeName #>>(item.Id, new ApiError("Something went wrong!", "<#= Item.Name #> cannot be created."));
         }
     }
 }

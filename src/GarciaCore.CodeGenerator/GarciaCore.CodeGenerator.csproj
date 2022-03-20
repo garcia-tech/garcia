@@ -6,6 +6,7 @@
 
     <ItemGroup>
       <None Remove="ApplicationServiceRegistrationTemplate.tt" />
+      <None Remove="BaseEntityTemplate.tt" />
       <None Remove="BaseTemplate.tt" />
       <None Remove="CQRSApplicationCreateCommandHandlerTemplate.tt" />
       <None Remove="CQRSApplicationCreateCommandHandlerTemplate2.tt" />
@@ -47,6 +48,11 @@
       </Compile>
       <Compile Update="ApplicationServiceRegistrationTemplate.cs">
         <DependentUpon>ApplicationServiceRegistrationTemplate.tt</DependentUpon>
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+      </Compile>
+      <Compile Update="BaseEntityTemplate.cs">
+        <DependentUpon>BaseEntityTemplate.tt</DependentUpon>
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
       </Compile>
@@ -136,6 +142,10 @@
       </Content>
       <Content Include="ApplicationServiceRegistrationTemplate.tt">
         <LastGenOutput>ApplicationServiceRegistrationTemplate.cs</LastGenOutput>
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+      </Content>
+      <Content Include="BaseEntityTemplate.tt">
+        <LastGenOutput>BaseEntityTemplate.cs</LastGenOutput>
         <Generator>TextTemplatingFilePreprocessor</Generator>
       </Content>
       <Content Include="MappingProfileTemplate.tt">

@@ -7,7 +7,8 @@
 <#@ import namespace="GarciaCore.Infrastructure" #>
 <#@ import namespace="GarciaCore.Application" #>
 <#@ include file="IncludeWarning.t4" #>
-<#@ include file="IncludeUsings.t4" #>  
+<#@ include file="IncludeUsings.t4" #>
+using GarciaCore.Application;
 using MediatR;
 <#= GetUsings() #>
 

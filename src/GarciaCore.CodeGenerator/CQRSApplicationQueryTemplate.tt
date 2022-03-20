@@ -8,6 +8,7 @@
 <#@ import namespace="GarciaCore.Application" #>
 <#@ include file="IncludeWarning.t4" #>
 <#@ include file="IncludeUsings.t4" #>
+using Microsoft.Extensions.Options;
 using AutoMapper;
 <#= GetUsings() #>
 
@@ -20,9 +21,10 @@ namespace <#= Namespace #>
     public partial class <#= Item.Name #>Query : I<#= Item.Name #>Query
     {
         private Settings _settings;
+        private readonly IMapper _mapper;
         private I<#= GetRepositoryType(Item.Name) #> _<#= Item.Name.ToCamelCase() #>Repository;
 
-        public <#= Item.Name #>Query(IOptions<Settings> settings, IMapper mapper, I<#= GetRepositoryType(Item.Name) #> <#= Item.Name #>Repository)
+        public <#= Item.Name #>Query(IOptions<Settings> settings, IMapper mapper, I<#= GetRepositoryType(Item.Name) #> <#= Item.Name.ToCamelCase() #>Repository)
         {
             _settings = settings.Value;
             _mapper = mapper;

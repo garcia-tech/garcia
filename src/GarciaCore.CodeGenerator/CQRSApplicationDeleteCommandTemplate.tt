@@ -7,13 +7,14 @@
 <#@ import namespace="GarciaCore.Infrastructure" #>
 <#@ import namespace="GarciaCore.Application" #>
 <#@ include file="IncludeWarning.t4" #>
-<#@ include file="IncludeUsings.t4" #>  
+<#@ include file="IncludeUsings.t4" #>
+using GarciaCore.Application;
 using MediatR;
 <#= GetUsings() #>
 
 namespace <#= Namespace #>
 {
-    public partial class Delete<#= Item.Name #>Command : <#= BaseClass #>
+    public partial class Delete<#= Item.Name #>Command : IRequest<BaseResponse<<#= IdTypeName #>>>
     {
         public <#= IdTypeName #> Id { get; set; }
     }

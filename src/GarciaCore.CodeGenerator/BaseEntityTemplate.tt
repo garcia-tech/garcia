@@ -11,22 +11,13 @@
 <#= GetUsings() #>
 namespace <#= Namespace #>
 {
-    public partial class <#= Item.Name #> : Entity<<#= IdTypeName #>>
+    public partial class BaseEntity : Entity<<#= IdTypeName #>>
     {
-<#
-        foreach (var property in Item.Properties)
-	    {
-            string innerTypeName = generator.GetInnerTypeName(property);
-#>
-        public <#= innerTypeName #> <#= property.Name.ToPascalCase() #> { get; set; }
-<#
-        }
-#>
     }
 }
 <#+
     protected override Generator CreateGenerator()
 	{
-		return new EntityGenerator();
+		return new BaseEntityGenerator();
 	}
 #>

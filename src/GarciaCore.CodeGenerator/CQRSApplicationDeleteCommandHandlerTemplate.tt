@@ -8,6 +8,7 @@
 <#@ import namespace="GarciaCore.Application" #>
 <#@ include file="IncludeWarning.t4" #>
 <#@ include file="IncludeUsings.t4" #>
+using GarciaCore.Application;
 using MediatR;
 <#= GetUsings() #>
 <#
@@ -48,9 +49,17 @@ namespace <#= Namespace #>
         public Delete<#= Item.Name #>CommandHandler(<#= repositoryString #>)
         {
             _<#= Item.Name.ToCamelCase() #>Repository =  <#= Item.Name.ToCamelCase() #>Repository;
+<#
+    foreach (var repository in repositories)
+    {
+#>
+            _<#= repository.ToCamelCase() #>Repository = <#= repository.ToCamelCase() #>Repository;
+<#
+    }
+#>
         }
 
-        public async Task<int> Handle(Delete<#= Item.Name #>Command request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<<#= IdTypeName #>>> Handle(Delete<#= Item.Name #>Command request, CancellationToken cancellationToken)
         {
             var item = await _<#= Item.Name.ToCamelCase() #>Repository.GetByIdAsync(request.Id);
 
@@ -61,7 +70,13 @@ namespace <#= Namespace #>
             
             item.IsDeleted = true;
             var result = await _<#= Item.Name.ToCamelCase() #>Repository.SaveAsync(item);
-            return result;
+            
+            if (result > 0)
+            {
+                return new BaseResponse<<#= IdTypeName #>>(item.Id, System.Net.HttpStatusCode.Created);
+            }
+
+            return new BaseResponse<<#= IdTypeName #>>(item.Id, new ApiError("Something went wrong!", "<#= Item.Name #> cannot be deleted."));
         }
     }
 }

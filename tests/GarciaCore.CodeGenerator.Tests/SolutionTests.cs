@@ -149,7 +149,7 @@ namespace GarciaCore.CodeGenerator.Tests
                 new Item()
                 {
                     Name = "Content",
-                    IdType = IdType.Int,
+                    IdType = IdType.Long,
                     Properties = new List<ItemProperty>()
                     {
                         new ItemProperty() { Name = "Date", Type = ItemPropertyType.DateTime, MappingType = ItemPropertyMappingType.Property },
@@ -160,7 +160,7 @@ namespace GarciaCore.CodeGenerator.Tests
                 new Item()
                 {
                     Name = "ContentItem",
-                    IdType = IdType.Int,
+                    IdType = IdType.Long,
                     Properties = new List<ItemProperty>()
                     {
                         new ItemProperty() { Name = "Date", Type = ItemPropertyType.DateTime, MappingType = ItemPropertyMappingType.Property },
@@ -170,7 +170,7 @@ namespace GarciaCore.CodeGenerator.Tests
                 new Item()
                 {
                     Name = "File",
-                    IdType = IdType.Int,
+                    IdType = IdType.Long,
                     Properties = new List<ItemProperty>()
                     {
                         new ItemProperty() { Name = "Url", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },

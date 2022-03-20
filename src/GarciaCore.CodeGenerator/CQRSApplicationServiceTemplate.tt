@@ -9,7 +9,15 @@
 <#@ include file="IncludeWarning.t4" #>
 <#@ include file="IncludeUsings.t4" #>
 using AutoMapper;
+using Microsoft.Extensions.Options;
 <#= GetUsings() #>
+<#
+    if (GeneratorRepository.ContainsGenerator(GeneratorType.Model))
+    {
+#>
+<#
+    }
+#>
 
 namespace <#= Namespace #>
 {
@@ -18,9 +26,10 @@ namespace <#= Namespace #>
 <#
         foreach (var property in Item.Properties.Where(x => x.MappingType == ItemPropertyMappingType.List && x.Type == ItemPropertyType.Class))
 	    {
-            string innerTypeName = this.generator.GetInnerTypeName(property);
+            string innerTypeName = this.generator.GetInnerTypeName(property, postfix: GeneratorRepository.ApplicationModelDtoPostfix);
 #>
-        Task<<#= innerTypeName #>> Get<#= property.Name.ToPascalCase() #>(<#= IdTypeName #> id);
+        Task<<#= innerTypeName #>> GetAllAsync();
+        Task<<#= innerTypeName #>> Get<#= property.Name.ToPascalCase() #>Async(<#= IdTypeName #> id);
 <#
         }
 #>
@@ -33,7 +42,7 @@ namespace <#= Namespace #>
         private readonly IMapper _mapper;
 
 
-        public <#= Item.Name #>Service(IOptions<Settings> settings, IMapper mapper, I<#= GetRepositoryType(Item.Name) #> <#= Item.Name #>Repository)
+        public <#= Item.Name #>Service(IOptions<Settings> settings, IMapper mapper, I<#= GetRepositoryType(Item.Name) #> <#= Item.Name.ToCamelCase() #>Repository)
         {
             _settings = settings.Value;
             _mapper = mapper;
@@ -59,7 +68,6 @@ namespace <#= Namespace #>
 
             if (item != null)
             {
-                return item.<#= property.Name #>;
                 var result = _mapper.Map<<#= innerTypeName #>>(item.<#= property.Name #>);
                 return result;
             }

@@ -168,6 +168,26 @@ namespace GarciaCore.CodeGenerator
                     }
                 }
 
+                foreach (var projectModel in solutionModel.Projects)
+                {
+                    var project = allProjects.FirstOrDefault(x => x.Uid == projectModel.Uid);
+                    var projectNamespaces = new List<string>();
+
+                    foreach (var projectGenerator in project.Generators)
+                    {
+                        if (!projectNamespaces.Contains(projectGenerator.Namespace))
+                            projectNamespaces.Add(projectGenerator.Namespace);
+                    }
+
+                    foreach (var @namespace in projectNamespaces)
+                    {
+                        if (!namespaces[project.Uid].Contains(@namespace))
+                        {
+                            namespaces[project.Uid].Add(@namespace);
+                        }
+                    }
+                }
+
                 foreach (var project in allProjects)
                 {
                     var usings = namespaces.FirstOrDefault(x => x.Key == project.Uid).Value;

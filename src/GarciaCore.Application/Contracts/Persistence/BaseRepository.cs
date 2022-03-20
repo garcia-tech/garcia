@@ -7,7 +7,7 @@ using GarciaCore.Domain;
 
 namespace GarciaCore.Application.Contracts.Persistence
 {
-    public abstract class BaseRepository<T> : IAsyncRepository<T, long> where T : Entity<long>
+    public abstract class BaseRepository<T> : IAsyncRepository<T> where T : Entity<long>
     {
         public BaseRepository()
         {

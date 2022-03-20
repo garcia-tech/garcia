@@ -79,7 +79,7 @@ public string GetUsings()
 
     if (Usings != null)
     {
-        foreach (var usingItem in Usings)
+        foreach (var usingItem in Usings.Where(x => x != Namespace))
         {
             text += $"using {usingItem};\n";
         }

@@ -21,9 +21,9 @@ namespace GarciaCore.CodeGenerator
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandTemplate.tt"
+    #line 1 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\BaseEntityTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
-    public partial class CQRSApplicationDeleteCommandTemplate : BaseTemplate
+    public partial class BaseEntityTemplate : BaseTemplate
     {
 #line hidden
         /// <summary>
@@ -43,50 +43,36 @@ using GarciaCore.Domain;
 using GarciaCore.Persistence;
 using System.Threading;
 using System.Threading.Tasks;");
-            this.Write("\r\nusing GarciaCore.Application;\r\nusing MediatR;\r\n");
+            this.Write("  \r\n");
             
-            #line 13 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandTemplate.tt"
+            #line 11 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\BaseEntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GetUsings()));
             
             #line default
             #line hidden
-            this.Write("\r\n\r\nnamespace ");
+            this.Write("\r\nnamespace ");
             
-            #line 15 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandTemplate.tt"
+            #line 12 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\BaseEntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
             
             #line default
             #line hidden
-            this.Write("\r\n{\r\n    public partial class Delete");
+            this.Write("\r\n{\r\n    public partial class BaseEntity : Entity<");
             
-            #line 17 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
-            
-            #line default
-            #line hidden
-            this.Write("Command : IRequest<BaseResponse<");
-            
-            #line 17 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandTemplate.tt"
+            #line 14 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\BaseEntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(IdTypeName));
             
             #line default
             #line hidden
-            this.Write(">>\r\n    {\r\n        public ");
-            
-            #line 19 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(IdTypeName));
-            
-            #line default
-            #line hidden
-            this.Write(" Id { get; set; }\r\n    }\r\n}\r\n\r\n");
+            this.Write(">\r\n    {\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 23 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationDeleteCommandTemplate.tt"
+        #line 18 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\BaseEntityTemplate.tt"
 
     protected override Generator CreateGenerator()
 	{
-		return new CQRSApplicationDeleteCommandGenerator();
+		return new BaseEntityGenerator();
 	}
 
         
