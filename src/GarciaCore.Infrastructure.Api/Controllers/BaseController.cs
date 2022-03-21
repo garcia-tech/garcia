@@ -13,6 +13,7 @@ namespace GarciaCore.Infrastructure.Api.Controllers
         where TService : IBaseService<TEntity, TDto, TKey>
         where TKey : IEquatable<TKey>
         where TEntity : IEntity<TKey>
+        where TDto : class
     {
         private readonly TService _service;
 
@@ -40,16 +41,16 @@ namespace GarciaCore.Infrastructure.Api.Controllers
         }
 
         [HttpPost]
-        public virtual async Task<ActionResult<BaseResponse<long>>> Create([FromBody] object requestBody)
+        public virtual async Task<ActionResult<BaseResponse<long>>> Create([FromBody] TDto requestBody)
         {
-            var response = await _service.AddAsync(Helpers.BasicMap<TEntity, object>(requestBody));
+            var response = await _service.AddAsync(Helpers.BasicMap<TEntity, TDto>(requestBody));
             return StatusCode(
                 response.StatusCode,
                 response.Success ? response.Result : response.Error);
         }
 
         [HttpPut("{id}")]
-        public virtual async Task<ActionResult<BaseResponse<long>>> Update(TKey id, [FromBody] object requestBody)
+        public virtual async Task<ActionResult<BaseResponse<long>>> Update(TKey id, [FromBody] TDto requestBody)
         {
             var response = await _service.UpdateAsync(id, requestBody);
             return StatusCode(
