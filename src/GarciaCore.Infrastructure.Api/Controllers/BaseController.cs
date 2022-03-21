@@ -43,7 +43,7 @@ namespace GarciaCore.Infrastructure.Api.Controllers
         [HttpPost]
         public virtual async Task<ActionResult<BaseResponse<long>>> Create([FromBody] TDto requestBody)
         {
-            var response = await _service.AddAsync(Helpers.BasicMap<TEntity, TDto>(requestBody));
+            var response = await _service.AddAsync(_service.Mapper.Map<TEntity>(requestBody));
             return StatusCode(
                 response.StatusCode,
                 response.Success ? response.Result : response.Error);

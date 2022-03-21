@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using GarciaCore.Application.Contracts.Persistence;
 using GarciaCore.Domain;
 
@@ -15,5 +16,6 @@ namespace GarciaCore.Application.Services
         Task<BaseResponse<long>> AddAsync(TEntity entity);
         Task<BaseResponse<long>> UpdateAsync(TKey id, object updateRequest);
         Task<BaseResponse<long>> DeleteAsync(TKey id);
+        IMapper Mapper { get; }
     }
 }
