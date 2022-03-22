@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using GarciaCore.Application.Contracts.Persistence;
@@ -15,26 +13,29 @@ namespace GarciaCore.Application.Services
         where TEntity : IEntity<TKey>
     {
         private readonly TRepository _repository;
-        private readonly IMapper _mapper;
+        /// <summary>
+        /// An AutoMapper's mapper instance. Provides mapping <typeparamref name="TEntity"/> to <typeparamref name="TDto"/> and reverse.
+        /// </summary>
+        public virtual IMapper Mapper { get; }
 
         public BaseService(TRepository repository)
         {
             _repository = repository;
-            _mapper = InitializeMapper()
+            Mapper = InitializeMapper()
                 .CreateMapper();
         }
 
         public virtual async Task<BaseResponse<IEnumerable<TDto>>> GetAllAsync()
         {
             var entities = await _repository.GetAllAsync();
-            var result = _mapper.Map<IEnumerable<TDto>>(entities);
+            var result = Mapper.Map<IEnumerable<TDto>>(entities);
             return new BaseResponse<IEnumerable<TDto>>(result);
         }
 
         public virtual async Task<BaseResponse<TDto>> GetByIdAsync(TKey id)
         {
             var entity = await _repository.GetByIdAsync(id);
-            var result = _mapper.Map<TDto>(entity);
+            var result = Mapper.Map<TDto>(entity);
             return new BaseResponse<TDto>(result);
 
         }
@@ -77,10 +78,11 @@ namespace GarciaCore.Application.Services
             return new BaseResponse<long>(result, System.Net.HttpStatusCode.OK);
         }
 
-        private MapperConfiguration InitializeMapper() =>
+        protected virtual MapperConfiguration InitializeMapper() =>
             new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<TEntity, TDto>();
+                cfg.CreateMap<TEntity, TDto>()
+                   .ReverseMap();
             });
 
     }
