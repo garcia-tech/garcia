@@ -11,6 +11,7 @@
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using MediatR;
+using GarciaCore.Application.Contracts.Persistence;
 <#= GetUsings() #>
 
 namespace <#= Namespace #>
@@ -21,6 +22,7 @@ namespace <#= Namespace #>
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddScoped(typeof(IAsyncRepository<>), typeof(Repository<>));
 <#
     if (GeneratorRepository.ContainsGenerator(GeneratorType.Repository))
     {

@@ -44,16 +44,16 @@ using GarciaCore.Persistence;
 using System.Threading;
 using System.Threading.Tasks;");
             this.Write("\r\nusing System.Reflection;\r\nusing Microsoft.Extensions.DependencyInjection;\r\nusin" +
-                    "g MediatR;\r\n");
+                    "g MediatR;\r\nusing GarciaCore.Application.Contracts.Persistence;\r\n");
             
-            #line 14 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
+            #line 15 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GetUsings()));
             
             #line default
             #line hidden
             this.Write("\r\n\r\nnamespace ");
             
-            #line 16 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
+            #line 17 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
             
             #line default
@@ -66,9 +66,10 @@ using System.Threading.Tasks;");
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddScoped(typeof(IAsyncRepository<>), typeof(Repository<>));
 ");
             
-            #line 24 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
+            #line 26 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
 
     if (GeneratorRepository.ContainsGenerator(GeneratorType.Repository))
     {
@@ -80,21 +81,21 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("            services.AddScoped<I");
             
-            #line 30 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
+            #line 32 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GetRepositoryType(item.Name)));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 30 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
+            #line 32 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GetRepositoryType(item.Name)));
             
             #line default
             #line hidden
             this.Write(">();\r\n");
             
-            #line 31 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
+            #line 33 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
 
         }
 
@@ -102,7 +103,7 @@ using System.Threading.Tasks;");
             #line default
             #line hidden
             
-            #line 34 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
+            #line 36 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
 
     }
     if (GeneratorRepository.ContainsGenerator(GeneratorType.Service))
@@ -115,21 +116,21 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("            services.AddScoped<I");
             
-            #line 41 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
+            #line 43 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write("Service, ");
             
-            #line 41 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
+            #line 43 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write("Service>();\r\n");
             
-            #line 42 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
+            #line 44 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
 
         }
 
@@ -137,7 +138,7 @@ using System.Threading.Tasks;");
             #line default
             #line hidden
             
-            #line 45 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
+            #line 47 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
 
     }
     if (GeneratorRepository.ContainsGenerator(GeneratorType.Query))
@@ -150,21 +151,21 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("            services.AddScoped<I");
             
-            #line 52 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
+            #line 54 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write("Query, ");
             
-            #line 52 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
+            #line 54 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write("Query>();\r\n");
             
-            #line 53 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
+            #line 55 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
 
         }
 
@@ -172,7 +173,7 @@ using System.Threading.Tasks;");
             #line default
             #line hidden
             
-            #line 56 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
+            #line 58 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
 
     }
 
@@ -183,7 +184,7 @@ using System.Threading.Tasks;");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 64 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
+        #line 66 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
 
     protected override Generator CreateGenerator()
 	{

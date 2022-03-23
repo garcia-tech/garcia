@@ -1,6 +1,11 @@
 {
   "Name": "Farmi",
-  "Folder": "C:\\Users\\vehbi\\source\\repos\\forfarming\\farmibackend\\src",
+  "Folder": "C:\\Users\\vehbi\\source\\repos\\Farmi\\src",
+  "Integrations": [
+    "SQLServer",
+    "MongoDB",
+    "Redis"
+  ],
   "Projects": [
     {
       "Name": "Farmi.Application",
@@ -49,6 +54,11 @@
         {
           "Name": "Mappings",
           "GeneratorName": "MappingProfileGenerator"
+        },
+        {
+          "Name": "",
+          "BaseClass": null,
+          "GeneratorName": "ApplicationServiceRegistrationGenerator"
         }
       ],
       "ProjectType": "ClassLibrary"
@@ -66,11 +76,6 @@
           "Name": "Controllers",
           "BaseClass": null,
           "GeneratorName": "CQRSWebApiControllerGenerator"
-        },
-        {
-          "Name": "",
-          "BaseClass": null,
-          "GeneratorName": "ApplicationServiceRegistrationGenerator"
         },
         {
           "Name": "",

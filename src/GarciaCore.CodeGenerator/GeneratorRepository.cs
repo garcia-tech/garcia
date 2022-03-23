@@ -7,6 +7,7 @@ namespace GarciaCore.CodeGenerator
     {
         private static List<IGenerator> Generators { get; set; } = new();
         public static List<Item> Items { get; set; } = new();
+        public static Solution Solution { get; set; }
 
         public static void AddGenerator(IGenerator generator)
         {
@@ -35,6 +36,11 @@ namespace GarciaCore.CodeGenerator
             {
                 Items.Add(item);
             }
+        }
+
+        public static bool ContainsIntegration(IntegrationType integrationType)
+        {
+            return Solution.Integrations.Count(x => x == integrationType.ToString()) > 0;
         }
     }
 }

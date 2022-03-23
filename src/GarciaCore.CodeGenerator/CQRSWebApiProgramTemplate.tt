@@ -10,10 +10,55 @@
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using GarciaCore.Application;
-using GarciaCore.Persistence.MongoDb;
-using GarciaCore.Persistence.EntityFramework;
 using GarciaCore.Infrastructure.Api.Filters;
 <#= GetUsings() #>
+using <#= Namespace #>;
+<#
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.SQLServer) 
+        || GeneratorRepository.ContainsIntegration(IntegrationType.PostgreSQL)
+        || GeneratorRepository.ContainsIntegration(IntegrationType.MySQL))
+    {
+#>
+using Microsoft.EntityFrameworkCore;
+using GarciaCore.Persistence.EntityFramework;
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.SQLServer))
+    {
+#>
+using GarciaCore.Persistence.EntityFramework.SqlServer;
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.PostgreSQL))
+    {
+#>
+using GarciaCore.Persistence.EntityFramework.PostgreSql;
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.MySQL))
+    {
+#>
+using GarciaCore.Persistence.EntityFramework.MySql;
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.MongoDB))
+    {
+#>
+using GarciaCore.Persistence.MongoDb;
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.Redis))
+    {
+#>
+using GarciaCore.Persistence.Redis;
+<#
+    }
+#>
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services
@@ -21,7 +66,6 @@ builder.Services
     {
         opt.Filters.Add(typeof(ValidationFilter<ApiError>));
     })
-    .AddFluentValidation(c => c.RegisterValidatorsFromAssemblyContaining<CreateProductCommand>())
     .AddJsonOptions(opt => opt.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
 
 builder.Services.Configure<ApiBehaviorOptions>(opt =>
@@ -32,8 +76,24 @@ builder.Services.Configure<ApiBehaviorOptions>(opt =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplicationServices();
+<#
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.MongoDB))
+    {
+#>
 builder.Services.AddMongoDbSettings(builder.Configuration);
 builder.Services.AddMongoDbRepository();
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.SQLServer) 
+        || GeneratorRepository.ContainsIntegration(IntegrationType.PostgreSQL)
+        || GeneratorRepository.ContainsIntegration(IntegrationType.MySQL))
+    {
+#>
+builder.Services.AddEfCore(builder.Configuration);
+<#
+    }
+#>
 
 var app = builder.Build();
 
