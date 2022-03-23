@@ -83,7 +83,7 @@ namespace GarciaCore.Test.Utils
             where TKey : IEquatable<TKey>
             where TMockRepository : Mock<IAsyncRepository<TEntity, TKey>>
         {
-            repository.Setup(x => x.AddAsync(It.IsAny<TEntity>()))
+            repository.Setup(x => x.AddAsync(It.IsAny<TEntity>())) 
                 .ReturnsAsync((TEntity entity) =>
                 {
                     mockDataSet.Add(entity);
@@ -124,6 +124,64 @@ namespace GarciaCore.Test.Utils
                 });
 
             return repository;
+        }
+        /// <summary>
+        /// Mocks up base repository methods.
+        /// </summary>
+        /// <typeparam name="TRepository">Desired repository type</typeparam>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <typeparam name="TKey"></typeparam>
+        /// <param name="repository"></param>
+        /// <param name="mockDataSet"></param>
+        /// <param name="testId"></param>
+        /// <returns><typeparamref name="TRepository"/></returns>
+        public static TRepository CreateMockRepository<TRepository, TEntity, TKey>(IAsyncRepository<TEntity, TKey> repository, List<TEntity> mockDataSet, TKey testId)
+            where TEntity : IEntity<TKey>
+            where TKey : IEquatable<TKey>
+            where TRepository : IAsyncRepository<TEntity, TKey>
+        {
+            var mock = Mock.Get(repository);
+            mock.Setup(x => x.AddAsync(It.IsAny<TEntity>()))
+                .ReturnsAsync((TEntity entity) =>
+                {
+                    mockDataSet.Add(entity);
+                    return 1;
+                });
+
+            mock.Setup(x => x.AddRangeAsync(It.IsAny<IEnumerable<TEntity>>()))
+                .ReturnsAsync((IEnumerable<TEntity> entities) =>
+                {
+                    mockDataSet.AddRange(entities);
+                    return entities.Count();
+                });
+
+            mock.Setup(x => x.DeleteAsync(It.IsAny<TEntity>()))
+                .ReturnsAsync((TEntity entity) =>
+                {
+                    var result = mockDataSet.Remove(entity);
+                    return Convert.ToInt32(result);
+                });
+
+            mock.Setup(x => x.DeleteManyAsync(x => x.Id.Equals(testId)))
+                .ReturnsAsync(() =>
+                {
+                    mockDataSet.RemoveAll(x => x.Id.Equals(testId));
+                    return mockDataSet.Count(x => x.Id.Equals(testId));
+                });
+
+            mock.Setup(x => x.GetByIdAsync(testId))
+                .ReturnsAsync(() =>
+                {
+                    return mockDataSet.FirstOrDefault(x => x.Id.Equals(testId));
+                });
+
+            mock.Setup(x => x.GetAllAsync())
+                .ReturnsAsync(() =>
+                {
+                    return mockDataSet;
+                });
+
+            return (TRepository) mock.Object;
         }
 
         /// <summary>
