@@ -21,6 +21,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\src\GarciaCore.Application\GarciaCore.Application.csproj" />
+		<ProjectReference Include="..\..\..\src\GarciaCore.Test.Utils\GarciaCore.Test.Utils.csproj" />
 	</ItemGroup>
 
 </Project>
