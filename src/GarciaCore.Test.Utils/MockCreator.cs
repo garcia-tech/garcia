@@ -77,7 +77,7 @@ namespace GarciaCore.Test.Utils
         /// <typeparam name="TKey"></typeparam>
         /// <param name="mockDataSet">Mock dataset that mock repository will use.</param>
         /// <param name="testId">A test id of type TKey. Mock repository will use it for generating some expressions.</param>
-        /// <returns></returns>
+        /// <returns><typeparamref name="TMockRepository"/></returns>
         public static TMockRepository CreateMockRepository<TMockRepository, TEntity, TKey>(TMockRepository repository ,List<TEntity> mockDataSet, TKey testId)
             where TEntity : IEntity<TKey>
             where TKey : IEquatable<TKey>
