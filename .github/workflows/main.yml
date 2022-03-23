@@ -137,6 +137,12 @@ jobs:
           PROJECT_FILE_PATH: src/GarciaCore.Persistence.EntityFramework.SqlServer/GarciaCore.Persistence.EntityFramework.SqlServer.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
+    - name: Publish GarciaCore.Tests.Utils
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: src/GarciaCore.Tests.Utils/GarciaCore.Tests.Utils.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
     - name: Publish GarciaCore
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:

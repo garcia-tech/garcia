@@ -27,6 +27,7 @@
     <ProjectReference Include="..\GarciaCore.Persistence.MongoDb\GarciaCore.Persistence.MongoDb.csproj" />
     <ProjectReference Include="..\GarciaCore.Persistence.Redis\GarciaCore.Persistence.Redis.csproj" />
     <ProjectReference Include="..\GarciaCore.Persistence\GarciaCore.Persistence.csproj" />
+    <ProjectReference Include="..\GarciaCore.Test.Utils\GarciaCore.Test.Utils.csproj" />
   </ItemGroup>
 
 </Project>
