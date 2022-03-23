@@ -6,14 +6,16 @@ namespace GarciaCore.CodeGenerator
 {
     public class Solution
     {
-        public Solution(string name, string folder)
+        public Solution(string name, string folder, List<string> integrations)
         {
             Name = name;
             Folder = folder;
+            Integrations = integrations;
         }
 
         public string Name { get; set; }
         public string Folder { get; set; }
+        public List<string> Integrations { get; }
         public List<Project> Projects { get; set; } = new List<Project>();
 
         //protected virtual async Task<List<GenerationResult>> Generate(Item item)
@@ -31,6 +33,7 @@ namespace GarciaCore.CodeGenerator
 
         public virtual async Task<List<GenerationResult>> Generate(List<Item> items)
         {
+            GeneratorRepository.Solution = this;
             var generationResults = new List<GenerationResult>();
 
             foreach (var item in items)

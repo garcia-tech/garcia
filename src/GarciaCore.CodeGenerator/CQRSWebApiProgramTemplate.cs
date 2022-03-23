@@ -43,23 +43,109 @@ using GarciaCore.Persistence;
 using System.Threading;
 using System.Threading.Tasks;");
             this.Write("\r\nusing FluentValidation.AspNetCore;\r\nusing Microsoft.AspNetCore.Mvc;\r\nusing Garc" +
-                    "iaCore.Application;\r\nusing GarciaCore.Persistence.MongoDb;\r\nusing GarciaCore.Per" +
-                    "sistence.EntityFramework;\r\nusing GarciaCore.Infrastructure.Api.Filters;\r\n");
+                    "iaCore.Application;\r\nusing GarciaCore.Infrastructure.Api.Filters;\r\n");
             
-            #line 16 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 14 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GetUsings()));
             
             #line default
             #line hidden
-            this.Write(@"
+            this.Write("\r\nusing ");
+            
+            #line 15 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
+            
+            #line default
+            #line hidden
+            this.Write(";\r\n");
+            
+            #line 16 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.SQLServer) 
+        || GeneratorRepository.ContainsIntegration(IntegrationType.PostgreSQL)
+        || GeneratorRepository.ContainsIntegration(IntegrationType.MySQL))
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("using Microsoft.EntityFrameworkCore;\r\nusing GarciaCore.Persistence.EntityFramewor" +
+                    "k;\r\n");
+            
+            #line 24 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.SQLServer))
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("using GarciaCore.Persistence.EntityFramework.SqlServer;\r\n");
+            
+            #line 31 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.PostgreSQL))
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("using GarciaCore.Persistence.EntityFramework.PostgreSql;\r\n");
+            
+            #line 38 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.MySQL))
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("using GarciaCore.Persistence.EntityFramework.MySql;\r\n");
+            
+            #line 45 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.MongoDB))
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("using GarciaCore.Persistence.MongoDb;\r\n");
+            
+            #line 52 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.Redis))
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("using GarciaCore.Persistence.Redis;\r\n");
+            
+            #line 59 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+
+    }
+
+            
+            #line default
+            #line hidden
+            this.Write(@"
 var builder = WebApplication.CreateBuilder(args);
 builder.Services
     .AddControllers(opt =>
     {
         opt.Filters.Add(typeof(ValidationFilter<ApiError>));
     })
-    .AddFluentValidation(c => c.RegisterValidatorsFromAssemblyContaining<CreateProductCommand>())
     .AddJsonOptions(opt => opt.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
 
 builder.Services.Configure<ApiBehaviorOptions>(opt =>
@@ -70,9 +156,41 @@ builder.Services.Configure<ApiBehaviorOptions>(opt =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplicationServices();
-builder.Services.AddMongoDbSettings(builder.Configuration);
-builder.Services.AddMongoDbRepository();
+");
+            
+            #line 79 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.MongoDB))
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("builder.Services.AddMongoDbSettings(builder.Configuration);\r\nbuilder.Services.Add" +
+                    "MongoDbRepository();\r\n");
+            
+            #line 85 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.SQLServer) 
+        || GeneratorRepository.ContainsIntegration(IntegrationType.PostgreSQL)
+        || GeneratorRepository.ContainsIntegration(IntegrationType.MySQL))
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("builder.Services.AddEfCore(builder.Configuration);\r\n");
+            
+            #line 94 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+
+    }
+
+            
+            #line default
+            #line hidden
+            this.Write(@"
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -96,7 +214,7 @@ public partial class Program { }
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 57 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+        #line 117 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     protected override Generator CreateGenerator()
 	{

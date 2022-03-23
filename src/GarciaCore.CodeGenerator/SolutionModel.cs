@@ -7,5 +7,6 @@ namespace GarciaCore.CodeGenerator
         public string Name { get; set; }
         public string Folder { get; set; }
         public List<ProjectModel> Projects { get; set; }
+        public List<string> Integrations { get; set; }
     }
 }
