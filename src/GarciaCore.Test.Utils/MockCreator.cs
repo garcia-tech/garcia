@@ -125,7 +125,16 @@ namespace GarciaCore.Test.Utils
 
             return repository;
         }
-
+        /// <summary>
+        /// Mocks up base repository methods.
+        /// </summary>
+        /// <typeparam name="TRepository">Desired repository type</typeparam>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <typeparam name="TKey"></typeparam>
+        /// <param name="repository"></param>
+        /// <param name="mockDataSet"></param>
+        /// <param name="testId"></param>
+        /// <returns><typeparamref name="TRepository"/></returns>
         public static TRepository CreateMockRepository<TRepository, TEntity, TKey>(IAsyncRepository<TEntity, TKey> repository, List<TEntity> mockDataSet, TKey testId)
             where TEntity : IEntity<TKey>
             where TKey : IEquatable<TKey>
