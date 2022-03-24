@@ -4,6 +4,8 @@ using GarciaCore.Domain;
 using GarciaCore.Application;
 using GarciaCore.Application.Contracts.Persistence;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace GarciaCore.Test.Utils
 {
@@ -185,6 +187,66 @@ namespace GarciaCore.Test.Utils
         }
 
         /// <summary>
+        /// Mocks up base repository methods.
+        /// Returns as instance of desired repository type
+        /// </summary>
+        /// <typeparam name="TRepository">Desired repository type</typeparam>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <typeparam name="TKey"></typeparam>
+        /// <param name="repository"></param>
+        /// <param name="mockDataSet"></param>
+        /// <param name="testId"></param>
+        /// <returns><typeparamref name="TRepository"/></returns>
+        public static TRepository CreateMockRepository<TRepository, TEntity, TKey>(List<TEntity> mockDataSet, TKey testId)
+            where TEntity : IEntity<TKey>
+            where TKey : IEquatable<TKey>
+            where TRepository : class, IAsyncRepository<TEntity, TKey>
+        {
+            var mock = new Mock<IAsyncRepository<TEntity, TKey>>();
+            mock.Setup(x => x.AddAsync(It.IsAny<TEntity>()))
+                .ReturnsAsync((TEntity entity) =>
+                {
+                    mockDataSet.Add(entity);
+                    return 1;
+                });
+
+            mock.Setup(x => x.AddRangeAsync(It.IsAny<IEnumerable<TEntity>>()))
+                .ReturnsAsync((IEnumerable<TEntity> entities) =>
+                {
+                    mockDataSet.AddRange(entities);
+                    return entities.Count();
+                });
+
+            mock.Setup(x => x.DeleteAsync(It.IsAny<TEntity>()))
+                .ReturnsAsync((TEntity entity) =>
+                {
+                    var result = mockDataSet.Remove(entity);
+                    return Convert.ToInt32(result);
+                });
+
+            mock.Setup(x => x.DeleteManyAsync(x => x.Id.Equals(testId)))
+                .ReturnsAsync(() =>
+                {
+                    mockDataSet.RemoveAll(x => x.Id.Equals(testId));
+                    return mockDataSet.Count(x => x.Id.Equals(testId));
+                });
+
+            mock.Setup(x => x.GetByIdAsync(testId))
+                .ReturnsAsync(() =>
+                {
+                    return mockDataSet.FirstOrDefault(x => x.Id.Equals(testId));
+                });
+
+            mock.Setup(x => x.GetAllAsync())
+                .ReturnsAsync(() =>
+                {
+                    return mockDataSet;
+                });
+
+            return mock.As<TRepository>().Object;
+        }
+
+        /// <summary>
         /// <inheritdoc cref="WebApplicationFactory{TEntryPoint}.WebApplicationFactory"/>
         /// </summary>
         /// <typeparam name="TEntryPoint"></typeparam>
@@ -207,6 +269,23 @@ namespace GarciaCore.Test.Utils
                 .WithWebHostBuilder(builder =>
                 {
                     builder.ConfigureServices(services);
+                })
+                .CreateClient();
+        }
+
+        /// <summary>
+        /// <inheritdoc cref="WebApplicationFactory{TEntryPoint}.WebApplicationFactory"/>
+        /// </summary>
+        /// <typeparam name="TEntryPoint"></typeparam>
+        /// <returns><see cref="HttpClient"/></returns>
+        public static HttpClient CreateTestClient<TEntryPoint>(Action<WebHostBuilderContext, IConfigurationBuilder> configureDelegate, Action<IServiceCollection> services) 
+            where TEntryPoint : class
+        {
+            return new WebApplicationFactory<TEntryPoint>()
+                .WithWebHostBuilder(builder =>
+                {
+                    builder.ConfigureServices(services);
+                    builder.ConfigureAppConfiguration(configureDelegate);
                 })
                 .CreateClient();
         }
