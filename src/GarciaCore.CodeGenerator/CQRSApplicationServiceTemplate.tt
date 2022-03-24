@@ -30,7 +30,7 @@ namespace <#= Namespace #>
 	    {
             string innerTypeName = this.generator.GetInnerTypeName(property, postfix: GeneratorRepository.ApplicationModelDtoPostfix);
 #>
-        Task<<#= innerTypeName #>> GetAllAsync();
+        Task<List<<#= Item.Name #><#= GeneratorRepository.ApplicationModelDtoPostfix #>>> GetAllAsync();
         Task<<#= innerTypeName #>> Get<#= property.Name.ToPascalCase() #>Async(<#= IdTypeName #> id);
 <#
         }
@@ -63,10 +63,10 @@ namespace <#= Namespace #>
 	    {
             string innerTypeName = this.generator.GetInnerTypeName(property, postfix: GeneratorRepository.ApplicationModelDtoPostfix);
 #>
-        public async Task<<#= innerTypeName #>> GetAllAsync()
+        public async Task<List<<#= Item.Name #><#= GeneratorRepository.ApplicationModelDtoPostfix #>>> GetAllAsync()
         {
             var items = await _<#= Item.Name.ToCamelCase() #>Repository.GetAllAsync();
-            return _mapper.Map<<#= innerTypeName #>>(items);
+            return _mapper.Map<List<<#= Item.Name #><#= GeneratorRepository.ApplicationModelDtoPostfix #>>>(items);
         }
         
         public async Task<<#= innerTypeName #>> Get<#= property.Name.ToPascalCase() #>Async(<#= IdTypeName #> id)

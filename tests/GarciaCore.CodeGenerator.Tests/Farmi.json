@@ -55,11 +55,15 @@
           "Name": "Mappings",
           "GeneratorName": "MappingProfileGenerator"
         },
-        
         {
           "Name": "",
           "BaseClass": null,
           "GeneratorName": "EntityFrameworkDbContextGenerator"
+        },
+        {
+          "Name": "",
+          "BaseClass": null,
+          "GeneratorName": "ApplicationServiceRegistrationGenerator"
         }
       ],
       "ProjectType": "ClassLibrary"
@@ -92,11 +96,6 @@
           "Name": "",
           "BaseClass": null,
           "GeneratorName": "WebApiAppSettingsGenerator"
-        },
-        {
-          "Name": "",
-          "BaseClass": null,
-          "GeneratorName": "ApplicationServiceRegistrationGenerator"
         }
       ],
       "ProjectType": "WebApi"
