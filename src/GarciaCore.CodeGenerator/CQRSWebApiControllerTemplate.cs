@@ -164,7 +164,14 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write("Service;\r\n        }\r\n\r\n        [HttpPost(Name = \"Create");
+            this.Write("Service;\r\n        }\r\n\r\n        [HttpPost(\"api/");
+            
+            #line 31 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\", Name = \"Create");
             
             #line 31 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
@@ -185,7 +192,7 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write("Command(Create");
+            this.Write("([FromBody] Create");
             
             #line 32 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
@@ -194,7 +201,14 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("Command command)\r\n        {\r\n            var response = await _mediator.Send(comm" +
                     "and);\r\n            return StatusCode(response.StatusCode, response.Result);\r\n   " +
-                    "     }\r\n\r\n        [HttpPut(Name = \"Update");
+                    "     }\r\n\r\n        [HttpPut(\"api/");
+            
+            #line 38 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\", Name = \"Update");
             
             #line 38 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
@@ -215,7 +229,7 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write("Command(Update");
+            this.Write("([FromBody] Update");
             
             #line 39 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
@@ -224,7 +238,14 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("Command command)\r\n        {\r\n            var response = await _mediator.Send(comm" +
                     "and);\r\n            return StatusCode(response.StatusCode, response.Result);\r\n   " +
-                    "     }\r\n\r\n        [HttpDelete(\"{id}\", Name = \"Delete");
+                    "     }\r\n\r\n        [HttpDelete(\"api/");
+            
+            #line 45 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
+            
+            #line default
+            #line hidden
+            this.Write("/{id}\", Name = \"Delete");
             
             #line 45 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
@@ -245,7 +266,7 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write("Command(Delete");
+            this.Write("(Delete");
             
             #line 46 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));

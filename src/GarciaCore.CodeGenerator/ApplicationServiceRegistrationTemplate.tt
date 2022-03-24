@@ -78,41 +78,6 @@ namespace <#= Namespace #>
     if (GeneratorRepository.ContainsIntegration(IntegrationType.Authentication))
     {
 #>
-    public class LoggedInUserService : ILoggedInUserService
-    {
-        public int UserId { get; set; }
-    }
-
-    public class AuthenticationService : IAuthenticationService
-    {
-        public async Task<IUser> ValidateUser(string userName, string password)
-        {
-            var model = new UserModel()
-            {
-                UserName = userName,
-                Id = "1",
-                Roles = new List<string>()
-                {
-                    "User"
-                }
-            };
-
-            return model;
-        }
-    }
-
-    public class UserModel : IUser
-    {
-        public string UserName { get; set; }
-        public string Id { get; set; }
-        public List<string> Roles { get; set; } = new List<string>();
-    }
-
-    public class CredentialsModel
-    {
-        public string UserName { get; set; }
-        public string Password { get; set; }
-    }
 <#
     }
 #>

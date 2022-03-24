@@ -219,44 +219,8 @@ using GarciaCore.Infrastructure.Identity;
             
             #line default
             #line hidden
-            this.Write(@"    public class LoggedInUserService : ILoggedInUserService
-    {
-        public int UserId { get; set; }
-    }
-
-    public class AuthenticationService : IAuthenticationService
-    {
-        public async Task<IUser> ValidateUser(string userName, string password)
-        {
-            var model = new UserModel()
-            {
-                UserName = userName,
-                Id = ""1"",
-                Roles = new List<string>()
-                {
-                    ""User""
-                }
-            };
-
-            return model;
-        }
-    }
-
-    public class UserModel : IUser
-    {
-        public string UserName { get; set; }
-        public string Id { get; set; }
-        public List<string> Roles { get; set; } = new List<string>();
-    }
-
-    public class CredentialsModel
-    {
-        public string UserName { get; set; }
-        public string Password { get; set; }
-    }
-");
             
-            #line 116 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
+            #line 81 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
 
     }
 
@@ -267,7 +231,7 @@ using GarciaCore.Infrastructure.Identity;
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 121 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
+        #line 86 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\ApplicationServiceRegistrationTemplate.tt"
 
     protected override Generator CreateGenerator()
 	{

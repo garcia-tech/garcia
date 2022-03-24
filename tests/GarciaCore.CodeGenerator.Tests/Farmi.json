@@ -55,11 +55,7 @@
           "Name": "Mappings",
           "GeneratorName": "MappingProfileGenerator"
         },
-        {
-          "Name": "",
-          "BaseClass": null,
-          "GeneratorName": "ApplicationServiceRegistrationGenerator"
-        },
+        
         {
           "Name": "",
           "BaseClass": null,
@@ -96,6 +92,11 @@
           "Name": "",
           "BaseClass": null,
           "GeneratorName": "WebApiAppSettingsGenerator"
+        },
+        {
+          "Name": "",
+          "BaseClass": null,
+          "GeneratorName": "ApplicationServiceRegistrationGenerator"
         }
       ],
       "ProjectType": "WebApi"
