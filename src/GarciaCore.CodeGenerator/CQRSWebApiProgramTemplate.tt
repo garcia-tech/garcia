@@ -24,6 +24,13 @@ using GarciaCore.Persistence.EntityFramework;
 <#
     }
 
+    if (GeneratorRepository.ContainsGenerator(GeneratorType.WebApiAuthentication))
+    {
+#>
+using GarciaCore.Application.Contracts.Identity;
+<#
+    }
+
     if (GeneratorRepository.ContainsIntegration(IntegrationType.SQLServer))
     {
 #>
@@ -77,6 +84,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplicationServices();
 <#
+    if (GeneratorRepository.ContainsGenerator(GeneratorType.WebApiAuthentication))
+    {
+#>
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddScoped<ILoggedInUserService, LoggedInUserService>();
+<#
+    }
+
     if (GeneratorRepository.ContainsIntegration(IntegrationType.MongoDB))
     {
 #>
@@ -90,7 +105,7 @@ builder.Services.AddMongoDbRepository();
         || GeneratorRepository.ContainsIntegration(IntegrationType.MySQL))
     {
 #>
-builder.Services.AddEfCore(builder.Configuration);
+builder.Services.AddEfCoreInMemory<<#= GeneratorRepository.Solution.Name #>DbContext>("<#= GeneratorRepository.Solution.Name #>");
 <#
     }
 #>

@@ -6,6 +6,7 @@
         PostgreSQL,
         MongoDB,
         MySQL,
-        Redis
+        Redis,
+        Authentication
     }
 }

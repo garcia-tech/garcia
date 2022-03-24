@@ -59,6 +59,11 @@
           "Name": "",
           "BaseClass": null,
           "GeneratorName": "ApplicationServiceRegistrationGenerator"
+        },
+        {
+          "Name": "",
+          "BaseClass": null,
+          "GeneratorName": "EntityFrameworkDbContextGenerator"
         }
       ],
       "ProjectType": "ClassLibrary"
@@ -81,6 +86,16 @@
           "Name": "",
           "BaseClass": null,
           "GeneratorName": "CQRSWebApiProgramGenerator"
+        },
+        {
+          "Name": "Controllers",
+          "BaseClass": null,
+          "GeneratorName": "WebApiAuthenticationGenerator"
+        },
+        {
+          "Name": "",
+          "BaseClass": null,
+          "GeneratorName": "WebApiAppSettingsGenerator"
         }
       ],
       "ProjectType": "WebApi"

@@ -76,6 +76,18 @@ using System.Threading.Tasks;");
 
     }
 
+    if (GeneratorRepository.ContainsGenerator(GeneratorType.WebApiAuthentication))
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("using GarciaCore.Application.Contracts.Identity;\r\n");
+            
+            #line 31 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+
+    }
+
     if (GeneratorRepository.ContainsIntegration(IntegrationType.SQLServer))
     {
 
@@ -84,7 +96,7 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("using GarciaCore.Persistence.EntityFramework.SqlServer;\r\n");
             
-            #line 31 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 38 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -96,7 +108,7 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("using GarciaCore.Persistence.EntityFramework.PostgreSql;\r\n");
             
-            #line 38 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 45 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -108,7 +120,7 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("using GarciaCore.Persistence.EntityFramework.MySql;\r\n");
             
-            #line 45 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 52 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -120,7 +132,7 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("using GarciaCore.Persistence.MongoDb;\r\n");
             
-            #line 52 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 59 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -132,7 +144,7 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("using GarciaCore.Persistence.Redis;\r\n");
             
-            #line 59 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 66 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -158,7 +170,20 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddApplicationServices();
 ");
             
-            #line 79 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 86 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+
+    if (GeneratorRepository.ContainsGenerator(GeneratorType.WebApiAuthentication))
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();\r\nbui" +
+                    "lder.Services.AddScoped<ILoggedInUserService, LoggedInUserService>();\r\n");
+            
+            #line 92 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+
+    }
 
     if (GeneratorRepository.ContainsIntegration(IntegrationType.MongoDB))
     {
@@ -169,7 +194,7 @@ builder.Services.AddApplicationServices();
             this.Write("builder.Services.AddMongoDbSettings(builder.Configuration);\r\nbuilder.Services.Add" +
                     "MongoDbRepository();\r\n");
             
-            #line 85 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 100 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -181,9 +206,23 @@ builder.Services.AddApplicationServices();
             
             #line default
             #line hidden
-            this.Write("builder.Services.AddEfCore(builder.Configuration);\r\n");
+            this.Write("builder.Services.AddEfCoreInMemory<");
             
-            #line 94 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 108 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorRepository.Solution.Name));
+            
+            #line default
+            #line hidden
+            this.Write("DbContext>(\"");
+            
+            #line 108 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorRepository.Solution.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\");\r\n");
+            
+            #line 109 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -214,7 +253,7 @@ public partial class Program { }
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 117 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+        #line 132 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     protected override Generator CreateGenerator()
 	{

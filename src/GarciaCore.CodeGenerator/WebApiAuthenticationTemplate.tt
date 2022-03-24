@@ -14,70 +14,52 @@ using MediatR;
 using GarciaCore.Application.Contracts.Persistence;
 using GarciaCore.Persistence.EntityFramework;
 using GarciaCore.Application;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc;
 using GarciaCore.Application.Contracts.Identity;
 using GarciaCore.Infrastructure.Identity;
+using Microsoft.Extensions.Options;
 <#= GetUsings() #>
 
 namespace <#= Namespace #>
 {
-    public static class ApplicationServiceRegistration
+    [ApiController]
+    [Route("[controller]")]
+    public class AuthenticationController : ControllerBase
     {
-        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+        private readonly ILogger<AuthenticationController> _logger;
+        private readonly IAuthenticationService _authenticationService;
+        private readonly IJwtService _jwtService;
+        private readonly JwtIssuerOptions _jwtOptions;
+
+        public AuthenticationController(ILogger<AuthenticationController> logger, IAuthenticationService authenticationService, IJwtService jwtService, IOptions<JwtIssuerOptions> jwtOptions)
         {
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddScoped(typeof(IAsyncRepository<>), typeof(EntityFrameworkRepository<>));
-            services.AddScoped<IJwtService, JwtService>();
-<#
-    if (GeneratorRepository.ContainsGenerator(GeneratorType.EntityFrameworkDbContext))
-    {
-#>
-            services.AddScoped<DbContext, <#= GeneratorRepository.Solution.Name #>DbContext>();
-<#
+            _logger = logger;
+            _authenticationService = authenticationService;
+            _jwtService = jwtService;
+            _jwtOptions = jwtOptions.Value;
+        }
+
+        [HttpPost("token")]
+        public virtual async Task<IActionResult> PostToken([FromBody] CredentialsModel credentials)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var identity = await _authenticationService.ValidateUser(credentials.UserName, credentials.Password);
+
+            if (identity == null)
+            {
+                return BadRequest("invalid_grant");
+            }
+
+            var jwt = await _jwtService.GenerateJwt(identity.UserName, identity.Id, identity.Roles);
+            return new OkObjectResult(jwt);
+        }
     }
 
-    if (GeneratorRepository.ContainsGenerator(GeneratorType.Repository))
-    {
-        foreach (var item in GeneratorRepository.Items)
-        {
-#>
-            services.AddScoped<I<#= GetRepositoryType(item.Name) #>, <#= GetRepositoryType(item.Name) #>>();
-<#
-        }
-#>
-<#
-    }
-    if (GeneratorRepository.ContainsGenerator(GeneratorType.Service))
-    {
-        foreach (var item in GeneratorRepository.Items.Where(x => x.AddApplication))
-        {
-#>
-            services.AddScoped<I<#= item.Name #>Service, <#= item.Name #>Service>();
-<#
-        }
-#>
-<#
-    }
-    if (GeneratorRepository.ContainsGenerator(GeneratorType.Query))
-    {
-        foreach (var item in GeneratorRepository.Items.Where(x => x.AddApplication))
-        {
-#>
-            services.AddScoped<I<#= item.Name #>Query, <#= item.Name #>Query>();
-<#
-        }
-#>
-<#
-    }
-#>
-            return services;
-        }
-    }
-<#
-    if (GeneratorRepository.ContainsIntegration(IntegrationType.Authentication))
-    {
-#>
     public class LoggedInUserService : ILoggedInUserService
     {
         public int UserId { get; set; }
@@ -113,9 +95,6 @@ namespace <#= Namespace #>
         public string UserName { get; set; }
         public string Password { get; set; }
     }
-<#
-    }
-#>
 }
 
 <#+

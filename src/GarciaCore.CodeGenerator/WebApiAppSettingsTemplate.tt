@@ -1,0 +1,24 @@
+<#@ template language="C#" inherits="BaseTemplate" #>
+
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*",
+  "JwtIssuerOptions": {
+    "Issuer": "<#= GeneratorRepository.Solution.Name #>",
+    "Audience": "http://<#= GeneratorRepository.Solution.Name #>-app.com/"
+  }
+}
+
+
+<#+
+    protected override Generator CreateGenerator()
+	{
+		return new ApplicationServiceRegistrationGenerator();
+	}
+#>

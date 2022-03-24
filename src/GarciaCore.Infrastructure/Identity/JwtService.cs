@@ -8,15 +8,20 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
 using System.Text.Json;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace GarciaCore.Infrastructure.Identity
 {
     public class JwtService : IJwtService
     {
         private readonly JwtIssuerOptions _jwtOptions;
+        protected string secretKey = "8b95c3c301a54b39b7b9b4c612bc6844";
+        protected SymmetricSecurityKey _signingKey;
 
         public JwtService(IOptions<JwtIssuerOptions> jwtOptions)
         {
+            _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
             _jwtOptions = jwtOptions.Value;
             ThrowIfInvalidOptions(_jwtOptions);
         }
@@ -98,10 +103,10 @@ namespace GarciaCore.Infrastructure.Identity
             return JsonSerializer.Serialize(response);
         }
 
-        public Task<string> GenerateJwt(string userName, string userId, List<string> roles)
+        public async Task<string> GenerateJwt(string userName, string userId, List<string> roles)
         {
             var claims = GenerateClaimsIdentity(userName, userId, roles);
-            return GenerateJwt(claims, userName);
+            return await GenerateJwt(claims, userName);
         }
     }
 }
