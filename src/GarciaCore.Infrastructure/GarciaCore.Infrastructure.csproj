@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <PackageReference Include="dein.ToolBox" Version="1.7.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.3" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="5.0.0" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.16.0" />
     <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.255">

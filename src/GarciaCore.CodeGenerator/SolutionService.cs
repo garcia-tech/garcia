@@ -75,6 +75,51 @@ namespace GarciaCore.CodeGenerator
             return model;
         }
 
+        public async Task<List<Item>> CreateItemsAsync(string itemsJson)
+        {
+            var itemsModel = JsonSerializer.Deserialize<ItemsModel>(itemsJson);
+            var messages = new List<string>();
+
+            if (itemsModel == null)
+                throw new CodeGeneratorException("Cannot convert json to ItemsModel, please check sample json.");
+
+            var items = new List<Item>();
+
+            foreach (var itemModel in itemsModel.Items)
+            {
+                if (string.IsNullOrEmpty(itemModel.IdType))
+                    itemModel.IdType = IdType.Int.ToString();
+
+                Enum.TryParse(itemModel.IdType, out IdType idType);
+                var item = new Item(itemModel.Name, itemModel.IsEnum, idType, itemModel.AddApplication);
+
+                foreach (var propertyModel in itemModel.Properties)
+                {
+                    if (string.IsNullOrEmpty(propertyModel.Type))
+                        propertyModel.Type = ItemPropertyType.String.ToString();
+
+                    if (string.IsNullOrEmpty(propertyModel.MappingType))
+                        propertyModel.MappingType = ItemPropertyMappingType.Property.ToString();
+
+                    Enum.TryParse(propertyModel.Type, out ItemPropertyType itemPropertyType);
+                    Enum.TryParse(propertyModel.MappingType, out ItemPropertyMappingType itemPropertyMappingType);
+                    Item innerItem = null;
+
+                    if (!string.IsNullOrEmpty(propertyModel.InnerType))
+                    {
+                        innerItem = new Item(propertyModel.InnerType, false, item.IdType, false);
+                    }
+
+                    var itemProperty = new ItemProperty(propertyModel.Name, itemPropertyType, itemPropertyMappingType, innerItem);
+                    item.Properties.Add(itemProperty);
+                }
+
+                items.Add(item);
+            }
+
+            return items;
+        }
+
         public async Task<SolutionGenerationResult> CreateSolutionAsync(string solutionJson)
         {
             //var solution = JsonConvert.DeserializeObject<Solution>(solutionJson);

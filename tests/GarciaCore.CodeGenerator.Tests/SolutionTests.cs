@@ -129,6 +129,47 @@ namespace GarciaCore.CodeGenerator.Tests
         }
 
         [Fact]
+        public async Task CreateItemsFromFileAsync()
+        {
+            //var itemsModel = new ItemsModel()
+            //{
+            //    Items = new List<ItemModel>()
+            //    {
+            //        new ItemModel()
+            //        {
+            //            AddApplication = true,
+            //            IdType = IdType.Long.ToString(),
+            //            IsEnum = false,
+            //            Name = "Content",
+            //            Properties = new List<ItemPropertyModel>()
+            //            {
+            //                new ItemPropertyModel()
+            //                {
+            //                    InnerType = "DateTime",
+            //                    MappingType = "Property",
+            //                },
+            //                new ItemPropertyModel()
+            //                {
+            //                    InnerType = "ContentItem",
+            //                    MappingType = "List",
+            //                    Type = "Class",
+            //                    Name = "Items"
+            //                }
+            //            }
+            //        }
+            //    }
+            //};
+
+            //_output.WriteLine(JsonSerializer.Serialize(itemsModel));
+            //return;
+            var json = await File.ReadAllTextAsync("Farmi.json");
+            var solution = await _solutionService.CreateSolutionAsync(json);
+            var itemsJson = await File.ReadAllTextAsync("FarmiItems.json");
+            var items = await _solutionService.CreateItemsAsync(itemsJson);
+            var result = await solution.Solution.Generate(items);
+        }
+
+        [Fact]
         public async Task CreateSolutionFromFileAsync()
         {
             var json = await File.ReadAllTextAsync("Farmi.json");
@@ -179,6 +220,7 @@ namespace GarciaCore.CodeGenerator.Tests
                 }
             };
 
+            _output.WriteLine(JsonSerializer.Serialize(items));
             var result = await solution.Solution.Generate(items);
             result.ShouldNotBeNull();
             result.ShouldNotBeEmpty();
@@ -196,8 +238,8 @@ namespace GarciaCore.CodeGenerator.Tests
                 item.Folder.ShouldNotBeNullOrEmpty();
                 item.Generator.ShouldNotBeNull();
                 item.Code.ShouldNotBeNullOrEmpty();
-                _output.WriteLine($"// Folder: {item.Folder}, File: {item.File},  Generator: {item.Generator.GetType().Name}");
-                _output.WriteLine(item.Code);
+                // _output.WriteLine($"// Folder: {item.Folder}, File: {item.File},  Generator: {item.Generator.GetType().Name}");
+                // _output.WriteLine(item.Code);
                 Directory.CreateDirectory(item.Folder);
                 await File.WriteAllTextAsync($"{item.Folder}\\{item.File}", item.Code);
             }

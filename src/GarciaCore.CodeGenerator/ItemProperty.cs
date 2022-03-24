@@ -3,10 +3,10 @@
     public class ItemProperty
     {
         public string Name { get; set; }
-        public bool IsNullable { get; set; }
         public ItemPropertyType Type { get; set; }
         public ItemPropertyMappingType MappingType { get; set; }
         public Item? InnerType { get; set; }
+        public bool IsNullable { get; set; }
         public int MinLength { get; set; }
         public int MaxLength { get; set; }
         public int? ItemId { get; set; }
@@ -22,5 +22,17 @@
         //public string FieldName { get; set; }
         //public bool AddOnChange { get; set; }
         //public string EditGroupName { get; set; }
+
+        public ItemProperty()
+        {
+        }
+
+        public ItemProperty(string name, ItemPropertyType type, ItemPropertyMappingType mappingType, Item? innerType)
+        {
+            Name = name;
+            Type = type;
+            MappingType = mappingType;
+            InnerType = innerType;
+        }
     }
 }

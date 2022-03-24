@@ -28,22 +28,22 @@ namespace <#= Namespace #>
             _<#= Item.Name.ToCamelCase() #>Service = <#= Item.Name.ToCamelCase() #>Service;
         }
 
-        [HttpPost(Name = "Create<#= Item.Name #>")]
-        public async Task<ActionResult<BaseResponse<Create<#= Item.Name #>Command>>> Create<#= Item.Name #>Command(Create<#= Item.Name #>Command command)
+        [HttpPost("api/<#= Item.Name #>", Name = "Create<#= Item.Name #>")]
+        public async Task<ActionResult<BaseResponse<Create<#= Item.Name #>Command>>> Create<#= Item.Name #>([FromBody] Create<#= Item.Name #>Command command)
         {
             var response = await _mediator.Send(command);
             return StatusCode(response.StatusCode, response.Result);
         }
 
-        [HttpPut(Name = "Update<#= Item.Name #>")]
-        public async Task<ActionResult<BaseResponse<Update<#= Item.Name #>Command>>> Update<#= Item.Name #>Command(Update<#= Item.Name #>Command command)
+        [HttpPut("api/<#= Item.Name #>", Name = "Update<#= Item.Name #>")]
+        public async Task<ActionResult<BaseResponse<Update<#= Item.Name #>Command>>> Update<#= Item.Name #>([FromBody] Update<#= Item.Name #>Command command)
         {
             var response = await _mediator.Send(command);
             return StatusCode(response.StatusCode, response.Result);
         }
 
-        [HttpDelete("{id}", Name = "Delete<#= Item.Name #>")]
-        public async Task<ActionResult<BaseResponse<Delete<#= Item.Name #>Command>>> Delete<#= Item.Name #>Command(Delete<#= Item.Name #>Command command)
+        [HttpDelete("api/<#= Item.Name #>/{id}", Name = "Delete<#= Item.Name #>")]
+        public async Task<ActionResult<BaseResponse<Delete<#= Item.Name #>Command>>> Delete<#= Item.Name #>(Delete<#= Item.Name #>Command command)
         {
             var response = await _mediator.Send(command);
             return StatusCode(response.StatusCode, response.Result);

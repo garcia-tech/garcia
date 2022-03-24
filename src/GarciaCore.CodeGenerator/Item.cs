@@ -10,6 +10,18 @@ namespace GarciaCore.CodeGenerator
         public IdType IdType { get; set; }
         public bool AddApplication { get; set; }
 
+        public Item()
+        {
+        }
+
+        public Item(string name, bool isEnum, IdType idType, bool addApplication)
+        {
+            Name = name;
+            IsEnum = isEnum;
+            IdType = idType;
+            AddApplication = addApplication;
+        }
+
         public override string ToString()
         {
             return this.Name;

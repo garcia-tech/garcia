@@ -12,6 +12,11 @@ using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using MediatR;
 using GarciaCore.Application.Contracts.Persistence;
+using GarciaCore.Persistence.EntityFramework;
+using GarciaCore.Application;
+using Microsoft.EntityFrameworkCore;
+using GarciaCore.Application.Contracts.Identity;
+using GarciaCore.Infrastructure.Identity;
 <#= GetUsings() #>
 
 namespace <#= Namespace #>
@@ -22,8 +27,16 @@ namespace <#= Namespace #>
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddScoped(typeof(IAsyncRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IAsyncRepository<>), typeof(EntityFrameworkRepository<>));
+            services.AddScoped<IJwtService, JwtService>();
 <#
+    if (GeneratorRepository.ContainsGenerator(GeneratorType.EntityFrameworkDbContext))
+    {
+#>
+            services.AddScoped<DbContext, <#= GeneratorRepository.Solution.Name #>DbContext>();
+<#
+    }
+
     if (GeneratorRepository.ContainsGenerator(GeneratorType.Repository))
     {
         foreach (var item in GeneratorRepository.Items)
@@ -61,6 +74,13 @@ namespace <#= Namespace #>
             return services;
         }
     }
+<#
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.Authentication))
+    {
+#>
+<#
+    }
+#>
 }
 
 <#+

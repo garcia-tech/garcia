@@ -24,6 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="FarmiItems.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Farmi - Copy.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

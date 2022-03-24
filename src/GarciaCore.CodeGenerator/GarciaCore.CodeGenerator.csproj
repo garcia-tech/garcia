@@ -21,11 +21,29 @@
       <None Remove="CQRSApplicationUpdateCommandTemplate.tt" />
       <None Remove="CQRSWebApiControllerTemplate.tt" />
       <None Remove="CQRSWebApiProgramTemplate.tt" />
+      <None Remove="EntityFrameworkDbContextTemplate.tt" />
       <None Remove="EntityTemplate.tt" />
       <None Remove="MappingProfileTemplate.tt" />
       <None Remove="RepositoryTemplate.tt" />
+      <None Remove="WebApiAppSettingsTemplate.tt" />
+      <None Remove="WebApiAuthenticationTemplate.tt" />
     </ItemGroup>
     <ItemGroup>
+      <Compile Update="WebApiAppSettingsTemplate.cs">
+        <DependentUpon>WebApiAppSettingsTemplate.tt</DependentUpon>
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+      </Compile>
+      <Compile Update="WebApiAuthenticationTemplate.cs">
+        <DependentUpon>WebApiAuthenticationTemplate.tt</DependentUpon>
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+      </Compile>
+      <Compile Update="EntityFrameworkDbContextTemplate.cs">
+        <DependentUpon>EntityFrameworkDbContextTemplate.tt</DependentUpon>
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+      </Compile>
       <Compile Update="BaseTemplate.cs">
         <AutoGen>True</AutoGen>
         <DesignTime>True</DesignTime>
@@ -124,6 +142,18 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Content Include="WebApiAppSettingsTemplate.tt">
+        <LastGenOutput>WebApiAppSettingsTemplate.cs</LastGenOutput>
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+      </Content>
+      <Content Include="WebApiAuthenticationTemplate.tt">
+        <LastGenOutput>WebApiAuthenticationTemplate.cs</LastGenOutput>
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+      </Content>
+      <Content Include="EntityFrameworkDbContextTemplate.tt">
+        <LastGenOutput>EntityFrameworkDbContextTemplate.cs</LastGenOutput>
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+      </Content>
       <Content Include="BaseTemplate.tt">
         <Generator>TextTemplatingFilePreprocessor</Generator>
         <LastGenOutput>BaseTemplate.cs</LastGenOutput>

@@ -16,5 +16,8 @@ namespace GarciaCore.CodeGenerator
         MappingProfile = 256,
         ApplicationServiceRegistration = 512,
         Program = 1024,
+        EntityFrameworkDbContext = 2048,
+        WebApiAuthentication = 4096,
+        WebApiAppSettings = 8192,
     }
 }
