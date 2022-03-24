@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace GarciaCore.CodeGenerator
 {
@@ -9,5 +10,6 @@ namespace GarciaCore.CodeGenerator
         Task<string> GetSampleJsonAsync();
         Task<Solution> CreateSampleSolutionAsync();
         Task<SolutionModel> CreateSampleSolution2Async();
+        Task<List<Item>> CreateItemsAsync(string itemsJson);
     }
 }

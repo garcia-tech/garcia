@@ -1,0 +1,23 @@
+{
+  "Items": [
+    {
+      "Name": "Content",
+      "Properties": [
+        {
+          "Name": "Date",
+          "Type": "DateTime",
+          "MappingType": "Property"
+        },
+        {
+          "Name": "Items",
+          "Type": "Class",
+          "MappingType": "List",
+          "InnerType": "ContentItem"
+        }
+      ],
+      "IsEnum": false,
+      "IdType": "Long",
+      "AddApplication": true
+    }
+  ]
+}

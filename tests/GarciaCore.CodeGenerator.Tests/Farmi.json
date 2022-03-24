@@ -1,6 +1,6 @@
 {
   "Name": "Farmi",
-  "Folder": "C:\\Users\\vehbi\\source\\repos\\Farmi\\src",
+  "Folder": "C:\\Users\\vehbi\\source\\repos\\forfarming\\farmibackend\\Farmi\\src",
   "Integrations": [
     "SQLServer",
     "MongoDB",
