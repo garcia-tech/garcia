@@ -25,12 +25,12 @@ namespace <#= Namespace #>
     public interface I<#= Item.Name #>Service
     {
         Task<<#= Item.Name #><#= GeneratorRepository.ApplicationModelDtoPostfix #>> GetAsync(<#= IdTypeName #> id);
+        Task<List<<#= Item.Name #><#= GeneratorRepository.ApplicationModelDtoPostfix #>>> GetAllAsync();
 <#
         foreach (var property in Item.Properties.Where(x => x.MappingType == ItemPropertyMappingType.List && x.Type == ItemPropertyType.Class))
 	    {
             string innerTypeName = this.generator.GetInnerTypeName(property, postfix: GeneratorRepository.ApplicationModelDtoPostfix);
 #>
-        Task<List<<#= Item.Name #><#= GeneratorRepository.ApplicationModelDtoPostfix #>>> GetAllAsync();
         Task<<#= innerTypeName #>> Get<#= property.Name.ToPascalCase() #>Async(<#= IdTypeName #> id);
 <#
         }
@@ -58,17 +58,17 @@ namespace <#= Namespace #>
             return model;
         }
 
-<#
-        foreach (var property in Item.Properties.Where(x => x.MappingType == ItemPropertyMappingType.List && x.Type == ItemPropertyType.Class))
-	    {
-            string innerTypeName = this.generator.GetInnerTypeName(property, postfix: GeneratorRepository.ApplicationModelDtoPostfix);
-#>
         public async Task<List<<#= Item.Name #><#= GeneratorRepository.ApplicationModelDtoPostfix #>>> GetAllAsync()
         {
             var items = await _<#= Item.Name.ToCamelCase() #>Repository.GetAllAsync();
             return _mapper.Map<List<<#= Item.Name #><#= GeneratorRepository.ApplicationModelDtoPostfix #>>>(items);
         }
-        
+
+<#
+        foreach (var property in Item.Properties.Where(x => x.MappingType == ItemPropertyMappingType.List && x.Type == ItemPropertyType.Class))
+	    {
+            string innerTypeName = this.generator.GetInnerTypeName(property, postfix: GeneratorRepository.ApplicationModelDtoPostfix);
+#>
         public async Task<<#= innerTypeName #>> Get<#= property.Name.ToPascalCase() #>Async(<#= IdTypeName #> id)
         {
             var item = await _<#= Item.Name.ToCamelCase() #>Repository.GetByIdAsync(id);

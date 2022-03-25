@@ -103,9 +103,22 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write(" id);\r\n");
+            this.Write(" id);\r\n        Task<List<");
             
             #line 28 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
+            
+            #line default
+            #line hidden
+            
+            #line 28 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorRepository.ApplicationModelDtoPostfix));
+            
+            #line default
+            #line hidden
+            this.Write(">> GetAllAsync();\r\n");
+            
+            #line 29 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
 
         foreach (var property in Item.Properties.Where(x => x.MappingType == ItemPropertyMappingType.List && x.Type == ItemPropertyType.Class))
 	    {
@@ -114,20 +127,7 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write("        Task<List<");
-            
-            #line 33 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
-            
-            #line default
-            #line hidden
-            
-            #line 33 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorRepository.ApplicationModelDtoPostfix));
-            
-            #line default
-            #line hidden
-            this.Write(">> GetAllAsync();\r\n        Task<");
+            this.Write("        Task<");
             
             #line 34 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(innerTypeName));
@@ -261,9 +261,43 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write(">(item);\r\n            return model;\r\n        }\r\n\r\n");
+            this.Write(">(item);\r\n            return model;\r\n        }\r\n\r\n        public async Task<List<" +
+                    "");
             
             #line 61 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
+            
+            #line default
+            #line hidden
+            
+            #line 61 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorRepository.ApplicationModelDtoPostfix));
+            
+            #line default
+            #line hidden
+            this.Write(">> GetAllAsync()\r\n        {\r\n            var items = await _");
+            
+            #line 63 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("Repository.GetAllAsync();\r\n            return _mapper.Map<List<");
+            
+            #line 64 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
+            
+            #line default
+            #line hidden
+            
+            #line 64 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorRepository.ApplicationModelDtoPostfix));
+            
+            #line default
+            #line hidden
+            this.Write(">>(items);\r\n        }\r\n\r\n");
+            
+            #line 67 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
 
         foreach (var property in Item.Properties.Where(x => x.MappingType == ItemPropertyMappingType.List && x.Type == ItemPropertyType.Class))
 	    {
@@ -272,40 +306,7 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write("        public async Task<List<");
-            
-            #line 66 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
-            
-            #line default
-            #line hidden
-            
-            #line 66 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorRepository.ApplicationModelDtoPostfix));
-            
-            #line default
-            #line hidden
-            this.Write(">> GetAllAsync()\r\n        {\r\n            var items = await _");
-            
-            #line 68 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
-            
-            #line default
-            #line hidden
-            this.Write("Repository.GetAllAsync();\r\n            return _mapper.Map<List<");
-            
-            #line 69 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
-            
-            #line default
-            #line hidden
-            
-            #line 69 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorRepository.ApplicationModelDtoPostfix));
-            
-            #line default
-            #line hidden
-            this.Write(">>(items);\r\n        }\r\n        \r\n        public async Task<");
+            this.Write("        public async Task<");
             
             #line 72 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(innerTypeName));
