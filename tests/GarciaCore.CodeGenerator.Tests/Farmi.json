@@ -6,6 +6,7 @@
     "MongoDB",
     "Redis"
   ],
+  "DefaultDatabaseServer": "SQLServer",
   "Projects": [
     {
       "Name": "Farmi.Application",

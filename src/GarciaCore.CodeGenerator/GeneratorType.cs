@@ -19,5 +19,6 @@ namespace GarciaCore.CodeGenerator
         EntityFrameworkDbContext = 2048,
         WebApiAuthentication = 4096,
         WebApiAppSettings = 8192,
+        SolutionJson = 16384,
     }
 }
