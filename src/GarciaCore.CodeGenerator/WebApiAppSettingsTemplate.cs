@@ -41,11 +41,45 @@ namespace GarciaCore.CodeGenerator
             
             #line default
             #line hidden
-            this.Write("-app.com/\"\r\n  }\r\n}\r\n\r\n\r\n");
+            this.Write("-app.com/\"\r\n  },\r\n");
+            
+            #line 16 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.AmazonS3FileUpload))
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("  \"AmazonS3Settings\": {\r\n    \"AccessKeyId\": \"AKIAXP5ELXGKN2VGXQUD\",\r\n    \"SecretA" +
+                    "ccessKey\": \"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\",\r\n    \"BucketName\": \"farmi" +
+                    "assetstest\",\r\n    \"BucketUrl\": \"https://farmiassetstest.s3.eu-central-1.amazonaw" +
+                    "s.com\"\r\n  }\r\n");
+            
+            #line 26 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
+
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.LocalFileUpload))
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("  \"FileUploadSettings\": {\r\n    \"FileUploadPath\": \"\",\r\n    \"BaseUrl\": \"\"\r\n  }\r\n");
+            
+            #line 36 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
+
+    }
+
+            
+            #line default
+            #line hidden
+            this.Write("}\r\n\r\n\r\n");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 19 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
+        #line 42 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
 
     protected override Generator CreateGenerator()
 	{

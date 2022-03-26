@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using GarciaCore.Infrastructure.Api;
 using GarciaCore.Application;
 using MediatR;
+using Newtonsoft.Json;
 <#= GetUsings() #>
 <#
     var services = $"I{Item.Name}Service {Item.Name.ToCamelCase()}Service";
@@ -20,6 +21,9 @@ using MediatR;
     if (GeneratorRepository.ContainsIntegration(IntegrationType.AmazonS3FileUpload) || GeneratorRepository.ContainsIntegration(IntegrationType.LocalFileUpload))
     {
         services += ", IFileUploadService fileUploadService";
+#>
+using GarciaCore.Application.Contracts.FileUpload;
+<#
     }
 #>
 
@@ -33,7 +37,6 @@ namespace <#= Namespace #>
     if (GeneratorRepository.ContainsIntegration(IntegrationType.AmazonS3FileUpload) || GeneratorRepository.ContainsIntegration(IntegrationType.LocalFileUpload))
     {
 #>
-        private IFileUploadService _fileUploadService;
 <#
     }
 #>
@@ -59,6 +62,33 @@ namespace <#= Namespace #>
             return StatusCode(response.StatusCode, response.Result);
         }
 
+<# 
+    if (Item.MultipartUpload)
+    {
+#>
+        [HttpPost("api/<#= Item.Name #>/Multipart", Name = "Create<#= Item.Name #>WithMultipartUpload")]
+        public async Task<ActionResult<BaseResponse<Create<#= Item.Name #>Command>>> Create<#= Item.Name #>WithMultipartUpload([FromForm] string data)
+        {
+            data = CleanJson(data);
+            var command = JsonConvert.DeserializeObject<Create<#= Item.Name #>Command>(data);
+            var files = await MultipartUploadAsync();
+            var response = await _mediator.Send(command);
+            return Ok(command);
+        }
+
+        [HttpPut("api/<#= Item.Name #>/Multipart", Name = "Update<#= Item.Name #>WithMultipartUpload")]
+        public async Task<ActionResult<BaseResponse<Update<#= Item.Name #>Command>>> Update<#= Item.Name #>WithMultipartUpload([FromForm] string data)
+        {
+            data = CleanJson(data);
+            var command = JsonConvert.DeserializeObject<Create<#= Item.Name #>Command>(data);
+            var files = await MultipartUploadAsync();
+            var response = await _mediator.Send(command);
+            return Ok(command);
+        }
+<#
+    }
+#>
+        
         [HttpPut("api/<#= Item.Name #>", Name = "Update<#= Item.Name #>")]
         public async Task<ActionResult<BaseResponse<Update<#= Item.Name #>Command>>> Update<#= Item.Name #>([FromBody] Update<#= Item.Name #>Command command)
         {

@@ -31,7 +31,7 @@ namespace GarciaCore.Application.Services
             return new FileWrapper(fileName, _settings.BucketUrl, $"{_settings.BucketUrl}/{fileName}", $"{_settings.BucketUrl}/{fileName}", fileName.Split('.').Last());
         }
 
-        public async Task<string> UploadAsync(IFormFile file)
+        public async Task<string> MultipartUploadAsync(IFormFile file)
         {
             var fileName = $"{Helpers.CreateKey(8)}_{file.FileName}";
 
@@ -69,6 +69,22 @@ namespace GarciaCore.Application.Services
         public string GetFileName(string url)
         {
             return url.Replace($"{_settings.BucketUrl}/", "");
+        }
+
+        public async Task<string> Base64UploadAsync(string fileName, string content)
+        {
+            fileName = $"{Helpers.CreateKey(8)}_{fileName}";
+            var bytes = Convert.FromBase64String(content);
+
+            using (Stream fileToUpload = new MemoryStream(bytes))
+            {
+                var putObjectRequest = new PutObjectRequest();
+                putObjectRequest.BucketName = _settings.BucketName;
+                putObjectRequest.Key = fileName;
+                putObjectRequest.InputStream = fileToUpload;
+                var response = await s3Client.PutObjectAsync(putObjectRequest);
+                return response.HttpStatusCode == System.Net.HttpStatusCode.OK ? fileName : string.Empty;
+            }
         }
     }
 }
