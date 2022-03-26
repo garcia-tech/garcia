@@ -78,27 +78,27 @@ using Microsoft.Extensions.Options;
                     "henticationService, IJwtService jwtService, IOptions<JwtIssuerOptions> jwtOption" +
                     "s)\r\n        {\r\n            _logger = logger;\r\n            _authenticationService" +
                     " = authenticationService;\r\n            _jwtService = jwtService;\r\n            _j" +
-                    "wtOptions = jwtOptions.Value;\r\n        }\r\n\r\n        [HttpPost(\"token\")]\r\n       " +
-                    " public virtual async Task<IActionResult> PostToken([FromBody] CredentialsModel " +
-                    "credentials)\r\n        {\r\n            if (!ModelState.IsValid)\r\n            {\r\n  " +
-                    "              return BadRequest(ModelState);\r\n            }\r\n\r\n            var i" +
-                    "dentity = await _authenticationService.ValidateUser(credentials.UserName, creden" +
-                    "tials.Password);\r\n\r\n            if (identity == null)\r\n            {\r\n          " +
-                    "      return BadRequest(\"invalid_grant\");\r\n            }\r\n\r\n            var jwt " +
-                    "= await _jwtService.GenerateJwt(identity.UserName, identity.Id, identity.Roles);" +
-                    "\r\n            return new OkObjectResult(jwt);\r\n        }\r\n    }\r\n\r\n    public cl" +
-                    "ass LoggedInUserService : ILoggedInUserService\r\n    {\r\n        public int UserId" +
-                    " { get; set; }\r\n    }\r\n\r\n    public class AuthenticationService : IAuthenticatio" +
-                    "nService\r\n    {\r\n        public async Task<IUser> ValidateUser(string userName, " +
-                    "string password)\r\n        {\r\n            var model = new UserModel()\r\n          " +
-                    "  {\r\n                UserName = userName,\r\n                Id = \"1\",\r\n          " +
-                    "      Roles = new List<string>()\r\n                {\r\n                    \"User\"\r" +
-                    "\n                }\r\n            };\r\n\r\n            return model;\r\n        }\r\n    " +
-                    "}\r\n\r\n    public class UserModel : IUser\r\n    {\r\n        public string UserName {" +
-                    " get; set; }\r\n        public string Id { get; set; }\r\n        public List<string" +
-                    "> Roles { get; set; } = new List<string>();\r\n    }\r\n\r\n    public class Credentia" +
-                    "lsModel\r\n    {\r\n        public string UserName { get; set; }\r\n        public str" +
-                    "ing Password { get; set; }\r\n    }\r\n}\r\n\r\n");
+                    "wtOptions = jwtOptions.Value;\r\n        }\r\n\r\n        [HttpPost(\"api/token\")]\r\n   " +
+                    "     public virtual async Task<IActionResult> PostToken([FromBody] CredentialsMo" +
+                    "del credentials)\r\n        {\r\n            if (!ModelState.IsValid)\r\n            {" +
+                    "\r\n                return BadRequest(ModelState);\r\n            }\r\n\r\n            v" +
+                    "ar identity = await _authenticationService.ValidateUser(credentials.UserName, cr" +
+                    "edentials.Password);\r\n\r\n            if (identity == null)\r\n            {\r\n      " +
+                    "          return BadRequest(\"invalid_grant\");\r\n            }\r\n\r\n            var " +
+                    "jwt = await _jwtService.GenerateJwt(identity.UserName, identity.Id, identity.Rol" +
+                    "es);\r\n            return new OkObjectResult(jwt);\r\n        }\r\n    }\r\n\r\n    publi" +
+                    "c class LoggedInUserService : ILoggedInUserService\r\n    {\r\n        public int Us" +
+                    "erId { get; set; }\r\n    }\r\n\r\n    public class AuthenticationService : IAuthentic" +
+                    "ationService\r\n    {\r\n        public async Task<IUser> ValidateUser(string userNa" +
+                    "me, string password)\r\n        {\r\n            var model = new UserModel()\r\n      " +
+                    "      {\r\n                UserName = userName,\r\n                Id = \"1\",\r\n      " +
+                    "          Roles = new List<string>()\r\n                {\r\n                    \"Us" +
+                    "er\"\r\n                }\r\n            };\r\n\r\n            return model;\r\n        }\r\n" +
+                    "    }\r\n\r\n    public class UserModel : IUser\r\n    {\r\n        public string UserNa" +
+                    "me { get; set; }\r\n        public string Id { get; set; }\r\n        public List<st" +
+                    "ring> Roles { get; set; } = new List<string>();\r\n    }\r\n\r\n    public class Crede" +
+                    "ntialsModel\r\n    {\r\n        public string UserName { get; set; }\r\n        public" +
+                    " string Password { get; set; }\r\n    }\r\n}\r\n\r\n");
             return this.GenerationEnvironment.ToString();
         }
         

@@ -9,8 +9,9 @@ namespace GarciaCore.Application.Contracts.FileUpload
 {
     public interface IFileUploadService
     {
-        Task<string> UploadAsync(IFormFile file);
+        Task<string> MultipartUploadAsync(IFormFile file);
         string GetUrl(string fileName);
         string GetFileName(string url);
+        Task<string> Base64UploadAsync(string fileName, string content);
     }
 }

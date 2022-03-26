@@ -14,6 +14,7 @@ namespace GarciaCore.CodeGenerator
         public bool IsEnum { get; set; }
         public string IdType { get; set; }
         public bool AddApplication { get; set; }
+        public bool MultipartUpload { get; internal set; }
     }
 
     public class ItemPropertyModel

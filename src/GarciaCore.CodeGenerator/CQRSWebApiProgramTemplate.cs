@@ -192,10 +192,12 @@ builder.Services.AddApplicationServices();
             
             #line default
             #line hidden
-            this.Write("builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();\r\nbui" +
-                    "lder.Services.AddScoped<ILoggedInUserService, LoggedInUserService>();\r\n");
+            this.Write(@"builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddScoped<ILoggedInUserService, LoggedInUserService>();
+builder.Services.RegisterServices(new JwtIssuerOptions() { Issuer = builder.Configuration.GetSection(nameof(JwtIssuerOptions))[nameof(JwtIssuerOptions.Issuer)], Audience = builder.Configuration.GetSection(nameof(JwtIssuerOptions))[nameof(JwtIssuerOptions.Audience)] });
+");
             
-            #line 101 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 102 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -208,7 +210,7 @@ builder.Services.AddApplicationServices();
             this.Write("builder.Services.AddMongoDbSettings(builder.Configuration);\r\nbuilder.Services.Add" +
                     "MongoDbRepository();\r\n");
             
-            #line 109 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 110 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -222,21 +224,21 @@ builder.Services.AddApplicationServices();
             #line hidden
             this.Write("builder.Services.AddEfCoreInMemory<");
             
-            #line 117 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 118 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorRepository.Solution.Name));
             
             #line default
             #line hidden
             this.Write("DbContext>(\"");
             
-            #line 117 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 118 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorRepository.Solution.Name));
             
             #line default
             #line hidden
             this.Write("\");\r\n");
             
-            #line 118 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 119 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -250,7 +252,7 @@ builder.Services.AddApplicationServices();
                     "lder.Services.Configure<AmazonS3Settings>(builder.Configuration.GetSection(nameo" +
                     "f(AmazonS3Settings)));\r\n");
             
-            #line 126 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 127 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -264,7 +266,7 @@ builder.Services.AddApplicationServices();
                     "r.Services.Configure<FileUploadSettings>(builder.Configuration.GetSection(nameof" +
                     "(FileUploadSettings)));\r\n");
             
-            #line 134 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 135 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -295,7 +297,7 @@ public partial class Program { }
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 157 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+        #line 158 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     protected override Generator CreateGenerator()
 	{

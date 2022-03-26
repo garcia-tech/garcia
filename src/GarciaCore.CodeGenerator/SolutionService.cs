@@ -91,7 +91,7 @@ namespace GarciaCore.CodeGenerator
                     itemModel.IdType = IdType.Int.ToString();
 
                 Enum.TryParse(itemModel.IdType, out IdType idType);
-                var item = new Item(itemModel.Name, itemModel.IsEnum, idType, itemModel.AddApplication);
+                var item = new Item(itemModel.Name, itemModel.IsEnum, idType, itemModel.AddApplication, itemModel.MultipartUpload);
 
                 foreach (var propertyModel in itemModel.Properties)
                 {
@@ -107,7 +107,7 @@ namespace GarciaCore.CodeGenerator
 
                     if (!string.IsNullOrEmpty(propertyModel.InnerType))
                     {
-                        innerItem = new Item(propertyModel.InnerType, false, item.IdType, false);
+                        innerItem = new Item(propertyModel.InnerType, false, item.IdType, false, false);
                     }
 
                     var itemProperty = new ItemProperty(propertyModel.Name, itemPropertyType, itemPropertyMappingType, innerItem);

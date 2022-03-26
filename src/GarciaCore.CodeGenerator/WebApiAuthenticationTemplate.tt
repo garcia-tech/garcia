@@ -40,7 +40,7 @@ namespace <#= Namespace #>
             _jwtOptions = jwtOptions.Value;
         }
 
-        [HttpPost("token")]
+        [HttpPost("api/token")]
         public virtual async Task<IActionResult> PostToken([FromBody] CredentialsModel credentials)
         {
             if (!ModelState.IsValid)

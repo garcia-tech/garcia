@@ -12,7 +12,30 @@
   "JwtIssuerOptions": {
     "Issuer": "<#= GeneratorRepository.Solution.Name #>",
     "Audience": "http://<#= GeneratorRepository.Solution.Name #>-app.com/"
+  },
+<#
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.AmazonS3FileUpload))
+    {
+#>
+  "AmazonS3Settings": {
+    "AccessKeyId": "AKIAXP5ELXGKN2VGXQUD",
+    "SecretAccessKey": "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",
+    "BucketName": "farmiassetstest",
+    "BucketUrl": "https://farmiassetstest.s3.eu-central-1.amazonaws.com"
   }
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.LocalFileUpload))
+    {
+#>
+  "FileUploadSettings": {
+    "FileUploadPath": "",
+    "BaseUrl": ""
+  }
+<#
+    }
+#>
 }
 
 

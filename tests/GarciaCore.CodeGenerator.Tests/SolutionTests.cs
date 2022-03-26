@@ -197,7 +197,8 @@ namespace GarciaCore.CodeGenerator.Tests
                         new ItemProperty() { Name = "Files", Type = ItemPropertyType.Class, MappingType = ItemPropertyMappingType.List, InnerType = new Item() { Name = "ContentFile" } },
                         new ItemProperty() { Name = "Milestones", Type = ItemPropertyType.Class, MappingType = ItemPropertyMappingType.List, InnerType = new Item() { Name = "ContentMilestone" } },
                     },
-                    AddApplication = true
+                    AddApplication = true,
+                    MultipartUpload = true
                 },
                 new Item()
                 {
