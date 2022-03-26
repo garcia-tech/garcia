@@ -11,7 +11,7 @@ namespace GarciaCore.CodeGenerator
     {
         public async Task<Solution> CreateSampleSolutionAsync()
         {
-            var solution = new Solution("TestSolution", "c:\\files\\garciacoretest", new List<string>());
+            var solution = new Solution("TestSolution", "c:\\files\\garciacoretest", new List<string>(), "SQLServer");
 
             var infrastructure = new Project("TestSolution.Infrastructure", ProjectType.ClassLibrary);
             infrastructure.AddGenerator("Repository", "Repository", new RepositoryGenerator());
@@ -129,7 +129,7 @@ namespace GarciaCore.CodeGenerator
             if (solutionModel == null)
                 throw new CodeGeneratorException("Cannot convert json to SolutionModel, please check sample json.");
 
-            var solution = new Solution(solutionModel.Name, solutionModel.Folder, solutionModel.Integrations);
+            var solution = new Solution(solutionModel.Name, solutionModel.Folder, solutionModel.Integrations, solutionModel.DefaultDatabaseServer);
             var allProjects = new List<Project>();
 
             if (solutionModel.Projects != null)

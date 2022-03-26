@@ -1,9 +1,11 @@
-﻿using GarciaCore.Application.Contracts.Persistence;
+﻿using GarciaCore.Application.Contracts.FileUpload;
+using GarciaCore.Application.Contracts.Persistence;
 using GarciaCore.Persistence;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GarciaCore.Infrastructure.Api
@@ -13,6 +15,7 @@ namespace GarciaCore.Infrastructure.Api
         protected GarciaCoreInfrastructureApiSettings _settings;
         protected IAsyncRepository _repository;
         protected readonly IMediator _mediator;
+        protected IFileUploadService _fileUploadService;
         public string BaseUrl { get { return $"{Request.Scheme}://{Request.Host}{Request.PathBase}"; } }
 
         public ApiController(IOptions<GarciaCoreInfrastructureApiSettings> settings, IAsyncRepository repository, IMediator mediator)
@@ -44,6 +47,29 @@ namespace GarciaCore.Infrastructure.Api
         protected string CleanJson(string data)
         {
             return data.Replace("{}", "null").Replace("{ }", "null");
+        }
+
+        protected async Task<List<string>> MultipartUploadAsync()
+        {
+            if (_fileUploadService == null)
+            {
+                throw new Exception("FileUploadService is not injected");
+            }
+
+            var files = new List<string>();
+
+            if (Request.HasFormContentType)
+            {
+                var form = Request.Form;
+
+                foreach (var formFile in form.Files)
+                {
+                    var fileName = await _fileUploadService.UploadAsync(formFile);
+                    files.Add(_fileUploadService.GetUrl(fileName));
+                }
+            }
+
+            return files;
         }
     }
 

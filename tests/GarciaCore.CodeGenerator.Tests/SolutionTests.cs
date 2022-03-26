@@ -194,30 +194,42 @@ namespace GarciaCore.CodeGenerator.Tests
                     Properties = new List<ItemProperty>()
                     {
                         new ItemProperty() { Name = "Date", Type = ItemPropertyType.DateTime, MappingType = ItemPropertyMappingType.Property },
-                        new ItemProperty() { Name = "Items", Type = ItemPropertyType.Class, MappingType = ItemPropertyMappingType.List, InnerType = new Item() { Name = "ContentItem" } },
+                        new ItemProperty() { Name = "Files", Type = ItemPropertyType.Class, MappingType = ItemPropertyMappingType.List, InnerType = new Item() { Name = "ContentFile" } },
+                        new ItemProperty() { Name = "Milestones", Type = ItemPropertyType.Class, MappingType = ItemPropertyMappingType.List, InnerType = new Item() { Name = "ContentMilestone" } },
                     },
                     AddApplication = true
                 },
                 new Item()
                 {
-                    Name = "ContentItem",
-                    IdType = IdType.Long,
-                    Properties = new List<ItemProperty>()
-                    {
-                        new ItemProperty() { Name = "Date", Type = ItemPropertyType.DateTime, MappingType = ItemPropertyMappingType.Property },
-                        new ItemProperty() { Name = "Files", Type = ItemPropertyType.Class, MappingType = ItemPropertyMappingType.List, InnerType = new Item() { Name = "ContentItemFile" } },
-                    }
-                },
-                new Item()
-                {
-                    Name = "ContentItemFile",
+                    Name = "ContentFile",
                     IdType = IdType.Long,
                     Properties = new List<ItemProperty>()
                     {
                         new ItemProperty() { Name = "Url", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
                         new ItemProperty() { Name = "Description", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
                     }
-                }
+                },
+                new Item()
+                {
+                    Name = "ContentMilestone",
+                    IdType = IdType.Long,
+                    Properties = new List<ItemProperty>()
+                    {
+                        new ItemProperty() { Name = "FinishedOn", Type = ItemPropertyType.DateTime, MappingType = ItemPropertyMappingType.Property },
+                    }
+                },
+                new Item()
+                {
+                    Name = "Milestone",
+                    IdType = IdType.Long,
+                    Properties = new List<ItemProperty>()
+                    {
+                        new ItemProperty() { Name = "Title", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
+                        new ItemProperty() { Name = "Description", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
+                        new ItemProperty() { Name = "Logo", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
+                    },
+                    AddApplication = true
+                },
             };
 
             _output.WriteLine(JsonSerializer.Serialize(items));
