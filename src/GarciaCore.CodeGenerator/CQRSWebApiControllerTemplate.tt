@@ -14,6 +14,14 @@ using GarciaCore.Infrastructure.Api;
 using GarciaCore.Application;
 using MediatR;
 <#= GetUsings() #>
+<#
+    var services = $"I{Item.Name}Service {Item.Name.ToCamelCase()}Service";
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.AmazonS3FileUpload) || GeneratorRepository.ContainsIntegration(IntegrationType.LocalFileUpload))
+    {
+        services += ", IFileUploadService fileUploadService";
+    }
+#>
 
 namespace <#= Namespace #>
 {
@@ -21,11 +29,27 @@ namespace <#= Namespace #>
     {
         private I<#= Item.Name #>Query _<#= Item.Name.ToCamelCase() #>Query;
         private I<#= Item.Name #>Service _<#= Item.Name.ToCamelCase() #>Service;
+<#
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.AmazonS3FileUpload) || GeneratorRepository.ContainsIntegration(IntegrationType.LocalFileUpload))
+    {
+#>
+        private IFileUploadService _fileUploadService;
+<#
+    }
+#>
 
-        public <#= Item.Name #>Controller(IOptions<GarciaCoreInfrastructureApiSettings> settings, I<#= Item.Name #>Query <#= Item.Name.ToCamelCase() #>Query, I<#= Item.Name #>Service <#= Item.Name.ToCamelCase() #>Service, IMediator mediator) : base(settings, null, mediator)
+        public <#= Item.Name #>Controller(IOptions<GarciaCoreInfrastructureApiSettings> settings, I<#= Item.Name #>Query <#= Item.Name.ToCamelCase() #>Query, <#= services #>, IMediator mediator) : base(settings, null, mediator)
         {
             _<#= Item.Name.ToCamelCase() #>Query = <#= Item.Name.ToCamelCase() #>Query;
             _<#= Item.Name.ToCamelCase() #>Service = <#= Item.Name.ToCamelCase() #>Service;
+<#
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.AmazonS3FileUpload) || GeneratorRepository.ContainsIntegration(IntegrationType.LocalFileUpload))
+    {
+#>
+            _fileUploadService = fileUploadService;
+<#
+    }
+#>
         }
 
         [HttpPost("api/<#= Item.Name #>", Name = "Create<#= Item.Name #>")]

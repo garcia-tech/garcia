@@ -7,6 +7,8 @@
         MongoDB,
         MySQL,
         Redis,
-        Authentication
+        Authentication,
+        AmazonS3FileUpload,
+        LocalFileUpload
     }
 }

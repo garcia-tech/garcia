@@ -215,9 +215,6 @@ namespace GarciaCore.CodeGenerator.Tests
                     IdType = IdType.Long,
                     Properties = new List<ItemProperty>()
                     {
-                        new ItemProperty() { Name = "Title", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
-                        new ItemProperty() { Name = "Description", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
-                        new ItemProperty() { Name = "Logo", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
                         new ItemProperty() { Name = "FinishedOn", Type = ItemPropertyType.DateTime, MappingType = ItemPropertyMappingType.Property },
                     }
                 },

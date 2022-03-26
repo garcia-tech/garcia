@@ -4,7 +4,8 @@
   "Integrations": [
     "SQLServer",
     "MongoDB",
-    "Redis"
+    "Redis",
+    "AmazonS3FileUpload"
   ],
   "DefaultDatabaseServer": "SQLServer",
   "Projects": [

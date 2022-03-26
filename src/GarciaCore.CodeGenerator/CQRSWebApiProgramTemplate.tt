@@ -28,6 +28,15 @@ using GarciaCore.Persistence.EntityFramework;
     {
 #>
 using GarciaCore.Application.Contracts.Identity;
+using GarciaCore.Infrastructure.Identity;
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.AmazonS3FileUpload) || GeneratorRepository.ContainsIntegration(IntegrationType.LocalFileUpload))
+    {
+#>
+using GarciaCore.Application.Contracts.FileUpload;
+using GarciaCore.Application.Services;
 <#
     }
 
@@ -106,6 +115,22 @@ builder.Services.AddMongoDbRepository();
     {
 #>
 builder.Services.AddEfCoreInMemory<<#= GeneratorRepository.Solution.Name #>DbContext>("<#= GeneratorRepository.Solution.Name #>");
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.AmazonS3FileUpload))
+    {
+#>
+builder.Services.AddScoped<IFileUploadService, AmazonS3FileUplaodService>();
+builder.Services.Configure<AmazonS3Settings>(builder.Configuration.GetSection(nameof(AmazonS3Settings)));
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.LocalFileUpload))
+    {
+#>
+builder.Services.AddScoped<IFileUploadService, LocalFileUplaodService>();
+builder.Services.Configure<FileUploadSettings>(builder.Configuration.GetSection(nameof(FileUploadSettings)));
 <#
     }
 #>
