@@ -10,18 +10,19 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using GarciaCore.Domain.Identity;
+using System.Security.Cryptography;
 
 namespace GarciaCore.Infrastructure.Identity
 {
     public class JwtService : IJwtService
     {
         private readonly JwtIssuerOptions _jwtOptions;
-        protected string secretKey = "8b95c3c301a54b39b7b9b4c612bc6844";
         protected SymmetricSecurityKey _signingKey;
 
         public JwtService(IOptions<JwtIssuerOptions> jwtOptions)
         {
-            _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
+            _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtOptions.Value.SecretKey));
             _jwtOptions = jwtOptions.Value;
             ThrowIfInvalidOptions(_jwtOptions);
         }
@@ -107,6 +108,33 @@ namespace GarciaCore.Infrastructure.Identity
         {
             var claims = GenerateClaimsIdentity(userName, userId, roles);
             return await GenerateJwt(claims, userName);
+        }
+
+        public RefreshToken GenerateRefreshToken(string ip, string userId) 
+        {
+            var randomBytes = new byte[64];
+            var refreshToken = Convert.ToBase64String(randomBytes);
+
+            return new RefreshToken
+            {
+                Token = refreshToken,
+                ExpirationDate = _jwtOptions.RefreshTokenOptions.Expiration,
+                UserId = userId,
+                CreatedByIp = ip
+            };
+        }
+
+        public RefreshToken RevokeRefreshToken(RefreshToken token, string ip)
+        {
+            if (token.Revoked)
+            {
+                throw new ArgumentException("Refresh token is already revoked");
+            }
+
+            token.Revoked = true;
+            token.RevokedByIp = ip;
+            token.RevokedDate = DateTime.UtcNow;
+            return token;
         }
     }
 }

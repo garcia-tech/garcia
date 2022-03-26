@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
@@ -7,20 +9,27 @@ namespace GarciaCore.Domain
 {
     public abstract partial class Entity<TKey> : IEntity<TKey> where TKey : IEquatable<TKey>
     {
+        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonId]
+        [BsonElement(Order = 0)]
         public virtual TKey Id { get; set; }
         public virtual Guid UniqueId { get; set; } = Guid.NewGuid();
+        [BsonRepresentation(BsonType.String)]
         public virtual DateTimeOffset CreatedOn { get; set; }
+        [BsonRepresentation(BsonType.String)]
         public virtual DateTimeOffset LastUpdatedOn { get; set; }
         public virtual bool Active { get; set; }
         public virtual int? CreatedBy { get; set; }
         public virtual int? LastUpdatedBy { get; set; }
         [JsonIgnore]
         public virtual int? DeletedBy { get; set; }
+        [BsonRepresentation(BsonType.String)]
         public virtual DateTimeOffset DeletedOn { get; set; }
         [JsonIgnore]
         public virtual bool Deleted { get; set; }
         private List<INotification> _domainEvents;
         [JsonIgnore]
+        [BsonIgnore]
         public IReadOnlyCollection<INotification> DomainEvents => _domainEvents?.AsReadOnly();
 
         public Entity()
