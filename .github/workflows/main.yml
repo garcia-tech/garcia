@@ -155,6 +155,18 @@ jobs:
           PROJECT_FILE_PATH: src/GarciaCore.Infrastructure.Identity/GarciaCore.Infrastructure.Identity.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
+    - name: Publish GarciaCore.Application.RabbitMQ
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: src/GarciaCore.Application.RabbitMQ/GarciaCore.Application.RabbitMQ.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
+    - name: Publish GarciaCore.Infrastructure.RabbitMQ
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: src/GarciaCore.Infrastructure.RabbitMQ/GarciaCore.Infrastructure.RabbitMQ.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
     - name: Publish GarciaCore
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
