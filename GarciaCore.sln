@@ -69,9 +69,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Domain.Identity"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Infrastructure.Identity", "src\GarciaCore.Infrastructure.Identity\GarciaCore.Infrastructure.Identity.csproj", "{E531BBCB-5FE0-4CED-8296-5352C082FEFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GaricaCore.Infrastructure.RabbitMQ", "src\GaricaCore.Infrastructure.RabbitMQ\GaricaCore.Infrastructure.RabbitMQ.csproj", "{37D4BA47-9C2F-4172-A999-0541580ED098}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Infrastructure.RabbitMQ", "src\GaricaCore.Infrastructure.RabbitMQ\GarciaCore.Infrastructure.RabbitMQ.csproj", "{37D4BA47-9C2F-4172-A999-0541580ED098}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.Application.RabbitMQ", "src\GarciaCore.Application.RabbitMQ\GarciaCore.Application.RabbitMQ.csproj", "{0CBF4FEB-E09E-4966-B4E4-F64649F80B55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Application.RabbitMQ", "src\GarciaCore.Application.RabbitMQ\GarciaCore.Application.RabbitMQ.csproj", "{0CBF4FEB-E09E-4966-B4E4-F64649F80B55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
