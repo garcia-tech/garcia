@@ -69,9 +69,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Domain.Identity"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Infrastructure.Identity", "src\GarciaCore.Infrastructure.Identity\GarciaCore.Infrastructure.Identity.csproj", "{E531BBCB-5FE0-4CED-8296-5352C082FEFB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Infrastructure.RabbitMQ", "src\GaricaCore.Infrastructure.RabbitMQ\GarciaCore.Infrastructure.RabbitMQ.csproj", "{37D4BA47-9C2F-4172-A999-0541580ED098}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Application.RabbitMQ", "src\GarciaCore.Application.RabbitMQ\GarciaCore.Application.RabbitMQ.csproj", "{0CBF4FEB-E09E-4966-B4E4-F64649F80B55}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Infrastructure.RabbitMQ", "src\GarciaCore.Infrastructure.RabbitMQ\GarciaCore.Infrastructure.RabbitMQ.csproj", "{59B33B20-B995-47B6-8129-340EA602DE8C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -199,14 +199,14 @@ Global
 		{E531BBCB-5FE0-4CED-8296-5352C082FEFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E531BBCB-5FE0-4CED-8296-5352C082FEFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E531BBCB-5FE0-4CED-8296-5352C082FEFB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{37D4BA47-9C2F-4172-A999-0541580ED098}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{37D4BA47-9C2F-4172-A999-0541580ED098}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{37D4BA47-9C2F-4172-A999-0541580ED098}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{37D4BA47-9C2F-4172-A999-0541580ED098}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0CBF4FEB-E09E-4966-B4E4-F64649F80B55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0CBF4FEB-E09E-4966-B4E4-F64649F80B55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CBF4FEB-E09E-4966-B4E4-F64649F80B55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CBF4FEB-E09E-4966-B4E4-F64649F80B55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59B33B20-B995-47B6-8129-340EA602DE8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59B33B20-B995-47B6-8129-340EA602DE8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59B33B20-B995-47B6-8129-340EA602DE8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59B33B20-B995-47B6-8129-340EA602DE8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -243,8 +243,8 @@ Global
 		{835890B7-1DED-4ACE-B413-69736B2BC6D4} = {0E922C1D-C0D6-4FCC-B5DE-1BA1AF5F0DA6}
 		{D1F359B3-2616-40D5-B45F-BBE3E0F4BCAB} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 		{E531BBCB-5FE0-4CED-8296-5352C082FEFB} = {087C542F-855C-47ED-96C8-9D088E416ED2}
-		{37D4BA47-9C2F-4172-A999-0541580ED098} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 		{0CBF4FEB-E09E-4966-B4E4-F64649F80B55} = {087C542F-855C-47ED-96C8-9D088E416ED2}
+		{59B33B20-B995-47B6-8129-340EA602DE8C} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3255BD7C-849F-4F0F-B86D-5A266B1F50B6}
