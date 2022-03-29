@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GarciaCore.Application.MongoDb\GarciaCore.Application.MongoDb.csproj" />
+    <ProjectReference Include="..\GarciaCore.Application.RabbitMQ\GarciaCore.Application.RabbitMQ.csproj" />
     <ProjectReference Include="..\GarciaCore.Application.Redis\GarciaCore.Application.Redis.csproj" />
     <ProjectReference Include="..\GarciaCore.Application\GarciaCore.Application.csproj" />
     <ProjectReference Include="..\GarciaCore.Cli\GarciaCore.Cli.csproj" />
@@ -30,6 +31,7 @@
     <ProjectReference Include="..\GarciaCore.Persistence.Redis\GarciaCore.Persistence.Redis.csproj" />
     <ProjectReference Include="..\GarciaCore.Persistence\GarciaCore.Persistence.csproj" />
     <ProjectReference Include="..\GarciaCore.Test.Utils\GarciaCore.Test.Utils.csproj" />
+    <ProjectReference Include="..\GaricaCore.Infrastructure.RabbitMQ\GaricaCore.Infrastructure.RabbitMQ.csproj" />
   </ItemGroup>
 
 </Project>
