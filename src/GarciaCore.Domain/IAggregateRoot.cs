@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GarciaCore.Domain
 {
-    public interface IAggragateRoot
+    public interface IAggregateRoot
     {
     }
 }
