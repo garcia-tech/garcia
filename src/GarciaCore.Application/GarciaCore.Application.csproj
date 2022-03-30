@@ -19,6 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\GarciaCore.Domain.Identity\GarciaCore.Domain.Identity.csproj" />
       <ProjectReference Include="..\GarciaCore.Domain\GarciaCore.Domain.csproj" />
     </ItemGroup>
 
