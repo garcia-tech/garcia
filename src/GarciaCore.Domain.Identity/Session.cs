@@ -16,6 +16,6 @@ namespace GarciaCore.Domain.Identity
         public string RenewedToken { get; set; }
         public bool Active { get; set; } = true;
         public DateTimeOffset? RenewedOn { get; set; }
-        public string? RenewedIp { get; set; }
+        public string RenewedIp { get; set; }
     }
 }

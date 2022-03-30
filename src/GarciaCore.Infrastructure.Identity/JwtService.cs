@@ -110,12 +110,12 @@ namespace GarciaCore.Infrastructure.Identity
             return await GenerateJwt(claims, userName);
         }
 
-        public RefreshToken GenerateRefreshToken(string ip, string userId) 
+        public T GenerateRefreshToken<T>(string ip, string userId) where T : RefreshToken, new()
         {
             var randomBytes = new byte[64];
             var refreshToken = Convert.ToBase64String(randomBytes);
 
-            return new RefreshToken
+            return new()
             {
                 Token = refreshToken,
                 ExpirationDate = _jwtOptions.RefreshTokenOptions.Expiration,
@@ -124,7 +124,7 @@ namespace GarciaCore.Infrastructure.Identity
             };
         }
 
-        public RefreshToken RevokeRefreshToken(RefreshToken token, string ip)
+        public T RevokeRefreshToken<T>(T token, string ip) where T : RefreshToken
         {
             if (token.Revoked)
             {
