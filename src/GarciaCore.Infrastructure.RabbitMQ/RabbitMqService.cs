@@ -15,34 +15,48 @@ namespace GaricaCore.Infrastructure.RabbitMQ
             _connection.ConnectionShutdown += RabbitMqConnectionShutdown;
         }
 
-        public void Publish(string channelName, string message, string exchange = "", bool persistent = true, bool noWait = false)
+        public void Publish(string queueName, string message, string exchange = "", bool persistent = true)
+        {
+            var channel = _connection.CreateModel();
+            var props = channel.CreateBasicProperties();
+            props.Persistent = persistent;
+            
+            channel.QueueDeclare(queueName, persistent, false, !persistent);
+
+            if(!string.IsNullOrEmpty(exchange))
+            {
+                channel.ExchangeDeclare(exchange, ExchangeType.Direct);
+                channel.QueueBind(queueName, exchange, $"{exchange}.{queueName}");
+            }
+
+            channel.BasicPublish(exchange, queueName, props, Encoding.UTF8.GetBytes(message));
+            channel.Close();
+        }
+
+        public async Task PublishAsync(string queueName, string message, string exchange = "", bool persistent = true)
         {
             var channel = _connection.CreateModel();
             var props = channel.CreateBasicProperties();
             props.Persistent = persistent;
 
-            IDictionary<string, object> arguments = new Dictionary<string, object>
-            {
-                { "nowait", noWait }
-            };
-            
-            channel.QueueDeclare(channelName, persistent, false, !persistent, arguments);
+            channel.QueueDeclareNoWait(queueName, persistent, false, !persistent, null);
 
-            if(!string.IsNullOrEmpty(exchange))
+            if (!string.IsNullOrEmpty(exchange))
             {
-                channel.ExchangeDeclare(exchange, ExchangeType.Direct, arguments: arguments);
-                channel.QueueBind(channelName, exchange, $"{exchange}.{channelName}", arguments);
+                channel.ExchangeDeclareNoWait(exchange, ExchangeType.Direct, arguments: null);
+                channel.QueueBindNoWait(queueName, exchange, $"{exchange}.{queueName}", null);
             }
 
-            channel.BasicPublish(exchange, channelName, props, Encoding.UTF8.GetBytes(message));
+            channel.BasicPublish(exchange, queueName, props, Encoding.UTF8.GetBytes(message));
             channel.Close();
+            await Task.CompletedTask;
         }
 
-        public void Subscribe(string channelName, Action<ReadOnlyMemory<byte>> receiveHandler, Action<Exception, ReadOnlyMemory<byte>> rejectHandler, 
+        public void Subscribe(string queueName, Action<ReadOnlyMemory<byte>> receiveHandler, Action<Exception, ReadOnlyMemory<byte>> rejectHandler, 
             bool requeueOnReject = false ,bool persistent = true, uint prefetchSize = 0, ushort prefetchCount = 1, bool global = false)
         {
             var channel = _connection.CreateModel();
-            channel.QueueDeclare(channelName, persistent, false, !persistent);
+            channel.QueueDeclare(queueName, persistent, false, !persistent);
             channel.BasicQos(prefetchSize, prefetchCount, global);
             var consumer = new EventingBasicConsumer(channel);
 
@@ -64,16 +78,16 @@ namespace GaricaCore.Infrastructure.RabbitMQ
             consumer.Registered += OnConsumerRegistered;
             consumer.Unregistered += OnConsumerUnregistered;
             consumer.ConsumerCancelled += OnConsumerConsumerCancelled;
-            channel.BasicConsume(channelName, false, consumer);
+            channel.BasicConsume(queueName, false, consumer);
         }
 
-        public void Subscribe(string channelName, Func<ReadOnlyMemory<byte>, Task> receiveHandler, Func<Exception, ReadOnlyMemory<byte>, Task> rejectHandler, 
+        public async Task SubscribeAsync(string queueName, Func<ReadOnlyMemory<byte>, Task> receiveHandler, Func<Exception, ReadOnlyMemory<byte>, Task> rejectHandler, 
             bool requeueOnReject = false ,bool persistent = true, uint prefetchSize = 0, ushort prefetchCount = 1, bool global = false)
         {
             var channel = _connection.CreateModel();
-            channel.QueueDeclare(channelName, persistent, false, !persistent);
+            channel.QueueDeclare(queueName, persistent, false, !persistent);
             channel.BasicQos(prefetchSize, prefetchCount, global);
-            var consumer = new EventingBasicConsumer(channel);
+            var consumer = new AsyncEventingBasicConsumer(channel);
 
             consumer.Received += async (ch, ea) =>
             {
@@ -81,6 +95,7 @@ namespace GaricaCore.Infrastructure.RabbitMQ
                 {
                     await receiveHandler(ea.Body);
                     channel.BasicAck(ea.DeliveryTag, true);
+                    await Task.Yield();
                 }
                 catch (Exception e)
                 {
@@ -89,13 +104,33 @@ namespace GaricaCore.Infrastructure.RabbitMQ
                 }
             };
 
-            consumer.Shutdown += OnConsumerShutdown;
-            consumer.Registered += OnConsumerRegistered;
-            consumer.Unregistered += OnConsumerUnregistered;
-            consumer.ConsumerCancelled += OnConsumerConsumerCancelled;
-            channel.BasicConsume(channelName, false, consumer);
+            consumer.Shutdown += OnConsumerShutdownAsync;
+            consumer.Registered += OnConsumerRegisteredAsync;
+            consumer.Unregistered += OnConsumerUnregisteredAsync;
+            consumer.ConsumerCancelled += OnConsumerConsumerCancelledAsync;
+            channel.BasicConsume(queueName, false, consumer);
+            await Task.CompletedTask;    
         }
 
+        public async Task DeleteQueue(string queueName, bool ifUnsued, bool ifEmpty)
+        {
+            var channel = _connection.CreateModel();
+            channel.QueueDeleteNoWait(queueName, ifUnsued, ifEmpty);
+            channel.Close();
+            await Task.CompletedTask;
+        }
+        public async Task DeleteExchange(string queueName, bool ifUnsued)
+        {
+            var channel = _connection.CreateModel();
+            channel.ExchangeDeleteNoWait(queueName, ifUnsued);
+            channel.Close();
+            await Task.CompletedTask;
+        }
+
+        private async Task OnConsumerConsumerCancelledAsync (object sender, ConsumerEventArgs e) { }
+        private async Task OnConsumerUnregisteredAsync (object sender, ConsumerEventArgs e) { }
+        private async Task OnConsumerRegisteredAsync (object sender, ConsumerEventArgs e) { }
+        private async Task OnConsumerShutdownAsync (object sender, ShutdownEventArgs e) { }
         private void OnConsumerConsumerCancelled(object sender, ConsumerEventArgs e) { }
         private void OnConsumerUnregistered(object sender, ConsumerEventArgs e) { }
         private void OnConsumerRegistered(object sender, ConsumerEventArgs e) { }
