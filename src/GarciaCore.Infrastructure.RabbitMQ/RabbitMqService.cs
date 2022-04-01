@@ -22,7 +22,7 @@ namespace GarciaCore.Infrastructure.RabbitMQ
             var channel = _connection.CreateModel();
             var props = channel.CreateBasicProperties();
             props.Persistent = persistent;
-            
+
             channel.QueueDeclare(queueName, persistent, false, !persistent);
 
             if(!string.IsNullOrEmpty(exchange))
@@ -66,8 +66,8 @@ namespace GarciaCore.Infrastructure.RabbitMQ
             await Task.CompletedTask;
         }
 
-        public void Subscribe(string queueName, Action<ReadOnlyMemory<byte>> receiveHandler, Action<Exception, ReadOnlyMemory<byte>> rejectHandler, 
-            bool requeueOnReject = false ,bool persistent = true, uint prefetchSize = 0, ushort prefetchCount = 1, bool global = false)
+        public void Subscribe(string queueName, Action<ReadOnlyMemory<byte>> receiveHandler, Action<Exception, ReadOnlyMemory<byte>> rejectHandler,
+            bool requeueOnReject = false, bool persistent = true, uint prefetchSize = 0, ushort prefetchCount = 1, bool global = false)
         {
             var channel = _connection.CreateModel();
             channel.QueueDeclare(queueName, persistent, false, !persistent);
@@ -95,8 +95,8 @@ namespace GarciaCore.Infrastructure.RabbitMQ
             channel.BasicConsume(queueName, false, consumer);
         }
 
-        public async Task SubscribeAsync(string queueName, Func<ReadOnlyMemory<byte>, Task> receiveHandler, Func<Exception, ReadOnlyMemory<byte>, Task> rejectHandler, 
-            bool requeueOnReject = false ,bool persistent = true, uint prefetchSize = 0, ushort prefetchCount = 1, bool global = false)
+        public async Task SubscribeAsync(string queueName, Func<ReadOnlyMemory<byte>, Task> receiveHandler, Func<Exception, ReadOnlyMemory<byte>, Task> rejectHandler,
+            bool requeueOnReject = false, bool persistent = true, uint prefetchSize = 0, ushort prefetchCount = 1, bool global = false)
         {
             var channel = _connection.CreateModel();
             channel.QueueDeclare(queueName, persistent, false, !persistent);
@@ -123,7 +123,7 @@ namespace GarciaCore.Infrastructure.RabbitMQ
             consumer.Unregistered += OnConsumerUnregisteredAsync;
             consumer.ConsumerCancelled += OnConsumerConsumerCancelledAsync;
             channel.BasicConsume(queueName, false, consumer);
-            await Task.CompletedTask;    
+            await Task.CompletedTask;
         }
 
         public async Task SubscribeAsync<T>(Func<T, Task> receiveHandler, Func<Exception, string, Task> rejectHandler) where T : IMessage
@@ -131,12 +131,12 @@ namespace GarciaCore.Infrastructure.RabbitMQ
             var channel = _connection.CreateModel();
             channel.QueueDeclare(typeof(T).Name, true, false, false);
             channel.BasicQos(0, 1, false);
-            var consumer = new AsyncEventingBasicConsumer(channel);
+            var consumer = new EventingBasicConsumer(channel);
 
             consumer.Received += async (ch, ea) =>
             {
                 var messageContent = Encoding.UTF8.GetString(ea.Body.ToArray());
-                
+
                 try
                 {
                     var model = JsonSerializer.Deserialize<T>(messageContent);
@@ -151,10 +151,10 @@ namespace GarciaCore.Infrastructure.RabbitMQ
                 }
             };
 
-            consumer.Shutdown += OnConsumerShutdownAsync;
-            consumer.Registered += OnConsumerRegisteredAsync;
-            consumer.Unregistered += OnConsumerUnregisteredAsync;
-            consumer.ConsumerCancelled += OnConsumerConsumerCancelledAsync;
+            consumer.Shutdown += OnConsumerShutdown;
+            consumer.Registered += OnConsumerRegistered;
+            consumer.Unregistered += OnConsumerUnregistered;
+            consumer.ConsumerCancelled += OnConsumerConsumerCancelled;
             channel.BasicConsume(typeof(T).Name, false, consumer);
             await Task.CompletedTask;
         }
@@ -174,10 +174,10 @@ namespace GarciaCore.Infrastructure.RabbitMQ
             await Task.CompletedTask;
         }
 
-        private async Task OnConsumerConsumerCancelledAsync (object sender, ConsumerEventArgs e) { }
-        private async Task OnConsumerUnregisteredAsync (object sender, ConsumerEventArgs e) { }
-        private async Task OnConsumerRegisteredAsync (object sender, ConsumerEventArgs e) { }
-        private async Task OnConsumerShutdownAsync (object sender, ShutdownEventArgs e) { }
+        private async Task OnConsumerConsumerCancelledAsync(object sender, ConsumerEventArgs e) { }
+        private async Task OnConsumerUnregisteredAsync(object sender, ConsumerEventArgs e) { }
+        private async Task OnConsumerRegisteredAsync(object sender, ConsumerEventArgs e) { }
+        private async Task OnConsumerShutdownAsync(object sender, ShutdownEventArgs e) { }
         private void OnConsumerConsumerCancelled(object sender, ConsumerEventArgs e) { }
         private void OnConsumerUnregistered(object sender, ConsumerEventArgs e) { }
         private void OnConsumerRegistered(object sender, ConsumerEventArgs e) { }
