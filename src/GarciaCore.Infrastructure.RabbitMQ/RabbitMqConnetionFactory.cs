@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 
-namespace GaricaCore.Infrastructure.RabbitMQ
+namespace GarciaCore.Infrastructure.RabbitMQ
 {
     public class RabbitMqConnetionFactory : IDisposable
     {

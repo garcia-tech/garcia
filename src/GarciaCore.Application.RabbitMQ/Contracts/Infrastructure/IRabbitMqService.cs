@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GarciaCore.Application.Contracts.Infrastructure;
+using GarciaCore.Domain;
 
 namespace GarciaCore.Application.RabbitMQ.Contracts.Infrastructure
 {
-    public interface IRabbitMqService
+    public interface IRabbitMqService : IServiceBus
     {
         /// <summary>
         /// Sends the <paramref name="message"/> to the specified <paramref name="queueName"/>.
@@ -60,6 +64,15 @@ namespace GarciaCore.Application.RabbitMQ.Contracts.Infrastructure
         /// <param name="global"></param>
         Task SubscribeAsync(string queueName, Func<ReadOnlyMemory<byte>, Task> receiveHandler, Func<Exception, ReadOnlyMemory<byte>, Task> rejectHandler,
             bool requeueOnReject = false, bool persistent = true, uint prefetchSize = 0, ushort prefetchCount = 1, bool global = false);
+        /// <summary>
+        /// When a message model created in <see cref="IMessage"/> type is published, 
+        /// a queue is created for the relevant message. This queue is listened and the incoming message is processed using the <paramref name="receiveHandler"/> method.
+        /// </summary>
+        /// <typeparam name="T">The message to receive.</typeparam>
+        /// <param name="receiveHandler">An action which handles incoming message.</param>
+        /// <param name="rejectHandler">An action which handles case of an error.</param>
+        /// <returns></returns>
+        Task SubscribeAsync<T>(Func<T, Task> receiveHandler, Func<Exception, string, Task> rejectHandler) where T : IMessage;
         /// <summary>
         /// Deletes specified queue
         /// </summary>
