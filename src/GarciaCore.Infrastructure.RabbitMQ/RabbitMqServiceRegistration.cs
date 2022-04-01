@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GarciaCore.Application.RabbitMQ.Contracts.Infrastructure;
+using GarciaCore.Application.Contracts.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using GarciaCore.Domain;
 
-namespace GaricaCore.Infrastructure.RabbitMQ
+namespace GarciaCore.Infrastructure.RabbitMQ
 {
     public static class RabbitMqServiceRegistration
     {
@@ -55,6 +57,15 @@ namespace GaricaCore.Infrastructure.RabbitMQ
         {
             services.AddSingleton<RabbitMqConnetionFactory>();
             services.AddSingleton<IRabbitMqService, RabbitMqService>();
+            services.AddSingleton<IServiceBus, RabbitMqService>();
+            return services;
+        }
+
+        public static IServiceCollection AddRabbitConsumer<TConsumer, TMessage>(this IServiceCollection services)
+            where TMessage : IMessage
+            where TConsumer : Consumer<TMessage>
+        {
+            services.AddHostedService<TConsumer>();
             return services;
         }
     }

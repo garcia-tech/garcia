@@ -1,9 +1,11 @@
 ﻿using System.Text;
+using System.Text.Json;
 using GarciaCore.Application.RabbitMQ.Contracts.Infrastructure;
+using GarciaCore.Domain;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
-namespace GaricaCore.Infrastructure.RabbitMQ
+namespace GarciaCore.Infrastructure.RabbitMQ
 {
     public class RabbitMqService : IRabbitMqService
     {
@@ -48,6 +50,18 @@ namespace GaricaCore.Infrastructure.RabbitMQ
             }
 
             channel.BasicPublish(exchange, queueName, props, Encoding.UTF8.GetBytes(message));
+            channel.Close();
+            await Task.CompletedTask;
+        }
+
+        public async Task PublishAsync<T>(T message) where T : IMessage
+        {
+            var queue = nameof(T);
+            var channel = _connection.CreateModel();
+            var props = channel.CreateBasicProperties();
+            props.Persistent = true;
+            channel.QueueDeclare(queue, true, false, false);
+            channel.BasicPublish("", queue, props, Encoding.UTF8.GetBytes(JsonSerializer.Serialize(message)));
             channel.Close();
             await Task.CompletedTask;
         }
@@ -110,6 +124,39 @@ namespace GaricaCore.Infrastructure.RabbitMQ
             consumer.ConsumerCancelled += OnConsumerConsumerCancelledAsync;
             channel.BasicConsume(queueName, false, consumer);
             await Task.CompletedTask;    
+        }
+
+        public async Task SubscribeAsync<T>(Func<T, Task> receiveHandler, Func<Exception, string, Task> rejectHandler) where T : IMessage
+        {
+            var channel = _connection.CreateModel();
+            channel.QueueDeclare(nameof(T), true, false, false);
+            channel.BasicQos(0, 1, false);
+            var consumer = new AsyncEventingBasicConsumer(channel);
+
+            consumer.Received += async (ch, ea) =>
+            {
+                var messageContent = Encoding.UTF8.GetString(ea.Body.ToArray());
+                
+                try
+                {
+                    var model = JsonSerializer.Deserialize<T>(messageContent);
+                    await receiveHandler(model);
+                    channel.BasicAck(ea.DeliveryTag, true);
+                    await Task.Yield();
+                }
+                catch (Exception e)
+                {
+                    channel.BasicReject(ea.DeliveryTag, false);
+                    await rejectHandler(e, messageContent);
+                }
+            };
+
+            consumer.Shutdown += OnConsumerShutdownAsync;
+            consumer.Registered += OnConsumerRegisteredAsync;
+            consumer.Unregistered += OnConsumerUnregisteredAsync;
+            consumer.ConsumerCancelled += OnConsumerConsumerCancelledAsync;
+            channel.BasicConsume(nameof(T), false, consumer);
+            await Task.CompletedTask;
         }
 
         public async Task DeleteQueue(string queueName, bool ifUnsued, bool ifEmpty)

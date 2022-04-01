@@ -1,4 +1,4 @@
-﻿namespace GaricaCore.Infrastructure.RabbitMQ
+﻿namespace GarciaCore.Infrastructure.RabbitMQ
 {
     public class RabbitMqSettings
     {
