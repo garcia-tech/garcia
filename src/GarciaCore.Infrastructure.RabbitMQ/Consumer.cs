@@ -12,15 +12,14 @@ namespace GarciaCore.Infrastructure.RabbitMQ
     {
         private readonly IRabbitMqService _rabbit;
 
-        protected Consumer(IRabbitMqService rabbit)
+        protected Consumer(RabbitMqConnectionFactory factory)
         {
-            _rabbit = rabbit;
+            _rabbit = new RabbitMqService(factory);
         }
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        protected async Task StartConsuming(Func<T, Task> consume, Func<Exception, string, Task> handleException)
         {
-            stoppingToken.ThrowIfCancellationRequested();
-            await _rabbit.SubscribeAsync<T>(Consume, HandleException);
+            await _rabbit.SubscribeAsync(consume, handleException);
         }
     }
 }

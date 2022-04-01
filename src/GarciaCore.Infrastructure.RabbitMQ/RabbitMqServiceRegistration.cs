@@ -24,7 +24,8 @@ namespace GarciaCore.Infrastructure.RabbitMQ
                 o.Password = configuration[$"{nameof(RabbitMqSettings)}:{o.GetPasswordKeyValue()}"];
             });
 
-            return services.AddRabbitMqServices();
+            services.AddSingleton<RabbitMqConnectionFactory>();
+            return services;
         }
 
         public static IServiceCollection AddRabbitMQ(this IServiceCollection services, RabbitMqSettings settings)
@@ -37,7 +38,8 @@ namespace GarciaCore.Infrastructure.RabbitMQ
                 o.Password = settings.Password;
             });
 
-            return services.AddRabbitMqServices();
+            services.AddSingleton<RabbitMqConnectionFactory>();
+            return services;
         }
 
         public static IServiceCollection AddRabbitMQ<T>(this IServiceCollection services, IOptions<T> options) where T : RabbitMqSettings
@@ -50,12 +52,12 @@ namespace GarciaCore.Infrastructure.RabbitMQ
                 o.Password =  options.Value.Password;
             });
 
-            return services.AddRabbitMqServices();
+            services.AddSingleton<RabbitMqConnectionFactory>();
+            return services;
         }
 
-        private static IServiceCollection AddRabbitMqServices(this IServiceCollection services)
+        public static IServiceCollection AddRabbitMqServices(this IServiceCollection services)
         {
-            services.AddSingleton<RabbitMqConnetionFactory>();
             services.AddSingleton<IRabbitMqService, RabbitMqService>();
             services.AddSingleton<IServiceBus, RabbitMqService>();
             return services;

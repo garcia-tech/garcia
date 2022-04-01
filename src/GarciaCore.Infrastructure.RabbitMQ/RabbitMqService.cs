@@ -11,7 +11,7 @@ namespace GarciaCore.Infrastructure.RabbitMQ
     {
         private readonly IConnection _connection;
 
-        public RabbitMqService(RabbitMqConnetionFactory factory)
+        public RabbitMqService(RabbitMqConnectionFactory factory)
         {
             _connection = factory.CreateConnection();
             _connection.ConnectionShutdown += RabbitMqConnectionShutdown;
