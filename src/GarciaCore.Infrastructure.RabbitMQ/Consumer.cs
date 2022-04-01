@@ -17,9 +17,10 @@ namespace GarciaCore.Infrastructure.RabbitMQ
             _rabbit = new RabbitMqService(factory);
         }
 
-        protected async Task StartConsuming(Func<T, Task> consume, Func<Exception, string, Task> handleException)
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            await _rabbit.SubscribeAsync(consume, handleException);
+            stoppingToken.ThrowIfCancellationRequested();
+            await _rabbit.SubscribeAsync<T>(Consume, HandleException);
         }
     }
 }
