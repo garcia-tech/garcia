@@ -56,7 +56,7 @@ namespace GarciaCore.Infrastructure.RabbitMQ
 
         public async Task PublishAsync<T>(T message) where T : IMessage
         {
-            var queue = nameof(T);
+            var queue = typeof(T).Name;
             var channel = _connection.CreateModel();
             var props = channel.CreateBasicProperties();
             props.Persistent = true;
@@ -129,7 +129,7 @@ namespace GarciaCore.Infrastructure.RabbitMQ
         public async Task SubscribeAsync<T>(Func<T, Task> receiveHandler, Func<Exception, string, Task> rejectHandler) where T : IMessage
         {
             var channel = _connection.CreateModel();
-            channel.QueueDeclare(nameof(T), true, false, false);
+            channel.QueueDeclare(typeof(T).Name, true, false, false);
             channel.BasicQos(0, 1, false);
             var consumer = new AsyncEventingBasicConsumer(channel);
 
@@ -155,7 +155,7 @@ namespace GarciaCore.Infrastructure.RabbitMQ
             consumer.Registered += OnConsumerRegisteredAsync;
             consumer.Unregistered += OnConsumerUnregisteredAsync;
             consumer.ConsumerCancelled += OnConsumerConsumerCancelledAsync;
-            channel.BasicConsume(nameof(T), false, consumer);
+            channel.BasicConsume(typeof(T).Name, false, consumer);
             await Task.CompletedTask;
         }
 
