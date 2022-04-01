@@ -8,13 +8,13 @@ using RabbitMQ.Client;
 
 namespace GarciaCore.Infrastructure.RabbitMQ
 {
-    public class RabbitMqConnetionFactory : IDisposable
+    public class RabbitMqConnectionFactory : IDisposable
     {
         private readonly RabbitMqSettings _settings;
         private readonly IConnectionFactory _factory;
         private IConnection _connection;
         
-        public RabbitMqConnetionFactory(IOptions<RabbitMqSettings> options)
+        public RabbitMqConnectionFactory(IOptions<RabbitMqSettings> options)
         {
             _settings = options.Value;
             _factory = new ConnectionFactory();
@@ -22,7 +22,7 @@ namespace GarciaCore.Infrastructure.RabbitMQ
                 $"{_settings.Host}:{_settings.Port}");
         }
 
-        public RabbitMqConnetionFactory(RabbitMqSettings settings)
+        public RabbitMqConnectionFactory(RabbitMqSettings settings)
         {
             _settings = settings;
             _factory = new ConnectionFactory();
