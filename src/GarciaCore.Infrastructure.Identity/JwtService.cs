@@ -22,7 +22,6 @@ namespace GarciaCore.Infrastructure.Identity
 
         public JwtService(IOptions<JwtIssuerOptions> jwtOptions)
         {
-            _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtOptions.Value.SecretKey));
             _jwtOptions = jwtOptions.Value;
             ThrowIfInvalidOptions(_jwtOptions);
         }

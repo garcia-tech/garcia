@@ -66,6 +66,11 @@
           "Name": "",
           "BaseClass": null,
           "GeneratorName": "ApplicationServiceRegistrationGenerator"
+        },
+        {
+          "Name": "Repositories",
+          "BaseClass": null,
+          "GeneratorName": "RepositoryGenerator"
         }
       ],
       "ProjectType": "ClassLibrary"

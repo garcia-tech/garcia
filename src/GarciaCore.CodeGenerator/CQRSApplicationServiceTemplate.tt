@@ -13,10 +13,11 @@ using AutoMapper;
 using Microsoft.Extensions.Options;
 <#= GetUsings() #>
 <#
-    if (GeneratorRepository.ContainsGenerator(GeneratorType.Model))
+    var repositoryGetByIdMethodName = "GetByIdAsync";
+
+    if (GeneratorRepository.ContainsGenerator(GeneratorType.Repository))
     {
-#>
-<#
+        repositoryGetByIdMethodName = "GetByIdWithIncludes";
     }
 #>
 
@@ -71,7 +72,7 @@ namespace <#= Namespace #>
 #>
         public async Task<<#= innerTypeName #>> Get<#= property.Name.ToPascalCase() #>Async(<#= IdTypeName #> id)
         {
-            var item = await _<#= Item.Name.ToCamelCase() #>Repository.GetByIdAsync(id);
+            var item = await _<#= Item.Name.ToCamelCase() #>Repository.<#= repositoryGetByIdMethodName #>(id);
 
             if (item != null)
             {
