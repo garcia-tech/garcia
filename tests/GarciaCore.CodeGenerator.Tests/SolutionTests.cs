@@ -231,6 +231,20 @@ namespace GarciaCore.CodeGenerator.Tests
                     },
                     AddApplication = true
                 },
+                new Item()
+                {
+                    Name = "FarmiUser",
+                    IdType = IdType.Long,
+                    Properties = new List<ItemProperty>()
+                    {
+                        new ItemProperty() { Name = "Email", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
+                        new ItemProperty() { Name = "Name", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
+                        new ItemProperty() { Name = "Phone", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
+                        new ItemProperty() { Name = "Photo", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property }
+                    },
+                    AddApplication = true,
+                    MultipartUpload = true
+                },
             };
 
             _output.WriteLine(JsonSerializer.Serialize(items));
@@ -254,6 +268,7 @@ namespace GarciaCore.CodeGenerator.Tests
                 // _output.WriteLine($"// Folder: {item.Folder}, File: {item.File},  Generator: {item.Generator.GetType().Name}");
                 // _output.WriteLine(item.Code);
                 Directory.CreateDirectory(item.Folder);
+                //if(!File.Exists($"{item.Folder}\\{item.File}"))
                 await File.WriteAllTextAsync($"{item.Folder}\\{item.File}", item.Code);
             }
         }

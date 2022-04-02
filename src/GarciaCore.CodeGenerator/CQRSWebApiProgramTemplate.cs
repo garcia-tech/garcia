@@ -192,10 +192,9 @@ builder.Services.AddApplicationServices();
             
             #line default
             #line hidden
-            this.Write(@"builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
-builder.Services.AddScoped<ILoggedInUserService, LoggedInUserService>();
-builder.Services.RegisterServices(new JwtIssuerOptions() { Issuer = builder.Configuration.GetSection(nameof(JwtIssuerOptions))[nameof(JwtIssuerOptions.Issuer)], Audience = builder.Configuration.GetSection(nameof(JwtIssuerOptions))[nameof(JwtIssuerOptions.Audience)] });
-");
+            this.Write("builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();\r\nbui" +
+                    "lder.Services.AddScoped<ILoggedInUserService, LoggedInUserService>();\r\nbuilder.S" +
+                    "ervices.AddJwtOptions(builder.Configuration);\r\n");
             
             #line 102 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 

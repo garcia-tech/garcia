@@ -7,6 +7,9 @@
 <#@ import namespace="GarciaCore.Infrastructure" #>
 <#@ include file="IncludeWarning.t4" #>
 <#@ include file="IncludeUsings.t4" #>
+using Microsoft.EntityFrameworkCore;
+using GarciaCore.Application.Contracts.Persistence;
+using GarciaCore.Persistence.EntityFramework;
 <#= GetUsings() #>
 
 namespace <#= Namespace #>
@@ -17,7 +20,8 @@ namespace <#= Namespace #>
         if (Item.Properties.Count(x => x.InnerType != null) > 0)
 	    {
 #>
-        Task<List<<#= Item.Name #>>> GetByIdWithIncludes(long id);
+        Task<List<<#= Item.Name #>>> GetAllWithIncludes();
+        Task<<#= Item.Name #>> GetByIdWithIncludes(long id);
 <#
         }
 #>
@@ -25,14 +29,31 @@ namespace <#= Namespace #>
 
     public partial class <#= Item.Name #>Repository : <#= BaseClass #><<#= Item.Name #>>, I<#= Item.Name #>Repository
     {
-        public LockerRepository(DbContext dbContext) : base(dbContext) { }
+        public <#= Item.Name #>Repository(DbContext dbContext) : base(dbContext) { }
+
 <#
         if (Item.Properties.Count(x => x.InnerType != null) > 0)
 	    {
 #>
-        public async Task<List<<#= Item.Name #>>> GetByIdWithIncludes( <#= IdTypeName #> id)
+        public async Task<List<<#= Item.Name #>>> GetAllWithIncludes()
         {
-            return await _dbContext.<#= Item.Name #>s
+            return await (_dbContext as <#= GeneratorRepository.Solution.Name #>DbContext).<#= Item.Name #>s
+<#
+        foreach (var property in Item.Properties.Where(x => x.InnerType != null))
+	    {
+            string innerTypeName = this.generator.GetInnerTypeName(property);
+#>
+                .Include(i => i.<#= property.Name #>)
+<#
+        }
+#>
+                .AsNoTracking()
+                .ToListAsync();
+        }
+
+        public async Task<<#= Item.Name #>> GetByIdWithIncludes(<#= IdTypeName #> id)
+        {
+            return await (_dbContext as <#= GeneratorRepository.Solution.Name #>DbContext).<#= Item.Name #>s
 <#
         foreach (var property in Item.Properties.Where(x => x.InnerType != null))
 	    {
@@ -44,7 +65,7 @@ namespace <#= Namespace #>
 #>
                 .Where(i => i.Id == id)
                 .AsNoTracking()
-                .ToListAsync();
+                .FirstOrDefaultAsync();
         }
 <#
         }

@@ -11,7 +11,9 @@
   "AllowedHosts": "*",
   "JwtIssuerOptions": {
     "Issuer": "<#= GeneratorRepository.Solution.Name #>",
-    "Audience": "http://<#= GeneratorRepository.Solution.Name #>-app.com/"
+    "Audience": "http://<#= GeneratorRepository.Solution.Name #>-app.com/",
+    "SecretKey": "8b95c3c301a54b39b7b9b4c612bc6844",
+    "ValidFor": 10000
   },
 <#
     if (GeneratorRepository.ContainsIntegration(IntegrationType.AmazonS3FileUpload))

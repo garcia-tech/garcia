@@ -41,9 +41,10 @@ namespace GarciaCore.CodeGenerator
             
             #line default
             #line hidden
-            this.Write("-app.com/\"\r\n  },\r\n");
+            this.Write("-app.com/\",\r\n    \"SecretKey\": \"8b95c3c301a54b39b7b9b4c612bc6844\",\r\n    \"ValidFor\"" +
+                    ": 10000\r\n  },\r\n");
             
-            #line 16 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
+            #line 18 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
 
     if (GeneratorRepository.ContainsIntegration(IntegrationType.AmazonS3FileUpload))
     {
@@ -56,7 +57,7 @@ namespace GarciaCore.CodeGenerator
                     "assetstest\",\r\n    \"BucketUrl\": \"https://farmiassetstest.s3.eu-central-1.amazonaw" +
                     "s.com\"\r\n  }\r\n");
             
-            #line 26 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
+            #line 28 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
 
     }
 
@@ -68,7 +69,7 @@ namespace GarciaCore.CodeGenerator
             #line hidden
             this.Write("  \"FileUploadSettings\": {\r\n    \"FileUploadPath\": \"\",\r\n    \"BaseUrl\": \"\"\r\n  }\r\n");
             
-            #line 36 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
+            #line 38 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
 
     }
 
@@ -79,7 +80,7 @@ namespace GarciaCore.CodeGenerator
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 42 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
+        #line 44 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
 
     protected override Generator CreateGenerator()
 	{

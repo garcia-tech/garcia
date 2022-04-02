@@ -1,7 +1,7 @@
 {
   "Items": [
     {
-      "Name": "Content",
+      "Name": "Test",
       "Properties": [
         {
           "Name": "Date",
@@ -12,7 +12,7 @@
           "Name": "Items",
           "Type": "Class",
           "MappingType": "List",
-          "InnerType": "ContentItem"
+          "InnerType": "string"
         }
       ],
       "IsEnum": false,
