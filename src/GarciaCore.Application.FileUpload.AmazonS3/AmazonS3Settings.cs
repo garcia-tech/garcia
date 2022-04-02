@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GarciaCore.Application
+namespace GarciaCore.Application.FileUpload.AmazonS3
 {
     public class AmazonS3Settings
     {

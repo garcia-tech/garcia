@@ -1,6 +1,6 @@
-﻿namespace GarciaCore.Application
+﻿namespace GarciaCore.Application.FileUpload.Local
 {
-    public class FileUploadSettings
+    public class LocalFileUploadSettings
     {
         public string FileUploadPath { get; set; }
         public string BaseUrl { get; set; }

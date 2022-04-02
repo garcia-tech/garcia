@@ -8,17 +8,18 @@ using Moq;
 using Shouldly;
 using GarciaCore.Application.Contracts.FileUpload;
 using Microsoft.Extensions.Options;
+using GarciaCore.Application.FileUpload.Local;
 
 namespace GarciaCore.Application.Tests.Services
 {
     public class FileUploadServiceTests
     {
-        private static Mock<IOptions<FileUploadSettings>> _mockOptions = new();
+        private static Mock<IOptions<LocalFileUploadSettings>> _mockOptions = new();
         private readonly IFileUploadService _service;
 
         public FileUploadServiceTests()
         {
-            var settings = new FileUploadSettings
+            var settings = new LocalFileUploadSettings
             {
               BaseUrl = "http://baseurl/",
               FileUploadPath = "c:\\files\\"

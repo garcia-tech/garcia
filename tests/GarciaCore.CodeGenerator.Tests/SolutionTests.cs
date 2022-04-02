@@ -240,7 +240,8 @@ namespace GarciaCore.CodeGenerator.Tests
                         new ItemProperty() { Name = "Email", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
                         new ItemProperty() { Name = "Name", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
                         new ItemProperty() { Name = "Phone", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
-                        new ItemProperty() { Name = "Photo", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property }
+                        new ItemProperty() { Name = "Photo", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
+                        new ItemProperty() { Name = "Password", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property }
                     },
                     AddApplication = true,
                     MultipartUpload = true

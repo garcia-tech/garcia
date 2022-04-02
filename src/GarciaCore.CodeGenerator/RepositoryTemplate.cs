@@ -88,14 +88,14 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write(">> GetAllWithIncludes();\r\n        Task<");
+            this.Write(">> GetAllWithIncludesAsync();\r\n        Task<");
             
             #line 24 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
-            this.Write("> GetByIdWithIncludes(long id);\r\n");
+            this.Write("> GetByIdWithIncludesAsync(long id);\r\n");
             
             #line 25 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
 
@@ -156,7 +156,8 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write(">> GetAllWithIncludes()\r\n        {\r\n            return await (_dbContext as ");
+            this.Write(">> GetAllWithIncludesAsync()\r\n        {\r\n            return await (_dbContext as " +
+                    "");
             
             #line 40 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorRepository.Solution.Name));
@@ -205,7 +206,7 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write("> GetByIdWithIncludes(");
+            this.Write("> GetByIdWithIncludesAsync(");
             
             #line 54 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\RepositoryTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(IdTypeName));

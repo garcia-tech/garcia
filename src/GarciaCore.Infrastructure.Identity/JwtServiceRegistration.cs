@@ -11,7 +11,6 @@ namespace GarciaCore.Infrastructure.Identity
 {
     public static class JwtServiceRegistration
     {
-     
         public static IServiceCollection AddJwtOptions(this IServiceCollection services, JwtIssuerOptions jwtOptions)
         {
             SymmetricSecurityKey _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtOptions.SecretKey));

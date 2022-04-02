@@ -8,7 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GarciaCore.Application.Services
+namespace GarciaCore.Application.FileUpload.AmazonS3
 {
     public class AmazonS3FileUplaodService : IFileUploadService
     {

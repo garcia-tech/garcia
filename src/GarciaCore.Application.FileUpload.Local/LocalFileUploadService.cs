@@ -8,13 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GarciaCore.Application.Services
+namespace GarciaCore.Application.FileUpload.Local
 {
     public partial class LocalFileUploadService : IFileUploadService
     {
-        private FileUploadSettings _settings;
+        private LocalFileUploadSettings _settings;
 
-        public LocalFileUploadService(IOptions<FileUploadSettings> settings)
+        public LocalFileUploadService(IOptions<LocalFileUploadSettings> settings)
         {
             _settings = settings.Value;
         }
