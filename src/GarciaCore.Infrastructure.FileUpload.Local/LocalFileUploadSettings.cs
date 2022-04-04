@@ -1,4 +1,4 @@
-﻿namespace GarciaCore.Application.FileUpload.Local
+﻿namespace GarciaCore.Infrastructure.FileUpload.Local
 {
     public class LocalFileUploadSettings
     {

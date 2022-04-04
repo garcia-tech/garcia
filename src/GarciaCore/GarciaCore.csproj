@@ -8,10 +8,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GarciaCore.Application.Email.Mandrill\GarciaCore.Application.Email.Mandrill.csproj" />
-    <ProjectReference Include="..\GarciaCore.Application.FileUpload.AmazonS3\GarciaCore.Application.FileUpload.AmazonS3.csproj" />
-    <ProjectReference Include="..\GarciaCore.Application.FileUpload.Local\GarciaCore.Application.FileUpload.Local.csproj" />
-    <ProjectReference Include="..\GarciaCore.Application.Marketing.MailChimp\GarciaCore.Application.Marketing.MailChimp.csproj" />
+    <ProjectReference Include="..\GarciaCore.Infrastructure.Email.Mandrill\GarciaCore.Infrastructure.Email.Mandrill.csproj" />
+    <ProjectReference Include="..\GarciaCore.Infrastructure.FileUpload.AmazonS3\GarciaCore.Infrastructure.FileUpload.AmazonS3.csproj" />
+    <ProjectReference Include="..\GarciaCore.Infrastructure.FileUpload.Local\GarciaCore.Infrastructure.FileUpload.Local.csproj" />
+    <ProjectReference Include="..\GarciaCore.Infrastructure.Marketing.MailChimp\GarciaCore.Infrastructure.Marketing.MailChimp.csproj" />
     <ProjectReference Include="..\GarciaCore.Application.MongoDb\GarciaCore.Application.MongoDb.csproj" />
     <ProjectReference Include="..\GarciaCore.Application.RabbitMQ\GarciaCore.Application.RabbitMQ.csproj" />
     <ProjectReference Include="..\GarciaCore.Application.Redis\GarciaCore.Application.Redis.csproj" />

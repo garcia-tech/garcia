@@ -1,5 +1,6 @@
 ﻿using Amazon.S3;
 using Amazon.S3.Model;
+using GarciaCore.Application;
 using GarciaCore.Application.Contracts.FileUpload;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
@@ -8,7 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GarciaCore.Application.FileUpload.AmazonS3
+namespace GarciaCore.Infrastructure.FileUpload.AmazonS3
 {
     public class AmazonS3FileUplaodService : IFileUploadService
     {

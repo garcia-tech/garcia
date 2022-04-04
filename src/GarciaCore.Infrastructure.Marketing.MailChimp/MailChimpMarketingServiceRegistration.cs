@@ -2,11 +2,11 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace GarciaCore.Application.Marketing.MailChimp
+namespace GarciaCore.Infrastructure.Marketing.MailChimp
 {
     public static class MailChimpMarketingServiceRegistration
     {
-        public static IServiceCollection RegisterMailChimpMarketingService(this IServiceCollection services, MailChimpMarketingSettings settings)
+        public static IServiceCollection AddMailChimpMarketingService(this IServiceCollection services, MailChimpMarketingSettings settings)
         {
             services.Configure<MailChimpMarketingSettings>(options =>
             {
@@ -18,7 +18,7 @@ namespace GarciaCore.Application.Marketing.MailChimp
             return services;
         }
 
-        public static IServiceCollection RegisterMailChimpMarketingService(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddMailChimpMarketingService(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<MailChimpMarketingSettings>(options =>
             {

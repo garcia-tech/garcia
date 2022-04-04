@@ -8,7 +8,7 @@ using Moq;
 using Shouldly;
 using GarciaCore.Application.Contracts.FileUpload;
 using Microsoft.Extensions.Options;
-using GarciaCore.Application.FileUpload.Local;
+using GarciaCore.Infrastructure.FileUpload.Local;
 
 namespace GarciaCore.Application.Tests.Services
 {

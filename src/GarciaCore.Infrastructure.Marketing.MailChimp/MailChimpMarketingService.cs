@@ -6,7 +6,7 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Threading.Tasks;
 
-namespace GarciaCore.Application.Marketing.MailChimp
+namespace GarciaCore.Infrastructure.Marketing.MailChimp
 {
     public class MailChimpMarketingService : IMarketingService
     {

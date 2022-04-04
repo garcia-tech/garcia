@@ -75,13 +75,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Infrastructure.R
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.TestApi", "src\GarciaCore.TestApi\GarciaCore.TestApi.csproj", "{87438282-6333-40CF-A98F-7EB29DB04452}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.Application.Email.Mandrill", "src\GarciaCore.Application.Email.Mandrill\GarciaCore.Application.Email.Mandrill.csproj", "{22F46715-48CC-4340-B80B-2EE8CA0BB998}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Infrastructure.Email.Mandrill", "src\GarciaCore.Infrastructure.Email.Mandrill\GarciaCore.Infrastructure.Email.Mandrill.csproj", "{22F46715-48CC-4340-B80B-2EE8CA0BB998}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.Application.Marketing.MailChimp", "src\GarciaCore.Application.Marketing.MailChimp\GarciaCore.Application.Marketing.MailChimp.csproj", "{E689D7EB-4EFE-4F60-9AD0-B92609D66003}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Infrastructure.Marketing.MailChimp", "src\GarciaCore.Infrastructure.Marketing.MailChimp\GarciaCore.Infrastructure.Marketing.MailChimp.csproj", "{E689D7EB-4EFE-4F60-9AD0-B92609D66003}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.Application.FileUpload.AmazonS3", "src\GarciaCore.Application.FileUpload.AmazonS3\GarciaCore.Application.FileUpload.AmazonS3.csproj", "{0B812A3D-8BF7-40F4-B49C-AA4A4C16D5B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Infrastructure.FileUpload.AmazonS3", "src\GarciaCore.Infrastructure.FileUpload.AmazonS3\GarciaCore.Infrastructure.FileUpload.AmazonS3.csproj", "{0B812A3D-8BF7-40F4-B49C-AA4A4C16D5B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.Application.FileUpload.Local", "src\GarciaCore.Application.FileUpload.Local\GarciaCore.Application.FileUpload.Local.csproj", "{3704E7E6-C2DC-4BA9-A1C0-4EE3F0802EDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Infrastructure.FileUpload.Local", "src\GarciaCore.Infrastructure.FileUpload.Local\GarciaCore.Infrastructure.FileUpload.Local.csproj", "{3704E7E6-C2DC-4BA9-A1C0-4EE3F0802EDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

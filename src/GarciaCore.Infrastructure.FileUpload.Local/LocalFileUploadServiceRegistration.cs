@@ -3,11 +3,11 @@ using GarciaCore.Application.Contracts.Marketing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace GarciaCore.Application.FileUpload.Local
+namespace GarciaCore.Infrastructure.FileUpload.Local
 {
     public static class LocalFileUploadServiceRegistration
     {
-        public static IServiceCollection RegisterLocalFileUploadService(this IServiceCollection services, LocalFileUploadSettings settings)
+        public static IServiceCollection AddLocalFileUploadService(this IServiceCollection services, LocalFileUploadSettings settings)
         {
             services.Configure<LocalFileUploadSettings>(options =>
             {
@@ -19,7 +19,7 @@ namespace GarciaCore.Application.FileUpload.Local
             return services;
         }
 
-        public static IServiceCollection RegisterLocalFileUploadService(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddLocalFileUploadService(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<LocalFileUploadSettings>(options =>
             {

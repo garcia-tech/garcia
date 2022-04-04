@@ -20,7 +20,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\src\GarciaCore.Application.FileUpload.Local\GarciaCore.Application.FileUpload.Local.csproj" />
+		<ProjectReference Include="..\..\..\src\GarciaCore.Infrastructure.FileUpload.Local\GarciaCore.Infrastructure.FileUpload.Local.csproj" />
 		<ProjectReference Include="..\..\..\src\GarciaCore.Application\GarciaCore.Application.csproj" />
 		<ProjectReference Include="..\..\..\src\GarciaCore.Test.Utils\GarciaCore.Test.Utils.csproj" />
 	</ItemGroup>

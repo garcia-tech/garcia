@@ -3,11 +3,11 @@ using GarciaCore.Application.Contracts.Marketing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace GarciaCore.Application.Email.Mandrill
+namespace GarciaCore.Infrastructure.Email.Mandrill
 {
     public static class MandrillEmailServiceRegistration
     {
-        public static IServiceCollection RegisterMandrillEmailService(this IServiceCollection services, MandrillEmailSettings settings)
+        public static IServiceCollection AddMandrillEmailService(this IServiceCollection services, MandrillEmailSettings settings)
         {
             services.Configure<MandrillEmailSettings>(options =>
             {
@@ -20,7 +20,7 @@ namespace GarciaCore.Application.Email.Mandrill
             return services;
         }
 
-        public static IServiceCollection RegisterMandrillEmailService(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddMandrillEmailService(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<MandrillEmailSettings>(options =>
             {

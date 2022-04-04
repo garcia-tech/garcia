@@ -3,11 +3,11 @@ using GarciaCore.Application.Contracts.Marketing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace GarciaCore.Application.FileUpload.AmazonS3
+namespace GarciaCore.Infrastructure.FileUpload.AmazonS3
 {
     public static class AmazonS3FileUploadServiceRegistration
     {
-        public static IServiceCollection RegisterAmazonS3FileUploadService(this IServiceCollection services, AmazonS3Settings settings)
+        public static IServiceCollection AddAmazonS3FileUploadService(this IServiceCollection services, AmazonS3Settings settings)
         {
             services.Configure<AmazonS3Settings>(options =>
             {
@@ -21,7 +21,7 @@ namespace GarciaCore.Application.FileUpload.AmazonS3
             return services;
         }
 
-        public static IServiceCollection RegisterAmazonS3FileUploadService(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddAmazonS3FileUploadService(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<AmazonS3Settings>(options =>
             {

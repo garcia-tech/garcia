@@ -1,4 +1,4 @@
-﻿namespace GarciaCore.Application.Email.Mandrill
+﻿namespace GarciaCore.Infrastructure.Email.Mandrill
 {
     public class MandrillEmailSettings
     {

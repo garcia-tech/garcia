@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GarciaCore.Application.Email.Mandrill
+namespace GarciaCore.Infrastructure.Email.Mandrill
 {
     public class MandrillEmailService : IEmailService
     {
