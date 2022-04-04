@@ -1,7 +1,7 @@
 ﻿using System.Text;
-using System.Text.Json;
 using GarciaCore.Application.RabbitMQ.Contracts.Infrastructure;
 using GarciaCore.Domain;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
@@ -61,7 +61,7 @@ namespace GarciaCore.Infrastructure.RabbitMQ
             var props = channel.CreateBasicProperties();
             props.Persistent = true;
             channel.QueueDeclare(queue, true, false, false);
-            channel.BasicPublish("", queue, props, Encoding.UTF8.GetBytes(JsonSerializer.Serialize(message)));
+            channel.BasicPublish("", queue, props, Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message)));
             channel.Close();
             await Task.CompletedTask;
         }
@@ -139,7 +139,7 @@ namespace GarciaCore.Infrastructure.RabbitMQ
 
                 try
                 {
-                    var model = JsonSerializer.Deserialize<T>(messageContent);
+                    var model = JsonConvert.DeserializeObject<T>(messageContent);
                     await receiveHandler(model);
                     channel.BasicAck(ea.DeliveryTag, true);
                     await Task.Yield();
