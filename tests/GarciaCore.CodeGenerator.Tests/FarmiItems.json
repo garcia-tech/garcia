@@ -1,7 +1,7 @@
 {
   "Items": [
     {
-      "Name": "Test",
+      "Name": "Content",
       "Properties": [
         {
           "Name": "Date",
@@ -9,15 +9,98 @@
           "MappingType": "Property"
         },
         {
-          "Name": "Items",
+          "Name": "Files",
           "Type": "Class",
           "MappingType": "List",
-          "InnerType": "string"
+          "InnerType": "ContentFile"
+        },
+        {
+          "Name": "Milestones",
+          "Type": "Class",
+          "MappingType": "List",
+          "InnerType": "ContentMilestone"
         }
       ],
-      "IsEnum": false,
       "IdType": "Long",
-      "AddApplication": true
+      "AddApplication": true,
+      "MultipartUpload": true
+    },
+    {
+      "Name": "ContentFile",
+      "Properties": [
+        {
+          "Name": "Url",
+          "Type": "String"
+        },
+        {
+          "Name": "Description",
+          "Type": "String"
+        }
+      ],
+      "IdType": "Long"
+    },
+    {
+      "Name": "ContentMilestone",
+      "Properties": [
+        {
+          "Name": "FinishedOn",
+          "Type": "DateTime",
+          "MappingType": "Property"
+        }
+      ],
+      "IdType": "Long"
+    },
+    {
+      "Name": "Milestone",
+      "Properties": [
+        {
+          "Name": "Title",
+          "Type": "String"
+        },
+        {
+          "Name": "Description",
+          "Type": "String"
+        },
+        {
+          "Name": "Logo",
+          "Type": "String"
+        }
+      ],
+      "IdType": "Long",
+      "AddApplication": true,
+      "MultipartUpload": true
+    },
+    {
+      "Name": "FarmiUser",
+      "Properties": [
+        {
+          "Name": "Email",
+          "Type": "String"
+        },
+        {
+          "Name": "Name",
+          "Type": "String"
+        },
+        {
+          "Name": "Phone",
+          "Type": "String"
+        },
+        {
+          "Name": "Photo",
+          "Type": "String"
+        },
+        {
+          "Name": "Password",
+          "Type": "String"
+        },
+        {
+          "Name": "PushToken",
+          "Type": "String"
+        }
+      ],
+      "IdType": "Long",
+      "AddApplication": true,
+      "MultipartUpload": true
     }
   ]
 }

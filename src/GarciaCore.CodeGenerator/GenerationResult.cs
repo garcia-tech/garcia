@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace GarciaCore.CodeGenerator
 {
@@ -15,8 +16,8 @@ namespace GarciaCore.CodeGenerator
         public string Folder { get; set; }
         public IGenerator Generator { get; set; }
         public string Code { get; set; }
-        public List<string> Messages { get; set; } = new List<string>();
-        public string AllMessages { get { return string.Join('\n', Messages); } }
+        public List<GenerationResultMessage> Messages { get; set; } = new List<GenerationResultMessage>();
+        public string AllMessages { get { return string.Join('\n', Messages.OrderByDescending(x => x.Type).Select(x => $"{x.Type.ToString()}: {x.Message}")); } }
         public string File { get; set; }
     }
 }

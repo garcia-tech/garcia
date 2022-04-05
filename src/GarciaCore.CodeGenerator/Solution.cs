@@ -33,26 +33,42 @@ namespace GarciaCore.CodeGenerator
         //    return generationResults;
         //}
 
-        public virtual async Task<List<GenerationResult>> Generate(List<Item> items)
+        public virtual async Task<GenerationResultContainer> Generate(List<Item> items)
         {
             GeneratorRepository.Solution = this;
-            var generationResults = new List<GenerationResult>();
+            var generationResults = new GenerationResultContainer();
+            var validItems = new List<Item>();
+            int index = 0;
 
             foreach (var item in items)
+            {
+                if (item.Properties.Count(x => string.IsNullOrEmpty(x.Name)) > 0)
+                {
+                    generationResults.Messages.Add(new GenerationResultMessage(GenerationResultMessageType.Error, $"Item {item.Name} contains a null property name at index {index}, cannot generate code for item {item.Name}."));
+                }
+                else
+                {
+                    validItems.Add(item);
+                }
+
+                index++;
+            }
+
+            foreach (var item in validItems)
             {
                 GeneratorRepository.AddItem(item);
 
                 foreach (var project in Projects)
                 {
                     var generationResult = await project.Generate(item);
-                    generationResults.AddRange(generationResult);
+                    generationResults.GenerationResults.AddRange(generationResult);
                 }
 
                 foreach (var property in item.Properties.Where(x => x.InnerType != null))
                 {
                     if (items.Count(x => x.Name.ToLowerInvariant() == property.InnerType.Name.ToLowerInvariant()) == 0)
                     {
-                        generationResults.ForEach(x => x.Messages.Add($"Item {property.InnerType.Name} does not exist in item collection, possible build error."));
+                        generationResults.GenerationResults.ForEach(x => x.Messages.Add(new GenerationResultMessage(GenerationResultMessageType.Warning, $"Item {property.InnerType.Name} does not exist in item collection, possible build error.")));
                     }
                 }
             }
@@ -60,10 +76,17 @@ namespace GarciaCore.CodeGenerator
             foreach (var project in Projects)
             {
                 var generationResult = await project.Generate();
-                generationResults.AddRange(generationResult);
+                generationResults.GenerationResults.AddRange(generationResult);
             }
 
             return generationResults;
         }
+    }
+
+    public class GenerationResultContainer
+    {
+        public List<GenerationResult> GenerationResults { get; set; } = new List<GenerationResult>();
+        public List<GenerationResultMessage> Messages { get; set; } = new List<GenerationResultMessage>();
+        public string AllMessages { get { return string.Join('\n', Messages.OrderByDescending(x => x.Type).Select(x => $"{x.Type.ToString()}: {x.Message}")); } }
     }
 }

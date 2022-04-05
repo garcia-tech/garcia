@@ -87,9 +87,9 @@ namespace GarciaCore.CodeGenerator.Tests
             var solution = await _solutionService.CreateSampleSolutionAsync();
             var result = await solution.Generate(items);
             result.ShouldNotBeNull();
-            result.ShouldNotBeEmpty();
+            result.GenerationResults.ShouldNotBeEmpty();
 
-            foreach (var item in result)
+            foreach (var item in result.GenerationResults)
             {
                 item.Folder.ShouldNotBeNullOrEmpty();
                 item.Generator.ShouldNotBeNull();
@@ -98,7 +98,7 @@ namespace GarciaCore.CodeGenerator.Tests
                 _output.WriteLine(item.Code);
             }
 
-            foreach (var item in result)
+            foreach (var item in result.GenerationResults)
             {
                 var allMessages = item.AllMessages;
 
@@ -131,42 +131,29 @@ namespace GarciaCore.CodeGenerator.Tests
         [Fact]
         public async Task CreateItemsFromFileAsync()
         {
-            //var itemsModel = new ItemsModel()
-            //{
-            //    Items = new List<ItemModel>()
-            //    {
-            //        new ItemModel()
-            //        {
-            //            AddApplication = true,
-            //            IdType = IdType.Long.ToString(),
-            //            IsEnum = false,
-            //            Name = "Content",
-            //            Properties = new List<ItemPropertyModel>()
-            //            {
-            //                new ItemPropertyModel()
-            //                {
-            //                    InnerType = "DateTime",
-            //                    MappingType = "Property",
-            //                },
-            //                new ItemPropertyModel()
-            //                {
-            //                    InnerType = "ContentItem",
-            //                    MappingType = "List",
-            //                    Type = "Class",
-            //                    Name = "Items"
-            //                }
-            //            }
-            //        }
-            //    }
-            //};
-
-            //_output.WriteLine(JsonSerializer.Serialize(itemsModel));
-            //return;
             var json = await File.ReadAllTextAsync("Farmi.json");
             var solution = await _solutionService.CreateSolutionAsync(json);
             var itemsJson = await File.ReadAllTextAsync("FarmiItems.json");
             var items = await _solutionService.CreateItemsAsync(itemsJson);
+
+            foreach (var message in solution.Messages)
+            {
+                _output.WriteLine(message);
+            }
+
             var result = await solution.Solution.Generate(items);
+            _output.WriteLine(result.AllMessages);
+
+            foreach (var item in result.GenerationResults)
+            {
+                item.Folder.ShouldNotBeNullOrEmpty();
+                item.Generator.ShouldNotBeNull();
+                item.Code.ShouldNotBeNullOrEmpty();
+                Directory.CreateDirectory(item.Folder);
+                //if(!File.Exists($"{item.Folder}\\{item.File}"))
+                await File.WriteAllTextAsync($"{item.Folder}\\{item.File}", item.Code);
+                _output.WriteLine($"{item.Folder}\\{item.File}");
+            }
         }
 
         [Fact]
@@ -241,7 +228,8 @@ namespace GarciaCore.CodeGenerator.Tests
                         new ItemProperty() { Name = "Name", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
                         new ItemProperty() { Name = "Phone", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
                         new ItemProperty() { Name = "Photo", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
-                        new ItemProperty() { Name = "Password", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property }
+                        new ItemProperty() { Name = "Password", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
+                        new ItemProperty() { Name = "PushToken", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property }
                     },
                     AddApplication = true,
                     MultipartUpload = true
@@ -251,9 +239,9 @@ namespace GarciaCore.CodeGenerator.Tests
             _output.WriteLine(JsonSerializer.Serialize(items));
             var result = await solution.Solution.Generate(items);
             result.ShouldNotBeNull();
-            result.ShouldNotBeEmpty();
+            result.GenerationResults.ShouldNotBeEmpty();
 
-            foreach (var item in result)
+            foreach (var item in result.GenerationResults)
             {
                 var allMessages = item.AllMessages;
 
@@ -261,17 +249,17 @@ namespace GarciaCore.CodeGenerator.Tests
                     _output.WriteLine($"// Messages: {allMessages}");
             }
 
-            foreach (var item in result)
-            {
-                item.Folder.ShouldNotBeNullOrEmpty();
-                item.Generator.ShouldNotBeNull();
-                item.Code.ShouldNotBeNullOrEmpty();
-                // _output.WriteLine($"// Folder: {item.Folder}, File: {item.File},  Generator: {item.Generator.GetType().Name}");
-                // _output.WriteLine(item.Code);
-                Directory.CreateDirectory(item.Folder);
-                //if(!File.Exists($"{item.Folder}\\{item.File}"))
-                await File.WriteAllTextAsync($"{item.Folder}\\{item.File}", item.Code);
-            }
+            //foreach (var item in result)
+            //{
+            //    item.Folder.ShouldNotBeNullOrEmpty();
+            //    item.Generator.ShouldNotBeNull();
+            //    item.Code.ShouldNotBeNullOrEmpty();
+            //    // _output.WriteLine($"// Folder: {item.Folder}, File: {item.File},  Generator: {item.Generator.GetType().Name}");
+            //    // _output.WriteLine(item.Code);
+            //    Directory.CreateDirectory(item.Folder);
+            //    //if(!File.Exists($"{item.Folder}\\{item.File}"))
+            //    await File.WriteAllTextAsync($"{item.Folder}\\{item.File}", item.Code);
+            //}
         }
     }
 }
