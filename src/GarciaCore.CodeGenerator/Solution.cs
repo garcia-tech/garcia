@@ -48,7 +48,27 @@ namespace GarciaCore.CodeGenerator
                 }
                 else
                 {
-                    validItems.Add(item);
+                    var propertyNames = new List<string>();
+                    var isValid = true;
+
+                    foreach (var property in item.Properties)
+                    {
+                        if (propertyNames.Contains(property.Name.ToLowerInvariant()))
+                        {
+                            isValid = false;
+                            generationResults.Messages.Add(new GenerationResultMessage(GenerationResultMessageType.Error, $"Item {item.Name} already contains property {property.Name}, cannot generate code for item {item.Name}."));
+                            break;
+                        }
+                        else
+                        {
+                            propertyNames.Add(property.Name.ToLowerInvariant());
+                        }
+                    }
+
+                    if (isValid)
+                    {
+                        validItems.Add(item);
+                    }
                 }
 
                 index++;

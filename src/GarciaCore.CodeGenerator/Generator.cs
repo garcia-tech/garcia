@@ -90,6 +90,7 @@ namespace GarciaCore.CodeGenerator
                     typeName = "TimeSpan";
                     break;
                 case ItemPropertyType.String:
+                case ItemPropertyType.Photo:
                     typeName = "string";
                     break;
                 case ItemPropertyType.Char:
