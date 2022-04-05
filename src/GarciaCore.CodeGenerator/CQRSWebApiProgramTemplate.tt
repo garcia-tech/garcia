@@ -32,11 +32,19 @@ using GarciaCore.Infrastructure.Identity;
 <#
     }
 
-    if (GeneratorRepository.ContainsIntegration(IntegrationType.AmazonS3FileUpload) || GeneratorRepository.ContainsIntegration(IntegrationType.LocalFileUpload))
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.AmazonS3FileUpload))
     {
 #>
 using GarciaCore.Application.Contracts.FileUpload;
-using GarciaCore.Application.Services;
+using GarciaCore.Infrastructure.FileUpload.AmazonS3;
+<#
+    }
+
+     if (GeneratorRepository.ContainsIntegration(IntegrationType.LocalFileUpload))
+    {
+#>
+using GarciaCore.Application.Contracts.FileUpload;
+using GarciaCore.Infrastructure.FileUpload.Local;
 <#
     }
 
@@ -72,6 +80,30 @@ using GarciaCore.Persistence.MongoDb;
     {
 #>
 using GarciaCore.Persistence.Redis;
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.MailchimpMail))
+    {
+#>
+using GarciaCore.Application.Contracts.Email;
+using GarciaCore.Infrastructure.Mail.Mailchimp;
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.MandrillMarketing))
+    {
+#>
+using GarciaCore.Application.Contracts.Marketing;
+using GarciaCore.Infrastructure.Marketing.Mandrill;
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.FirebasePushNotification))
+    {
+#>
+using GarciaCore.Application.Contracts.PushNotification;
+using GarciaCore.Infrastructure.PushNotification.Firebase;
 <#
     }
 #>

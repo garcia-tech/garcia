@@ -9,6 +9,9 @@
         Redis,
         Authentication,
         AmazonS3FileUpload,
-        LocalFileUpload
+        LocalFileUpload,
+        MailchimpMail,
+        MandrillMarketing,
+        FirebasePushNotification
     }
 }
