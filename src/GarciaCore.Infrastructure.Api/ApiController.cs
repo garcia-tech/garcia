@@ -1,4 +1,5 @@
-﻿using GarciaCore.Application.Contracts.FileUpload;
+﻿using GarciaCore.Application;
+using GarciaCore.Application.Contracts.FileUpload;
 using GarciaCore.Application.Contracts.Persistence;
 using GarciaCore.Persistence;
 using MediatR;
@@ -49,14 +50,14 @@ namespace GarciaCore.Infrastructure.Api
             return data.Replace("{}", "null").Replace("{ }", "null");
         }
 
-        protected async Task<List<string>> MultipartUploadAsync()
+        protected async Task<List<UploadedFile>> MultipartUploadAsync()
         {
             if (_fileUploadService == null)
             {
                 throw new Exception("FileUploadService is not injected");
             }
 
-            var files = new List<string>();
+            var files = new List<UploadedFile>();
 
             if (Request.HasFormContentType)
             {
@@ -65,7 +66,8 @@ namespace GarciaCore.Infrastructure.Api
                 foreach (var formFile in form.Files)
                 {
                     var file = await _fileUploadService.MultipartUploadAsync(formFile);
-                    files.Add(_fileUploadService.GetUrl(file.FileName));
+                    file.FileName = _fileUploadService.GetUrl(file.FileName);
+                    files.Add(file);
                 }
             }
 
