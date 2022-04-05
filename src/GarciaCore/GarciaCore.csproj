@@ -25,6 +25,7 @@
     <ProjectReference Include="..\GarciaCore.Infrastructure.Api\GarciaCore.Infrastructure.Api.csproj" />
     <ProjectReference Include="..\GarciaCore.Infrastructure.Identity\GarciaCore.Infrastructure.Identity.csproj" />
     <ProjectReference Include="..\GarciaCore.Infrastructure.MongoDb\GarciaCore.Infrastructure.MongoDb.csproj" />
+    <ProjectReference Include="..\GarciaCore.Infrastructure.PushNotification.Firebase\GarciaCore.Infrastructure.PushNotification.Firebase.csproj" />
     <ProjectReference Include="..\GarciaCore.Infrastructure.RabbitMQ\GarciaCore.Infrastructure.RabbitMQ.csproj" />
     <ProjectReference Include="..\GarciaCore.Infrastructure.Redis\GarciaCore.Infrastructure.Redis.csproj" />
     <ProjectReference Include="..\GarciaCore.Infrastructure\GarciaCore.Infrastructure.csproj" />
