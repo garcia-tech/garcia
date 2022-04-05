@@ -32,11 +32,19 @@ using GarciaCore.Infrastructure.Identity;
 <#
     }
 
-    if (GeneratorRepository.ContainsIntegration(IntegrationType.AmazonS3FileUpload) || GeneratorRepository.ContainsIntegration(IntegrationType.LocalFileUpload))
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.AmazonS3FileUpload))
     {
 #>
 using GarciaCore.Application.Contracts.FileUpload;
-using GarciaCore.Application.Services;
+using GarciaCore.Infrastructure.FileUpload.AmazonS3;
+<#
+    }
+
+     if (GeneratorRepository.ContainsIntegration(IntegrationType.LocalFileUpload))
+    {
+#>
+using GarciaCore.Application.Contracts.FileUpload;
+using GarciaCore.Infrastructure.FileUpload.Local;
 <#
     }
 
@@ -72,6 +80,30 @@ using GarciaCore.Persistence.MongoDb;
     {
 #>
 using GarciaCore.Persistence.Redis;
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.MandrillEmail))
+    {
+#>
+using GarciaCore.Application.Contracts.Email;
+using GarciaCore.Infrastructure.Email.Mandrill;
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.MailChimpMarketing))
+    {
+#>
+using GarciaCore.Application.Contracts.Marketing;
+using GarciaCore.Infrastructure.Marketing.MailChimp;
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.FirebasePushNotification))
+    {
+#>
+using GarciaCore.Application.Contracts.PushNotification;
+using GarciaCore.Infrastructure.PushNotification.Firebase;
 <#
     }
 #>
@@ -122,16 +154,35 @@ builder.Services.AddEfCoreInMemory<<#= GeneratorRepository.Solution.Name #>DbCon
     if (GeneratorRepository.ContainsIntegration(IntegrationType.AmazonS3FileUpload))
     {
 #>
-builder.Services.AddScoped<IFileUploadService, AmazonS3FileUplaodService>();
-builder.Services.Configure<AmazonS3Settings>(builder.Configuration.GetSection(nameof(AmazonS3Settings)));
+builder.Services.AddAmazonS3FileUploadService(builder.Configuration);
 <#
     }
 
     if (GeneratorRepository.ContainsIntegration(IntegrationType.LocalFileUpload))
     {
 #>
-builder.Services.AddScoped<IFileUploadService, LocalFileUplaodService>();
-builder.Services.Configure<FileUploadSettings>(builder.Configuration.GetSection(nameof(FileUploadSettings)));
+builder.Services.AddLocalFileUploadService(builder.Configuration);
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.MailChimpMarketing))
+    {
+#>
+builder.Services.AddMailChimpMarketingService(builder.Configuration);
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.MandrillEmail))
+    {
+#>
+builder.Services.AddMandrillEmailService(builder.Configuration);
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.FirebasePushNotification))
+    {
+#>
+builder.Services.AddFirebasePushNotificationService(builder.Configuration);
 <#
     }
 #>

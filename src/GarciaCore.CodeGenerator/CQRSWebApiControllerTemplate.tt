@@ -131,11 +131,11 @@ namespace <#= Namespace #>
         [HttpGet("api/<#= Item.Name #>/{id}/<#= property.Name.ToPascalCase() #>")]
         public async Task<ActionResult<<#= innerTypeName #>>> Get<#= property.Name.ToPascalCase() #>(<#= IdTypeName #> id)
         {
-            var item = await _<#= Item.Name.ToCamelCase() #>Service.GetAsync(id);
+            var items = await _<#= Item.Name.ToCamelCase() #>Service.Get<#= property.Name.ToPascalCase() #>Async(id);
 
-            if (item != null)
+            if (items != null)
             {
-                return Ok(item.<#= property.Name #>);
+                return Ok(items);
             }
 
             return NotFound();

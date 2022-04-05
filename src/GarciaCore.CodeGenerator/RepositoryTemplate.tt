@@ -20,8 +20,8 @@ namespace <#= Namespace #>
         if (Item.Properties.Count(x => x.InnerType != null) > 0)
 	    {
 #>
-        Task<List<<#= Item.Name #>>> GetAllWithIncludes();
-        Task<<#= Item.Name #>> GetByIdWithIncludes(long id);
+        Task<List<<#= Item.Name #>>> GetAllWithIncludesAsync();
+        Task<<#= Item.Name #>> GetByIdWithIncludesAsync(long id);
 <#
         }
 #>
@@ -35,7 +35,7 @@ namespace <#= Namespace #>
         if (Item.Properties.Count(x => x.InnerType != null) > 0)
 	    {
 #>
-        public async Task<List<<#= Item.Name #>>> GetAllWithIncludes()
+        public async Task<List<<#= Item.Name #>>> GetAllWithIncludesAsync()
         {
             return await (_dbContext as <#= GeneratorRepository.Solution.Name #>DbContext).<#= Item.Name #>s
 <#
@@ -51,7 +51,7 @@ namespace <#= Namespace #>
                 .ToListAsync();
         }
 
-        public async Task<<#= Item.Name #>> GetByIdWithIncludes(<#= IdTypeName #> id)
+        public async Task<<#= Item.Name #>> GetByIdWithIncludesAsync(<#= IdTypeName #> id)
         {
             return await (_dbContext as <#= GeneratorRepository.Solution.Name #>DbContext).<#= Item.Name #>s
 <#

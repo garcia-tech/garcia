@@ -167,6 +167,36 @@ jobs:
           PROJECT_FILE_PATH: src/GarciaCore.Infrastructure.RabbitMQ/GarciaCore.Infrastructure.RabbitMQ.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
+    - name: Publish GarciaCore.Application.Email.Mandrill
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: src/GarciaCore.Infrastructure.Email.Mandrill/GarciaCore.Infrastructure.RabbitMQ.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
+    - name: Publish GarciaCore.Application.FileUpload.AmazonS3
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: src/GarciaCore.Infrastructure.FileUpload.AmazonS3/GarciaCore.Infrastructure.FileUpload.AmazonS3.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
+    - name: Publish GarciaCore.Application.FileUpload.Local
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: src/GarciaCore.Infrastructure.FileUpload.Local/GarciaCore.Infrastructure.FileUpload.Local.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
+    - name: Publish GarciaCore.Application.Marketing.MailChimp
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: src/GarciaCore.Infrastructure.Marketing.MailChimp/GarciaCore.Infrastructure.Marketing.MailChimp.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
+    - name: Publish GarciaCore.Infrastructure.PushNotification.Firebase
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: src/GarciaCore.Infrastructure.PushNotification.Firebase/GarciaCore.Infrastructure.PushNotification.Firebase.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
     - name: Publish GarciaCore
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:

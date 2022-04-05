@@ -562,22 +562,22 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write(" id)\r\n        {\r\n            var item = await _");
+            this.Write(" id)\r\n        {\r\n            var items = await _");
             
             #line 134 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
             
             #line default
             #line hidden
-            this.Write("Service.GetAsync(id);\r\n\r\n            if (item != null)\r\n            {\r\n          " +
-                    "      return Ok(item.");
+            this.Write("Service.Get");
             
-            #line 138 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
+            #line 134 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToPascalCase()));
             
             #line default
             #line hidden
-            this.Write(");\r\n            }\r\n\r\n            return NotFound();\r\n        }\r\n");
+            this.Write("Async(id);\r\n\r\n            if (items != null)\r\n            {\r\n                retu" +
+                    "rn Ok(items);\r\n            }\r\n\r\n            return NotFound();\r\n        }\r\n");
             
             #line 143 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
 

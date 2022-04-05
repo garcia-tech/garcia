@@ -59,7 +59,7 @@ using System.Threading.Tasks;");
 
     if (GeneratorRepository.ContainsGenerator(GeneratorType.Repository))
     {
-        repositoryGetByIdMethodName = "GetByIdWithIncludes";
+        repositoryGetByIdMethodName = "GetByIdWithIncludesAsync";
     }
 
             

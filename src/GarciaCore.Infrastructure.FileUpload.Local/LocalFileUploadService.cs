@@ -1,4 +1,5 @@
-﻿using GarciaCore.Application.Contracts.FileUpload;
+﻿using GarciaCore.Application;
+using GarciaCore.Application.Contracts.FileUpload;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using System;
@@ -8,13 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GarciaCore.Application.Services
+namespace GarciaCore.Infrastructure.FileUpload.Local
 {
     public partial class LocalFileUploadService : IFileUploadService
     {
-        private FileUploadSettings _settings;
+        private LocalFileUploadSettings _settings;
 
-        public LocalFileUploadService(IOptions<FileUploadSettings> settings)
+        public LocalFileUploadService(IOptions<LocalFileUploadSettings> settings)
         {
             _settings = settings.Value;
         }

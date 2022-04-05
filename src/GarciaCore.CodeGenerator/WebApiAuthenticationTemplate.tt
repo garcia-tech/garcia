@@ -23,8 +23,6 @@ using Microsoft.Extensions.Options;
 
 namespace <#= Namespace #>
 {
-    [ApiController]
-    [Route("[controller]")]
     public class AuthenticationController : ControllerBase
     {
         private readonly ILogger<AuthenticationController> _logger;
@@ -40,7 +38,7 @@ namespace <#= Namespace #>
             _jwtOptions = jwtOptions.Value;
         }
 
-        [HttpPost("api/token")]
+        [HttpPost("api/Authentication/Token")]
         public virtual async Task<IActionResult> PostToken([FromBody] CredentialsModel credentials)
         {
             if (!ModelState.IsValid)
