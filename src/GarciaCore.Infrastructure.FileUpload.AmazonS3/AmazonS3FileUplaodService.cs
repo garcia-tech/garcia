@@ -32,9 +32,10 @@ namespace GarciaCore.Infrastructure.FileUpload.AmazonS3
             return new FileWrapper(fileName, _settings.BucketUrl, $"{_settings.BucketUrl}/{fileName}", $"{_settings.BucketUrl}/{fileName}", fileName.Split('.').Last());
         }
 
-        public async Task<string> MultipartUploadAsync(IFormFile file)
+        public async Task<UploadedFile> MultipartUploadAsync(IFormFile file)
         {
             var fileName = $"{Helpers.CreateKey(8)}_{file.FileName}";
+            var name = file.Name;
 
             using (Stream fileToUpload = file.OpenReadStream())
             {
@@ -44,7 +45,7 @@ namespace GarciaCore.Infrastructure.FileUpload.AmazonS3
                 putObjectRequest.InputStream = fileToUpload;
                 putObjectRequest.ContentType = file.ContentType;
                 var response = await s3Client.PutObjectAsync(putObjectRequest);
-                return response.HttpStatusCode == System.Net.HttpStatusCode.OK ? fileName : string.Empty;
+                return response.HttpStatusCode == System.Net.HttpStatusCode.OK ? new UploadedFile(name, fileName): null;
             }
         }
 
@@ -72,7 +73,7 @@ namespace GarciaCore.Infrastructure.FileUpload.AmazonS3
             return url.Replace($"{_settings.BucketUrl}/", "");
         }
 
-        public async Task<string> Base64UploadAsync(string fileName, string content)
+        public async Task<UploadedFile> Base64UploadAsync(string fileName, string content)
         {
             fileName = $"{Helpers.CreateKey(8)}_{fileName}";
             var bytes = Convert.FromBase64String(content);
@@ -84,7 +85,7 @@ namespace GarciaCore.Infrastructure.FileUpload.AmazonS3
                 putObjectRequest.Key = fileName;
                 putObjectRequest.InputStream = fileToUpload;
                 var response = await s3Client.PutObjectAsync(putObjectRequest);
-                return response.HttpStatusCode == System.Net.HttpStatusCode.OK ? fileName : string.Empty;
+                return response.HttpStatusCode == System.Net.HttpStatusCode.OK ? new UploadedFile(null, fileName) : null;
             }
         }
     }

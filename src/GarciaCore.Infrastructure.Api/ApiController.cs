@@ -64,8 +64,8 @@ namespace GarciaCore.Infrastructure.Api
 
                 foreach (var formFile in form.Files)
                 {
-                    var fileName = await _fileUploadService.MultipartUploadAsync(formFile);
-                    files.Add(_fileUploadService.GetUrl(fileName));
+                    var file = await _fileUploadService.MultipartUploadAsync(formFile);
+                    files.Add(_fileUploadService.GetUrl(file.FileName));
                 }
             }
 

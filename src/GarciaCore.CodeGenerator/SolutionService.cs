@@ -78,7 +78,6 @@ namespace GarciaCore.CodeGenerator
         public async Task<List<Item>> CreateItemsAsync(string itemsJson)
         {
             var itemsModel = JsonSerializer.Deserialize<ItemsModel>(itemsJson);
-            var messages = new List<string>();
 
             if (itemsModel == null)
                 throw new CodeGeneratorException("Cannot convert json to ItemsModel, please check sample json.");
@@ -88,7 +87,7 @@ namespace GarciaCore.CodeGenerator
             foreach (var itemModel in itemsModel.Items)
             {
                 if (string.IsNullOrEmpty(itemModel.IdType))
-                    itemModel.IdType = IdType.Int.ToString();
+                    itemModel.IdType = !string.IsNullOrEmpty(itemsModel.IdType) ? itemsModel.IdType.ToString() : IdType.Int.ToString();
 
                 Enum.TryParse(itemModel.IdType, out IdType idType);
                 var item = new Item(itemModel.Name, itemModel.IsEnum, idType, itemModel.AddApplication, itemModel.MultipartUpload);
