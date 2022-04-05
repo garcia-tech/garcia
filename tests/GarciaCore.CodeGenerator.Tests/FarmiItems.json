@@ -28,7 +28,8 @@
       "Name": "ContentFile",
       "Properties": [
         {
-          "Name": "Url"
+          "Name": "Url",
+          "Type": "Photo"
         },
         {
           "Name": "Description"
@@ -54,7 +55,8 @@
           "Name": "Description"
         },
         {
-          "Name": "Logo"
+          "Name": "Logo",
+          "Type": "Photo"
         }
       ],
       "AddApplication": true,
@@ -77,8 +79,7 @@
           "Type": "Photo"
         },
         {
-          "Name": "Password",
-          "Type": "String"
+          "Name": "Password"
         },
         {
           "Name": "PushToken"
@@ -86,6 +87,77 @@
       ],
       "AddApplication": true,
       "MultipartUpload": true
+    },
+    {
+      "Name": "DiseaseRecognition",
+      "Properties": [
+        {
+          "Name": "CropType"
+        },
+        {
+          "Name": "CultivationType"
+        },
+        {
+          "Name": "Photos",
+          "Type": "Photo"
+        },
+        {
+          "Name": "Description"
+        },
+        {
+          "Name": "Diagnosis"
+        }
+      ],
+      "AddApplication": true,
+      "MultipartUpload": true
+    },
+    {
+      "Name": "RecipeOptimization",
+      "Properties": [
+        {
+          "Name": "CropType"
+        },
+        {
+          "Name": "CultivationType"
+        },
+        {
+          "Name": "CropAge",
+          "Type": "Int"
+        },
+        {
+          "Name": "LightSchedule"
+        },
+        {
+          "Name": "IrrigationSchedule"
+        },
+        {
+          "Name": "Temperature",
+          "Type": "Decimal"
+        },
+        {
+          "Name": "Humidity",
+          "Type": "Decimal"
+        },
+        {
+          "Name": "Vpd",
+          "Type": "Decimal"
+        },
+        {
+          "Name": "Ec",
+          "Type": "Decimal"
+        },
+        {
+          "Name": "Ph",
+          "Type": "Decimal"
+        },
+        {
+          "Name": "Description"
+        },
+        {
+          "Name": "RecipeRecommend"
+        }
+      ],
+      "AddApplication": true
     }
   ]
 }

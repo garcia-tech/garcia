@@ -93,7 +93,7 @@ namespace <#= Namespace #>
     foreach (var property in Item.Properties.Where(x => x.Type == ItemPropertyType.Photo && x.MappingType == ItemPropertyMappingType.List))
     {
 #>
-            command.<#= property.Name #> = files.Select(x => x.Name == "<#= property.Name #>").ToList();
+            command.<#= property.Name #> = files.Where(x => x.Name == "<#= property.Name #>").Select(x => x.FileName).ToList();
 <#
     }
 #>

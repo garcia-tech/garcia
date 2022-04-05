@@ -382,14 +382,14 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write(" = files.Select(x => x.Name == \"");
+            this.Write(" = files.Where(x => x.Name == \"");
             
             #line 96 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
-            this.Write("\").ToList();\r\n");
+            this.Write("\").Select(x => x.FileName).ToList();\r\n");
             
             #line 97 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
 
