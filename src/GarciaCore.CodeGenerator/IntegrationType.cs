@@ -10,8 +10,8 @@
         Authentication,
         AmazonS3FileUpload,
         LocalFileUpload,
-        MailchimpMail,
-        MandrillMarketing,
+        MailChimpMarketing,
+        MandrillEmail,
         FirebasePushNotification
     }
 }

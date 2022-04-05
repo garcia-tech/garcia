@@ -8,7 +8,7 @@ namespace GarciaCore.Infrastructure.PushNotification.Firebase
 {
     public static class FirebasePushNotificationServiceRegistration
     {
-        public static IServiceCollection AddMandrillEmailService(this IServiceCollection services, FirebasePushNotificationSettings settings)
+        public static IServiceCollection AddFirebasePushNotificationService(this IServiceCollection services, FirebasePushNotificationSettings settings)
         {
             services.Configure<FirebasePushNotificationSettings>(options =>
             {
@@ -19,7 +19,7 @@ namespace GarciaCore.Infrastructure.PushNotification.Firebase
             return services;
         }
 
-        public static IServiceCollection AddMandrillEmailService(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddFirebasePushNotificationService(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<FirebasePushNotificationSettings>(options =>
             {

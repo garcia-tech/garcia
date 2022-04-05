@@ -175,27 +175,27 @@ using System.Threading.Tasks;");
 
     }
 
-    if (GeneratorRepository.ContainsIntegration(IntegrationType.MailchimpMail))
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.MandrillEmail))
     {
 
             
             #line default
             #line hidden
-            this.Write("using GarciaCore.Application.Contracts.Email;\r\nusing GarciaCore.Infrastructure.Ma" +
-                    "il.Mailchimp;\r\n");
+            this.Write("using GarciaCore.Application.Contracts.Email;\r\nusing GarciaCore.Infrastructure.Em" +
+                    "ail.Mandrill;\r\n");
             
             #line 91 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
-    if (GeneratorRepository.ContainsIntegration(IntegrationType.MandrillMarketing))
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.MailChimpMarketing))
     {
 
             
             #line default
             #line hidden
             this.Write("using GarciaCore.Application.Contracts.Marketing;\r\nusing GarciaCore.Infrastructur" +
-                    "e.Marketing.Mandrill;\r\n");
+                    "e.Marketing.MailChimp;\r\n");
             
             #line 99 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
@@ -299,11 +299,9 @@ builder.Services.AddApplicationServices();
             
             #line default
             #line hidden
-            this.Write("builder.Services.AddScoped<IFileUploadService, AmazonS3FileUplaodService>();\r\nbui" +
-                    "lder.Services.Configure<AmazonS3Settings>(builder.Configuration.GetSection(nameo" +
-                    "f(AmazonS3Settings)));\r\n");
+            this.Write("builder.Services.AddAmazonS3FileUploadService(builder.Configuration);\r\n");
             
-            #line 159 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 158 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -313,11 +311,45 @@ builder.Services.AddApplicationServices();
             
             #line default
             #line hidden
-            this.Write("builder.Services.AddScoped<IFileUploadService, LocalFileUplaodService>();\r\nbuilde" +
-                    "r.Services.Configure<FileUploadSettings>(builder.Configuration.GetSection(nameof" +
-                    "(FileUploadSettings)));\r\n");
+            this.Write("builder.Services.AddLocalFileUploadService(builder.Configuration);\r\n");
             
-            #line 167 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 165 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.MailChimpMarketing))
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("builder.Services.AddMailChimpMarketingService(builder.Configuration);\r\n");
+            
+            #line 172 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.MandrillEmail))
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("builder.Services.AddMandrillEmailService(builder.Configuration);\r\n");
+            
+            #line 179 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.FirebasePushNotification))
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("builder.Services.AddFirebasePushNotificationService(builder.Configuration);\r\n");
+            
+            #line 186 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -348,7 +380,7 @@ public partial class Program { }
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 190 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+        #line 209 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     protected override Generator CreateGenerator()
 	{

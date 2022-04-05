@@ -83,19 +83,19 @@ using GarciaCore.Persistence.Redis;
 <#
     }
 
-    if (GeneratorRepository.ContainsIntegration(IntegrationType.MailchimpMail))
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.MandrillEmail))
     {
 #>
 using GarciaCore.Application.Contracts.Email;
-using GarciaCore.Infrastructure.Mail.Mailchimp;
+using GarciaCore.Infrastructure.Email.Mandrill;
 <#
     }
 
-    if (GeneratorRepository.ContainsIntegration(IntegrationType.MandrillMarketing))
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.MailChimpMarketing))
     {
 #>
 using GarciaCore.Application.Contracts.Marketing;
-using GarciaCore.Infrastructure.Marketing.Mandrill;
+using GarciaCore.Infrastructure.Marketing.MailChimp;
 <#
     }
 
@@ -154,16 +154,35 @@ builder.Services.AddEfCoreInMemory<<#= GeneratorRepository.Solution.Name #>DbCon
     if (GeneratorRepository.ContainsIntegration(IntegrationType.AmazonS3FileUpload))
     {
 #>
-builder.Services.AddScoped<IFileUploadService, AmazonS3FileUplaodService>();
-builder.Services.Configure<AmazonS3Settings>(builder.Configuration.GetSection(nameof(AmazonS3Settings)));
+builder.Services.AddAmazonS3FileUploadService(builder.Configuration);
 <#
     }
 
     if (GeneratorRepository.ContainsIntegration(IntegrationType.LocalFileUpload))
     {
 #>
-builder.Services.AddScoped<IFileUploadService, LocalFileUplaodService>();
-builder.Services.Configure<FileUploadSettings>(builder.Configuration.GetSection(nameof(FileUploadSettings)));
+builder.Services.AddLocalFileUploadService(builder.Configuration);
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.MailChimpMarketing))
+    {
+#>
+builder.Services.AddMailChimpMarketingService(builder.Configuration);
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.MandrillEmail))
+    {
+#>
+builder.Services.AddMandrillEmailService(builder.Configuration);
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.FirebasePushNotification))
+    {
+#>
+builder.Services.AddFirebasePushNotificationService(builder.Configuration);
 <#
     }
 #>
