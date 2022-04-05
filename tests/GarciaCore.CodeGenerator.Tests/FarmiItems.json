@@ -73,7 +73,8 @@
           "Name": "Phone"
         },
         {
-          "Name": "Photo"
+          "Name": "Photo",
+          "Type": "Photo"
         },
         {
           "Name": "Password",
