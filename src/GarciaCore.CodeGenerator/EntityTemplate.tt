@@ -7,7 +7,9 @@
 <#@ import namespace="GarciaCore.Infrastructure" #>
 <#@ import namespace="GarciaCore.Application" #>
 <#@ include file="IncludeWarning.t4" #>
-<#@ include file="IncludeUsings.t4" #>  
+<#@ include file="IncludeUsings.t4" #>
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 <#= GetUsings() #>
 namespace <#= Namespace #>
 {
@@ -17,6 +19,15 @@ namespace <#= Namespace #>
         foreach (var property in Item.Properties)
 	    {
             string innerTypeName = generator.GetInnerTypeName(property);
+            
+            if (property.Type == ItemPropertyType.Photo && property.MappingType == ItemPropertyMappingType.List)
+            {
+#>
+        [JsonIgnore]
+        public string <#= property.Name.ToPascalCase() #>String { get { return string.Join(',', <#= property.Name.ToPascalCase() #>); } set { <#= property.Name.ToPascalCase() #> = value.Split(',').ToList(); } }
+        [NotMapped]
+<#
+            }
 #>
         public <#= innerTypeName #> <#= property.Name.ToPascalCase() #> { get; set; }
 <#

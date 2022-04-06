@@ -19,6 +19,11 @@
           "Type": "Class",
           "MappingType": "List",
           "InnerType": "ContentMilestone"
+        },
+        {
+          "Name": "User",
+          "Type": "Class",
+          "InnerType": "User"
         }
       ],
       "AddApplication": true,
@@ -28,7 +33,8 @@
       "Name": "ContentFile",
       "Properties": [
         {
-          "Name": "Url"
+          "Name": "Url",
+          "Type": "Photo"
         },
         {
           "Name": "Description"
@@ -54,14 +60,15 @@
           "Name": "Description"
         },
         {
-          "Name": "Logo"
+          "Name": "Logo",
+          "Type": "Photo"
         }
       ],
       "AddApplication": true,
       "MultipartUpload": true
     },
     {
-      "Name": "FarmiUser",
+      "Name": "User",
       "Properties": [
         {
           "Name": "Email"
@@ -77,8 +84,7 @@
           "Type": "Photo"
         },
         {
-          "Name": "Password",
-          "Type": "String"
+          "Name": "Password"
         },
         {
           "Name": "PushToken"
@@ -86,6 +92,88 @@
       ],
       "AddApplication": true,
       "MultipartUpload": true
+    },
+    {
+      "Name": "DiseaseRecognition",
+      "Properties": [
+        {
+          "Name": "CropType"
+        },
+        {
+          "Name": "CultivationType"
+        },
+        {
+          "Name": "Photos",
+          "Type": "Photo",
+          "MappingType": "List"
+        },
+        {
+          "Name": "Description"
+        },
+        {
+          "Name": "Diagnosis"
+        },
+        {
+          "Name": "User",
+          "Type": "Class",
+          "InnerType": "User"
+        }
+      ],
+      "AddApplication": true,
+      "MultipartUpload": true
+    },
+    {
+      "Name": "RecipeOptimization",
+      "Properties": [
+        {
+          "Name": "CropType"
+        },
+        {
+          "Name": "CultivationType"
+        },
+        {
+          "Name": "CropAge",
+          "Type": "Int"
+        },
+        {
+          "Name": "LightSchedule"
+        },
+        {
+          "Name": "IrrigationSchedule"
+        },
+        {
+          "Name": "Temperature",
+          "Type": "Decimal"
+        },
+        {
+          "Name": "Humidity",
+          "Type": "Decimal"
+        },
+        {
+          "Name": "Vpd",
+          "Type": "Decimal"
+        },
+        {
+          "Name": "Ec",
+          "Type": "Decimal"
+        },
+        {
+          "Name": "Ph",
+          "Type": "Decimal"
+        },
+        {
+          "Name": "Description"
+        },
+        {
+          "Name": "RecipeRecommend"
+        },
+        {
+          "Name": "User",
+          "Type": "Class",
+          "InnerType": "User"
+        }
+      ],
+      "AddApplication": true
     }
   ]
 }
