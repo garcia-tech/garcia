@@ -1,14 +1,10 @@
-﻿using GarciaCore.Application.Contracts.Infrastructure;
+﻿using System;
+using GarciaCore.Application.Contracts.Infrastructure;
 using GarciaCore.Application.Redis.Contracts.Infrastructure;
 using GarciaCore.Domain;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GarciaCore.Infrastructure.Redis
 {
@@ -51,7 +47,7 @@ namespace GarciaCore.Infrastructure.Redis
 
         public static IServiceCollection AddRedisConsumer<TConsumer, TMessage>(this IServiceCollection services)
             where TMessage : IMessage
-            where TConsumer : Consumer<TMessage>
+            where TConsumer : BaseConsumer<TMessage>
         {
             return services.AddHostedService<TConsumer>();
         }
