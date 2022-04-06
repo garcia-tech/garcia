@@ -1,4 +1,6 @@
-﻿using GarciaCore.Application.Redis.Contracts.Infrastructure;
+﻿using GarciaCore.Application.Contracts.Infrastructure;
+using GarciaCore.Application.Redis.Contracts.Infrastructure;
+using GarciaCore.Domain;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -40,6 +42,18 @@ namespace GarciaCore.Infrastructure.Redis
             return services;
         }
 
-        public static IServiceCollection AddRedisServices(this IServiceCollection services) => services.AddSingleton<IRedisService, RedisService>();
+        public static IServiceCollection AddRedisServices(this IServiceCollection services)
+        {
+            services.AddSingleton<IRedisService, RedisService>();
+            services.AddSingleton<IServiceBus, RedisService>();
+            return services;
+        }
+
+        public static IServiceCollection AddRedisConsumer<TConsumer, TMessage>(this IServiceCollection services)
+            where TMessage : IMessage
+            where TConsumer : Consumer<TMessage>
+        {
+            return services.AddHostedService<TConsumer>();
+        }
     }
 }

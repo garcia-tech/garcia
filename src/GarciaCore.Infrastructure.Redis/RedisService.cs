@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using GarciaCore.Application.Redis.Contracts.Infrastructure;
+using GarciaCore.Domain;
 using StackExchange.Redis;
+using Newtonsoft.Json;
 
 namespace GarciaCore.Infrastructure.Redis
 {
@@ -21,11 +23,37 @@ namespace GarciaCore.Infrastructure.Redis
             await _connection.GetSubscriber().PublishAsync(channel, message);
         }
 
+        public async Task PublishAsync<T>(T message) where T : IMessage
+        {
+            var channel = typeof(T).Name;
+            var msg = JsonConvert.SerializeObject(message);
+            await _connection.GetSubscriber().PublishAsync(channel, msg);
+        }
+
         public async Task SubscribeAsync(string channel, Action<string> action)
         {
             await _connection.GetSubscriber().SubscribeAsync(channel, (ch, message) =>
                 action(message)
             );
+        }
+
+        public async Task SubscribeAsync<T>(Func<T , Task> receiveHandler, Func<Exception, string, Task> rejectHandler) where T : IMessage
+        {
+            var channel = typeof(T).Name;
+
+            await _connection.GetSubscriber().SubscribeAsync(channel, async (ch, message) =>
+            {
+                try
+                {
+                    var model = JsonConvert.DeserializeObject<T>(message);
+                    await receiveHandler(model);
+                }
+                catch (Exception exception)
+                {
+                   await rejectHandler(exception, message);
+                }
+
+            });
         }
 
         public async Task ExecuteWithLockAsync(Action action, int expiryInMilliSeconds)
