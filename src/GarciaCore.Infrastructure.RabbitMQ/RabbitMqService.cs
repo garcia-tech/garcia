@@ -183,5 +183,10 @@ namespace GarciaCore.Infrastructure.RabbitMQ
         private void OnConsumerRegistered(object sender, ConsumerEventArgs e) { }
         private void OnConsumerShutdown(object sender, ShutdownEventArgs e) { }
         private void RabbitMqConnectionShutdown(object sender, ShutdownEventArgs e) { }
+
+        public void Dispose()
+        {
+            _connection.Close();
+        }
     }
 }

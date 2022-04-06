@@ -8,8 +8,23 @@ using GarciaCore.Domain;
 
 namespace GarciaCore.Application.Redis.Contracts.Infrastructure
 {
-    public interface IRedisService : IAsyncPubSubService, IServiceBus
+    public interface IRedisService : IServiceBus
     {
+        /// <summary>
+        /// Publishes a message to the related channel
+        /// </summary>
+        /// <param name="channel">Name of the related channel.</param>
+        /// <param name="message">A message to be published</param>
+        /// <returns></returns>
+        Task PublishAsync(string channel, string message);
+        /// <summary>
+        /// Subscribe to perform some operation when a change to the preferred/active node
+        /// is broadcast.
+        /// </summary>
+        /// <param name="channel">Name of the related channel.</param>
+        /// <param name="action">An action that processes the received message</param>
+        /// <returns></returns>
+        Task SubscribeAsync(string channel, Action<string> action);
         /// <summary>
         /// Executes the given action with distributed lock object asynchronously 
         /// </summary>
@@ -24,14 +39,5 @@ namespace GarciaCore.Application.Redis.Contracts.Infrastructure
         /// <param name="expiryInMilliSeconds">Lock expiration duration</param>
         /// <returns><see langword="true"/> if it is successfuly taken; otherwise <see langword="false"/></returns>
         Task<bool> AcquireLockAsync(string key, int expiryInMilliSeconds);
-        /// <summary>
-        /// When a message model created in <see cref="IMessage"/> type is published, 
-        /// a queue is created for the relevant message. This queue is listened and the incoming message is processed using the <paramref name="receiveHandler"/> method.
-        /// </summary>
-        /// <typeparam name="T">The message to receive.</typeparam>
-        /// <param name="receiveHandler">An action which handles incoming message.</param>
-        /// <param name="rejectHandler">An action which handles case of an error.</param>
-        /// <returns></returns>
-        Task SubscribeAsync<T>(Func<T, Task> receiveHandler, Func<Exception, string, Task> rejectHandler) where T : IMessage;
     }
 }
