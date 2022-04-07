@@ -41,15 +41,7 @@ namespace GarciaCore.Infrastructure.Redis
         public static IServiceCollection AddRedisServices(this IServiceCollection services)
         {
             services.AddSingleton<IRedisService, RedisService>();
-            services.AddSingleton<IServiceBus, RedisService>();
             return services;
-        }
-
-        public static IServiceCollection AddRedisConsumer<TConsumer, TMessage>(this IServiceCollection services)
-            where TMessage : IMessage
-            where TConsumer : BaseConsumer<TMessage>
-        {
-            return services.AddHostedService<TConsumer>();
         }
     }
 }

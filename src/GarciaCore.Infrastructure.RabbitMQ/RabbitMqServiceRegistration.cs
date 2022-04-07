@@ -54,15 +54,6 @@ namespace GarciaCore.Infrastructure.RabbitMQ
         public static IServiceCollection AddRabbitMqServices(this IServiceCollection services)
         {
             services.AddSingleton<IRabbitMqService, RabbitMqService>();
-            services.AddSingleton<IServiceBus, RabbitMqService>();
-            return services;
-        }
-
-        public static IServiceCollection AddRabbitConsumer<TConsumer, TMessage>(this IServiceCollection services)
-            where TMessage : IMessage
-            where TConsumer : BaseConsumer<TMessage>
-        {
-            services.AddHostedService<TConsumer>();
             return services;
         }
     }
