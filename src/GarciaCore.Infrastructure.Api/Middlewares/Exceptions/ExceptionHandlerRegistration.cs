@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GarciaCore.Application;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
+using GarciaCore.Application;
 
 namespace GarciaCore.Infrastructure.Api.Middlewares.Exceptions
 {
