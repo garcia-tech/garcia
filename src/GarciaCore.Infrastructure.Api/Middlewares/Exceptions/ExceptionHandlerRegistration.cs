@@ -11,6 +11,21 @@ namespace GarciaCore.Infrastructure.Api.Middlewares.Exceptions
         {
             return services.Configure(options);
         }
+        public static IServiceCollection AddGarciaExceptionHandler(this IServiceCollection services)
+        {
+            return services.AddTransient<ExceptionHandler<ApiError>>();
+        }
+        public static IServiceCollection AddGarciaExceptionHandler<THandler>(this IServiceCollection services)
+            where THandler : ExceptionHandler<ApiError>
+        {
+            return services.AddTransient<THandler>();
+        }
+        public static IServiceCollection AddGarciaExceptionHandler<THandler, TErrorModel>(this IServiceCollection services)
+            where TErrorModel : ApiError, new()
+            where THandler : ExceptionHandler<TErrorModel>
+        {
+            return services.AddTransient<THandler>();
+        }
         public static IApplicationBuilder UseGarciaExceptionHandler(this IApplicationBuilder builder)
         {
             return builder.UseMiddleware<ExceptionHandler<ApiError>>();
