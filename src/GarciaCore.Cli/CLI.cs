@@ -13,12 +13,13 @@ public class CLI
     private readonly string[] _args;
     private readonly IConsoleWrapper _consoleWrapper;
     private readonly IClipboard _clipboard;
+    private CreateService _createService = new CreateService();
 
-    public CLI(IShellHelper shellHelper, 
+    public CLI(IShellHelper shellHelper,
         ISolutionService solutionService,
         IConsoleWrapper consoleWrapper,
         IClipboard clipboard,
-        string[] args )
+        string[] args)
     {
         _shellHelper = shellHelper;
         _solutionService = solutionService;
@@ -26,7 +27,7 @@ public class CLI
         _clipboard = clipboard;
         _args = args;
     }
-        
+
     public void Run()
     {
         if (_args.Length == 0)
@@ -50,12 +51,25 @@ public class CLI
                     Name = "Test",
                     Properties = new System.Collections.Generic.List<ItemProperty>()
                     {
-                        new ItemProperty(){Name = "Test property", Type = ItemPropertyType.String, MappingType = ItemPropertyMappingType.Property },
-                        new ItemProperty(){Name = "Test property list", Type = ItemPropertyType.Integer, MappingType = ItemPropertyMappingType.List }
+                        new ItemProperty()
+                        {
+                            Name = "Test property", Type = ItemPropertyType.String,
+                            MappingType = ItemPropertyMappingType.Property
+                        },
+                        new ItemProperty()
+                        {
+                            Name = "Test property list", Type = ItemPropertyType.Integer,
+                            MappingType = ItemPropertyMappingType.List
+                        }
                     }
                 };
+                
                 //var text = Generate(item);
                 //Console.WriteLine(text);
+                break;
+            case "create":
+                _createService.CreateMicroService(_args[1]);
+                
                 break;
         }
     }
@@ -89,11 +103,11 @@ public class CLI
         {
             command += ";update-database";
         }
-        
+
         return command;
     }
 
-    internal virtual string CreateMigrationName() 
+    internal virtual string CreateMigrationName()
         => "Migrations_" + Guid.NewGuid().ToString().Replace("-", "")
-                                                    .Substring(0, 5);
+            .Substring(0, 5);
 }

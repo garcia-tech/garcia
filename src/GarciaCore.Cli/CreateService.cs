@@ -5,8 +5,7 @@ using GarciaCore.CodeGenerator;
 using GarciaCore.Infrastructure;
 using ToolBox.Bridge;
 
-namespace MigrationNameGenerator;
-
+namespace GarciaCore.Cli;
 public class CreateService
 {
     private ShellHelper _shellHelper = new ShellHelper();

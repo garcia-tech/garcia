@@ -72,6 +72,11 @@ public class ProgramTests
 
         Assert.Equal($"{expectedCommand}{Environment.NewLine}ToolBox.Bridge.Response{Environment.NewLine}", _fakeConsoleWrapper.ConsoleMessage);
     }
+
+    public void CreateMSTest(string[] args, string expectedCommand)
+    {
+        
+    }
 }
 
 public class FakeConsoleWrapper : IConsoleWrapper
