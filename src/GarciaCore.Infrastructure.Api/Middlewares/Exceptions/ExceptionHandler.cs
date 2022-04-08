@@ -12,15 +12,10 @@ namespace GarciaCore.Infrastructure.Api.Middlewares.Exceptions
 {
     public class ExceptionHandler<TErrorModel> : IMiddleware where TErrorModel : ApiError, new()
     {
-        private readonly ILogger _logger;
+        private readonly ILogger<ExceptionHandler<TErrorModel>> _logger;
         private readonly IOptions<ExceptionHandlingOptions> _options;
 
-        public ExceptionHandler(ILogger logger)
-        {
-            _logger = logger;
-        }
-
-        public ExceptionHandler(ILogger logger, IOptions<ExceptionHandlingOptions> options)
+        public ExceptionHandler(ILogger<ExceptionHandler<TErrorModel>> logger, IOptions<ExceptionHandlingOptions> options)
         {
             _logger = logger;
             _options = options;
