@@ -10,30 +10,27 @@ using Microsoft.Extensions.Options;
 
 namespace GarciaCore.Infrastructure.Api.Middlewares.Exceptions
 {
-    public class ExceptionHandler<TErrorModel> where TErrorModel : ApiError, new()
+    public class ExceptionHandler<TErrorModel> : IMiddleware where TErrorModel : ApiError, new()
     {
-        private readonly RequestDelegate _next;
         private readonly ILogger _logger;
         private readonly IOptions<ExceptionHandlingOptions> _options;
 
-        public ExceptionHandler(RequestDelegate next, ILogger logger)
+        public ExceptionHandler(ILogger logger)
         {
-            _next = next;
             _logger = logger;
         }
 
-        public ExceptionHandler(RequestDelegate next, ILogger logger, IOptions<ExceptionHandlingOptions> options)
+        public ExceptionHandler(ILogger logger, IOptions<ExceptionHandlingOptions> options)
         {
-            _next = next;
             _logger = logger;
             _options = options;
         }
 
-        public async Task Invoke(HttpContext context)
+        public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
             try
             {
-                await _next(context);
+                await next(context);
             }
             catch (Exception exception)
             {
