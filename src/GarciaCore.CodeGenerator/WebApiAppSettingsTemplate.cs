@@ -111,6 +111,20 @@ namespace GarciaCore.CodeGenerator
 
     }
 
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.SQLServer))
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("  \"ConnectionStrings\": {\r\n    \"SqlServer\": \"server=dev.forfarming.co;user id=forf" +
+                    "arming;password=Ff756638;initial catalog=Farmi;Min Pool Size=100;Max Pool Size=5" +
+                    "00\"\r\n  },\r\n");
+            
+            #line 77 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
+
+    }
+
             
             #line default
             #line hidden
@@ -118,7 +132,7 @@ namespace GarciaCore.CodeGenerator
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 74 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
+        #line 83 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
 
     protected override Generator CreateGenerator()
 	{
