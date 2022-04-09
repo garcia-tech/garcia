@@ -1,0 +1,13 @@
+<#@ template language="C#" inherits="BaseTemplate" #>
+React code
+##pages\Edit##
+Edit contents
+##pages\List##
+List contents
+
+<#+
+    protected override Generator CreateGenerator()
+	{
+		return new ReactCRUDGenerator();
+	}
+#>

@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GarciaCore.CodeGenerator
 {
@@ -29,17 +31,53 @@ namespace GarciaCore.CodeGenerator
         public string BaseClass { get; }
         public IGenerator Generator { get; set; }
 
-        public virtual async Task<GenerationResult> Generate(Item item)
+        public virtual async Task<List<GenerationResult>> Generate(Item item)
         {
             if (Generator == null)
             {
                 throw new CodeGeneratorException("Generator cannot be null");
             }
 
+            var results = new List<GenerationResult>();
             var code = await Generator.Generate(item, Namespace, BaseClass);
             var file = await Generator.GetFileName(item);
-            var generationResult = new GenerationResult(Folder, Generator, code, file);
-            return generationResult;
+
+            if (Generator.IsMultiple)
+            {
+                var codes = code.Split("##");
+
+                if (codes.Length > 0)
+                {
+                    var fileName = string.Empty;
+
+                    for (int i = 1; i < codes.Length; i++)
+                    {
+                        if (i % 2 == 1)
+                        {
+                            fileName = codes[i];
+                        }
+                        else
+                        {
+                            if (!string.IsNullOrWhiteSpace(fileName))
+                            {
+                                var foldersAndFile = fileName.Split('\\');
+                                var folder = fileName.Replace($"\\{foldersAndFile.Last()}", "");
+                                var result2 = new GenerationResult($"{Folder}\\{folder}", Generator, $"{codes[0]}{codes[i]}", file.Replace($".{Generator.FileExtension}", $"{foldersAndFile.Last()}.{Generator.FileExtension}"));
+                                results.Add(result2);
+                            }
+
+                            fileName = string.Empty;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                var generationResult = new GenerationResult(Folder, Generator, code, file);
+                results.Add(generationResult);
+            }
+
+            return results;
         }
     }
 }

@@ -131,7 +131,7 @@ namespace GarciaCore.CodeGenerator.Tests
         [Fact]
         public async Task CreateItemsFromFileAsync()
         {
-            var json = await File.ReadAllTextAsync("Farmi.json");
+            var json = await File.ReadAllTextAsync("FarmiReact.json");
             var solution = await _solutionService.CreateSolutionAsync(json);
             var itemsJson = await File.ReadAllTextAsync("FarmiItems.json");
             var items = await _solutionService.CreateItemsAsync(itemsJson);
@@ -150,8 +150,8 @@ namespace GarciaCore.CodeGenerator.Tests
                 item.Generator.ShouldNotBeNull();
                 item.Code.ShouldNotBeNullOrEmpty();
                 Directory.CreateDirectory(item.Folder);
-                //if(!File.Exists($"{item.Folder}\\{item.File}"))
-                await File.WriteAllTextAsync($"{item.Folder}\\{item.File}", item.Code);
+                if (!File.Exists($"{item.Folder}\\{item.File}"))
+                    await File.WriteAllTextAsync($"{item.Folder}\\{item.File}", item.Code);
                 _output.WriteLine($"{item.Folder}\\{item.File}");
             }
         }
