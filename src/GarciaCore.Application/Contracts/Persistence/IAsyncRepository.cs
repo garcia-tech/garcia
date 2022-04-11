@@ -72,5 +72,6 @@ namespace GarciaCore.Application.Contracts.Persistence
 
     public interface IAsyncRepository<T> : IAsyncRepository<T, long> where T : Entity<long>
     {
+        Task<T> GetByIdWithNavigationsAsync(long id);
     }
 }

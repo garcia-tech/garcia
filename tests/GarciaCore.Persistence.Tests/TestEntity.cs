@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using GarciaCore.Domain;
 
 namespace GarciaCore.Persistence.Tests
@@ -16,5 +17,18 @@ namespace GarciaCore.Persistence.Tests
 
         public int Key { get; set; } = 0;
         public string Name { get; set; } = string.Empty;
+        public ICollection<TestChildEntity> TestChildEntities { get; set; } = new List<TestChildEntity>();
+
+        public void AddChild(TestChildEntity data)
+        {
+            TestChildEntities.Add(data);
+        }
+    }
+
+    public class TestChildEntity : Entity<long>
+    {
+        public string Name { get; set; }
+        public TestEntity TestEntity { get; set; }
+        public long TestEntityId { get; set; }
     }
 }
