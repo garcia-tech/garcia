@@ -57,6 +57,11 @@ namespace GarciaCore.Persistence
             return await _repository.GetByIdAsync(id);
         }
 
+        public override Task<T> GetByIdWithNavigationsAsync(long id)
+        {
+            throw new NotImplementedException();
+        }
+
         public override async Task<long> UpdateAsync(T entity)
         {
             return await _repository.UpdateAsync(entity);

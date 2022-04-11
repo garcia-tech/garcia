@@ -21,11 +21,18 @@ namespace GarciaCore.Persistence.Tests
         {
             using (var context = CreateContext())
             {
+                var child = new TestChildEntity()
+                {
+                    Name = "test"
+                };
+                var parent = new TestEntity(1, "One");
+                parent.AddChild(child);
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
                 context.AddRange(
-                    new TestEntity(1, "One"),
+                    parent,
                     new TestEntity(2, "Two"));
+                context.Add(child);
                 context.SaveChanges();
                 _repository = new EntityFrameworkRepository<TestEntity>(CreateContext());
             }
@@ -44,6 +51,15 @@ namespace GarciaCore.Persistence.Tests
             Assert.NotNull(item);
             item = await _repository.GetByIdAsync(3);
             Assert.Null(item);
+        }
+
+        [Fact]
+        public async void GetByIdWithNavigations()
+        {
+            
+            var item = await _repository.GetByIdWithNavigationsAsync(1);
+            Assert.NotNull(item);
+            Assert.NotEqual(0, item.TestChildEntities.Count);
         }
 
         [Fact]
