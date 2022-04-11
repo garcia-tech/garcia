@@ -12,7 +12,7 @@ namespace GarciaCore.CodeGenerator
 
         protected virtual string FileNamePrefix { get; } = string.Empty;
         protected abstract string FileNamePostfix { get; }
-        protected abstract string FileExtension { get; }
+        public abstract string FileExtension { get; }
         public abstract GeneratorType GeneratorType { get; }
 
         public virtual List<IGenerator> Dependencies { get; set; } = new List<IGenerator>();
@@ -24,6 +24,7 @@ namespace GarciaCore.CodeGenerator
         public virtual List<string> Usings { get; set; }
         public virtual bool IsItemLevel { get; } = true;
         public abstract List<string> GarciaCoreDependencies { get; }
+        public virtual bool IsMultiple { get; } = false;
 
         public virtual async Task<string> Generate<T>(Item item, string @namespace, string baseClass) where T : BaseTemplate
         {

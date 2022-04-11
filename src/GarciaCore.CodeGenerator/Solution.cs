@@ -77,7 +77,10 @@ namespace GarciaCore.CodeGenerator
             foreach (var item in validItems)
             {
                 GeneratorRepository.AddItem(item);
+            }
 
+            foreach (var item in validItems)
+            {
                 foreach (var project in Projects)
                 {
                     var generationResult = await project.Generate(item);

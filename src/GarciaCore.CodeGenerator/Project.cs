@@ -81,7 +81,7 @@ namespace GarciaCore.CodeGenerator
             foreach (var generator in Generators.Where(x => x.Generator.IsItemLevel && !x.Generator.IsApplicationGenerator()))
             {
                 var generationResult = await generator.Generate(item);
-                generationResults.Add(generationResult);
+                generationResults.AddRange(generationResult);
             }
 
             if (item.AddApplication)
@@ -89,7 +89,7 @@ namespace GarciaCore.CodeGenerator
                 foreach (var generator in Generators.Where(x => x.Generator.IsItemLevel && x.Generator.IsApplicationGenerator()))
                 {
                     var generationResult = await generator.Generate(item);
-                    generationResults.Add(generationResult);
+                    generationResults.AddRange(generationResult);
                 }
             }
 
@@ -103,7 +103,7 @@ namespace GarciaCore.CodeGenerator
             foreach (var generator in Generators.Where(x => !x.Generator.IsItemLevel))
             {
                 var generationResult = await generator.Generate(null);
-                generationResults.Add(generationResult);
+                generationResults.AddRange(generationResult);
             }
 
             return generationResults;

@@ -86,6 +86,26 @@ namespace <#= Namespace #>
             command.<#= property.Name #> = files.Where(x => x.Name == "<#= property.Name #>").Select(x => x.FileName).ToList();
 <#
     }
+
+    foreach (var property in Item.Properties.Where(x => x.Type == ItemPropertyType.Class && x.MappingType == ItemPropertyMappingType.List && x.InnerType != null))
+    {
+        var propertyItem = GeneratorRepository.Items.FirstOrDefault(x => x.Name == property.InnerType.Name);
+
+        if (propertyItem != null)
+        {
+            foreach (var propertyItemProperty in propertyItem.Properties.Where(x => x.Type == ItemPropertyType.Photo && x.MappingType == ItemPropertyMappingType.Property))
+            {
+#>
+
+            for (int i = 0; i < (files.Count() < command.<#= property.Name #>.Count ? files.Count() : command.<#= property.Name #>.Count); i++)
+            {
+                command.<#= property.Name #>[i].<#= propertyItemProperty.Name #> = files[i].FileName;
+            }
+
+<#
+            }
+        }
+    }
 #>
             var response = await _mediator.Send(command);
             return Ok(command);

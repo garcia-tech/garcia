@@ -67,6 +67,15 @@
   },
 <#
     }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.SQLServer))
+    {
+#>
+  "ConnectionStrings": {
+    "SqlServer": "server=dev.forfarming.co;user id=forfarming;password=Ff756638;initial catalog=Farmi;Min Pool Size=100;Max Pool Size=500"
+  },
+<#
+    }
 #>
 }
 

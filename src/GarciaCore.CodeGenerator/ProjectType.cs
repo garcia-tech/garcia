@@ -4,6 +4,7 @@
     {
         ClassLibrary = 0,
         WebApi,
-        Console
+        Console,
+        React
     }
 }
