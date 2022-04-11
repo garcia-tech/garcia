@@ -47,6 +47,11 @@
         {
           "Name": "FinishedOn",
           "Type": "DateTime"
+        },
+        {
+          "Name": "Milestone",
+          "Type": "Class",
+          "InnerType": "Milestone"
         }
       ]
     },

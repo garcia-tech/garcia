@@ -66,6 +66,14 @@ namespace <#= Namespace #>
         public async Task<BaseResponse<<#= IdTypeName #>>> Handle(Create<#= Item.Name #>Command request, CancellationToken cancellationToken)
         {
             var item = _mapper.Map<<#= Item.Name #>>(request);
+<#
+    foreach (var property in properties.Where(x => x.MappingType == ItemPropertyMappingType.Property && x.Type == ItemPropertyType.Class))
+    {
+#>
+            item.<#= property.Name #> = await _<#=property.InnerType.Name.ToCamelCase() #>Repository.GetByIdAsync(request.<#= property.Name #>Id);
+<#
+    }
+#>
             var result = await _<#= Item.Name.ToCamelCase() #>Repository.AddAsync(item);
             
             if (result > 0)
