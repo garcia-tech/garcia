@@ -42,6 +42,11 @@ namespace GarciaCore.CodeGenerator
 
             foreach (var item in items)
             {
+                if (!item.Properties.Select(x => x.Name).Contains("CreatedOn"))
+                {
+                    item.Properties.Add(new ItemProperty("CreatedOn", ItemPropertyType.DateTimeOffset, ItemPropertyMappingType.Property, null));
+                }
+
                 if (item.Properties.Count(x => string.IsNullOrEmpty(x.Name)) > 0)
                 {
                     generationResults.Messages.Add(new GenerationResultMessage(GenerationResultMessageType.Error, $"Item {item.Name} contains a null property name at index {index}, cannot generate code for item {item.Name}."));

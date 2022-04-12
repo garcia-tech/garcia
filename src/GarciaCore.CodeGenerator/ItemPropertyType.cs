@@ -13,6 +13,7 @@
         Class,
         Unknown,
         Boolean,
-        Enum
+        Enum,
+        DateTimeOffset
     }
 }

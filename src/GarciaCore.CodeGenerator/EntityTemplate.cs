@@ -75,7 +75,7 @@ using System.Threading.Tasks;");
             
             #line 16 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
 
-        foreach (var property in Item.Properties)
+        foreach (var property in Item.Properties.Where(x => !GeneratorRepository.BaseLevelProperties.Contains(x.Name)))
 	    {
             string innerTypeName = generator.GetInnerTypeName(property);
 
