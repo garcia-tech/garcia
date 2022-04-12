@@ -8,7 +8,8 @@ namespace GarciaCore.CodeGenerator
 
     public abstract class Generator : IGenerator
     {
-        protected ItemPropertyType[] notNullablePropertyTypes = new ItemPropertyType[] { ItemPropertyType.String, ItemPropertyType.Class, ItemPropertyType.Unknown };
+        //protected ItemPropertyType[] notNullablePropertyTypes = new ItemPropertyType[] { ItemPropertyType.String, ItemPropertyType.Class, ItemPropertyType.Unknown, ItemPropertyType.Photo };
+        protected ItemPropertyType[] notNullablePropertyTypes = new ItemPropertyType[] { };
 
         protected virtual string FileNamePrefix { get; } = string.Empty;
         protected abstract string FileNamePostfix { get; }
@@ -99,6 +100,9 @@ namespace GarciaCore.CodeGenerator
                     break;
                 case ItemPropertyType.Boolean:
                     typeName = "bool";
+                    break;
+                case ItemPropertyType.DateTimeOffset:
+                    typeName = "DateTimeOffset";
                     break;
                 case ItemPropertyType.Class:
                 case ItemPropertyType.Enum:

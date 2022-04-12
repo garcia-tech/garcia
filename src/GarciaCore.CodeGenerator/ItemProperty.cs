@@ -27,12 +27,13 @@
         {
         }
 
-        public ItemProperty(string name, ItemPropertyType type, ItemPropertyMappingType mappingType, Item? innerType)
+        public ItemProperty(string name, ItemPropertyType type, ItemPropertyMappingType mappingType, Item? innerType, bool isNullable)
         {
             Name = name;
             Type = type;
             MappingType = mappingType;
             InnerType = innerType;
+            IsNullable = isNullable;
         }
     }
 }
