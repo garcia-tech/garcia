@@ -14,6 +14,7 @@
         Unknown,
         Boolean,
         Enum,
+        DateTimeOffset,
         Photo
     }
 }

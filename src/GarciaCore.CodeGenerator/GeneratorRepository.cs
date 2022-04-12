@@ -8,6 +8,24 @@ namespace GarciaCore.CodeGenerator
         private static List<IGenerator> Generators { get; set; } = new();
         public static List<Item> Items { get; set; } = new();
         public static Solution Solution { get; set; }
+        public static List<string> BaseLevelProperties { get; set; }
+
+        static GeneratorRepository()
+        {
+            BaseLevelProperties = new List<string>()
+            {
+                "Id",
+                "UniqueId",
+                "CreatedOn",
+                "LastUpdatedOn",
+                "Active",
+                "CreatedBy",
+                "LastUpdatedBy",
+                "DeletedBy",
+                "DeletedOn",
+                "Deleted"
+            };
+        }
 
         public static void AddGenerator(IGenerator generator)
         {
