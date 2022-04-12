@@ -92,7 +92,8 @@
           "Name": "Password"
         },
         {
-          "Name": "PushToken"
+          "Name": "PushToken",
+          "IsNullable": true
         }
       ],
       "AddApplication": true,
@@ -131,46 +132,58 @@
       "Name": "RecipeOptimization",
       "Properties": [
         {
-          "Name": "CropType"
+          "Name": "CropType",
+          "IsNullable": true
         },
         {
-          "Name": "CultivationType"
+          "Name": "CultivationType",
+          "IsNullable": true
         },
         {
           "Name": "CropAge",
-          "Type": "Int"
+          "Type": "Int",
+          "IsNullable": true
         },
         {
-          "Name": "LightSchedule"
+          "Name": "LightSchedule",
+          "IsNullable": true
         },
         {
-          "Name": "IrrigationSchedule"
+          "Name": "IrrigationSchedule",
+          "IsNullable": true
         },
         {
           "Name": "Temperature",
-          "Type": "Decimal"
+          "Type": "Decimal",
+          "IsNullable": true
         },
         {
           "Name": "Humidity",
-          "Type": "Decimal"
+          "Type": "Decimal",
+          "IsNullable": true
         },
         {
           "Name": "Vpd",
-          "Type": "Decimal"
+          "Type": "Decimal",
+          "IsNullable": true
         },
         {
           "Name": "Ec",
-          "Type": "Decimal"
+          "Type": "Decimal",
+          "IsNullable": true
         },
         {
           "Name": "Ph",
-          "Type": "Decimal"
+          "Type": "Decimal",
+          "IsNullable": true
         },
         {
-          "Name": "Description"
+          "Name": "Description",
+          "IsNullable": true
         },
         {
-          "Name": "RecipeRecommend"
+          "Name": "RecipeRecommend",
+          "IsNullable": true
         },
         {
           "Name": "User",

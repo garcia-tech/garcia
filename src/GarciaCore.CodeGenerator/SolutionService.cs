@@ -109,7 +109,7 @@ namespace GarciaCore.CodeGenerator
                         innerItem = new Item(propertyModel.InnerType, false, item.IdType, false, false);
                     }
 
-                    var itemProperty = new ItemProperty(propertyModel.Name, itemPropertyType, itemPropertyMappingType, innerItem);
+                    var itemProperty = new ItemProperty(propertyModel.Name, itemPropertyType, itemPropertyMappingType, innerItem, propertyModel.IsNullable);
                     item.Properties.Add(itemProperty);
                 }
 

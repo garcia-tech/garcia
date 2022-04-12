@@ -44,7 +44,7 @@ namespace GarciaCore.CodeGenerator
             {
                 if (!item.Properties.Select(x => x.Name).Contains("CreatedOn"))
                 {
-                    item.Properties.Add(new ItemProperty("CreatedOn", ItemPropertyType.DateTimeOffset, ItemPropertyMappingType.Property, null));
+                    item.Properties.Add(new ItemProperty("CreatedOn", ItemPropertyType.DateTimeOffset, ItemPropertyMappingType.Property, null, false));
                 }
 
                 if (item.Properties.Count(x => string.IsNullOrEmpty(x.Name)) > 0)

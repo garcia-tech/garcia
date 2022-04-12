@@ -28,6 +28,13 @@ namespace <#= Namespace #>
         [NotMapped]
 <#
             }
+
+            else  if (!Item.Properties.Select(x => x.Name.ToLowerInvariant()).Contains($"{property.Name}Id".ToLowerInvariant()) && property.Type == ItemPropertyType.Class && property.MappingType == ItemPropertyMappingType.Property)
+            {
+#>
+        public <#= IdTypeName #> <#= property.Name.ToPascalCase() #>Id { get; set; }
+<#
+            }
 #>
         public <#= innerTypeName #> <#= property.Name.ToPascalCase() #> { get; set; }
 <#
