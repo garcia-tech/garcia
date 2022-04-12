@@ -1,12 +1,10 @@
-﻿using GarciaCore.Application.Redis.Contracts.Infrastructure;
+﻿using System;
+using GarciaCore.Application.Contracts.Infrastructure;
+using GarciaCore.Application.Redis.Contracts.Infrastructure;
+using GarciaCore.Domain;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GarciaCore.Infrastructure.Redis
 {
@@ -40,6 +38,10 @@ namespace GarciaCore.Infrastructure.Redis
             return services;
         }
 
-        public static IServiceCollection AddRedisServices(this IServiceCollection services) => services.AddSingleton<IRedisService, RedisService>();
+        public static IServiceCollection AddRedisServices(this IServiceCollection services)
+        {
+            services.AddSingleton<IRedisService, RedisService>();
+            return services;
+        }
     }
 }

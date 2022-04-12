@@ -40,7 +40,7 @@ namespace GarciaCore.Infrastructure.FileUpload.Local
             return GetDetails(fileName).Url;
         }
 
-        public async Task<string> MultipartUploadAsync(IFormFile file)
+        public async Task<UploadedFile> MultipartUploadAsync(IFormFile file)
         {
             var targetDirectory = _settings.FileUploadPath;
             var fileName = $"{Helpers.CreateKey(8)}_{file.FileName}";
@@ -51,10 +51,10 @@ namespace GarciaCore.Infrastructure.FileUpload.Local
                 await file.CopyToAsync(fileStream);
             }
 
-            return fileName;
+            return new UploadedFile(file.Name, fileName);
         }
 
-        public async Task<string> Base64UploadAsync(string fileName, string content)
+        public async Task<UploadedFile> Base64UploadAsync(string fileName, string content)
         {
             fileName = $"{Helpers.CreateKey(8)}_{fileName}";
             var bytes = Convert.FromBase64String(content);
@@ -67,7 +67,7 @@ namespace GarciaCore.Infrastructure.FileUpload.Local
                 await fileStream.FlushAsync();
             }
 
-            return fileName;
+            return new UploadedFile(null, fileName);
         }
     }
 }

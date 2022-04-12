@@ -1,0 +1,23 @@
+{
+  "Name": "Farmi",
+  "Folder": "C:\\files\\farmireact",
+  "Integrations": [
+  ],
+  "DefaultDatabaseServer": "",
+  "Projects": [
+    {
+      "Name": "Farmi.React",
+      "Folder": null,
+      "Namespace": null,
+      "ProjectDependencies": [
+      ],
+      "Generators": [
+        {
+          "Name": "React",
+          "GeneratorName": "ReactCRUDGenerator"
+        }
+      ],
+      "ProjectType": "React"
+    }
+  ]
+}

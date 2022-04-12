@@ -24,6 +24,7 @@ namespace GarciaCore.Application.Contracts.Persistence
         public abstract Task<long> DeleteAsync(T entity);
         public abstract Task<long> DeleteManyAsync(Expression<Func<T, bool>> filter);
         public abstract Task<IReadOnlyList<T>> GetAllAsync(int page, int size);
+        public abstract Task<T> GetByIdWithNavigationsAsync(long id);
 
         public virtual async Task<long> SaveAsync(T entity)
         {

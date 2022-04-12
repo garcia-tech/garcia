@@ -1,12 +1,12 @@
 {
+  "IdType": "Long",
   "Items": [
     {
       "Name": "Content",
       "Properties": [
         {
           "Name": "Date",
-          "Type": "DateTime",
-          "MappingType": "Property"
+          "Type": "DateTime"
         },
         {
           "Name": "Files",
@@ -19,9 +19,13 @@
           "Type": "Class",
           "MappingType": "List",
           "InnerType": "ContentMilestone"
+        },
+        {
+          "Name": "User",
+          "Type": "Class",
+          "InnerType": "User"
         }
       ],
-      "IdType": "Long",
       "AddApplication": true,
       "MultipartUpload": true
     },
@@ -30,77 +34,151 @@
       "Properties": [
         {
           "Name": "Url",
-          "Type": "String"
+          "Type": "Photo"
         },
         {
-          "Name": "Description",
-          "Type": "String"
+          "Name": "Description"
         }
-      ],
-      "IdType": "Long"
+      ]
     },
     {
       "Name": "ContentMilestone",
       "Properties": [
         {
           "Name": "FinishedOn",
-          "Type": "DateTime",
-          "MappingType": "Property"
+          "Type": "DateTime"
+        },
+        {
+          "Name": "Milestone",
+          "Type": "Class",
+          "InnerType": "Milestone"
         }
-      ],
-      "IdType": "Long"
+      ]
     },
     {
       "Name": "Milestone",
       "Properties": [
         {
-          "Name": "Title",
-          "Type": "String"
+          "Name": "Title"
         },
         {
-          "Name": "Description",
-          "Type": "String"
+          "Name": "Description"
         },
         {
           "Name": "Logo",
-          "Type": "String"
+          "Type": "Photo"
         }
       ],
-      "IdType": "Long",
       "AddApplication": true,
       "MultipartUpload": true
     },
     {
-      "Name": "FarmiUser",
+      "Name": "User",
       "Properties": [
         {
-          "Name": "Email",
-          "Type": "String"
+          "Name": "Email"
         },
         {
-          "Name": "Name",
-          "Type": "String"
+          "Name": "Name"
         },
         {
-          "Name": "Phone",
-          "Type": "String"
+          "Name": "Phone"
         },
         {
           "Name": "Photo",
-          "Type": "String"
+          "Type": "Photo"
         },
         {
-          "Name": "Password",
-          "Type": "String"
+          "Name": "Password"
         },
         {
-          "Name": "PushToken",
-          "Type": "String"
+          "Name": "PushToken"
         }
       ],
-      "IdType": "Long",
       "AddApplication": true,
       "MultipartUpload": true
+    },
+    {
+      "Name": "DiseaseRecognition",
+      "Properties": [
+        {
+          "Name": "CropType"
+        },
+        {
+          "Name": "CultivationType"
+        },
+        {
+          "Name": "Photos",
+          "Type": "Photo",
+          "MappingType": "List"
+        },
+        {
+          "Name": "Description"
+        },
+        {
+          "Name": "Diagnosis"
+        },
+        {
+          "Name": "User",
+          "Type": "Class",
+          "InnerType": "User"
+        }
+      ],
+      "AddApplication": true,
+      "MultipartUpload": true
+    },
+    {
+      "Name": "RecipeOptimization",
+      "Properties": [
+        {
+          "Name": "CropType"
+        },
+        {
+          "Name": "CultivationType"
+        },
+        {
+          "Name": "CropAge",
+          "Type": "Int"
+        },
+        {
+          "Name": "LightSchedule"
+        },
+        {
+          "Name": "IrrigationSchedule"
+        },
+        {
+          "Name": "Temperature",
+          "Type": "Decimal"
+        },
+        {
+          "Name": "Humidity",
+          "Type": "Decimal"
+        },
+        {
+          "Name": "Vpd",
+          "Type": "Decimal"
+        },
+        {
+          "Name": "Ec",
+          "Type": "Decimal"
+        },
+        {
+          "Name": "Ph",
+          "Type": "Decimal"
+        },
+        {
+          "Name": "Description"
+        },
+        {
+          "Name": "RecipeRecommend"
+        },
+        {
+          "Name": "User",
+          "Type": "Class",
+          "InnerType": "User"
+        }
+      ],
+      "AddApplication": true
     }
   ]
 }

@@ -24,7 +24,7 @@
     "SecretAccessKey": "xhvDcSqCBD5Hy+HhRqJpYABa/PHWaFRLgy91Q1E0",
     "BucketName": "farmiassetstest",
     "BucketUrl": "https://farmiassetstest.s3.eu-central-1.amazonaws.com"
-  }
+  },
 <#
     }
 
@@ -34,7 +34,46 @@
   "FileUploadSettings": {
     "FileUploadPath": "",
     "BaseUrl": ""
-  }
+  },
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.MandrillEmail))
+    {
+#>
+  "MandrillEmailSettings": {
+    "ApiKey": "",
+    "SenderEmailAddress": "",
+    "Bcc": ""
+  },
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.MailChimpMarketing))
+    {
+#>
+  "MailChimpMarketingSettings": {
+    "ApiKey": "",
+    "AudienceListId": ""
+  },
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.FirebasePushNotification))
+    {
+#>
+  "FirebasePushNotificationSettings": {
+    "AccessToken": ""
+  },
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.SQLServer))
+    {
+#>
+  "ConnectionStrings": {
+    "SqlServer": "server=dev.forfarming.co;user id=forfarming;password=Ff756638;initial catalog=Farmi;Min Pool Size=100;Max Pool Size=500"
+  },
 <#
     }
 #>

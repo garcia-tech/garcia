@@ -24,12 +24,18 @@
       <None Remove="EntityFrameworkDbContextTemplate.tt" />
       <None Remove="EntityTemplate.tt" />
       <None Remove="MappingProfileTemplate.tt" />
+      <None Remove="ReactCRUDTemplate.tt" />
       <None Remove="RepositoryTemplate.tt" />
       <None Remove="SolutionJsonTemplate.tt" />
       <None Remove="WebApiAppSettingsTemplate.tt" />
       <None Remove="WebApiAuthenticationTemplate.tt" />
     </ItemGroup>
     <ItemGroup>
+      <Compile Update="ReactCRUDTemplate.cs">
+        <DependentUpon>ReactCRUDTemplate.tt</DependentUpon>
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+      </Compile>
       <Compile Update="SolutionJsonTemplate.cs">
         <DependentUpon>SolutionJsonTemplate.tt</DependentUpon>
         <DesignTime>True</DesignTime>
@@ -148,6 +154,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Content Include="ReactCRUDTemplate.tt">
+        <LastGenOutput>ReactCRUDTemplate.cs</LastGenOutput>
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+      </Content>
       <Content Include="SolutionJsonTemplate.tt">
         <LastGenOutput>SolutionJsonTemplate.cs</LastGenOutput>
         <Generator>TextTemplatingFilePreprocessor</Generator>

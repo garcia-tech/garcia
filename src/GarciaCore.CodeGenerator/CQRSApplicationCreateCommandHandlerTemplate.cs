@@ -235,9 +235,49 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write(">(request);\r\n            var result = await _");
+            this.Write(">(request);\r\n");
             
             #line 69 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
+
+    foreach (var property in properties.Where(x => x.MappingType == ItemPropertyMappingType.Property && x.Type == ItemPropertyType.Class))
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("            item.");
+            
+            #line 73 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
+            
+            #line default
+            #line hidden
+            this.Write(" = await _");
+            
+            #line 73 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.InnerType.Name.ToCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("Repository.GetByIdAsync(request.");
+            
+            #line 73 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Id);\r\n");
+            
+            #line 74 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
+
+    }
+
+            
+            #line default
+            #line hidden
+            this.Write("            var result = await _");
+            
+            #line 77 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name.ToCamelCase()));
             
             #line default
@@ -245,7 +285,7 @@ using System.Threading.Tasks;");
             this.Write("Repository.AddAsync(item);\r\n            \r\n            if (result > 0)\r\n          " +
                     "  {\r\n                return new BaseResponse<");
             
-            #line 73 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
+            #line 81 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(IdTypeName));
             
             #line default
@@ -253,14 +293,14 @@ using System.Threading.Tasks;");
             this.Write(">(item.Id, System.Net.HttpStatusCode.Created);\r\n            }\r\n\r\n            retu" +
                     "rn new BaseResponse<");
             
-            #line 76 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
+            #line 84 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(IdTypeName));
             
             #line default
             #line hidden
             this.Write(">(item.Id, new ApiError(\"Something went wrong!\", \"");
             
-            #line 76 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
+            #line 84 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
@@ -269,7 +309,7 @@ using System.Threading.Tasks;");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 81 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
+        #line 89 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSApplicationCreateCommandHandlerTemplate.tt"
 
     protected override Generator CreateGenerator()
 	{

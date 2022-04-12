@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GarciaCore.Application.RabbitMQ.Contracts.Infrastructure;
+﻿using GarciaCore.Application.RabbitMQ.Contracts.Infrastructure;
 using GarciaCore.Application.Contracts.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -59,15 +54,6 @@ namespace GarciaCore.Infrastructure.RabbitMQ
         public static IServiceCollection AddRabbitMqServices(this IServiceCollection services)
         {
             services.AddSingleton<IRabbitMqService, RabbitMqService>();
-            services.AddSingleton<IServiceBus, RabbitMqService>();
-            return services;
-        }
-
-        public static IServiceCollection AddRabbitConsumer<TConsumer, TMessage>(this IServiceCollection services)
-            where TMessage : IMessage
-            where TConsumer : Consumer<TMessage>
-        {
-            services.AddHostedService<TConsumer>();
             return services;
         }
     }

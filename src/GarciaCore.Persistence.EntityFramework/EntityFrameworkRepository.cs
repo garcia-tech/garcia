@@ -74,9 +74,21 @@ namespace GarciaCore.Persistence.EntityFramework
             return await _dbContext.SaveChangesAsync();
         }
 
-        //public override Task<IReadOnlyList<T>> GetAsync(Dictionary<string, object> filter)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public override async Task<T> GetByIdWithNavigationsAsync(long id)
+        {
+            var query = _dbContext.Set<T>().AsQueryable();
+            var navigations = _dbContext.Model.FindEntityType(typeof(T))?
+                    .GetDerivedTypesInclusive()
+                    .SelectMany(type => type.GetNavigations())
+                    .Distinct();
+
+            if (navigations != null && navigations.Count() > 0)
+            {
+                foreach (var property in navigations)
+                    query = query.Include(property.Name);
+            }
+
+            return await query.FirstOrDefaultAsync(x => x.Id == id);
+        }
     }
 }

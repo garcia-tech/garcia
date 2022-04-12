@@ -43,23 +43,24 @@ using GarciaCore.Persistence;
 using System.Threading;
 using System.Threading.Tasks;");
             this.Write("\r\nusing FluentValidation.AspNetCore;\r\nusing Microsoft.AspNetCore.Mvc;\r\nusing Garc" +
-                    "iaCore.Application;\r\nusing GarciaCore.Infrastructure.Api.Filters;\r\n");
+                    "iaCore.Application;\r\nusing GarciaCore.Infrastructure.Api.Filters;\r\nusing Microso" +
+                    "ft.Extensions.Options;\r\n");
             
-            #line 14 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 15 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GetUsings()));
             
             #line default
             #line hidden
             this.Write("\r\nusing ");
             
-            #line 15 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 16 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 16 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 17 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     if (GeneratorRepository.ContainsIntegration(IntegrationType.SQLServer) 
         || GeneratorRepository.ContainsIntegration(IntegrationType.PostgreSQL)
@@ -72,7 +73,7 @@ using System.Threading.Tasks;");
             this.Write("using Microsoft.EntityFrameworkCore;\r\nusing GarciaCore.Persistence.EntityFramewor" +
                     "k;\r\n");
             
-            #line 24 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 25 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -85,7 +86,7 @@ using System.Threading.Tasks;");
             this.Write("using GarciaCore.Application.Contracts.Identity;\r\nusing GarciaCore.Infrastructure" +
                     ".Identity;\r\n");
             
-            #line 32 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 33 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -98,7 +99,7 @@ using System.Threading.Tasks;");
             this.Write("using GarciaCore.Application.Contracts.FileUpload;\r\nusing GarciaCore.Infrastructu" +
                     "re.FileUpload.AmazonS3;\r\n");
             
-            #line 40 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 41 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -111,7 +112,7 @@ using System.Threading.Tasks;");
             this.Write("using GarciaCore.Application.Contracts.FileUpload;\r\nusing GarciaCore.Infrastructu" +
                     "re.FileUpload.Local;\r\n");
             
-            #line 48 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 49 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -123,7 +124,7 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("using GarciaCore.Persistence.EntityFramework.SqlServer;\r\n");
             
-            #line 55 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 56 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -135,7 +136,7 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("using GarciaCore.Persistence.EntityFramework.PostgreSql;\r\n");
             
-            #line 62 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 63 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -147,7 +148,7 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("using GarciaCore.Persistence.EntityFramework.MySql;\r\n");
             
-            #line 69 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 70 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -159,7 +160,7 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("using GarciaCore.Persistence.MongoDb;\r\n");
             
-            #line 76 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 77 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -171,7 +172,7 @@ using System.Threading.Tasks;");
             #line hidden
             this.Write("using GarciaCore.Persistence.Redis;\r\n");
             
-            #line 83 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 84 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -184,7 +185,7 @@ using System.Threading.Tasks;");
             this.Write("using GarciaCore.Application.Contracts.Email;\r\nusing GarciaCore.Infrastructure.Em" +
                     "ail.Mandrill;\r\n");
             
-            #line 91 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 92 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -197,7 +198,7 @@ using System.Threading.Tasks;");
             this.Write("using GarciaCore.Application.Contracts.Marketing;\r\nusing GarciaCore.Infrastructur" +
                     "e.Marketing.MailChimp;\r\n");
             
-            #line 99 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 100 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -210,7 +211,7 @@ using System.Threading.Tasks;");
             this.Write("using GarciaCore.Application.Contracts.PushNotification;\r\nusing GarciaCore.Infras" +
                     "tructure.PushNotification.Firebase;\r\n");
             
-            #line 107 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 108 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -236,7 +237,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddApplicationServices();
 ");
             
-            #line 127 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 128 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     if (GeneratorRepository.ContainsGenerator(GeneratorType.WebApiAuthentication))
     {
@@ -248,7 +249,7 @@ builder.Services.AddApplicationServices();
                     "lder.Services.AddScoped<ILoggedInUserService, LoggedInUserService>();\r\nbuilder.S" +
                     "ervices.AddJwtOptions(builder.Configuration);\r\n");
             
-            #line 134 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 135 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -261,7 +262,7 @@ builder.Services.AddApplicationServices();
             this.Write("builder.Services.AddMongoDbSettings(builder.Configuration);\r\nbuilder.Services.Add" +
                     "MongoDbRepository();\r\n");
             
-            #line 142 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 143 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -275,21 +276,37 @@ builder.Services.AddApplicationServices();
             #line hidden
             this.Write("builder.Services.AddEfCoreInMemory<");
             
-            #line 150 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 151 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorRepository.Solution.Name));
             
             #line default
             #line hidden
             this.Write("DbContext>(\"");
             
-            #line 150 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 151 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorRepository.Solution.Name));
             
             #line default
             #line hidden
-            this.Write("\");\r\n");
+            this.Write("\");\r\nbuilder.Services.AddEfCoreSqlServer<");
             
-            #line 151 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 152 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorRepository.Solution.Name));
+            
+            #line default
+            #line hidden
+            this.Write("DbContext, EfCoreSettings>(\r\n    Options.Create<EfCoreSettings>(\r\n        new EfC" +
+                    "oreSettings\r\n        {\r\n            ConnectionString = builder.Configuration[\"Co" +
+                    "nnectionStrings:SqlServer\"],\r\n            MigrationsAssembly = \"");
+            
+            #line 157 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorRepository.Solution.Name));
+            
+            #line default
+            #line hidden
+            this.Write(".Api\"\r\n        }\r\n    )\r\n);\r\n");
+            
+            #line 161 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -301,7 +318,7 @@ builder.Services.AddApplicationServices();
             #line hidden
             this.Write("builder.Services.AddAmazonS3FileUploadService(builder.Configuration);\r\n");
             
-            #line 158 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 168 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -313,7 +330,7 @@ builder.Services.AddApplicationServices();
             #line hidden
             this.Write("builder.Services.AddLocalFileUploadService(builder.Configuration);\r\n");
             
-            #line 165 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 175 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -325,7 +342,7 @@ builder.Services.AddApplicationServices();
             #line hidden
             this.Write("builder.Services.AddMailChimpMarketingService(builder.Configuration);\r\n");
             
-            #line 172 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 182 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -337,7 +354,7 @@ builder.Services.AddApplicationServices();
             #line hidden
             this.Write("builder.Services.AddMandrillEmailService(builder.Configuration);\r\n");
             
-            #line 179 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 189 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -349,7 +366,7 @@ builder.Services.AddApplicationServices();
             #line hidden
             this.Write("builder.Services.AddFirebasePushNotificationService(builder.Configuration);\r\n");
             
-            #line 186 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 196 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -380,7 +397,7 @@ public partial class Program { }
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 209 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+        #line 219 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     protected override Generator CreateGenerator()
 	{

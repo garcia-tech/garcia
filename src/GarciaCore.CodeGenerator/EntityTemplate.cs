@@ -43,62 +43,96 @@ using GarciaCore.Domain;
 using GarciaCore.Persistence;
 using System.Threading;
 using System.Threading.Tasks;");
-            this.Write("  \r\n");
+            this.Write("\r\nusing System.ComponentModel.DataAnnotations.Schema;\r\nusing System.Text.Json.Ser" +
+                    "ialization;\r\n");
             
-            #line 11 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+            #line 13 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GetUsings()));
             
             #line default
             #line hidden
             this.Write("\r\nnamespace ");
             
-            #line 12 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+            #line 14 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public partial class ");
             
-            #line 14 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+            #line 16 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
             
             #line default
             #line hidden
             this.Write(" : Entity<");
             
-            #line 14 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+            #line 16 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(IdTypeName));
             
             #line default
             #line hidden
             this.Write(">\r\n    {\r\n");
             
-            #line 16 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+            #line 18 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
 
         foreach (var property in Item.Properties.Where(x => !GeneratorRepository.BaseLevelProperties.Contains(x.Name)))
 	    {
             string innerTypeName = generator.GetInnerTypeName(property);
+            
+            if (property.Type == ItemPropertyType.Photo && property.MappingType == ItemPropertyMappingType.List)
+            {
+
+            
+            #line default
+            #line hidden
+            this.Write("        [JsonIgnore]\r\n        public string ");
+            
+            #line 27 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToPascalCase()));
+            
+            #line default
+            #line hidden
+            this.Write("String { get { return string.Join(\',\', ");
+            
+            #line 27 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToPascalCase()));
+            
+            #line default
+            #line hidden
+            this.Write("); } set { ");
+            
+            #line 27 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToPascalCase()));
+            
+            #line default
+            #line hidden
+            this.Write(" = value.Split(\',\').ToList(); } }\r\n        [NotMapped]\r\n");
+            
+            #line 29 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+
+            }
 
             
             #line default
             #line hidden
             this.Write("        public ");
             
-            #line 21 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+            #line 32 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(innerTypeName));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 21 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+            #line 32 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToPascalCase()));
             
             #line default
             #line hidden
             this.Write(" { get; set; }\r\n");
             
-            #line 22 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+            #line 33 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
 
         }
 
@@ -109,7 +143,7 @@ using System.Threading.Tasks;");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 27 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+        #line 38 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
 
     protected override Generator CreateGenerator()
 	{

@@ -20,5 +20,6 @@ namespace GarciaCore.CodeGenerator
         WebApiAuthentication = 4096,
         WebApiAppSettings = 8192,
         SolutionJson = 16384,
+        ReactCRUD = 32768
     }
 }

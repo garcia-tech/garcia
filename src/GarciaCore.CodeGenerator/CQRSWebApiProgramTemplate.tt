@@ -11,6 +11,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using GarciaCore.Application;
 using GarciaCore.Infrastructure.Api.Filters;
+using Microsoft.Extensions.Options;
 <#= GetUsings() #>
 using <#= Namespace #>;
 <#
@@ -148,6 +149,15 @@ builder.Services.AddMongoDbRepository();
     {
 #>
 builder.Services.AddEfCoreInMemory<<#= GeneratorRepository.Solution.Name #>DbContext>("<#= GeneratorRepository.Solution.Name #>");
+builder.Services.AddEfCoreSqlServer<<#= GeneratorRepository.Solution.Name #>DbContext, EfCoreSettings>(
+    Options.Create<EfCoreSettings>(
+        new EfCoreSettings
+        {
+            ConnectionString = builder.Configuration["ConnectionStrings:SqlServer"],
+            MigrationsAssembly = "<#= GeneratorRepository.Solution.Name #>.Api"
+        }
+    )
+);
 <#
     }
 

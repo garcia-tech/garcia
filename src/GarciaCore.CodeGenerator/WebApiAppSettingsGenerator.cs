@@ -11,6 +11,6 @@ namespace GarciaCore.CodeGenerator
         public override bool IsItemLevel => false;
         public override List<string> GarciaCoreDependencies => new List<string>() { };
         public override string Name => "appsettings";
-        protected override string FileExtension => "json";
+        public override string FileExtension => "json";
     }
 }

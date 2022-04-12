@@ -55,7 +55,7 @@ namespace GarciaCore.CodeGenerator
             this.Write("  \"AmazonS3Settings\": {\r\n    \"AccessKeyId\": \"AKIAXP5ELXGKN2VGXQUD\",\r\n    \"SecretA" +
                     "ccessKey\": \"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\",\r\n    \"BucketName\": \"farmi" +
                     "assetstest\",\r\n    \"BucketUrl\": \"https://farmiassetstest.s3.eu-central-1.amazonaw" +
-                    "s.com\"\r\n  }\r\n");
+                    "s.com\"\r\n  },\r\n");
             
             #line 28 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
 
@@ -67,9 +67,61 @@ namespace GarciaCore.CodeGenerator
             
             #line default
             #line hidden
-            this.Write("  \"FileUploadSettings\": {\r\n    \"FileUploadPath\": \"\",\r\n    \"BaseUrl\": \"\"\r\n  }\r\n");
+            this.Write("  \"FileUploadSettings\": {\r\n    \"FileUploadPath\": \"\",\r\n    \"BaseUrl\": \"\"\r\n  },\r\n");
             
             #line 38 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
+
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.MandrillEmail))
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("  \"MandrillEmailSettings\": {\r\n    \"ApiKey\": \"\",\r\n    \"SenderEmailAddress\": \"\",\r\n " +
+                    "   \"Bcc\": \"\"\r\n  },\r\n");
+            
+            #line 49 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
+
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.MailChimpMarketing))
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("  \"MailChimpMarketingSettings\": {\r\n    \"ApiKey\": \"\",\r\n    \"AudienceListId\": \"\"\r\n " +
+                    " },\r\n");
+            
+            #line 59 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
+
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.FirebasePushNotification))
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("  \"FirebasePushNotificationSettings\": {\r\n    \"AccessToken\": \"\"\r\n  },\r\n");
+            
+            #line 68 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
+
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.SQLServer))
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("  \"ConnectionStrings\": {\r\n    \"SqlServer\": \"server=dev.forfarming.co;user id=forf" +
+                    "arming;password=Ff756638;initial catalog=Farmi;Min Pool Size=100;Max Pool Size=5" +
+                    "00\"\r\n  },\r\n");
+            
+            #line 77 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
 
     }
 
@@ -80,7 +132,7 @@ namespace GarciaCore.CodeGenerator
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 44 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
+        #line 83 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
 
     protected override Generator CreateGenerator()
 	{
