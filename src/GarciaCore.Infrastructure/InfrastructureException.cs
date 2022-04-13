@@ -19,4 +19,26 @@ namespace GarciaCore.Infrastructure
         {
         }
     }
+
+    public class DomainExistingItemException : Exception
+    {
+        public DomainExistingItemException(string message) : base(message)
+        {
+        }
+
+        public DomainExistingItemException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+    }
+
+    public class DomainValidationException : Exception
+    {
+        public DomainValidationException(string message) : base(message)
+        {
+        }
+
+        public DomainValidationException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+    }
 }
