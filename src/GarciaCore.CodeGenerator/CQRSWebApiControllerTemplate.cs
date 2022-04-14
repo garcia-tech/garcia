@@ -317,10 +317,11 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write(" = files.FirstOrDefault(x => x.Name == \"");
+            this.Write(" = files.FirstOrDefault(x => !string.IsNullOrEmpty(x.Name) && x.Name.ToLowerInvar" +
+                    "iant() == \"");
             
             #line 79 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToLowerInvariant()));
             
             #line default
             #line hidden
@@ -343,10 +344,11 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write(" = files.Where(x => x.Name == \"");
+            this.Write(" = files.Where(x => !string.IsNullOrEmpty(x.Name) && x.Name.ToLowerInvariant() ==" +
+                    " \"");
             
             #line 86 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToLowerInvariant()));
             
             #line default
             #line hidden
@@ -438,7 +440,7 @@ using System.Threading.Tasks;");
             #line default
             #line hidden
             this.Write("WithMultipartUpload([FromForm] string data)\r\n        {\r\n            data = CleanJ" +
-                    "son(data);\r\n            var command = JsonConvert.DeserializeObject<Create");
+                    "son(data);\r\n            var command = JsonConvert.DeserializeObject<Update");
             
             #line 118 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Item.Name));
@@ -462,10 +464,11 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write(" = files.FirstOrDefault(x => x.Name == \"");
+            this.Write(" = files.FirstOrDefault(x => !string.IsNullOrEmpty(x.Name) && x.Name.ToLowerInvar" +
+                    "iant() == \"");
             
             #line 124 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToLowerInvariant()));
             
             #line default
             #line hidden
@@ -488,10 +491,11 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write(" = files.Where(x => x.Name == \"");
+            this.Write(" = files.Where(x => !string.IsNullOrEmpty(x.Name) && x.Name.ToLowerInvariant() ==" +
+                    " \"");
             
             #line 131 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToLowerInvariant()));
             
             #line default
             #line hidden
