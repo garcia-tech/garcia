@@ -6,7 +6,7 @@
       "Properties": [
         {
           "Name": "Date",
-          "Type": "DateTime"
+          "Type": "DateTimeOffset"
         },
         {
           "Name": "Files",
@@ -46,7 +46,7 @@
       "Properties": [
         {
           "Name": "FinishedOn",
-          "Type": "DateTime"
+          "Type": "DateTimeOffset"
         },
         {
           "Name": "Milestone",
