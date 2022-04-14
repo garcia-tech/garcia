@@ -37,7 +37,7 @@ namespace GarciaCore.Infrastructure.Redis
             );
         }
 
-        public async Task SubscribeAsync<T>(Func<T , Task> receiveHandler, Func<Exception, string, Task> rejectHandler) where T : IMessage
+        public async Task SubscribeAsync<T>(Func<T, Task> receiveHandler, Func<Exception, string, Task> rejectHandler) where T : IMessage
         {
             var channel = typeof(T).Name;
 
@@ -50,7 +50,7 @@ namespace GarciaCore.Infrastructure.Redis
                 }
                 catch (Exception exception)
                 {
-                   await rejectHandler(exception, message);
+                    await rejectHandler(exception, message);
                 }
 
             });
@@ -84,7 +84,7 @@ namespace GarciaCore.Infrastructure.Redis
         private async Task<bool> GetLockAsync(string key, TimeSpan expiration)
         {
             return await _connection.GetDatabase()
-                .StringSetAsync(key, Guid.NewGuid().ToString(), expiration, When.NotExists);
+                .StringSetAsync(key, Guid.NewGuid().ToString(), expiration, when: When.NotExists);
         }
 
         private async Task ReleaseLockAsync(string key)
