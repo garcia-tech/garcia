@@ -83,7 +83,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Infrastructure.F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Infrastructure.FileUpload.Local", "src\GarciaCore.Infrastructure.FileUpload.Local\GarciaCore.Infrastructure.FileUpload.Local.csproj", "{3704E7E6-C2DC-4BA9-A1C0-4EE3F0802EDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.Infrastructure.PushNotification.Firebase", "src\GarciaCore.Infrastructure.PushNotification.Firebase\GarciaCore.Infrastructure.PushNotification.Firebase.csproj", "{CB237DED-1E40-4FFE-AD84-7C35AEB24E5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Infrastructure.PushNotification.Firebase", "src\GarciaCore.Infrastructure.PushNotification.Firebase\GarciaCore.Infrastructure.PushNotification.Firebase.csproj", "{CB237DED-1E40-4FFE-AD84-7C35AEB24E5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.Infrastructure.ImageResize.Local", "src\GarciaCore.Infrastructure.ImageResize.Local\GarciaCore.Infrastructure.ImageResize.Local.csproj", "{87DE73FC-6B0B-45BA-A6F8-322C46AB6039}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -243,6 +245,10 @@ Global
 		{CB237DED-1E40-4FFE-AD84-7C35AEB24E5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB237DED-1E40-4FFE-AD84-7C35AEB24E5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB237DED-1E40-4FFE-AD84-7C35AEB24E5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87DE73FC-6B0B-45BA-A6F8-322C46AB6039}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87DE73FC-6B0B-45BA-A6F8-322C46AB6039}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87DE73FC-6B0B-45BA-A6F8-322C46AB6039}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87DE73FC-6B0B-45BA-A6F8-322C46AB6039}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
