@@ -8,6 +8,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GarciaCore.Application.ElasticSearch\GarciaCore.Application.ElasticSearch.csproj" />
+    <ProjectReference Include="..\GarciaCore.Exceptions.ElasticSearch\GarciaCore.Exceptions.ElasticSearch.csproj" />
+    <ProjectReference Include="..\GarciaCore.Infrastructure.Elasticsearch\GarciaCore.Infrastructure.ElasticSearch.csproj" />
     <ProjectReference Include="..\GarciaCore.Infrastructure.Email.Mandrill\GarciaCore.Infrastructure.Email.Mandrill.csproj" />
     <ProjectReference Include="..\GarciaCore.Infrastructure.FileUpload.AmazonS3\GarciaCore.Infrastructure.FileUpload.AmazonS3.csproj" />
     <ProjectReference Include="..\GarciaCore.Infrastructure.FileUpload.Local\GarciaCore.Infrastructure.FileUpload.Local.csproj" />
