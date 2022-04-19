@@ -32,9 +32,9 @@ namespace GarciaCore.Infrastructure.FileUpload.AmazonS3
             return new FileWrapper(fileName, _settings.BucketUrl, $"{_settings.BucketUrl}/{fileName}", $"{_settings.BucketUrl}/{fileName}", fileName.Split('.').Last());
         }
 
-        public async Task<UploadedFile> MultipartUploadAsync(IFormFile file)
+        public async Task<UploadedFile> MultipartUploadAsync(IFormFile file, string newFileName = null)
         {
-            var fileName = $"{Helpers.CreateKey(8)}_{file.FileName}";
+            var fileName = !string.IsNullOrEmpty(newFileName) ? newFileName : $"{Helpers.CreateKey(8)}_{file.FileName}";
             var name = file.Name;
 
             using (Stream fileToUpload = file.OpenReadStream())

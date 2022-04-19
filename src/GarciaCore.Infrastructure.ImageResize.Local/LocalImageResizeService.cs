@@ -11,18 +11,18 @@ namespace GarciaCore.Infrastructure.ImageResize.Local
 {
     public class LocalImageResizeService : IImageResizeService
     {
-        private readonly ImageResizeSettings _imageResizeSettings;
+        public ImageResizeSettings ImageResizeSettings { get; set; }
 
         public LocalImageResizeService(IOptions<ImageResizeSettings> options)
         {
-            _imageResizeSettings = options.Value;
+            ImageResizeSettings = options.Value;
         }
 
         public Stream ResizeToStream(IFormFile file, int? newHeight = null)
         {
             if (!newHeight.HasValue)
             {
-                newHeight = _imageResizeSettings.DefaultHeight;
+                newHeight = ImageResizeSettings.DefaultHeight;
             }
 
             IImageFormat format;

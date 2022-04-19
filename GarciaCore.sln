@@ -85,13 +85,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Infrastructure.F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Infrastructure.PushNotification.Firebase", "src\GarciaCore.Infrastructure.PushNotification.Firebase\GarciaCore.Infrastructure.PushNotification.Firebase.csproj", "{CB237DED-1E40-4FFE-AD84-7C35AEB24E5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.Infrastructure.ImageResize.Local", "src\GarciaCore.Infrastructure.ImageResize.Local\GarciaCore.Infrastructure.ImageResize.Local.csproj", "{87DE73FC-6B0B-45BA-A6F8-322C46AB6039}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Infrastructure.ImageResize.Local", "src\GarciaCore.Infrastructure.ImageResize.Local\GarciaCore.Infrastructure.ImageResize.Local.csproj", "{87DE73FC-6B0B-45BA-A6F8-322C46AB6039}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Infrastructure.ElasticSearch", "src\GarciaCore.Infrastructure.ElasticSearch\GarciaCore.Infrastructure.ElasticSearch.csproj", "{1B831CB0-9B0D-4CA5-B5DF-AE91DEA778E2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Application.ElasticSearch", "src\GarciaCore.Application.ElasticSearch\GarciaCore.Application.ElasticSearch.csproj", "{8BE362A8-A1E9-435F-B5C4-B19A79480EF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarciaCore.Exceptions.ElasticSearch", "src\GarciaCore.Exceptions.ElasticSearch\GarciaCore.Exceptions.ElasticSearch.csproj", "{421EA5D9-5B04-4230-9B9D-88BC37276897}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarciaCore.Exceptions.ElasticSearch", "src\GarciaCore.Exceptions.ElasticSearch\GarciaCore.Exceptions.ElasticSearch.csproj", "{421EA5D9-5B04-4230-9B9D-88BC37276897}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -311,6 +311,7 @@ Global
 		{0B812A3D-8BF7-40F4-B49C-AA4A4C16D5B3} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 		{3704E7E6-C2DC-4BA9-A1C0-4EE3F0802EDC} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 		{CB237DED-1E40-4FFE-AD84-7C35AEB24E5E} = {087C542F-855C-47ED-96C8-9D088E416ED2}
+		{87DE73FC-6B0B-45BA-A6F8-322C46AB6039} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 		{1B831CB0-9B0D-4CA5-B5DF-AE91DEA778E2} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 		{8BE362A8-A1E9-435F-B5C4-B19A79480EF1} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 		{421EA5D9-5B04-4230-9B9D-88BC37276897} = {087C542F-855C-47ED-96C8-9D088E416ED2}
