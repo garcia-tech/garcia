@@ -12,6 +12,7 @@
         LocalFileUpload,
         MailChimpMarketing,
         MandrillEmail,
-        FirebasePushNotification
+        FirebasePushNotification,
+        LocalImageResize
     }
 }

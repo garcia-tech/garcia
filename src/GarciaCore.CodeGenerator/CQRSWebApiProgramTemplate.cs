@@ -215,6 +215,19 @@ using System.Threading.Tasks;");
 
     }
 
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.LocalImageResize))
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("using GarciaCore.Application.Contracts.ImageResize;\r\nusing GarciaCore.Infrastruct" +
+                    "ure.ImageResize.Local;\r\n");
+            
+            #line 116 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+
+    }
+
             
             #line default
             #line hidden
@@ -237,7 +250,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddApplicationServices();
 ");
             
-            #line 128 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 136 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     if (GeneratorRepository.ContainsGenerator(GeneratorType.WebApiAuthentication))
     {
@@ -249,7 +262,7 @@ builder.Services.AddApplicationServices();
                     "lder.Services.AddScoped<ILoggedInUserService, LoggedInUserService>();\r\nbuilder.S" +
                     "ervices.AddJwtOptions(builder.Configuration);\r\n");
             
-            #line 135 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 143 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -262,7 +275,7 @@ builder.Services.AddApplicationServices();
             this.Write("builder.Services.AddMongoDbSettings(builder.Configuration);\r\nbuilder.Services.Add" +
                     "MongoDbRepository();\r\n");
             
-            #line 143 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 151 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -276,21 +289,21 @@ builder.Services.AddApplicationServices();
             #line hidden
             this.Write("builder.Services.AddEfCoreInMemory<");
             
-            #line 151 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 159 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorRepository.Solution.Name));
             
             #line default
             #line hidden
             this.Write("DbContext>(\"");
             
-            #line 151 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 159 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorRepository.Solution.Name));
             
             #line default
             #line hidden
             this.Write("\");\r\nbuilder.Services.AddEfCoreSqlServer<");
             
-            #line 152 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 160 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorRepository.Solution.Name));
             
             #line default
@@ -299,14 +312,14 @@ builder.Services.AddApplicationServices();
                     "oreSettings\r\n        {\r\n            ConnectionString = builder.Configuration[\"Co" +
                     "nnectionStrings:SqlServer\"],\r\n            MigrationsAssembly = \"");
             
-            #line 157 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 165 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorRepository.Solution.Name));
             
             #line default
             #line hidden
             this.Write(".Api\"\r\n        }\r\n    )\r\n);\r\n");
             
-            #line 161 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 169 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -318,7 +331,7 @@ builder.Services.AddApplicationServices();
             #line hidden
             this.Write("builder.Services.AddAmazonS3FileUploadService(builder.Configuration);\r\n");
             
-            #line 168 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 176 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -330,7 +343,7 @@ builder.Services.AddApplicationServices();
             #line hidden
             this.Write("builder.Services.AddLocalFileUploadService(builder.Configuration);\r\n");
             
-            #line 175 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 183 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -342,7 +355,7 @@ builder.Services.AddApplicationServices();
             #line hidden
             this.Write("builder.Services.AddMailChimpMarketingService(builder.Configuration);\r\n");
             
-            #line 182 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 190 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -354,7 +367,7 @@ builder.Services.AddApplicationServices();
             #line hidden
             this.Write("builder.Services.AddMandrillEmailService(builder.Configuration);\r\n");
             
-            #line 189 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 197 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -366,7 +379,19 @@ builder.Services.AddApplicationServices();
             #line hidden
             this.Write("builder.Services.AddFirebasePushNotificationService(builder.Configuration);\r\n");
             
-            #line 196 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 204 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.FirebasePushNotification))
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("builder.Services.AddLocalFileUploadService(builder.Configuration);\r\n");
+            
+            #line 211 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -397,7 +422,7 @@ public partial class Program { }
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 219 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+        #line 234 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     protected override Generator CreateGenerator()
 	{

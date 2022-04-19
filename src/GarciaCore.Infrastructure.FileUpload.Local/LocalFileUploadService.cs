@@ -69,5 +69,10 @@ namespace GarciaCore.Infrastructure.FileUpload.Local
 
             return new UploadedFile(null, fileName);
         }
+
+        public Task<UploadedFile> MultipartUploadAsync(Stream stream, string originalFileName, string contentType, string newFileName = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
