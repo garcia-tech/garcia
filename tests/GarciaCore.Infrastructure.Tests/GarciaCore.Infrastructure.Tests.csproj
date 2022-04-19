@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\GarciaCore.Infrastructure.Elasticsearch\GarciaCore.Infrastructure.ElasticSearch.csproj" />
+    <ProjectReference Include="..\..\src\GarciaCore.Infrastructure.ElasticSearch\GarciaCore.Infrastructure.ElasticSearch.csproj" />
     <ProjectReference Include="..\..\src\GarciaCore.Infrastructure.Redis\GarciaCore.Infrastructure.Redis.csproj" />
   </ItemGroup>
 
