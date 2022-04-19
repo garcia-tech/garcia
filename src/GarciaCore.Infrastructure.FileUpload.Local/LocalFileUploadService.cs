@@ -40,10 +40,10 @@ namespace GarciaCore.Infrastructure.FileUpload.Local
             return GetDetails(fileName).Url;
         }
 
-        public async Task<UploadedFile> MultipartUploadAsync(IFormFile file)
+        public async Task<UploadedFile> MultipartUploadAsync(IFormFile file, string newFileName = null)
         {
             var targetDirectory = _settings.FileUploadPath;
-            var fileName = $"{Helpers.CreateKey(8)}_{file.FileName}";
+            var fileName = !string.IsNullOrEmpty(newFileName) ? newFileName : $"{Helpers.CreateKey(8)}_{file.FileName}";
             var savePath = Path.Combine(targetDirectory, fileName).Replace("/", "\\");
 
             using (var fileStream = new FileStream(savePath, FileMode.Create))

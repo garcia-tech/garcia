@@ -21,15 +21,13 @@ namespace GarciaCore.Infrastructure.Api
         protected IImageResizeService _imageResizeService;
         public string BaseUrl { get { return $"{Request.Scheme}://{Request.Host}{Request.PathBase}"; } }
 
-        public ApiController(IOptions<GarciaCoreInfrastructureApiSettings> settings, IAsyncRepository repository, IMediator mediator)
+        public ApiController(IOptions<GarciaCoreInfrastructureApiSettings> settings, IMediator mediator, IAsyncRepository repository = null, IFileUploadService fileUploadService = null, IImageResizeService imageResizeService = null)
         {
             _settings = settings?.Value;
             _repository = repository;
             _mediator = mediator;
-        }
-
-        public ApiController(IOptions<GarciaCoreInfrastructureApiSettings> settings, IMediator mediator) : this(settings, null, mediator)
-        {
+            _fileUploadService = fileUploadService;
+            _imageResizeService = imageResizeService;
         }
 
         protected IActionResult CreateResponse<T>(T item)
@@ -67,8 +65,19 @@ namespace GarciaCore.Infrastructure.Api
 
                 foreach (var formFile in form.Files)
                 {
-                    var file = await _fileUploadService.MultipartUploadAsync(formFile);
-                    var resized = false;
+                    string newFileName = null;
+
+                    if (_imageResizeService == null || _imageResizeService.ImageResizeSettings.PreserveOriginalFile)
+                    {
+                        var file = await _fileUploadService.MultipartUploadAsync(formFile);
+                        newFileName = $"{file.FileName.Insert(file.FileName.LastIndexOf('.'), _imageResizeService.ImageResizeSettings.ResizedFileSuffix)}";
+
+                        if (_imageResizeService == null)
+                        {
+                            file.FileName = _fileUploadService.GetUrl(file.FileName);
+                            files.Add(file);
+                        }
+                    }
 
                     if (_imageResizeService != null)
                     {
@@ -76,17 +85,10 @@ namespace GarciaCore.Infrastructure.Api
 
                         if (stream != null)
                         {
-                            var file2 = await _fileUploadService.MultipartUploadAsync(stream, formFile.FileName, formFile.ContentType, $"{file.FileName.Insert(file.FileName.LastIndexOf('.'), $"_sm")}");
+                            var file2 = await _fileUploadService.MultipartUploadAsync(stream, formFile.FileName, formFile.ContentType, newFileName);
                             file2.FileName = _fileUploadService.GetUrl(file2.FileName);
                             files.Add(file2);
-                            resized = true;
                         }
-                    }
-
-                    if (!resized)
-                    {
-                        file.FileName = _fileUploadService.GetUrl(file.FileName);
-                        files.Add(file);
                     }
                 }
             }
