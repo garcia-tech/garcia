@@ -125,6 +125,19 @@ namespace GarciaCore.CodeGenerator
 
     }
 
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.LocalImageResize))
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("  \"ImageResizeSettings\": {\r\n    \"MaximumHeight\": 400,\r\n    \"DefaultHeight\": 200\r\n" +
+                    "  }\r\n");
+            
+            #line 87 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
+
+    }
+
             
             #line default
             #line hidden
@@ -132,7 +145,7 @@ namespace GarciaCore.CodeGenerator
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 83 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
+        #line 93 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\WebApiAppSettingsTemplate.tt"
 
     protected override Generator CreateGenerator()
 	{

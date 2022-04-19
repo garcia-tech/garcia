@@ -45,8 +45,21 @@ namespace GarciaCore.Infrastructure.FileUpload.AmazonS3
                 putObjectRequest.InputStream = fileToUpload;
                 putObjectRequest.ContentType = file.ContentType;
                 var response = await s3Client.PutObjectAsync(putObjectRequest);
-                return response.HttpStatusCode == System.Net.HttpStatusCode.OK ? new UploadedFile(name, fileName): null;
+                return response.HttpStatusCode == System.Net.HttpStatusCode.OK ? new UploadedFile(name, fileName) : null;
             }
+        }
+
+        public async Task<UploadedFile> MultipartUploadAsync(Stream stream, string originalFileName, string contentType, string newFileName = null)
+        {
+            var fileName = !string.IsNullOrEmpty(newFileName) ? newFileName : $"{Helpers.CreateKey(8)}_{originalFileName}";
+            var name = originalFileName;
+            var putObjectRequest = new PutObjectRequest();
+            putObjectRequest.BucketName = _settings.BucketName;
+            putObjectRequest.Key = fileName;
+            putObjectRequest.InputStream = stream;
+            putObjectRequest.ContentType = contentType;
+            var response = await s3Client.PutObjectAsync(putObjectRequest);
+            return response.HttpStatusCode == System.Net.HttpStatusCode.OK ? new UploadedFile(name, fileName) : null;
         }
 
         public string GetUrl(string fileName)

@@ -107,6 +107,14 @@ using GarciaCore.Application.Contracts.PushNotification;
 using GarciaCore.Infrastructure.PushNotification.Firebase;
 <#
     }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.LocalImageResize))
+    {
+#>
+using GarciaCore.Application.Contracts.ImageResize;
+using GarciaCore.Infrastructure.ImageResize.Local;
+<#
+    }
 #>
 
 var builder = WebApplication.CreateBuilder(args);
@@ -193,6 +201,13 @@ builder.Services.AddMandrillEmailService(builder.Configuration);
     {
 #>
 builder.Services.AddFirebasePushNotificationService(builder.Configuration);
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.FirebasePushNotification))
+    {
+#>
+builder.Services.AddLocalFileUploadService(builder.Configuration);
 <#
     }
 #>

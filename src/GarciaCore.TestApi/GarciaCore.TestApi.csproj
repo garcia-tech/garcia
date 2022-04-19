@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GarciaCore.Infrastructure.ImageResize.Local\GarciaCore.Infrastructure.ImageResize.Local.csproj" />
     <ProjectReference Include="..\GarciaCore\GarciaCore.csproj" />
   </ItemGroup>
 
