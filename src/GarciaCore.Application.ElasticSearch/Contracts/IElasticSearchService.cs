@@ -18,7 +18,7 @@ namespace GarciaCore.Application.ElasticSearch.Contracts
         Task<ISearchResponse<T>> SearchAsync(SearchRequest<T> request);
         Task<ISearchResponse<T>> SearchAsync(SearchDescriptor<T> query);
         Task<ISearchResponse<T>> SearchMultiMatchAsync(Func<FieldsDescriptor<T>, IPromise<Fields>> fields, string searchText, int? skip = null, int? take = null, TextQueryType type = TextQueryType.BestFields, Operator opr = Operator.Or);
-        Task<ISearchResponse<T>> GetByIdAsync(TKey id);
+        Task<T> GetByIdAsync(TKey id);
         Task DeleteAsync(T document);
 
     }

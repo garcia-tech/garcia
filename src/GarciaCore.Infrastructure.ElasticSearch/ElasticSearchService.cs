@@ -20,7 +20,7 @@ namespace GarciaCore.Infrastructure.ElasticSearch
 
         public async Task<long> SetDocumentAsync(T document)
         {
-            var index = typeof(T).Name;
+            var index = typeof(T).Name.ToLower();
             var exists = await _client.DocumentExistsAsync<T>(DocumentPath<T>.Id(document), x => x.Index(index));
 
             if (exists.Exists)
@@ -30,16 +30,14 @@ namespace GarciaCore.Infrastructure.ElasticSearch
                 throw new SetDocumentException($"Update Document failed at index {index} :" + updateResult.ServerError.Error.Reason);
             }
 
-            var insertResult = await _client.IndexAsync(document, x => x.Index(index));
+            var insertResult = await _client.IndexDocumentAsync(document);
             if (insertResult.ServerError == null) return insertResult.SequenceNumber;
             throw new SetDocumentException($"Insert Document failed at index {index} :" + insertResult.ServerError.Error.Reason);
         }
 
         public async Task<ISearchResponse<T>> SearchAsync(Expression<Func<T, object>> field , string searchText, int? skip = null, int? take = null)
         {
-            var index = typeof(T).Name;
             var query = new SearchDescriptor<T>()
-                .Index(index)
                 .Query(q => q
                     .Match(m => m
                     .Field(field)
@@ -64,16 +62,13 @@ namespace GarciaCore.Infrastructure.ElasticSearch
 
         public async Task<ISearchResponse<T>> SearchAsync(SearchDescriptor<T> query)
         {
-            var index = typeof(T).Name;
-            var result = await _client.SearchAsync<T>(query.Index(index));
+            var result = await _client.SearchAsync<T>(query);
             return result;
         }
 
         public async Task<ISearchResponse<T>> SearchMultiMatchAsync(Func<FieldsDescriptor<T>, IPromise<Fields>> fields, string searchText, int? skip = null, int? take = null, TextQueryType type = TextQueryType.BestFields, Operator opr = Operator.Or)
         {
-            var index = typeof(T).Name;
             var query = new SearchDescriptor<T>()
-                .Index(index)
                 .Query(q => q
                     .MultiMatch(m => m
                         .Fields(fields)
@@ -92,22 +87,19 @@ namespace GarciaCore.Infrastructure.ElasticSearch
             return result;
         }
 
-        public async Task<ISearchResponse<T>> GetByIdAsync(TKey id)
+        public async Task<T> GetByIdAsync(TKey id)
         {
-            var index = typeof(T).Name;
-            var result = await _client.SearchAsync<T>(s =>
-            s.Index(index)
+            var result = await _client.SearchAsync<T>(s => s
                 .Query(q =>
                     q.Term(t => t.Id, id))
             );
-
-            return result;
+            return result.Documents.FirstOrDefault();
         }
 
         public async Task DeleteAsync(T document)
         {
-            var index = typeof(T).Name;
-            var result = await _client.DeleteAsync<T>(document, x => x.Index(index));
+            var index = typeof(T).Name.ToLower();
+            var result = await _client.DeleteAsync<T>(document);
             if (result.ServerError != null) throw new DeleteDocumentException($"Delete Document failed at index {index} :" + result.ServerError.Error.Reason);
         }
     }

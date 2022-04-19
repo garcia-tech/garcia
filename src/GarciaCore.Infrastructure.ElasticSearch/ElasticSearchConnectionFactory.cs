@@ -13,7 +13,7 @@ namespace GarciaCore.Infrastructure.ElasticSearch
             _settings = options.Value;
         }
 
-        public virtual ConnectionSettings GetConnection<T>(string index) where T : class
+        protected virtual ConnectionSettings GetConnection<T>(string index) where T : class
         {
             var pool = new SingleNodeConnectionPool(new Uri(_settings.Uri));
             var connection = new ConnectionSettings(pool)
@@ -27,6 +27,6 @@ namespace GarciaCore.Infrastructure.ElasticSearch
         }
 
         public ElasticClient GetClient<T>() where T : class 
-            => new ElasticClient(GetConnection<T>(typeof(T).Name));
+            => new ElasticClient(GetConnection<T>(typeof(T).Name.ToLower()));
     }
 }
