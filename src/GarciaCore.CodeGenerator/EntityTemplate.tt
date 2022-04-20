@@ -24,7 +24,7 @@ namespace <#= Namespace #>
             {
 #>
         [JsonIgnore]
-        public string <#= property.Name.ToPascalCase() #>String { get { return string.Join(',', <#= property.Name.ToPascalCase() #>); } set { <#= property.Name.ToPascalCase() #> = value.Split(',').ToList(); } }
+        public string? <#= property.Name.ToPascalCase() #>String { get { return <#= property.Name.ToPascalCase() #> == null ? null : string.Join(',', <#= property.Name.ToPascalCase() #>); } set { <#= property.Name.ToPascalCase() #> = value == null ? new List<string>() : value.Split(',').ToList(); } }
         [NotMapped]
 <#
             }

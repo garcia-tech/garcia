@@ -158,13 +158,11 @@ builder.Services.AddMongoDbRepository();
 #>
 builder.Services.AddEfCoreInMemory<<#= GeneratorRepository.Solution.Name #>DbContext>("<#= GeneratorRepository.Solution.Name #>");
 builder.Services.AddEfCoreSqlServer<<#= GeneratorRepository.Solution.Name #>DbContext, EfCoreSettings>(
-    Options.Create<EfCoreSettings>(
-        new EfCoreSettings
-        {
-            ConnectionString = builder.Configuration["ConnectionStrings:SqlServer"],
-            MigrationsAssembly = "<#= GeneratorRepository.Solution.Name #>.Api"
-        }
-    )
+    new EfCoreSettings
+    {
+        ConnectionString = builder.Configuration["ConnectionStrings:SqlServer"],
+        MigrationsAssembly = "<#= GeneratorRepository.Solution.Name #>.Api"
+    }
 );
 <#
     }
@@ -204,10 +202,10 @@ builder.Services.AddFirebasePushNotificationService(builder.Configuration);
 <#
     }
 
-    if (GeneratorRepository.ContainsIntegration(IntegrationType.FirebasePushNotification))
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.LocalImageResize))
     {
 #>
-builder.Services.AddLocalFileUploadService(builder.Configuration);
+builder.Services.AddLocalImageResizeService(builder.Configuration);
 <#
     }
 #>

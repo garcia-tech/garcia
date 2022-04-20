@@ -6,18 +6,22 @@ namespace GarciaCore.CodeGenerator
 {
     public class Solution
     {
-        public Solution(string name, string folder, List<string> integrations, string defaultDatabaseServer)
+        public Solution(string name, string folder, List<string> integrations, string defaultDatabaseServer, bool overwriteItemCode, bool overwriteNonItemCode)
         {
             Name = name;
             Folder = folder;
             Integrations = integrations;
             DefaultDatabaseServer = defaultDatabaseServer;
+            OverwriteItemCode = overwriteItemCode;
+            OverwriteNonItemCode = overwriteNonItemCode;
         }
 
         public string Name { get; set; }
         public string Folder { get; set; }
         public List<string> Integrations { get; }
         public string DefaultDatabaseServer { get; }
+        public bool OverwriteItemCode { get; }
+        public bool OverwriteNonItemCode { get; }
         public List<Project> Projects { get; set; } = new List<Project>();
 
         //protected virtual async Task<List<GenerationResult>> Generate(Item item)

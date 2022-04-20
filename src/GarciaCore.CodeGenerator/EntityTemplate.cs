@@ -86,14 +86,21 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write("        [JsonIgnore]\r\n        public string ");
+            this.Write("        [JsonIgnore]\r\n        public string? ");
             
             #line 27 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToPascalCase()));
             
             #line default
             #line hidden
-            this.Write("String { get { return string.Join(\',\', ");
+            this.Write("String { get { return ");
+            
+            #line 27 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToPascalCase()));
+            
+            #line default
+            #line hidden
+            this.Write(" == null ? null : string.Join(\',\', ");
             
             #line 27 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name.ToPascalCase()));
@@ -107,7 +114,8 @@ using System.Threading.Tasks;");
             
             #line default
             #line hidden
-            this.Write(" = value.Split(\',\').ToList(); } }\r\n        [NotMapped]\r\n");
+            this.Write(" = value == null ? new List<string>() : value.Split(\',\').ToList(); } }\r\n        [" +
+                    "NotMapped]\r\n");
             
             #line 29 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\EntityTemplate.tt"
 

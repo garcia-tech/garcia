@@ -45,8 +45,13 @@
       "Name": "ContentMilestone",
       "Properties": [
         {
-          "Name": "FinishedOn",
+          "Name": "Date",
           "Type": "DateTimeOffset"
+        },
+        {
+          "Name": "FinishedOn",
+          "Type": "DateTimeOffset",
+          "IsNullable": true
         },
         {
           "Name": "Milestone",
@@ -59,14 +64,17 @@
       "Name": "Milestone",
       "Properties": [
         {
-          "Name": "Title"
+          "Name": "Title",
+          "IsNullable": true
         },
         {
-          "Name": "Description"
+          "Name": "Description",
+          "IsNullable": true
         },
         {
           "Name": "Logo",
-          "Type": "Photo"
+          "Type": "Photo",
+          "IsNullable": true
         }
       ],
       "AddApplication": true,
@@ -82,11 +90,13 @@
           "Name": "Name"
         },
         {
-          "Name": "Phone"
+          "Name": "Phone",
+          "IsNullable": true
         },
         {
           "Name": "Photo",
-          "Type": "Photo"
+          "Type": "Photo",
+          "IsNullable": true
         },
         {
           "Name": "Password"
@@ -103,10 +113,12 @@
       "Name": "DiseaseRecognition",
       "Properties": [
         {
-          "Name": "CropType"
+          "Name": "CropType",
+          "IsNullable": true
         },
         {
-          "Name": "CultivationType"
+          "Name": "CultivationType",
+          "IsNullable": true
         },
         {
           "Name": "Photos",
@@ -114,10 +126,12 @@
           "MappingType": "List"
         },
         {
-          "Name": "Description"
+          "Name": "Description",
+          "IsNullable": true
         },
         {
-          "Name": "Diagnosis"
+          "Name": "Diagnosis",
+          "IsNullable": true
         },
         {
           "Name": "User",

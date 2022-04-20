@@ -308,18 +308,18 @@ builder.Services.AddApplicationServices();
             
             #line default
             #line hidden
-            this.Write("DbContext, EfCoreSettings>(\r\n    Options.Create<EfCoreSettings>(\r\n        new EfC" +
-                    "oreSettings\r\n        {\r\n            ConnectionString = builder.Configuration[\"Co" +
-                    "nnectionStrings:SqlServer\"],\r\n            MigrationsAssembly = \"");
+            this.Write("DbContext, EfCoreSettings>(\r\n    new EfCoreSettings\r\n    {\r\n        ConnectionStr" +
+                    "ing = builder.Configuration[\"ConnectionStrings:SqlServer\"],\r\n        MigrationsA" +
+                    "ssembly = \"");
             
-            #line 165 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 164 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorRepository.Solution.Name));
             
             #line default
             #line hidden
-            this.Write(".Api\"\r\n        }\r\n    )\r\n);\r\n");
+            this.Write(".Api\"\r\n    }\r\n);\r\n");
             
-            #line 169 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 167 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -331,7 +331,7 @@ builder.Services.AddApplicationServices();
             #line hidden
             this.Write("builder.Services.AddAmazonS3FileUploadService(builder.Configuration);\r\n");
             
-            #line 176 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 174 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -343,7 +343,7 @@ builder.Services.AddApplicationServices();
             #line hidden
             this.Write("builder.Services.AddLocalFileUploadService(builder.Configuration);\r\n");
             
-            #line 183 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 181 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -355,7 +355,7 @@ builder.Services.AddApplicationServices();
             #line hidden
             this.Write("builder.Services.AddMailChimpMarketingService(builder.Configuration);\r\n");
             
-            #line 190 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 188 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -367,7 +367,7 @@ builder.Services.AddApplicationServices();
             #line hidden
             this.Write("builder.Services.AddMandrillEmailService(builder.Configuration);\r\n");
             
-            #line 197 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 195 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -379,19 +379,19 @@ builder.Services.AddApplicationServices();
             #line hidden
             this.Write("builder.Services.AddFirebasePushNotificationService(builder.Configuration);\r\n");
             
-            #line 204 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 202 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
-    if (GeneratorRepository.ContainsIntegration(IntegrationType.FirebasePushNotification))
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.LocalImageResize))
     {
 
             
             #line default
             #line hidden
-            this.Write("builder.Services.AddLocalFileUploadService(builder.Configuration);\r\n");
+            this.Write("builder.Services.AddLocalImageResizeService(builder.Configuration);\r\n");
             
-            #line 211 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+            #line 209 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     }
 
@@ -422,7 +422,7 @@ public partial class Program { }
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 234 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+        #line 232 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     protected override Generator CreateGenerator()
 	{
