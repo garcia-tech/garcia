@@ -85,7 +85,7 @@ namespace GarciaCore.Infrastructure.Api
 
                         if (stream != null)
                         {
-                            var file2 = await _fileUploadService.MultipartUploadAsync(stream, formFile.FileName, formFile.ContentType, newFileName);
+                            var file2 = await _fileUploadService.MultipartUploadAsync(stream, formFile.Name, formFile.ContentType, newFileName);
                             file2.FileName = _fileUploadService.GetUrl(file2.FileName);
                             files.Add(file2);
                         }
