@@ -17,12 +17,23 @@ using Newtonsoft.Json;
 <#= GetUsings() #>
 <#
     var services = $"I{Item.Name}Service {Item.Name.ToCamelCase()}Service";
+    var services2 = "";
 
     if (GeneratorRepository.ContainsIntegration(IntegrationType.AmazonS3FileUpload) || GeneratorRepository.ContainsIntegration(IntegrationType.LocalFileUpload))
     {
         services += ", IFileUploadService fileUploadService";
+        services2 += ", fileUploadService: fileUploadService";
 #>
 using GarciaCore.Application.Contracts.FileUpload;
+<#
+    }
+
+    if (GeneratorRepository.ContainsIntegration(IntegrationType.LocalImageResize))
+    {
+        services += ", IImageResizeService imageResizeService";
+        services2 += ", imageResizeService: imageResizeService";
+#>
+using GarciaCore.Application.Contracts.ImageResize;
 <#
     }
 #>
@@ -41,18 +52,10 @@ namespace <#= Namespace #>
     }
 #>
 
-        public <#= Item.Name #>Controller(IOptions<GarciaCoreInfrastructureApiSettings> settings, I<#= Item.Name #>Query <#= Item.Name.ToCamelCase() #>Query, <#= services #>, IMediator mediator) : base(settings, null, mediator)
+        public <#= Item.Name #>Controller(IOptions<GarciaCoreInfrastructureApiSettings> settings, I<#= Item.Name #>Query <#= Item.Name.ToCamelCase() #>Query, <#= services #>, IMediator mediator) : base(settings, mediator<#= services2 #>)
         {
             _<#= Item.Name.ToCamelCase() #>Query = <#= Item.Name.ToCamelCase() #>Query;
             _<#= Item.Name.ToCamelCase() #>Service = <#= Item.Name.ToCamelCase() #>Service;
-<#
-    if (GeneratorRepository.ContainsIntegration(IntegrationType.AmazonS3FileUpload) || GeneratorRepository.ContainsIntegration(IntegrationType.LocalFileUpload))
-    {
-#>
-            _fileUploadService = fileUploadService;
-<#
-    }
-#>
         }
 
         [HttpPost("api/<#= Item.Name #>", Name = "Create<#= Item.Name #>")]

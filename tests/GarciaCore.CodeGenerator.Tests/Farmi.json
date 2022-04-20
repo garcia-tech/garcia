@@ -8,8 +8,11 @@
     "AmazonS3FileUpload",
     "FirebasePushNotification",
     "MailChimpMarketing",
-    "MandrillEmail"
+    "MandrillEmail",
+    "LocalImageResize"
   ],
+  "OverwriteItemCode": true,
+  "OverwriteNonItemCode": false,
   "DefaultDatabaseServer": "SQLServer",
   "Projects": [
     {

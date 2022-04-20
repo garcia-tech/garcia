@@ -9,5 +9,7 @@ namespace GarciaCore.CodeGenerator
         public List<ProjectModel> Projects { get; set; }
         public List<string> Integrations { get; set; }
         public string DefaultDatabaseServer { get; set; }
+        public bool OverwriteItemCode { get; set; }
+        public bool OverwriteNonItemCode { get; set; }
     }
 }

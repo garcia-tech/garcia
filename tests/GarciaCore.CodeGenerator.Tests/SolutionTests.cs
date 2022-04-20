@@ -150,8 +150,12 @@ namespace GarciaCore.CodeGenerator.Tests
                 item.Generator.ShouldNotBeNull();
                 item.Code.ShouldNotBeNullOrEmpty();
                 Directory.CreateDirectory(item.Folder);
-                if (item.Generator.IsItemLevel || !File.Exists($"{item.Folder}\\{item.File}"))
+
+                if (!File.Exists($"{item.Folder}\\{item.File}") || (solution.Solution.OverwriteItemCode && item.Generator.IsItemLevel) || (solution.Solution.OverwriteNonItemCode && !item.Generator.IsItemLevel))
+                {
                     await File.WriteAllTextAsync($"{item.Folder}\\{item.File}", item.Code);
+                }
+
                 _output.WriteLine($"{item.Folder}\\{item.File}");
             }
         }
