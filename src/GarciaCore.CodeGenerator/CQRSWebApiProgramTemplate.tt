@@ -220,11 +220,16 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
+<#
+    if (GeneratorRepository.ContainsGenerator(GeneratorType.WebApiAuthentication))
+    {
+#>
+app.UseAuthentication();
+<#
+    }
+#>
 app.MapControllers();
-
 app.Run();
 public partial class Program { }
 
