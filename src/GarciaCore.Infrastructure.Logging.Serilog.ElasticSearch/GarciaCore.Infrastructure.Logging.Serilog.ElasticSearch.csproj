@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="8.5.0-alpha0003" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GarciaCore.Infrastructure.Logging.Serilog\GarciaCore.Infrastructure.Logging.Serilog.csproj" />
+  </ItemGroup>
+
+</Project>
