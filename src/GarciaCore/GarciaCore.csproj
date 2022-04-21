@@ -15,6 +15,9 @@
     <ProjectReference Include="..\GarciaCore.Infrastructure.FileUpload.AmazonS3\GarciaCore.Infrastructure.FileUpload.AmazonS3.csproj" />
     <ProjectReference Include="..\GarciaCore.Infrastructure.FileUpload.Local\GarciaCore.Infrastructure.FileUpload.Local.csproj" />
     <ProjectReference Include="..\GarciaCore.Infrastructure.ImageResize.Local\GarciaCore.Infrastructure.ImageResize.Local.csproj" />
+    <ProjectReference Include="..\GarciaCore.Infrastructure.Logging.Serilog.ElasticSearch\GarciaCore.Infrastructure.Logging.Serilog.ElasticSearch.csproj" />
+    <ProjectReference Include="..\GarciaCore.Infrastructure.Logging.Serilog.Graylog\GarciaCore.Infrastructure.Logging.Serilog.Graylog.csproj" />
+    <ProjectReference Include="..\GarciaCore.Infrastructure.Logging.Serilog\GarciaCore.Infrastructure.Logging.Serilog.csproj" />
     <ProjectReference Include="..\GarciaCore.Infrastructure.Marketing.MailChimp\GarciaCore.Infrastructure.Marketing.MailChimp.csproj" />
     <ProjectReference Include="..\GarciaCore.Application.MongoDb\GarciaCore.Application.MongoDb.csproj" />
     <ProjectReference Include="..\GarciaCore.Application.RabbitMQ\GarciaCore.Application.RabbitMQ.csproj" />

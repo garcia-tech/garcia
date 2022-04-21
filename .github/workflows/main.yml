@@ -221,6 +221,24 @@ jobs:
           PROJECT_FILE_PATH: src/GarciaCore.Infrastructure.ImageResize.Local/GarciaCore.Infrastructure.ImageResize.Local.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
+    - name: Publish GarciaCore.Infrastructure.Logging.Serilog
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: src/GarciaCore.Infrastructure.Logging.Serilog/GarciaCore.Infrastructure.Logging.Serilog.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
+    - name: Publish GarciaCore.Infrastructure.Logging.Serilog.ElasticSearch
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: src/GarciaCore.Infrastructure.Logging.Serilog.ElasticSearch/GarciaCore.Infrastructure.Logging.Serilog.ElasticSearch.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
+    - name: Publish GarciaCore.Infrastructure.Logging.Serilog.Graylog
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: src/GarciaCore.Infrastructure.Logging.Serilog.Graylog/GarciaCore.Infrastructure.Logging.Serilog.Graylog.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
     - name: Publish GarciaCore
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:

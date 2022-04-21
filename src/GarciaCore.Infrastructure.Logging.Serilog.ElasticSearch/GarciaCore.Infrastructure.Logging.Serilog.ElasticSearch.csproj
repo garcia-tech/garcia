@@ -1,16 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="8.5.0-alpha0003" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Serilog.Sinks.Elasticsearch" Version="8.5.0-alpha0003" />
+		<PackageReference Include="Nerdbank.GitVersioning" Version="3.4.255">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\GarciaCore.Infrastructure.Logging.Serilog\GarciaCore.Infrastructure.Logging.Serilog.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\GarciaCore.Infrastructure.Logging.Serilog\GarciaCore.Infrastructure.Logging.Serilog.csproj" />
+	</ItemGroup>
 
 </Project>
