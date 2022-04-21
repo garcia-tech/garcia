@@ -398,31 +398,32 @@ builder.Services.AddApplicationServices();
             
             #line default
             #line hidden
-            this.Write(@"
-var app = builder.Build();
+            this.Write("\r\nvar app = builder.Build();\r\n\r\n// Configure the HTTP request pipeline.\r\nif (app." +
+                    "Environment.IsDevelopment())\r\n{\r\n    app.UseSwagger();\r\n    app.UseSwaggerUI();\r" +
+                    "\n}\r\n\r\napp.UseHttpsRedirection();\r\napp.UseAuthorization();\r\n");
+            
+            #line 224 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    if (GeneratorRepository.ContainsGenerator(GeneratorType.WebApiAuthentication))
+    {
 
-app.UseHttpsRedirection();
+            
+            #line default
+            #line hidden
+            this.Write("app.UseAuthentication();\r\n");
+            
+            #line 229 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
-app.UseAuthorization();
+    }
 
-app.MapControllers();
-
-app.Run();
-public partial class Program { }
-
-
-");
+            
+            #line default
+            #line hidden
+            this.Write("app.MapControllers();\r\napp.Run();\r\npublic partial class Program { }\r\n\r\n\r\n");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 232 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
+        #line 237 "C:\Users\vehbi\source\repos\projects\garciacore\src\GarciaCore.CodeGenerator\CQRSWebApiProgramTemplate.tt"
 
     protected override Generator CreateGenerator()
 	{

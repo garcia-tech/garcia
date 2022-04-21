@@ -36,6 +36,21 @@ using GarciaCore.Application.Contracts.FileUpload;
 using GarciaCore.Application.Contracts.ImageResize;
 <#
     }
+
+    var userIdText = "";
+    var hasUserId = false;
+
+    if (GeneratorRepository.ContainsGenerator(GeneratorType.WebApiAuthentication))
+    {
+        var userId = Item.Properties.FirstOrDefault(x => x.Name == "UserId");
+        var user = Item.Properties.FirstOrDefault(x => x.Name == "User");
+
+        if (userId != null || user != null)
+        {
+            userIdText = "command.UserId ??= long.Parse(User.Claims.FirstOrDefault(x => x.Type == \"id\")?.Value);";
+            hasUserId = true;
+        }
+    }
 #>
 
 namespace <#= Namespace #>
@@ -61,6 +76,14 @@ namespace <#= Namespace #>
         [HttpPost("api/<#= Item.Name #>", Name = "Create<#= Item.Name #>")]
         public async Task<ActionResult<BaseResponse<Create<#= Item.Name #>Command>>> Create<#= Item.Name #>([FromBody] Create<#= Item.Name #>Command command)
         {
+<#
+    if (hasUserId)
+    {
+#>
+            <#= userIdText #>
+<#
+    }
+#>
             var response = await _mediator.Send(command);
             return StatusCode(response.StatusCode, response.Result);
         }
