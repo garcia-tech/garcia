@@ -19,11 +19,10 @@ using Microsoft.AspNetCore.Mvc;
 using GarciaCore.Application.Contracts.Identity;
 using GarciaCore.Infrastructure.Identity;
 using Microsoft.Extensions.Options;
+using System.Security.Claims;
 
 namespace GarciaCore.TestApi.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
     public class AuthenticationController : ControllerBase
     {
         private readonly ILogger<AuthenticationController> _logger;
@@ -39,8 +38,8 @@ namespace GarciaCore.TestApi.Controllers
             _jwtOptions = jwtOptions.Value;
         }
 
-        [HttpPost("api/token")]
-        public virtual async Task<IActionResult> PostToken([FromBody] CredentialsModel credentials)
+        [HttpPost("api/Authentication/Token")]
+        public async Task<IActionResult> PostToken([FromBody] CredentialsModel credentials)
         {
             if (!ModelState.IsValid)
             {
@@ -57,6 +56,24 @@ namespace GarciaCore.TestApi.Controllers
             var jwt = await _jwtService.GenerateJwt(identity.UserName, identity.Id, identity.Roles);
             return new OkObjectResult(jwt);
         }
+
+        [HttpGet("api/Authentication/Claims")]
+        public async Task<IEnumerable<ClaimsModel>> GetClaims()
+        {
+            return User.Claims.Select(x => new ClaimsModel(x.Type, x.Value));
+        }
+    }
+
+    public class ClaimsModel
+    {
+        public ClaimsModel(string name, string value)
+        {
+            Name = name;
+            Value = value;
+        }
+
+        public string Name { get; set; }
+        public string Value{ get; set; }
     }
 
     public class LoggedInUserService : ILoggedInUserService
