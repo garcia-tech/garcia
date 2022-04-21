@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using GarciaCore.Application;
 using GarciaCore.Infrastructure.Api.Providers;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.AspNetCore.Builder;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace GarciaCore.Infrastructure.Api
 {
@@ -21,15 +23,17 @@ namespace GarciaCore.Infrastructure.Api
         /// <param name="services"></param>
         /// <param name="headerNames"></param>
         /// <returns><paramref name="services"/></returns>
-        public static IServiceCollection AddApiVersioning<TErrorResponse>(this IServiceCollection services, params string[] headerNames)
+        public static IServiceCollection AddGarciaApiVersioning<TErrorResponse>(this IServiceCollection services, params string[] headerNames)
             where TErrorResponse : ApiError, new()
         {
+            string[] defaultHeaderNames = { "api-version" };
+
             return services.AddApiVersioning(opt =>
             {
                 opt.DefaultApiVersion = new ApiVersion(1, 0);
                 opt.AssumeDefaultVersionWhenUnspecified = true;
                 opt.ReportApiVersions = true;
-                opt.ApiVersionReader = new HeaderApiVersionReader(headerNames);
+                opt.ApiVersionReader = new HeaderApiVersionReader(headerNames != null && headerNames.Length > 0 ? headerNames : defaultHeaderNames);
                 opt.ErrorResponses = new VersioningErrorProvider<TErrorResponse>();
             });
         }
@@ -52,12 +56,14 @@ namespace GarciaCore.Infrastructure.Api
         public static IServiceCollection AddApiVersioning<TErrorResponse>(this IServiceCollection services, params IApiVersionReader[] versionReader)
             where TErrorResponse : ApiError, new()
         {
+            IApiVersionReader[] defaultVersionReaders = { new HeaderApiVersionReader("api-version") };
+
             return services.AddApiVersioning(opt =>
             {
                 opt.DefaultApiVersion = new ApiVersion(1, 0);
                 opt.AssumeDefaultVersionWhenUnspecified = true;
                 opt.ReportApiVersions = true;
-                opt.ApiVersionReader = ApiVersionReader.Combine(versionReader);
+                opt.ApiVersionReader = ApiVersionReader.Combine(versionReader != null && versionReader.Length > 0 ? versionReader : defaultVersionReaders);
                 opt.ErrorResponses = new VersioningErrorProvider<TErrorResponse>();
             });
         }
@@ -104,7 +110,24 @@ namespace GarciaCore.Infrastructure.Api
             services.ConfigureOptions<TProvider>();
             return services;
         }
+        /// <summary>
+        /// Creates Swagger UI with version groups
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        public static IApplicationBuilder UseSwaggerUiWithGroups(this IApplicationBuilder app, string title)
+        {
+            var provider = app.ApplicationServices.GetRequiredService<IApiVersionDescriptionProvider>();
 
-
+            return app.UseSwaggerUI(c =>
+            {
+                foreach (var description in provider.ApiVersionDescriptions)
+                {
+                    c.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", title +
+                        description.GroupName.ToUpperInvariant());
+                }
+            });
+        }
     }
 }
