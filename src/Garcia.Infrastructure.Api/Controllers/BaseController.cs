@@ -17,9 +17,9 @@ namespace Garcia.Infrastructure.Api.Controllers
     {
         private readonly TService _service;
 
-        public BaseController(TService service)
+        public BaseController(TService services)
         {
-            _service = service;
+            _service = services;
         }
 
         [HttpGet]

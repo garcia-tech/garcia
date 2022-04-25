@@ -11,9 +11,9 @@ namespace Garcia.Persistence.EntityFramework
 {
     public partial class EntityFrameworkRepository<T> : BaseRepository<T> where T : Entity<long>
     {
-        protected readonly DbContext _dbContext;
+        protected readonly BaseContext _dbContext;
 
-        public EntityFrameworkRepository(DbContext dbContext)
+        public EntityFrameworkRepository(BaseContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -50,11 +50,6 @@ namespace Garcia.Persistence.EntityFramework
         {
             return await _dbContext.Set<T>().Skip((page - 1) * size).Take(size).AsNoTracking().ToListAsync();
         }
-
-        //public override Task<IReadOnlyList<T>> GetByKeyAsync(string key, object value)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         public override async Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> filter)
         {

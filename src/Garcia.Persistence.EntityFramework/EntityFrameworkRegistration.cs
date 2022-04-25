@@ -1,25 +1,30 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Garcia.Application;
 using Garcia.Application.Contracts.Persistence;
 
 namespace Garcia.Persistence.EntityFramework
 {
     public static class EntityFrameworkRegistration
     {
-        public static IServiceCollection AddEfCore<TContext>(this IServiceCollection service, Action<DbContextOptionsBuilder> options) where TContext : BaseContext
+        public static IServiceCollection AddEfCore<TContext>(this IServiceCollection services, Action<DbContextOptionsBuilder> options) where TContext : BaseContext
         {
-            return service.AddDbContext<TContext>(options);
+            services.AddLoggedInUserService();
+            services.AddDbContext<TContext>(options);
+            return services;
         }
 
-        public static IServiceCollection AddEfCoreInMemory<TContext>(this IServiceCollection service, string databaseName) where TContext : BaseContext
+        public static IServiceCollection AddEfCoreInMemory<TContext>(this IServiceCollection services, string databaseName) where TContext : BaseContext
         {
-            return service.AddDbContext<TContext>(options => options.UseInMemoryDatabase(databaseName));
+            services.AddLoggedInUserService();
+            services.AddDbContext<TContext>(options => options.UseInMemoryDatabase(databaseName));
+            return services;
         }
 
-        public static IServiceCollection AddEfCoreRepository(this IServiceCollection service)
+        public static IServiceCollection AddEfCoreRepository(this IServiceCollection services)
         {
-            return service.AddScoped(typeof(IAsyncRepository<>), typeof(EntityFrameworkRepository<>));
+            return services.AddScoped(typeof(IAsyncRepository<>), typeof(EntityFrameworkRepository<>));
         }
     }
 }

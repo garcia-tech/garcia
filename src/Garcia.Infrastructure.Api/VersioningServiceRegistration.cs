@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Builder;
-using Swashbuckle.AspNetCore.SwaggerUI;
 using Garcia.Application;
 using Garcia.Infrastructure.Api.Providers;
 
@@ -38,10 +37,6 @@ namespace Garcia.Infrastructure.Api
             });
         }
 
-        public static IServiceCollection AddApiVersioning(this IServiceCollection services,
-            Action<ApiVersioningOptions> options) =>
-            services.AddApiVersioning(options);
-
         /// <summary>
         /// Configures <see cref="Microsoft.AspNetCore.Mvc.Versioning"/>. Uses <see cref="VersioningErrorProvider{TErrorResponse}"/> 
         /// it takes <typeparamref name="TErrorResponse"/> as type parameter
@@ -53,7 +48,7 @@ namespace Garcia.Infrastructure.Api
         /// <param name="services"></param>
         /// <param name="versionReader"></param>
         /// <returns><paramref name="services"/></returns>
-        public static IServiceCollection AddApiVersioning<TErrorResponse>(this IServiceCollection services, params IApiVersionReader[] versionReader)
+        public static IServiceCollection AddGarciaApiVersioning<TErrorResponse>(this IServiceCollection services, params IApiVersionReader[] versionReader)
             where TErrorResponse : ApiError, new()
         {
             IApiVersionReader[] defaultVersionReaders = { new HeaderApiVersionReader("api-version") };
@@ -124,7 +119,7 @@ namespace Garcia.Infrastructure.Api
             {
                 foreach (var description in provider.ApiVersionDescriptions)
                 {
-                    c.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", title +
+                    c.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", title + " " +
                         description.GroupName.ToUpperInvariant());
                 }
             });
