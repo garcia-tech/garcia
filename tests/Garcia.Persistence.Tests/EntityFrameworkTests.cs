@@ -38,7 +38,7 @@ namespace Garcia.Persistence.Tests
             }
         }
 
-        public BaseContext CreateContext()
+        public DbContext CreateContext()
             => new EntityFrameworkTestsContext(
                 new DbContextOptionsBuilder<EntityFrameworkTestsContext>()
                     .UseSqlServer(ConnectionString)
