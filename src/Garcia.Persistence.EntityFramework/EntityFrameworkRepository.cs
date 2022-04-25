@@ -11,9 +11,9 @@ namespace Garcia.Persistence.EntityFramework
 {
     public partial class EntityFrameworkRepository<T> : BaseRepository<T> where T : Entity<long>
     {
-        protected readonly BaseContext _dbContext;
+        protected readonly DbContext _dbContext;
 
-        public EntityFrameworkRepository(BaseContext dbContext)
+        public EntityFrameworkRepository(DbContext dbContext)
         {
             _dbContext = dbContext;
         }
