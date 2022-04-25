@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.255">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Garcia.Application.ElasticSearch\Garcia.Application.ElasticSearch.csproj" />
+    <ProjectReference Include="..\Garcia.Exceptions.ElasticSearch\Garcia.Exceptions.ElasticSearch.csproj" />
+    <ProjectReference Include="..\Garcia.Infrastructure.ElasticSearch\Garcia.Infrastructure.ElasticSearch.csproj" />
+    <ProjectReference Include="..\Garcia.Infrastructure.Email.Mandrill\Garcia.Infrastructure.Email.Mandrill.csproj" />
+    <ProjectReference Include="..\Garcia.Infrastructure.FileUpload.AmazonS3\Garcia.Infrastructure.FileUpload.AmazonS3.csproj" />
+    <ProjectReference Include="..\Garcia.Infrastructure.FileUpload.Local\Garcia.Infrastructure.FileUpload.Local.csproj" />
+    <ProjectReference Include="..\Garcia.Infrastructure.ImageResize.Local\Garcia.Infrastructure.ImageResize.Local.csproj" />
+    <ProjectReference Include="..\Garcia.Infrastructure.Logging.Serilog.ElasticSearch\Garcia.Infrastructure.Logging.Serilog.ElasticSearch.csproj" />
+    <ProjectReference Include="..\Garcia.Infrastructure.Logging.Serilog.Graylog\Garcia.Infrastructure.Logging.Serilog.Graylog.csproj" />
+    <ProjectReference Include="..\Garcia.Infrastructure.Logging.Serilog\Garcia.Infrastructure.Logging.Serilog.csproj" />
+    <ProjectReference Include="..\Garcia.Infrastructure.Marketing.MailChimp\Garcia.Infrastructure.Marketing.MailChimp.csproj" />
+    <ProjectReference Include="..\Garcia.Application.MongoDb\Garcia.Application.MongoDb.csproj" />
+    <ProjectReference Include="..\Garcia.Application.RabbitMQ\Garcia.Application.RabbitMQ.csproj" />
+    <ProjectReference Include="..\Garcia.Application.Redis\Garcia.Application.Redis.csproj" />
+    <ProjectReference Include="..\Garcia.Application\Garcia.Application.csproj" />
+    <ProjectReference Include="..\Garcia.Domain.Identity\Garcia.Domain.Identity.csproj" />
+    <ProjectReference Include="..\Garcia.Domain.MongoDb\Garcia.Domain.MongoDb.csproj" />
+    <ProjectReference Include="..\Garcia.Domain\Garcia.Domain.csproj" />
+    <ProjectReference Include="..\Garcia.Exceptions.Redis\Garcia.Exceptions.Redis.csproj" />
+    <ProjectReference Include="..\Garcia.Infrastructure.Api\Garcia.Infrastructure.Api.csproj" />
+    <ProjectReference Include="..\Garcia.Infrastructure.Identity\Garcia.Infrastructure.Identity.csproj" />
+    <ProjectReference Include="..\Garcia.Infrastructure.MongoDb\Garcia.Infrastructure.MongoDb.csproj" />
+    <ProjectReference Include="..\Garcia.Infrastructure.PushNotification.Firebase\Garcia.Infrastructure.PushNotification.Firebase.csproj" />
+    <ProjectReference Include="..\Garcia.Infrastructure.RabbitMQ\Garcia.Infrastructure.RabbitMQ.csproj" />
+    <ProjectReference Include="..\Garcia.Infrastructure.Redis\Garcia.Infrastructure.Redis.csproj" />
+    <ProjectReference Include="..\Garcia.Infrastructure\Garcia.Infrastructure.csproj" />
+    <ProjectReference Include="..\Garcia.Persistence.EntityFramework.MySql\Garcia.Persistence.EntityFramework.MySql.csproj" />
+    <ProjectReference Include="..\Garcia.Persistence.EntityFramework.PostgreSQL\Garcia.Persistence.EntityFramework.PostgreSql.csproj" />
+    <ProjectReference Include="..\Garcia.Persistence.EntityFramework.SqlServer\Garcia.Persistence.EntityFramework.SqlServer.csproj" />
+    <ProjectReference Include="..\Garcia.Persistence.EntityFramework\Garcia.Persistence.EntityFramework.csproj" />
+    <ProjectReference Include="..\Garcia.Persistence.MongoDb\Garcia.Persistence.MongoDb.csproj" />
+    <ProjectReference Include="..\Garcia.Persistence.Redis\Garcia.Persistence.Redis.csproj" />
+    <ProjectReference Include="..\Garcia.Persistence\Garcia.Persistence.csproj" />
+    <ProjectReference Include="..\Garcia.Test.Utils\Garcia.Test.Utils.csproj" />
+  </ItemGroup>
+
+</Project>
