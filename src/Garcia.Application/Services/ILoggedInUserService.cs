@@ -1,4 +1,4 @@
-﻿namespace Garcia.Application
+﻿namespace Garcia.Application.Services
 {
     public interface ILoggedInUserService
     {

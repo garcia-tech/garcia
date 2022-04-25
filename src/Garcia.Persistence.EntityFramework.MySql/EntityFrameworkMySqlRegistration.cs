@@ -1,4 +1,4 @@
-﻿using Garcia.Persistence.EntityFramework;
+﻿using Garcia.Application;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,8 +10,10 @@ namespace Garcia.Persistence.EntityFramework.MySql
             where TOptions : EfCoreSettings
             where TContext : BaseContext
         {
-            return services.AddDbContext<TContext>(options => options.UseMySQL(settings.ConnectionString,
+            services.AddLoggedInUserService();
+            services.AddDbContext<TContext>(options => options.UseMySQL(settings.ConnectionString,
                 x => x.MigrationsAssembly(settings.MigrationsAssembly)));
+            return services;
         }
     }
 }
