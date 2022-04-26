@@ -227,6 +227,12 @@ jobs:
           PROJECT_FILE_PATH: src/Garcia.Infrastructure.Logging.Serilog.Graylog/Garcia.Infrastructure.Logging.Serilog.Graylog.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
+    - name: Publish Garcia.Infrastructure.Ocelot
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: src/Garcia.Infrastructure.Ocelot/Garcia.Infrastructure.Ocelot.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
     - name: Publish Garcia
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
