@@ -15,7 +15,7 @@ namespace Garcia.Infrastructure.Ocelot
             builder.Configuration
                    .AddJsonFile("apsettings.json", optional: true, reloadOnChange: true)
                    .AddJsonFile($"appsettings.{builder.Environment}.json", optional: true, reloadOnChange: true)
-                   .AddJsonFile(configurationFileName)
+                   .AddJsonFile(configurationFileName + ".json")
                    .AddJsonFile($"{configurationFileName}.{builder.Environment}.json", optional: true, reloadOnChange: true)
                    .AddEnvironmentVariables();
 
