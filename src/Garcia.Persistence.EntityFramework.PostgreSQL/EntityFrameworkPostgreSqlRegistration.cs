@@ -13,6 +13,7 @@ namespace Garcia.Persistence.EntityFramework.PostgreSql
             services.AddLoggedInUserService();
             services.AddDbContext<TContext>(options => options.UseNpgsql(settings.ConnectionString,
                 x => x.MigrationsAssembly(settings.MigrationsAssembly)));
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             return services;
         }
     }
