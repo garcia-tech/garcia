@@ -30,6 +30,7 @@
     <ProjectReference Include="..\Garcia.Infrastructure.Api\Garcia.Infrastructure.Api.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.Identity\Garcia.Infrastructure.Identity.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.MongoDb\Garcia.Infrastructure.MongoDb.csproj" />
+    <ProjectReference Include="..\Garcia.Infrastructure.Ocelot\Garcia.Infrastructure.Ocelot.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.PushNotification.Firebase\Garcia.Infrastructure.PushNotification.Firebase.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.RabbitMQ\Garcia.Infrastructure.RabbitMQ.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.Redis\Garcia.Infrastructure.Redis.csproj" />

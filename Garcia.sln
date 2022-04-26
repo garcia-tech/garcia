@@ -89,6 +89,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Infrastructure.Tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Persistence.Tests", "tests\Garcia.Persistence.Tests\Garcia.Persistence.Tests.csproj", "{82D08DA1-CEA7-49BD-85B6-293A8A381986}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garcia.Infrastructure.Ocelot", "src\Garcia.Infrastructure.Ocelot\Garcia.Infrastructure.Ocelot.csproj", "{1AAAB774-768B-4954-9AE7-D8E284C8B471}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -255,6 +257,10 @@ Global
 		{82D08DA1-CEA7-49BD-85B6-293A8A381986}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82D08DA1-CEA7-49BD-85B6-293A8A381986}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82D08DA1-CEA7-49BD-85B6-293A8A381986}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AAAB774-768B-4954-9AE7-D8E284C8B471}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AAAB774-768B-4954-9AE7-D8E284C8B471}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AAAB774-768B-4954-9AE7-D8E284C8B471}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AAAB774-768B-4954-9AE7-D8E284C8B471}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -301,6 +307,7 @@ Global
 		{CB3F491A-2AA7-46E7-A1DD-5CDA4269910C} = {0E922C1D-C0D6-4FCC-B5DE-1BA1AF5F0DA6}
 		{E3A28A42-39A4-4801-B008-F75888F081F4} = {D9DB56ED-BA04-4098-ADFC-63415E4E6C4E}
 		{82D08DA1-CEA7-49BD-85B6-293A8A381986} = {D9DB56ED-BA04-4098-ADFC-63415E4E6C4E}
+		{1AAAB774-768B-4954-9AE7-D8E284C8B471} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3255BD7C-849F-4F0F-B86D-5A266B1F50B6}
