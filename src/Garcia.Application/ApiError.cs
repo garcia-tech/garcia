@@ -37,7 +37,7 @@ namespace Garcia.Application
             set => _errorMessageList = value;
         }
 
-        public void AddErrors(string errorMessage)
+        public void AddError(string errorMessage)
         {
             ErrorMessageList ??= new List<string>();
             ErrorMessageList.Add(errorMessage);

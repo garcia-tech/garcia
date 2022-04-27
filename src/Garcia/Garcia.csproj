@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Garcia.Application.ElasticSearch\Garcia.Application.ElasticSearch.csproj" />
+    <ProjectReference Include="..\Garcia.Application.Identity\Garcia.Application.Identity.csproj" />
     <ProjectReference Include="..\Garcia.Exceptions.ElasticSearch\Garcia.Exceptions.ElasticSearch.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.ElasticSearch\Garcia.Infrastructure.ElasticSearch.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.Email.Mandrill\Garcia.Infrastructure.Email.Mandrill.csproj" />

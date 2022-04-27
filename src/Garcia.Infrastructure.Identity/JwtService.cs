@@ -91,25 +91,25 @@ namespace Garcia.Infrastructure.Identity
             }
         }
 
-        public async Task<string> GenerateJwt(ClaimsIdentity identity, string userName)
+        public async Task<TokenInfo> GenerateJwt(ClaimsIdentity identity, string userName)
         {
-            var response = new
+            var response = new TokenInfo
             {
-                id = identity.Claims.Single(c => c.Type == "id").Value,
-                auth_token = await GenerateEncodedToken(userName, identity),
-                expires_in = (int)_jwtOptions.ValidFor.TotalSeconds
+                Id = identity.Claims.Single(c => c.Type == "id").Value,
+                AuthToken = await GenerateEncodedToken(userName, identity),
+                ExpiresIn = (int) _jwtOptions.ValidFor.TotalSeconds
             };
 
-            return JsonSerializer.Serialize(response);
+            return response;
         }
 
-        public async Task<string> GenerateJwt(string userName, string userId, List<string> roles)
+        public async Task<TokenInfo> GenerateJwt(string userName, string userId, List<string> roles)
         {
             var claims = GenerateClaimsIdentity(userName, userId, roles);
             return await GenerateJwt(claims, userName);
         }
 
-        public T GenerateRefreshToken<T>(string ip, string userId) where T : RefreshToken, new()
+        public T GenerateRefreshToken<T>(string ip) where T : RefreshToken, new()
         {
             var randomBytes = new byte[64];
             var refreshToken = Convert.ToBase64String(randomBytes);
@@ -118,7 +118,6 @@ namespace Garcia.Infrastructure.Identity
             {
                 Token = refreshToken,
                 ExpirationDate = _jwtOptions.RefreshTokenOptions.Expiration,
-                UserId = userId,
                 CreatedByIp = ip
             };
         }

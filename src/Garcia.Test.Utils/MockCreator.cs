@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Garcia.Application.Contracts.Persistence;
+using System.Linq.Expressions;
 
 namespace Garcia.Test.Utils
 {
@@ -67,6 +68,13 @@ namespace Garcia.Test.Utils
                     return mockDataSet;
                 });
 
+            repository.Setup(x => x.GetAsync(It.IsAny<Expression<Func<TEntity, bool>>>()))
+                .ReturnsAsync((Expression<Func<TEntity, bool>> expression) =>
+                {
+                    var result = mockDataSet.Where(expression.Compile());
+                    return result.ToList();
+                });
+
             return repository;
         }
 
@@ -125,6 +133,13 @@ namespace Garcia.Test.Utils
                     return mockDataSet;
                 });
 
+            repository.Setup(x => x.GetAsync(It.IsAny<Expression<Func<TEntity, bool>>>()))
+                .ReturnsAsync((Expression<Func<TEntity, bool>> expression) =>
+                {
+                    var result = mockDataSet.Where(expression.Compile());
+                    return result.ToList();
+                });
+
             return repository;
         }
         /// <summary>
@@ -143,6 +158,7 @@ namespace Garcia.Test.Utils
             where TRepository : IAsyncRepository<TEntity, TKey>
         {
             var mock = Mock.Get(repository);
+
             mock.Setup(x => x.AddAsync(It.IsAny<TEntity>()))
                 .ReturnsAsync((TEntity entity) =>
                 {
@@ -181,6 +197,13 @@ namespace Garcia.Test.Utils
                 .ReturnsAsync(() =>
                 {
                     return mockDataSet;
+                });
+
+            mock.Setup(x => x.GetAsync(It.IsAny<Expression<Func<TEntity, bool>>>()))
+                .ReturnsAsync((Expression<Func<TEntity, bool>> expression) =>
+                {
+                    var result = mockDataSet.Where(expression.Compile());
+                    return result.ToList();
                 });
 
             return (TRepository) mock.Object;
@@ -203,6 +226,7 @@ namespace Garcia.Test.Utils
             where TRepository : class, IAsyncRepository<TEntity, TKey>
         {
             var mock = new Mock<IAsyncRepository<TEntity, TKey>>();
+
             mock.Setup(x => x.AddAsync(It.IsAny<TEntity>()))
                 .ReturnsAsync((TEntity entity) =>
                 {
@@ -241,6 +265,13 @@ namespace Garcia.Test.Utils
                 .ReturnsAsync(() =>
                 {
                     return mockDataSet;
+                });
+
+            mock.Setup(x => x.GetAsync(It.IsAny<Expression<Func<TEntity, bool>>>()))
+                .ReturnsAsync((Expression<Func<TEntity, bool>> expression) =>
+                {
+                    var result = mockDataSet.Where(expression.Compile());
+                    return result.ToList();
                 });
 
             return mock.As<TRepository>().Object;

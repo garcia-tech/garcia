@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Garcia.Domain.Identity
+﻿namespace Garcia.Domain.Identity
 {
-    public class RefreshToken
+    public class RefreshToken : ValueObject
     {
         public RefreshToken()
         {
@@ -21,6 +15,17 @@ namespace Garcia.Domain.Identity
         public bool Revoked { get; set; }
         public string RevokedByIp { get; set; }
         public string ReplacedByToken { get; set; }
-        public string UserId { get; set; }
+
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Token;
+            yield return CreatedDate;
+            yield return CreatedByIp;
+            yield return ExpirationDate;
+            yield return RevokedDate;
+            yield return Revoked;
+            yield return RevokedByIp;
+            yield return ReplacedByToken;
+        }
     }
 }

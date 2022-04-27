@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Garcia.Application.Identity\Garcia.Application.Identity.csproj" />
     <ProjectReference Include="..\Garcia.Application\Garcia.Application.csproj" />
     <ProjectReference Include="..\Garcia.Persistence\Garcia.Persistence.csproj" />
   </ItemGroup>
