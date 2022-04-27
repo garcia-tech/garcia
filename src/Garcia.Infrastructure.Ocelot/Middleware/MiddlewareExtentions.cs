@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
+using MMLib.SwaggerForOcelot.Configuration;
 using Ocelot.Middleware;
 
 namespace Garcia.Infrastructure.Ocelot.Middleware
@@ -53,12 +54,14 @@ namespace Garcia.Infrastructure.Ocelot.Middleware
                 {
                     opt.DownstreamSwaggerHeaders = downstreamSwaggerHeaders;
                 }
-
-                opt.DownstreamSwaggerEndPointBasePath = "gateway/swagger/docs";
-                opt.PathToSwaggerGenerator = "/swagger/docs";
             });
 
             return app;
+        }
+
+        public static IApplicationBuilder UseGarciaSwaggerForOcelotUI(this IApplicationBuilder app, Action<SwaggerForOcelotUIOptions> setupAction = null)
+        {
+            return app.UseSwaggerForOcelotUI(setupAction);
         }
     }
 }
