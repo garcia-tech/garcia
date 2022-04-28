@@ -100,5 +100,50 @@ namespace Garcia.Infrastructure.Identity
 
             return services;
         }
+
+        public static IServiceCollection AddJwtOptions(this IServiceCollection services, string authenticationScheme, IConfiguration configuration)
+        {
+            SymmetricSecurityKey _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration[$"{nameof(JwtIssuerOptions)}:{nameof(JwtIssuerOptions.SecretKey)}"]));
+
+            services.Configure<JwtIssuerOptions>(options =>
+            {
+                options.Issuer = configuration[$"{nameof(JwtIssuerOptions)}:{nameof(options.Issuer)}"];
+                options.Audience = configuration[$"{nameof(JwtIssuerOptions)}:{nameof(options.Audience)}"];
+                options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
+                options.ValidFor = configuration.GetSection(nameof(JwtIssuerOptions)).GetValue<TimeSpan>(nameof(options.ValidFor));
+                options.RefreshTokenOptions = configuration.GetSection(nameof(JwtIssuerOptions)).GetValue<RefreshTokenOptions>(nameof(options.RefreshTokenOptions));
+            });
+
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidIssuer = configuration[$"{nameof(JwtIssuerOptions)}:{nameof(JwtIssuerOptions.Issuer)}"],
+                ValidateAudience = true,
+                ValidAudience = configuration[$"{nameof(JwtIssuerOptions)}:{nameof(JwtIssuerOptions.Audience)}"],
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = _signingKey,
+                RequireExpirationTime = false,
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero
+            };
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(authenticationScheme, configureOptions =>
+            {
+                configureOptions.ClaimsIssuer = configuration[$"{nameof(JwtIssuerOptions)}:{nameof(JwtIssuerOptions.Issuer)}"];
+                configureOptions.TokenValidationParameters = tokenValidationParameters;
+                configureOptions.SaveToken = true;
+            });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("ApiUser", policy => policy.RequireClaim(Constants.Strings.JwtClaimIdentifiers.Role, Constants.Strings.JwtClaimIdentifiers.Role));
+            });
+
+            return services;
+        }
     }
 }
