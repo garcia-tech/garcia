@@ -2,7 +2,6 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using Garcia.Application;
 using Garcia.Application.Contracts.Infrastructure;
 
 namespace Garcia.Infrastructure

@@ -24,7 +24,7 @@ namespace Garcia.Infrastructure.Api.Providers
             switch (context.ErrorCode)
             {
                 case "UnsupportedApiVersion":
-                    Response.AddErrors(context.ErrorCode);
+                    Response.AddError(context.ErrorCode);
                     return new BadRequestObjectResult(Response);
                 default:
                     break;

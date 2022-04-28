@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using Garcia.Application.Contracts.Persistence;
+using Garcia.Domain;
 using Moq;
 
 namespace Garcia.Application.Tests
@@ -60,6 +63,29 @@ namespace Garcia.Application.Tests
                     });
 
             return mockRepository;
+        }
+
+        public static Mock<IAsyncRepository<TestUser, long>> InitializeRepositoryInstance(string testusername, string testpassword)
+        {
+            var repository = new Mock<IAsyncRepository<TestUser, long>>();
+
+            var list = new List<TestUser>()
+            {
+                new TestUser
+                {
+                    Id = 1,
+                    Username = "seckinpullu", 
+                    Password = "CY9rzUYh03PK3k6DJie09g=="
+                },
+            };
+            repository.Setup(x => x.GetAsync(It.IsAny<Expression<Func<TestUser, bool>>>()))
+                .ReturnsAsync((Expression<Func<TestUser, bool>> expression) =>
+                {
+                    var result = list.Where(expression.Compile());
+                    return result.ToList();
+                });
+
+            return repository;
         }
     }
 }

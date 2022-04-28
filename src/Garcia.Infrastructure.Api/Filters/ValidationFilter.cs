@@ -30,7 +30,7 @@ namespace Garcia.Infrastructure.Api.Filters
 
             foreach (var error in errorsInModalState)
             {
-                Response.AddErrors($"{error.Key} is invalid: {error.Value?.FirstOrDefault()}");
+                Response.AddError($"{error.Key} is invalid: {error.Value?.FirstOrDefault()}");
             }
 
             context.Result = new BadRequestObjectResult(Response);

@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Garcia.Domain.Identity
+﻿namespace Garcia.Domain.Identity
 {
-    public class Session<TKey, TUserId> : Entity<TKey>
+    public class Session<TKey> : Entity<TKey>
         where TKey : IEquatable<TKey>
-        where TUserId : IEquatable<TUserId>
     {
-        public TUserId UserId { get; set; }
+        public TKey UserId { get; set; }
         public string Token { get; set; }
         public string CreatedByIp { get; set; }
         public string RenewedToken { get; set; }
         public bool Active { get; set; } = true;
         public DateTimeOffset? RenewedOn { get; set; }
         public string RenewedIp { get; set; }
+        public RefreshToken RefreshToken { get; set; }
     }
 }

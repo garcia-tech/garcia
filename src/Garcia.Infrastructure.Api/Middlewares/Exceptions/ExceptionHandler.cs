@@ -41,7 +41,7 @@ namespace Garcia.Infrastructure.Api.Middlewares.Exceptions
             };
 
             errorModel.SetStatusCode(System.Net.HttpStatusCode.InternalServerError);
-            errorModel.AddErrors(exception.Message);
+            errorModel.AddError(exception.Message);
             SetError(errorModel, exception);
             context.Response.ContentType = _options?.Value.ResponseContentType ?? "application/json";
             context.Response.StatusCode = errorModel.StatusCode.Value;

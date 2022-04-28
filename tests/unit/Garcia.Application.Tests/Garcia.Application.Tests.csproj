@@ -20,8 +20,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\src\Garcia.Application.Identity\Garcia.Application.Identity.csproj" />
 		<ProjectReference Include="..\..\..\src\Garcia.Infrastructure.FileUpload.Local\Garcia.Infrastructure.FileUpload.Local.csproj" />
 		<ProjectReference Include="..\..\..\src\Garcia.Application\Garcia.Application.csproj" />
+		<ProjectReference Include="..\..\..\src\Garcia.Infrastructure.Identity\Garcia.Infrastructure.Identity.csproj" />
+		<ProjectReference Include="..\..\..\src\Garcia.Infrastructure\Garcia.Infrastructure.csproj" />
 		<ProjectReference Include="..\..\..\src\Garcia.Test.Utils\Garcia.Test.Utils.csproj" />
 	</ItemGroup>
 
