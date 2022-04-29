@@ -19,6 +19,13 @@ namespace Garcia.Infrastructure.PushNotification.Firebase
             return services;
         }
 
+        public static IServiceCollection AddFirebasePushNotificationService(this IServiceCollection services, Action<FirebasePushNotificationSettings> options)
+        {
+            services.Configure(options);
+            services.AddScoped<IPushNotificationService, FirebasePushNotificationService>();
+            return services;
+        }
+
         public static IServiceCollection AddFirebasePushNotificationService(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<FirebasePushNotificationSettings>(options =>
