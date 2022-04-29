@@ -45,6 +45,28 @@ namespace Garcia.Infrastructure.Identity
                 configureOptions.ClaimsIssuer = jwtOptions.Issuer;
                 configureOptions.TokenValidationParameters = tokenValidationParameters;
                 configureOptions.SaveToken = true;
+
+                configureOptions.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        string authorizationStringEquivalent = context.Request.Headers["Authorization"];
+
+                        var authorizationHeader = authorizationStringEquivalent?.Split(' ');
+
+                        var bearerToken = authorizationHeader?.Length > 1 ? authorizationHeader[1] : null;
+
+                        var path = context.HttpContext.Request.Path;
+
+                        if (!string.IsNullOrEmpty(bearerToken) &&
+                            (path.StartsWithSegments("/hubs")))
+                        {
+                            context.Token = bearerToken;
+                        }
+
+                        return Task.CompletedTask;
+                    }
+                };
             });
 
             services.AddAuthorization(options =>
@@ -90,6 +112,28 @@ namespace Garcia.Infrastructure.Identity
                 configureOptions.ClaimsIssuer = configuration[$"{nameof(JwtIssuerOptions)}:{nameof(JwtIssuerOptions.Issuer)}"];
                 configureOptions.TokenValidationParameters = tokenValidationParameters;
                 configureOptions.SaveToken = true;
+
+                configureOptions.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        string authorizationStringEquivalent = context.Request.Headers["Authorization"];
+
+                        var authorizationHeader = authorizationStringEquivalent?.Split(' ');
+
+                        var bearerToken = authorizationHeader?.Length > 1 ? authorizationHeader[1] : null;
+
+                        var path = context.HttpContext.Request.Path;
+
+                        if (!string.IsNullOrEmpty(bearerToken) &&
+                            (path.StartsWithSegments("/hubs")))
+                        {
+                            context.Token = bearerToken;
+                        }
+
+                        return Task.CompletedTask;
+                    }
+                };
             });
 
             services.AddAuthorization(options =>
@@ -135,6 +179,28 @@ namespace Garcia.Infrastructure.Identity
                 configureOptions.ClaimsIssuer = configuration[$"{nameof(JwtIssuerOptions)}:{nameof(JwtIssuerOptions.Issuer)}"];
                 configureOptions.TokenValidationParameters = tokenValidationParameters;
                 configureOptions.SaveToken = true;
+
+                configureOptions.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        string authorizationStringEquivalent = context.Request.Headers["Authorization"];
+
+                        var authorizationHeader = authorizationStringEquivalent?.Split(' ');
+
+                        var bearerToken = authorizationHeader?.Length > 1 ? authorizationHeader[1] : null;
+
+                        var path = context.HttpContext.Request.Path;
+
+                        if (!string.IsNullOrEmpty(bearerToken) &&
+                            (path.StartsWithSegments("/hubs")))
+                        {
+                            context.Token = bearerToken;
+                        }
+
+                        return Task.CompletedTask;
+                    }
+                };
             });
 
             services.AddAuthorization(options =>
