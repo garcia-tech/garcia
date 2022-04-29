@@ -34,6 +34,7 @@
     <ProjectReference Include="..\Garcia.Infrastructure.Ocelot\Garcia.Infrastructure.Ocelot.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.PushNotification.Firebase\Garcia.Infrastructure.PushNotification.Firebase.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.RabbitMQ\Garcia.Infrastructure.RabbitMQ.csproj" />
+    <ProjectReference Include="..\Garcia.Infrastructure.RealTime.SignalR\Garcia.Infrastructure.RealTime.SignalR.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.Redis\Garcia.Infrastructure.Redis.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure\Garcia.Infrastructure.csproj" />
     <ProjectReference Include="..\Garcia.Persistence.EntityFramework.MySql\Garcia.Persistence.EntityFramework.MySql.csproj" />
