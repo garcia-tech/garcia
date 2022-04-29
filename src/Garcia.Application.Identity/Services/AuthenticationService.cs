@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Garcia.Application.Contracts.Identity;
+﻿using Garcia.Application.Contracts.Identity;
 using Garcia.Application.Contracts.Persistence;
 using Garcia.Application.Identity.Models.Request;
 using Garcia.Domain.Identity;
@@ -27,11 +22,11 @@ namespace Garcia.Application.Identity.Services
 
         public AuthenticationService(TRepository repository, IEncryption encryption, IJwtService jwt)
         {
+            _jwt = jwt;
             _repository = repository;
             _encryption = encryption;
             _mapper = InitializeMapper()
                 .CreateMapper();
-            _jwt = jwt;
         }
 
         public virtual async Task<BaseResponse<TUserDto>> ValidateUser(Credentials request)

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Garcia.Application.Contracts.Identity;
+﻿using Garcia.Application.Contracts.Identity;
 using Garcia.Application.Identity.Models.Request;
 using Garcia.Application.Identity.Models.Response;
 using Garcia.Domain;
