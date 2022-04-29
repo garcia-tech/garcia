@@ -8,16 +8,17 @@ namespace Garcia.Infrastructure.PushNotification.Firebase
 {
     public class FirebasePushNotificationService : IPushNotificationService
     {
-        private readonly FirebasePushNotificationSettings _settings;
         private readonly FirebaseApp _firebaseApp;
 
-        public FirebasePushNotificationService(IOptions<FirebasePushNotificationSettings> settings)
+        public FirebasePushNotificationService(IOptions<FirebasePushNotificationSettings> options)
         {
-            _settings = settings.Value;
+            var settings = options.Value;
 
             _firebaseApp = FirebaseApp.Create(new AppOptions()
             {
-                Credential = GoogleCredential.FromAccessToken(_settings.AccessToken),
+                Credential = !string.IsNullOrEmpty(settings.AccessToken) ? 
+                    GoogleCredential.FromAccessToken(settings.AccessToken) :
+                    GoogleCredential.FromFile(settings.FilePath)
             });
         }
 
@@ -27,6 +28,53 @@ namespace Garcia.Infrastructure.PushNotification.Firebase
             {
                 Data = data,
                 Token = token,
+
+                Android = new AndroidConfig
+                {
+                    Data = data
+                },
+
+                Apns = new ApnsConfig
+                {
+                    CustomData = (IDictionary<string, object>) 
+                        data.ToDictionary(x => x.Key, x => x.Value),
+
+                    Aps = new Aps
+                    {
+                        MutableContent = true,
+                        ContentAvailable = false
+                    }
+                }
+            };
+
+            string response = await FirebaseMessaging.DefaultInstance.SendAsync(message);
+            return string.IsNullOrEmpty(response) ? 0 : 1;
+        }
+
+        public async Task<int> SendPushNotificationToTopicAsync(string topic, Dictionary<string, string> data)
+        {
+            var message = new Message()
+            {
+                Data = data,
+                Topic = topic,
+
+                Android = new AndroidConfig
+                {
+                    Data = data
+                },
+
+                Apns = new ApnsConfig
+                {
+                    CustomData = (IDictionary<string, object>)
+                        data.ToDictionary(x => x.Key, x => x.Value),
+
+                    Aps = new Aps
+                    {
+                        MutableContent = true,
+                        ContentAvailable = false
+                    }
+
+                }
             };
 
             string response = await FirebaseMessaging.DefaultInstance.SendAsync(message);
@@ -38,7 +86,24 @@ namespace Garcia.Infrastructure.PushNotification.Firebase
             var message = new MulticastMessage()
             {
                 Tokens = tokens,
-                Data = data
+                Data = data,
+
+                Android = new AndroidConfig
+                {
+                    Data = data
+                },
+
+                Apns = new ApnsConfig
+                {
+                    CustomData = (IDictionary<string, object>)
+                        data.ToDictionary(x => x.Key, x => x.Value),
+
+                    Aps = new Aps
+                    {
+                        MutableContent = true,
+                        ContentAvailable = false
+                    }
+                }
             };
 
             var response = await FirebaseMessaging.DefaultInstance.SendMulticastAsync(message);
@@ -50,7 +115,24 @@ namespace Garcia.Infrastructure.PushNotification.Firebase
             var messages = data.Select(x => new Message()
             {
                 Token = token,
-                Data = x
+                Data = x,
+
+                Android = new AndroidConfig
+                {
+                    Data = x
+                },
+
+                Apns = new ApnsConfig
+                {
+                    CustomData = (IDictionary<string, object>)
+                        x.ToDictionary(d => d.Key, d => d.Value),
+
+                    Aps = new Aps
+                    {
+                        MutableContent = true,
+                        ContentAvailable = false
+                    }
+                }
             });
             var response = await FirebaseMessaging.DefaultInstance.SendAllAsync(messages);
             return response.SuccessCount;
