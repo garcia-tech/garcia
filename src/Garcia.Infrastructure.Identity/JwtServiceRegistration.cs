@@ -1,11 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Configuration;
+using Garcia.Application.Contracts.Identity;
+using Garcia.Application.Contracts.Infrastructure;
 
 namespace Garcia.Infrastructure.Identity
 {
@@ -144,6 +143,16 @@ namespace Garcia.Infrastructure.Identity
             });
 
             return services;
+        }
+
+        public static IServiceCollection AddJwtService(this IServiceCollection services)
+        {
+            return services.AddScoped<IJwtService, JwtService>();
+        }
+
+        public static IServiceCollection AddEncryption(this IServiceCollection services)
+        {
+            return services.AddScoped<IEncryption, Encryption>();
         }
     }
 }
