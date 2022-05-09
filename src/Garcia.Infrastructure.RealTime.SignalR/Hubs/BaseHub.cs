@@ -5,7 +5,14 @@ using Microsoft.Extensions.Options;
 
 namespace Garcia.Infrastructure.RealTime.SignalR.Hubs
 {
-    public class BaseHub : Hub<IBaseHubClient>
+    public class BaseHub : BaseHub<IBaseHubClient>
+    {
+        public BaseHub(IOptions<SignalRSettings> options, ILogger<BaseHub> logger) : base(options, logger)
+        {
+        }
+    }
+
+    public class BaseHub<T> : Hub<T> where T : class, IBaseHubClient
     {
         protected SignalRSettings Settings { get; }
         private readonly ILogger<BaseHub> _logger;
@@ -24,7 +31,7 @@ namespace Garcia.Infrastructure.RealTime.SignalR.Hubs
 
         public override async Task OnDisconnectedAsync(Exception? exception)
         {
-            if (string.IsNullOrEmpty(Settings.DefaultGroup) 
+            if (string.IsNullOrEmpty(Settings.DefaultGroup)
                 || Context.ConnectionAborted.IsCancellationRequested) return;
             await RemoveGroup(Settings.DefaultGroup);
 
