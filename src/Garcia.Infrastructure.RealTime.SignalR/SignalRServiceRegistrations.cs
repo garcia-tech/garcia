@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Http.Connections;
+using Garcia.Infrastructure.RealTime.SignalR.Clients;
 
 namespace Garcia.Infrastructure.RealTime.SignalR
 {
@@ -33,6 +34,14 @@ namespace Garcia.Infrastructure.RealTime.SignalR
 
         public static IApplicationBuilder MapBaseHub<THub>(this WebApplication app, string endpoint, Action<HttpConnectionDispatcherOptions>? configureOptions)
             where THub : BaseHub
+        {
+            app.MapHub<THub>(endpoint, configureOptions);
+            return app;
+        }
+
+        public static IApplicationBuilder MapBaseHub<THub, TClient>(this WebApplication app, string endpoint, Action<HttpConnectionDispatcherOptions>? configureOptions)
+            where THub : BaseHub<TClient>
+            where TClient : class, IBaseHubClient
         {
             app.MapHub<THub>(endpoint, configureOptions);
             return app;
