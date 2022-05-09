@@ -39,6 +39,14 @@ namespace Garcia.Infrastructure.RealTime.SignalR
             return app;
         }
 
+        public static IApplicationBuilder MapBaseHub<THub, TClient>(this WebApplication app, string endpoint)
+            where THub : BaseHub<TClient>
+            where TClient : class, IBaseHubClient
+        {
+            app.MapHub<THub>(endpoint);
+            return app;
+        }
+
         public static IApplicationBuilder MapBaseHub<THub, TClient>(this WebApplication app, string endpoint, Action<HttpConnectionDispatcherOptions>? configureOptions)
             where THub : BaseHub<TClient>
             where TClient : class, IBaseHubClient
