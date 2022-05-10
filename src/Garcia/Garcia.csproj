@@ -38,6 +38,7 @@
     <ProjectReference Include="..\Garcia.Infrastructure.Redis\Garcia.Infrastructure.Redis.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure\Garcia.Infrastructure.csproj" />
     <ProjectReference Include="..\Garcia.Persistence.EntityFramework.MySql\Garcia.Persistence.EntityFramework.MySql.csproj" />
+    <ProjectReference Include="..\Garcia.Persistence.EntityFramework.Oracle\Garcia.Persistence.EntityFramework.Oracle.csproj" />
     <ProjectReference Include="..\Garcia.Persistence.EntityFramework.PostgreSQL\Garcia.Persistence.EntityFramework.PostgreSql.csproj" />
     <ProjectReference Include="..\Garcia.Persistence.EntityFramework.SqlServer\Garcia.Persistence.EntityFramework.SqlServer.csproj" />
     <ProjectReference Include="..\Garcia.Persistence.EntityFramework\Garcia.Persistence.EntityFramework.csproj" />
