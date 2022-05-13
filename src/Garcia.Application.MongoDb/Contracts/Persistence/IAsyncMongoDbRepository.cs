@@ -1,6 +1,7 @@
 ﻿using Garcia.Application.Contracts.Persistence;
 using MongoDB.Driver;
 using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -21,5 +22,12 @@ namespace Garcia.Application.MongoDb.Contracts.Persistence
         /// <param name="filter">Query of the operation.</param>
         /// <returns><see langword="true"/> if any matching entity; otherwise <see langword="false"/></returns>
         Task<bool> AnyAsync(Expression<Func<T, bool>> filter);
+        /// <summary>
+        /// Gets all entities with pagination.
+        /// </summary>
+        /// <param name="page">Desired page.</param>
+        /// <param name="size">Count of entity.</param>
+        /// <returns><c>IReadonlyList</c> of <typeparamref name="T"/> entities.</returns>
+        Task<IReadOnlyList<T>> GetAllAsync(int page, int size);
     }
 }
