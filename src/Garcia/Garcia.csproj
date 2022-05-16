@@ -8,9 +8,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Garcia.Application.Cassandra\Garcia.Application.Cassandra.csproj" />
     <ProjectReference Include="..\Garcia.Application.ElasticSearch\Garcia.Application.ElasticSearch.csproj" />
     <ProjectReference Include="..\Garcia.Application.Identity\Garcia.Application.Identity.csproj" />
+    <ProjectReference Include="..\Garcia.Exceptions.Cassandra\Garcia.Exceptions.Cassandra.csproj" />
     <ProjectReference Include="..\Garcia.Exceptions.ElasticSearch\Garcia.Exceptions.ElasticSearch.csproj" />
+    <ProjectReference Include="..\Garcia.Infrastructure.Cassandra\Garcia.Infrastructure.Cassandra.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.ElasticSearch\Garcia.Infrastructure.ElasticSearch.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.Email.Mandrill\Garcia.Infrastructure.Email.Mandrill.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.FileUpload.AmazonS3\Garcia.Infrastructure.FileUpload.AmazonS3.csproj" />
@@ -37,6 +40,7 @@
     <ProjectReference Include="..\Garcia.Infrastructure.RealTime.SignalR\Garcia.Infrastructure.RealTime.SignalR.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.Redis\Garcia.Infrastructure.Redis.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure\Garcia.Infrastructure.csproj" />
+    <ProjectReference Include="..\Garcia.Persistence.Cassandra\Garcia.Persistence.Cassandra.csproj" />
     <ProjectReference Include="..\Garcia.Persistence.EntityFramework.MySql\Garcia.Persistence.EntityFramework.MySql.csproj" />
     <ProjectReference Include="..\Garcia.Persistence.EntityFramework.Oracle\Garcia.Persistence.EntityFramework.Oracle.csproj" />
     <ProjectReference Include="..\Garcia.Persistence.EntityFramework.PostgreSQL\Garcia.Persistence.EntityFramework.PostgreSql.csproj" />

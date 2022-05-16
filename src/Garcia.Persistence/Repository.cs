@@ -10,9 +10,9 @@ namespace Garcia.Persistence
 {
     public class Repository<T> : BaseRepository<T> where T : Entity<long>
     {
-        private IAsyncRepository<T, long> _repository;
+        private IAsyncRepository<T> _repository;
 
-        public Repository(IAsyncRepository<T, long> repository)
+        public Repository(IAsyncRepository<T> repository)
         {
             _repository = repository;
         }

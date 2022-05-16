@@ -10,7 +10,7 @@ namespace Garcia.Application.Contracts.Persistence
     {
     }
 
-    public interface IAsyncRepository<T, TKey> where TKey : IEquatable<TKey>
+    public interface IAsyncRepository<T, TKey> : IAsyncRepository where TKey : IEquatable<TKey>
     {
         /// <summary>
         /// Gets a single entity by id.
@@ -53,13 +53,6 @@ namespace Garcia.Application.Contracts.Persistence
         /// <param name="entity">The entity to be deleted.</param>
         /// <returns>Number of affected records.</returns>
         Task<long> DeleteAsync(T entity);
-        /// <summary>
-        /// Gets all entities with pagination.
-        /// </summary>
-        /// <param name="page">Desired page.</param>
-        /// <param name="size">Count of entity.</param>
-        /// <returns><c>IReadonlyList</c> of <typeparamref name="T"/> entities.</returns>
-        Task<IReadOnlyList<T>> GetAllAsync(int page, int size);
         //Task<IReadOnlyList<T>> GetByKeyAsync(string key, object value);
         /// <summary>
         /// Gets multiple enetities matching the <paramref name="filter"/>.
@@ -72,6 +65,13 @@ namespace Garcia.Application.Contracts.Persistence
 
     public interface IAsyncRepository<T> : IAsyncRepository<T, long> where T : Entity<long>
     {
+        /// <summary>
+        /// Gets all entities with pagination.
+        /// </summary>
+        /// <param name="page">Desired page.</param>
+        /// <param name="size">Count of entity.</param>
+        /// <returns><see cref="IReadOnlyCollection{T}"/></returns>
+        Task<IReadOnlyList<T>> GetAllAsync(int page, int size);
         Task<T> GetByIdWithNavigationsAsync(long id);
     }
 }

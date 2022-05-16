@@ -95,7 +95,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Application.Identity
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Infrastructure.RealTime.SignalR", "src\Garcia.Infrastructure.RealTime.SignalR\Garcia.Infrastructure.RealTime.SignalR.csproj", "{83BE4626-3425-4DF7-B158-499365EDC108}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garcia.Persistence.EntityFramework.Oracle", "src\Garcia.Persistence.EntityFramework.Oracle\Garcia.Persistence.EntityFramework.Oracle.csproj", "{9AE7E254-8F67-417A-AB6B-FA4F079E6310}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Persistence.EntityFramework.Oracle", "src\Garcia.Persistence.EntityFramework.Oracle\Garcia.Persistence.EntityFramework.Oracle.csproj", "{9AE7E254-8F67-417A-AB6B-FA4F079E6310}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garcia.Persistence.Cassandra", "src\Garcia.Persistence.Cassandra\Garcia.Persistence.Cassandra.csproj", "{196812F0-296B-447F-A105-39903F966B63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garcia.Infrastructure.Cassandra", "src\Garcia.Infrastructure.Cassandra\Garcia.Infrastructure.Cassandra.csproj", "{67D0CE3B-D440-4CB0-A1F9-71F96248A0C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garcia.Application.Cassandra", "src\Garcia.Application.Cassandra\Garcia.Application.Cassandra.csproj", "{648F562E-9E08-47A8-936A-A4CBF66C80D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garcia.Exceptions.Cassandra", "src\Garcia.Exceptions.Cassandra\Garcia.Exceptions.Cassandra.csproj", "{9AD3AC64-DC58-4566-92A2-C4E26EB53F75}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -279,6 +287,22 @@ Global
 		{9AE7E254-8F67-417A-AB6B-FA4F079E6310}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AE7E254-8F67-417A-AB6B-FA4F079E6310}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9AE7E254-8F67-417A-AB6B-FA4F079E6310}.Release|Any CPU.Build.0 = Release|Any CPU
+		{196812F0-296B-447F-A105-39903F966B63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{196812F0-296B-447F-A105-39903F966B63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{196812F0-296B-447F-A105-39903F966B63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{196812F0-296B-447F-A105-39903F966B63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67D0CE3B-D440-4CB0-A1F9-71F96248A0C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67D0CE3B-D440-4CB0-A1F9-71F96248A0C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67D0CE3B-D440-4CB0-A1F9-71F96248A0C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67D0CE3B-D440-4CB0-A1F9-71F96248A0C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{648F562E-9E08-47A8-936A-A4CBF66C80D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{648F562E-9E08-47A8-936A-A4CBF66C80D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{648F562E-9E08-47A8-936A-A4CBF66C80D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{648F562E-9E08-47A8-936A-A4CBF66C80D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AD3AC64-DC58-4566-92A2-C4E26EB53F75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AD3AC64-DC58-4566-92A2-C4E26EB53F75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AD3AC64-DC58-4566-92A2-C4E26EB53F75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AD3AC64-DC58-4566-92A2-C4E26EB53F75}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -329,6 +353,10 @@ Global
 		{1E24B618-E260-4124-AE34-B7DEB27F4801} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 		{83BE4626-3425-4DF7-B158-499365EDC108} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 		{9AE7E254-8F67-417A-AB6B-FA4F079E6310} = {087C542F-855C-47ED-96C8-9D088E416ED2}
+		{196812F0-296B-447F-A105-39903F966B63} = {087C542F-855C-47ED-96C8-9D088E416ED2}
+		{67D0CE3B-D440-4CB0-A1F9-71F96248A0C4} = {087C542F-855C-47ED-96C8-9D088E416ED2}
+		{648F562E-9E08-47A8-936A-A4CBF66C80D4} = {087C542F-855C-47ED-96C8-9D088E416ED2}
+		{9AD3AC64-DC58-4566-92A2-C4E26EB53F75} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3255BD7C-849F-4F0F-B86D-5A266B1F50B6}

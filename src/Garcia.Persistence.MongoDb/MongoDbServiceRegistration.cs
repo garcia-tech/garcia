@@ -1,33 +1,29 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
-using Garcia.Domain.MongoDb;
 using Garcia.Application.MongoDb.Contracts.Persistence;
 using Garcia.Infrastructure.MongoDb;
+using System;
 
 namespace Garcia.Persistence.MongoDb
 {
     public static class MongoDbServiceRegistration
     {
-        public static IServiceCollection AddMongoDbSettings<T>(this IServiceCollection services, IOptions<T> options) where T : MongoDbSettings
+        public static IServiceCollection AddMongoDb(this IServiceCollection services, IConfiguration configuration)
         {
-            return services.Configure<T>(o =>
-            {
-                o.ConnectionString = options.Value.ConnectionString;
-                o.DatabaseName = options.Value.DatabaseName;
-            });
-        }
-        public static IServiceCollection AddMongoDbSettings(this IServiceCollection services, IConfiguration configuration)
-        {
-            return services.Configure<MongoDbSettings>(options =>
+            services.Configure<MongoDbSettings>(options =>
             {
                 string node = options.GetNodeValue();
                 options.ConnectionString = configuration.GetSection(node + ":" + options.GetConnectionStringKeyValue()).Value;
                 options.DatabaseName = configuration.GetSection(node + ":" + options.GetDatabaseNameKeyValue()).Value;
             });
+
+            services.AddScoped(typeof(IAsyncMongoDbRepository<>), typeof(MongoDbRepository<>));
+            return services;
         }
-        public static IServiceCollection AddMongoDbRepository(this IServiceCollection services)
+
+        public static IServiceCollection AddMongoDb(this IServiceCollection services, Action<MongoDbSettings> options)
         {
+            services.Configure(options);
             services.AddScoped(typeof(IAsyncMongoDbRepository<>), typeof(MongoDbRepository<>));
             return services;
         }
