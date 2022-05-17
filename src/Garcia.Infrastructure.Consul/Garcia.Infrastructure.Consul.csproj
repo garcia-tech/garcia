@@ -4,17 +4,14 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
-
 	<ItemGroup>
-		<PackageReference Include="MMLib.SwaggerForOcelot" Version="5.1.0" />
-		<PackageReference Include="Ocelot" Version="18.0.0" />
-		<PackageReference Include="Ocelot.Cache.CacheManager" Version="18.0.0" />
+		<PackageReference Include="Consul" Version="1.6.10.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
 		<PackageReference Include="Nerdbank.GitVersioning" Version="3.4.255">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Ocelot.Provider.Consul" Version="18.0.0" />
-		<PackageReference Include="Ocelot.Provider.Eureka" Version="18.0.0" />
 	</ItemGroup>
 
 </Project>
