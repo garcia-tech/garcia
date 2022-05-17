@@ -14,6 +14,7 @@
     <ProjectReference Include="..\Garcia.Exceptions.Cassandra\Garcia.Exceptions.Cassandra.csproj" />
     <ProjectReference Include="..\Garcia.Exceptions.ElasticSearch\Garcia.Exceptions.ElasticSearch.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.Cassandra\Garcia.Infrastructure.Cassandra.csproj" />
+    <ProjectReference Include="..\Garcia.Infrastructure.Consul\Garcia.Infrastructure.Consul.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.ElasticSearch\Garcia.Infrastructure.ElasticSearch.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.Email.Mandrill\Garcia.Infrastructure.Email.Mandrill.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.FileUpload.AmazonS3\Garcia.Infrastructure.FileUpload.AmazonS3.csproj" />

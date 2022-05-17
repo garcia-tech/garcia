@@ -4,6 +4,8 @@ using Ocelot.DependencyInjection;
 using Ocelot.Cache.CacheManager;
 using Ocelot.Cache;
 using CacheManager.Core;
+using Ocelot.Provider.Consul;
+using Ocelot.Provider.Eureka;
 
 namespace Garcia.Infrastructure.Ocelot
 {
@@ -25,6 +27,48 @@ namespace Garcia.Infrastructure.Ocelot
                 });
 
             return services.AddOcelot(configuration).AddCacheManager(settings);
+        }
+
+        public static IOcelotBuilder AddGarciaOcelotWithConsul(this IServiceCollection services, IConfiguration configuration, bool enableCaching = false, Action<ConfigurationBuilderCachePart>? cacheManagerSettings = null)
+        {
+            services.AddSwaggerForOcelot(configuration);
+
+            if (!enableCaching)
+            {
+                return services.AddOcelot(configuration);
+            }
+
+            Action<ConfigurationBuilderCachePart> settings = cacheManagerSettings ??
+                new Action<ConfigurationBuilderCachePart>(x =>
+                {
+                    x.WithDictionaryHandle();
+                });
+
+            return services
+                    .AddOcelot(configuration)
+                    .AddCacheManager(settings)
+                    .AddConsul();
+        }
+
+        public static IOcelotBuilder AddGarciaOcelotWithEureka(this IServiceCollection services, IConfiguration configuration, bool enableCaching = false, Action<ConfigurationBuilderCachePart>? cacheManagerSettings = null)
+        {
+            services.AddSwaggerForOcelot(configuration);
+
+            if (!enableCaching)
+            {
+                return services.AddOcelot(configuration);
+            }
+
+            Action<ConfigurationBuilderCachePart> settings = cacheManagerSettings ??
+                new Action<ConfigurationBuilderCachePart>(x =>
+                {
+                    x.WithDictionaryHandle();
+                });
+
+            return services
+                    .AddOcelot(configuration)
+                    .AddCacheManager(settings)
+                    .AddEureka();
         }
 
         public static IOcelotBuilder AddGarciaOcelot<TCacheManager>(this IServiceCollection services, IConfiguration configuration)

@@ -97,13 +97,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Infrastructure.RealT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Persistence.EntityFramework.Oracle", "src\Garcia.Persistence.EntityFramework.Oracle\Garcia.Persistence.EntityFramework.Oracle.csproj", "{9AE7E254-8F67-417A-AB6B-FA4F079E6310}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garcia.Persistence.Cassandra", "src\Garcia.Persistence.Cassandra\Garcia.Persistence.Cassandra.csproj", "{196812F0-296B-447F-A105-39903F966B63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Persistence.Cassandra", "src\Garcia.Persistence.Cassandra\Garcia.Persistence.Cassandra.csproj", "{196812F0-296B-447F-A105-39903F966B63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garcia.Infrastructure.Cassandra", "src\Garcia.Infrastructure.Cassandra\Garcia.Infrastructure.Cassandra.csproj", "{67D0CE3B-D440-4CB0-A1F9-71F96248A0C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Infrastructure.Cassandra", "src\Garcia.Infrastructure.Cassandra\Garcia.Infrastructure.Cassandra.csproj", "{67D0CE3B-D440-4CB0-A1F9-71F96248A0C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garcia.Application.Cassandra", "src\Garcia.Application.Cassandra\Garcia.Application.Cassandra.csproj", "{648F562E-9E08-47A8-936A-A4CBF66C80D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Application.Cassandra", "src\Garcia.Application.Cassandra\Garcia.Application.Cassandra.csproj", "{648F562E-9E08-47A8-936A-A4CBF66C80D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garcia.Exceptions.Cassandra", "src\Garcia.Exceptions.Cassandra\Garcia.Exceptions.Cassandra.csproj", "{9AD3AC64-DC58-4566-92A2-C4E26EB53F75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Exceptions.Cassandra", "src\Garcia.Exceptions.Cassandra\Garcia.Exceptions.Cassandra.csproj", "{9AD3AC64-DC58-4566-92A2-C4E26EB53F75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garcia.Infrastructure.Consul", "src\Garcia.Infrastructure.Consul\Garcia.Infrastructure.Consul.csproj", "{2ED88FEE-2E4D-4743-89B5-6E705BA9C764}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -303,6 +305,10 @@ Global
 		{9AD3AC64-DC58-4566-92A2-C4E26EB53F75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AD3AC64-DC58-4566-92A2-C4E26EB53F75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9AD3AC64-DC58-4566-92A2-C4E26EB53F75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2ED88FEE-2E4D-4743-89B5-6E705BA9C764}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ED88FEE-2E4D-4743-89B5-6E705BA9C764}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ED88FEE-2E4D-4743-89B5-6E705BA9C764}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ED88FEE-2E4D-4743-89B5-6E705BA9C764}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -357,6 +363,7 @@ Global
 		{67D0CE3B-D440-4CB0-A1F9-71F96248A0C4} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 		{648F562E-9E08-47A8-936A-A4CBF66C80D4} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 		{9AD3AC64-DC58-4566-92A2-C4E26EB53F75} = {087C542F-855C-47ED-96C8-9D088E416ED2}
+		{2ED88FEE-2E4D-4743-89B5-6E705BA9C764} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3255BD7C-849F-4F0F-B86D-5A266B1F50B6}
