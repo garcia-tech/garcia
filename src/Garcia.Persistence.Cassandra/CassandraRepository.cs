@@ -7,7 +7,7 @@ using Garcia.Infrastructure.Cassandra;
 
 namespace Garcia.Persistence.Cassandra
 {
-    public class CassandraRepository<T> : IAsyncCassandraRepository<T> where T : Entity<Guid>
+    public class CassandraRepository<T> : IAsyncCassandraRepository<T> where T : Entity<Guid>, new()
     {
         private readonly Table<T> _table;
         public CassandraRepository(CassandraConnectionFactory factory)
@@ -35,17 +35,39 @@ namespace Garcia.Persistence.Cassandra
             return entities.Count();
         }
 
-        public async Task<long> DeleteAsync(T entity)
+        public async Task<long> DeleteAsync(T entity, bool hardDelete = false)
         {
-            var result = await _table.Where(x => x.Id == entity.Id)
+            RowSet result;
+
+            if (!hardDelete)
+            {
+                entity.Deleted = true;
+                result = await _table.Where(x => x.Id == entity.Id)
+                    .Select(x => entity)
+                    .Update()
+                    .ExecuteAsync();
+                return result.GetRows().Count();
+            }
+
+            result = await _table.Where(x => x.Id == entity.Id)
                 .Delete()
                 .ExecuteAsync();
             return result.GetRows().Count();
         }
 
-        public async Task<long> DeleteManyAsync(Expression<Func<T, bool>> filter)
+        public async Task<long> DeleteManyAsync(Expression<Func<T, bool>> filter, bool hardDelete = false)
         {
-            var result = await _table.Where(filter)
+            RowSet result;
+
+            if (!hardDelete)
+            {
+                result = await _table.Where(filter)
+                    .Select(x => new T {Deleted = true})
+                    .Update()
+                    .ExecuteAsync();
+            }
+
+            result = await _table.Where(filter)
                 .Delete()
                 .ExecuteAsync();
             return result.GetRows().Count();

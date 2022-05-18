@@ -42,8 +42,15 @@ namespace Garcia.Persistence.EntityFramework
             return await _dbContext.SaveChangesAsync();
         }
 
-        public override async Task<long> DeleteAsync(T entity)
+        public override async Task<long> DeleteAsync(T entity, bool hardDelete = false)
         {
+            if(!hardDelete)
+            {
+                entity.Deleted = true;
+                _dbContext.Entry(entity).State = EntityState.Modified;
+                return await _dbContext.SaveChangesAsync();
+            }
+
             _dbContext.Set<T>().Remove(entity);
             return await _dbContext.SaveChangesAsync();
         }
@@ -65,9 +72,21 @@ namespace Garcia.Persistence.EntityFramework
             return await _dbContext.SaveChangesAsync();
         }
 
-        public override async Task<long> DeleteManyAsync(Expression<Func<T, bool>> filter)
+        public override async Task<long> DeleteManyAsync(Expression<Func<T, bool>> filter, bool hardDelete = false)
         {
             var entities = _dbContext.Set<T>().Where(filter);
+
+            if(!hardDelete)
+            {
+                await entities.ForEachAsync(x =>
+                {
+                    x.Deleted = true;
+                    _dbContext.Entry(x).State = EntityState.Modified;
+                });
+
+                return await _dbContext.SaveChangesAsync();
+            }
+
             _dbContext.Set<T>().RemoveRange(entities);
             return await _dbContext.SaveChangesAsync();
         }

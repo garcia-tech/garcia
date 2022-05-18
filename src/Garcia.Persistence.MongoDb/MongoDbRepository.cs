@@ -48,13 +48,26 @@ namespace Garcia.Persistence.MongoDb
             return count > 0;
         }
 
-        public async Task<long> DeleteAsync(T entity)
+        public async Task<long> DeleteAsync(T entity, bool hardDelete = false)
         {
+            if(!hardDelete)
+            {
+                entity.Deleted = true;
+                await Collection.FindOneAndReplaceAsync(x => x.Id == entity.Id, entity);
+                return entity == null ? 0 : 1;
+            }
+
             return (await Collection.DeleteOneAsync(x => x.Id == entity.Id)).DeletedCount;
         }
 
-        public async Task<long> DeleteManyAsync(Expression<Func<T, bool>> filter)
+        public async Task<long> DeleteManyAsync(Expression<Func<T, bool>> filter, bool hardDelete = false)
         {
+            if(!hardDelete)
+            {
+                var definition = Builders<T>.Update.Set(x => x.Deleted, true);
+                return (await Collection.UpdateManyAsync(filter, definition)).ModifiedCount;
+            }
+
             return (await Collection.DeleteManyAsync(filter)).DeletedCount;
         }
 
