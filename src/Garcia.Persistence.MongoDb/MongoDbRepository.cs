@@ -61,7 +61,7 @@ namespace Garcia.Persistence.MongoDb
         public async Task<IReadOnlyList<T>> GetAllAsync()
         {
             return await (await Collection
-                .FindAsync(_ => true))
+                .FindAsync(x => !x.Deleted))
                 .ToListAsync();
         }
 
@@ -69,7 +69,7 @@ namespace Garcia.Persistence.MongoDb
         {
             return await Collection
                 .Aggregate()
-                .Match(_ => true)
+                .Match(x => !x.Deleted)
                 .Skip((page - 1) * size)
                 .Limit(size)
                 .ToListAsync();
@@ -85,7 +85,7 @@ namespace Garcia.Persistence.MongoDb
         public async Task<T> GetByIdAsync(string id)
         {
             return await (await Collection
-                .FindAsync(x => x.Id == id))
+                .FindAsync(x => !x.Deleted && x.Id == id))
                 .FirstOrDefaultAsync();
         }
 

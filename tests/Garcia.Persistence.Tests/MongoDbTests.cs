@@ -185,5 +185,33 @@ namespace Garcia.Persistence.Tests
             result.ShouldBeTrue();
             DisposeConnection();
         }
+
+        [Fact]
+        public async void Soft_Delete_Should_Success()
+        {
+            CreateConnection();
+
+            var entities = new List<TestMongoEntity>()
+            {
+                new TestMongoEntity
+                {
+                    Name = "Test1"
+                },
+                new TestMongoEntity
+                {
+                    Name = "Test2"
+                }
+            };
+
+            var resultCount = await _repository.AddRangeAsync(entities);
+            resultCount.ShouldBe(2);
+            var refItem = (await _repository.GetAllAsync()).FirstOrDefault();
+            refItem!.Deleted = true;
+            await _repository.UpdateAsync(refItem);
+            var list = await _repository.GetAllAsync();
+            list.Any(x => x.Id == refItem.Id).ShouldBeFalse();
+            var deletedItem = await _repository.GetByIdAsync(refItem.Id);
+            deletedItem.ShouldBeNull();
+        }
     }
 }

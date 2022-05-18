@@ -53,13 +53,13 @@ namespace Garcia.Persistence.Cassandra
 
         public async Task<IReadOnlyList<T>> GetAllAsync()
         {
-            var list = await _table.ExecuteAsync();
+            var list = await _table.Where(x => !x.Deleted).ExecuteAsync();
             return list.ToList();
         }
 
         public async Task<IReadOnlyList<T>> GetAllAsync(Guid referenceId, int size)
         {
-            var list = await _table.Where(x => x.Id.CompareTo(referenceId) > 0).Take(size)
+            var list = await _table.Where(x => !x.Deleted && x.Id.CompareTo(referenceId) > 0).Take(size)
                 .ExecuteAsync();
             return list.ToList();
         }
@@ -72,7 +72,7 @@ namespace Garcia.Persistence.Cassandra
 
         public async Task<T> GetByIdAsync(Guid id)
         {
-            return await _table.FirstOrDefault(x => x.Id == id).ExecuteAsync();
+            return await _table.FirstOrDefault(x => !x.Deleted && x.Id == id).ExecuteAsync();
         }
 
         public async Task<long> UpdateAsync(T entity)
