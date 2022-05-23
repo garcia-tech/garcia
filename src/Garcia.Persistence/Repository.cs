@@ -27,14 +27,14 @@ namespace Garcia.Persistence
             return await _repository.AddRangeAsync(entities);
         }
 
-        public override async Task<long> DeleteAsync(T entity)
+        public override async Task<long> DeleteAsync(T entity, bool hardDelete = false)
         {
-            return await _repository.DeleteAsync(entity);
+            return await _repository.DeleteAsync(entity, hardDelete);
         }
 
-        public override async Task<long> DeleteManyAsync(Expression<Func<T, bool>> filter)
+        public override async Task<long> DeleteManyAsync(Expression<Func<T, bool>> filter, bool hardDelete = false)
         {
-            return await _repository.DeleteManyAsync(filter);
+            return await _repository.DeleteManyAsync(filter, hardDelete);
         }
 
         public override async Task<IReadOnlyList<T>> GetAllAsync()

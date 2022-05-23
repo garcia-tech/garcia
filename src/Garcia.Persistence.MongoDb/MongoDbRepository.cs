@@ -48,20 +48,33 @@ namespace Garcia.Persistence.MongoDb
             return count > 0;
         }
 
-        public async Task<long> DeleteAsync(T entity)
+        public async Task<long> DeleteAsync(T entity, bool hardDelete = false)
         {
+            if(!hardDelete)
+            {
+                entity.Deleted = true;
+                await Collection.FindOneAndReplaceAsync(x => x.Id == entity.Id, entity);
+                return entity == null ? 0 : 1;
+            }
+
             return (await Collection.DeleteOneAsync(x => x.Id == entity.Id)).DeletedCount;
         }
 
-        public async Task<long> DeleteManyAsync(Expression<Func<T, bool>> filter)
+        public async Task<long> DeleteManyAsync(Expression<Func<T, bool>> filter, bool hardDelete = false)
         {
+            if(!hardDelete)
+            {
+                var definition = Builders<T>.Update.Set(x => x.Deleted, true);
+                return (await Collection.UpdateManyAsync(filter, definition)).ModifiedCount;
+            }
+
             return (await Collection.DeleteManyAsync(filter)).DeletedCount;
         }
 
         public async Task<IReadOnlyList<T>> GetAllAsync()
         {
             return await (await Collection
-                .FindAsync(_ => true))
+                .FindAsync(x => !x.Deleted))
                 .ToListAsync();
         }
 
@@ -69,7 +82,7 @@ namespace Garcia.Persistence.MongoDb
         {
             return await Collection
                 .Aggregate()
-                .Match(_ => true)
+                .Match(x => !x.Deleted)
                 .Skip((page - 1) * size)
                 .Limit(size)
                 .ToListAsync();
@@ -85,7 +98,7 @@ namespace Garcia.Persistence.MongoDb
         public async Task<T> GetByIdAsync(string id)
         {
             return await (await Collection
-                .FindAsync(x => x.Id == id))
+                .FindAsync(x => !x.Deleted && x.Id == id))
                 .FirstOrDefaultAsync();
         }
 

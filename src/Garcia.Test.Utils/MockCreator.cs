@@ -42,14 +42,14 @@ namespace Garcia.Test.Utils
                     return entities.Count();
                 });
 
-            repository.Setup(x => x.DeleteAsync(It.IsAny<TEntity>()))
+            repository.Setup(x => x.DeleteAsync(It.IsAny<TEntity>(), true))
                 .ReturnsAsync((TEntity entity) =>
                 {
                     var result = mockDataSet.Remove(entity);
                     return Convert.ToInt32(result);
                 });
 
-            repository.Setup(x => x.DeleteManyAsync(x => x.Id.Equals(testId)))
+            repository.Setup(x => x.DeleteManyAsync(x => x.Id.Equals(testId), true))
                 .ReturnsAsync(() =>
                 {
                     mockDataSet.RemoveAll(x => x.Id.Equals(testId));
@@ -107,14 +107,14 @@ namespace Garcia.Test.Utils
                     return entities.Count();
                 });
 
-            repository.Setup(x => x.DeleteAsync(It.IsAny<TEntity>()))
+            repository.Setup(x => x.DeleteAsync(It.IsAny<TEntity>(), true))
                 .ReturnsAsync((TEntity entity) =>
                 {
                     var result = mockDataSet.Remove(entity);
                     return Convert.ToInt32(result);
                 });
 
-            repository.Setup(x => x.DeleteManyAsync(x => x.Id.Equals(testId)))
+            repository.Setup(x => x.DeleteManyAsync(x => x.Id.Equals(testId), true))
                 .ReturnsAsync(() =>
                 {
                     mockDataSet.RemoveAll(x => x.Id.Equals(testId));
@@ -173,14 +173,14 @@ namespace Garcia.Test.Utils
                     return entities.Count();
                 });
 
-            mock.Setup(x => x.DeleteAsync(It.IsAny<TEntity>()))
+            mock.Setup(x => x.DeleteAsync(It.IsAny<TEntity>(), true))
                 .ReturnsAsync((TEntity entity) =>
                 {
                     var result = mockDataSet.Remove(entity);
                     return Convert.ToInt32(result);
                 });
 
-            mock.Setup(x => x.DeleteManyAsync(x => x.Id.Equals(testId)))
+            mock.Setup(x => x.DeleteManyAsync(x => x.Id.Equals(testId), true))
                 .ReturnsAsync(() =>
                 {
                     mockDataSet.RemoveAll(x => x.Id.Equals(testId));
@@ -241,14 +241,14 @@ namespace Garcia.Test.Utils
                     return entities.Count();
                 });
 
-            mock.Setup(x => x.DeleteAsync(It.IsAny<TEntity>()))
+            mock.Setup(x => x.DeleteAsync(It.IsAny<TEntity>(),true))
                 .ReturnsAsync((TEntity entity) =>
                 {
                     var result = mockDataSet.Remove(entity);
                     return Convert.ToInt32(result);
                 });
 
-            mock.Setup(x => x.DeleteManyAsync(x => x.Id.Equals(testId)))
+            mock.Setup(x => x.DeleteManyAsync(x => x.Id.Equals(testId), true))
                 .ReturnsAsync(() =>
                 {
                     mockDataSet.RemoveAll(x => x.Id.Equals(testId));

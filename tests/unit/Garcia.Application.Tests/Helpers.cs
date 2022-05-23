@@ -54,7 +54,7 @@ namespace Garcia.Application.Tests
             mockRepository.Setup(repo => repo.UpdateAsync(It.IsAny<TestEntity>()))
                 .ReturnsAsync(1);
 
-            mockRepository.Setup(repo => repo.DeleteAsync(It.IsAny<TestEntity>()))
+            mockRepository.Setup(repo => repo.DeleteAsync(It.IsAny<TestEntity>(), true))
                 .ReturnsAsync(
                     (TestEntity entity) =>
                     {

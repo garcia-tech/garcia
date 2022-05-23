@@ -20,8 +20,8 @@ namespace Garcia.Application.Contracts.Persistence
         public abstract Task<long> AddAsync(T entity);
         public abstract Task<long> AddRangeAsync(IEnumerable<T> entities);
         public abstract Task<long> UpdateAsync(T entity);
-        public abstract Task<long> DeleteAsync(T entity);
-        public abstract Task<long> DeleteManyAsync(Expression<Func<T, bool>> filter);
+        public abstract Task<long> DeleteAsync(T entity, bool hardDelete = false);
+        public abstract Task<long> DeleteManyAsync(Expression<Func<T, bool>> filter, bool hardDelete = false);
         public abstract Task<IReadOnlyList<T>> GetAllAsync(int page, int size);
         public abstract Task<T> GetByIdWithNavigationsAsync(long id);
 

@@ -36,11 +36,13 @@ namespace Garcia.Application.Contracts.Persistence
         /// <returns>Number of affected records.</returns>
         Task<long> AddRangeAsync(IEnumerable<T> entities);
         /// <summary>
-        /// Deletes multiple entities matching the <paramref name="filter"/>.
+        /// Deletes multiple entities matching the <paramref name="filter"/> if <paramref name="hardDelete"/> true.
+        /// Otherwise sets Deleted field of entities to true.
         /// </summary>
         /// <param name="filter">Query of the operation.</param>
+        /// <param name="hardDelete"></param>
         /// <returns>Number of affected records.</returns>
-        Task<long> DeleteManyAsync(Expression<Func<T, bool>> filter);
+        Task<long> DeleteManyAsync(Expression<Func<T, bool>> filter, bool hardDelete = false);
         /// <summary>
         /// Updates single entity <typeparamref name="T"/>
         /// </summary>
@@ -48,11 +50,13 @@ namespace Garcia.Application.Contracts.Persistence
         /// <returns>Number of affected records.</returns>
         Task<long> UpdateAsync(T entity);
         /// <summary>
-        /// Deletes single entity <typeparamref name="T"/>
+        /// Removes single entity <typeparamref name="T"/> if <paramref name="hardDelete"/> is true.
+        /// If not, it sets the entity's Deleted field to true.
         /// </summary>
         /// <param name="entity">The entity to be deleted.</param>
+        /// <param name="hardDelete"></param>
         /// <returns>Number of affected records.</returns>
-        Task<long> DeleteAsync(T entity);
+        Task<long> DeleteAsync(T entity, bool hardDelete = false);
         //Task<IReadOnlyList<T>> GetByKeyAsync(string key, object value);
         /// <summary>
         /// Gets multiple enetities matching the <paramref name="filter"/>.

@@ -7,6 +7,7 @@ using Garcia.Domain;
 using Garcia.Persistence.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
+using Shouldly;
 
 namespace Garcia.Persistence.Tests
 {
@@ -148,6 +149,18 @@ namespace Garcia.Persistence.Tests
             await _repository.DeleteManyAsync(x => x.Key > 4);
             var entities = await _repository.GetAllAsync();
             Assert.DoesNotContain(entities, x => x.Key > 4);
+        }
+
+        [Fact]
+        public async void Soft_Delete_Should_Success()
+        {
+            var item = await _repository.GetByIdAsync(1);
+            item!.Deleted = true;
+            await _repository.UpdateAsync(item);
+            var list = await _repository.GetAllAsync();
+            list.Any(x => x.Id == 1).ShouldBeFalse();
+            item = await _repository.GetByIdAsync(1);
+            item.ShouldBeNull();
         }
     }
 }
