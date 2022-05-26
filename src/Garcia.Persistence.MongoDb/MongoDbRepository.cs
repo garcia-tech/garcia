@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using Garcia.Infrastructure;
 using Garcia.Domain.MongoDb;
 using Garcia.Application.MongoDb.Contracts.Persistence;
 using Garcia.Infrastructure.MongoDb;
@@ -20,6 +18,13 @@ namespace Garcia.Persistence.MongoDb
         public MongoDbRepository(IOptions<MongoDbSettings> options)
         {
             var settings = options.Value;
+            var client = new MongoClient(settings.ConnectionString);
+            var database = client.GetDatabase(settings.DatabaseName);
+            Collection = database.GetCollection<T>(typeof(T).Name);
+        }
+
+        public MongoDbRepository(MongoDbSettings settings)
+        {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
             Collection = database.GetCollection<T>(typeof(T).Name);

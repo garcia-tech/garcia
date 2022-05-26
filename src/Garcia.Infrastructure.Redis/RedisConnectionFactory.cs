@@ -14,23 +14,32 @@ namespace Garcia.Infrastructure.Redis
         private readonly int _cacheExpirationInMinutes;
         private readonly IServer _server;
         private readonly string _serviceLockKey;
+
         public RedisConnectionFactory(IOptions<RedisSettings> options)
         {
-            _multiplexer = CreateLazyConnection(options).Value;
+            _multiplexer = CreateLazyConnection(options.Value).Value;
             _cacheExpirationInMinutes = options.Value.CacheExpirationInMinutes;
             _server = _multiplexer.GetServer($"{options.Value.Host}:{options.Value.Port}");
             _serviceLockKey = options.Value.ServiceLockKey;
         }
 
-        private ConnectionMultiplexer CreateConnection(IOptions<RedisSettings> options)
+        public RedisConnectionFactory(RedisSettings settings)
         {
-            return ConnectionMultiplexer.Connect($"{options.Value.Host}:{options.Value.Port}, password={options.Value.Password}");
+            _multiplexer = CreateLazyConnection(settings).Value;
+            _cacheExpirationInMinutes = settings.CacheExpirationInMinutes;
+            _server = _multiplexer.GetServer($"{settings.Host}:{settings.Port}");
+            _serviceLockKey = settings.ServiceLockKey;
         }
 
-        private Lazy<ConnectionMultiplexer> CreateLazyConnection(IOptions<RedisSettings> options)
+        private ConnectionMultiplexer CreateConnection(RedisSettings settings)
+        {
+            return ConnectionMultiplexer.Connect($"{settings.Host}:{settings.Port}, password={settings.Password}");
+        }
+
+        private Lazy<ConnectionMultiplexer> CreateLazyConnection(RedisSettings settings)
         {
             return new Lazy<ConnectionMultiplexer>(() =>
-                ConnectionMultiplexer.Connect($"{options.Value.Host}:{options.Value.Port}, password={options.Value.Password}")
+                ConnectionMultiplexer.Connect($"{settings.Host}:{settings.Port}, password={settings.Password}")
             );
         }
 
