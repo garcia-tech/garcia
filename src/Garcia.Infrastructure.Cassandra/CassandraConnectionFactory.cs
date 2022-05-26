@@ -13,6 +13,11 @@ namespace Garcia.Infrastructure.Cassandra
             _settings = options.Value;
         }
 
+        public CassandraConnectionFactory(CassandraSettings settings)
+        {
+            _settings = settings;
+        }
+
         public Cluster GetCluster()
         {
             var builder = Cluster.Builder();
