@@ -10,5 +10,6 @@
         public string Username { get; set; }
         public string Password { get; set; }
         public bool AuthenticationRequired { get; }
+        public string IndexFormat { get; set; }
     }
 }

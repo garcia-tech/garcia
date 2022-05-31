@@ -13,6 +13,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Garcia.Infrastructure.ElasticSearch\Garcia.Infrastructure.ElasticSearch.csproj" />
 		<ProjectReference Include="..\Garcia.Infrastructure.Logging.Serilog\Garcia.Infrastructure.Logging.Serilog.csproj" />
 	</ItemGroup>
 

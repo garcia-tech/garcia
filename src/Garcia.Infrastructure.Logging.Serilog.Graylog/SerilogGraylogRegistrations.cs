@@ -90,5 +90,36 @@ namespace Garcia.Infrastructure.Logging.Serilog.Graylog
             var logger = loggerConfigurations.CreateLogger();
             return logging.ClearProviders().AddSerilog(logger);
         }
+
+        public static ILoggingBuilder AddGarciaSerilogGraylog(this ILoggingBuilder logging, GraylogSettings settings, LogEventLevel minimumLevel = LogEventLevel.Debug, int bufferSize = 1000, bool blockWhenFull = false, bool logConsole = false, params CustomProperty[] customProperties)
+        {
+            var options = new GraylogSinkOptions
+            {
+                HostnameOrAddress = settings.Host,
+                Port = settings.Port,
+                TransportType = TransportType.Http
+
+            };
+
+            if (!string.IsNullOrEmpty(settings.Username) && !string.IsNullOrEmpty(settings.Password))
+            {
+                options.PasswordInHttp = settings.Password;
+                options.UsernameInHttp = settings.Username;
+            }
+
+            var loggerConfigurations = new LoggerConfiguration()
+                .AddCustomProperties(customProperties)
+                .MinimumLevel.Is(minimumLevel)
+                .Enrich.FromLogContext()
+                .Filter.ByExcluding(Matching.FromSource("System"))
+                .WriteTo.Async(c => c.Graylog(options), bufferSize, blockWhenFull);
+
+            if (logConsole)
+            {
+                loggerConfigurations.WriteTo.Async(c => c.Console(), bufferSize, blockWhenFull);
+            }
+            var logger = loggerConfigurations.CreateLogger();
+            return logging.ClearProviders().AddSerilog(logger);
+        }
     }
 }

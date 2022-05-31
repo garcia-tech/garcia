@@ -1,4 +1,5 @@
-﻿using Garcia.Infrastructure.Logging.Serilog.Configurations;
+﻿using Garcia.Infrastructure.ElasticSearch;
+using Garcia.Infrastructure.Logging.Serilog.Configurations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Serilog;
@@ -77,6 +78,39 @@ namespace Garcia.Infrastructure.Logging.Serilog.ElasticSearch
             if (!string.IsNullOrEmpty(configuration["ElasticSearchSettings:Username"]) && !string.IsNullOrEmpty(configuration["ElasticSearchSettings:Password"]))
             {
                 options.ModifyConnectionSettings = x => x.BasicAuthentication(configuration["ElasticSearchSettings:Username"], configuration["ElasticSearchSettings:Password"]);
+            }
+
+            var loggerConfigurations = new LoggerConfiguration()
+                .AddCustomProperties(customProperties)
+                .MinimumLevel.Is(minimumLevel)
+                .Enrich.FromLogContext()
+                .Filter.ByExcluding(Matching.FromSource("System"))
+                .WriteTo.Async(c => c.Elasticsearch(options), bufferSize, blockWhenFull);
+
+            if (logConsole)
+            {
+                loggerConfigurations.WriteTo.Async(c => c.Console(), bufferSize, blockWhenFull);
+            }
+            var logger = loggerConfigurations.CreateLogger();
+            return logging.ClearProviders().AddSerilog(logger);
+        }
+
+        public static ILoggingBuilder AddGarciaSerilogElastic(this ILoggingBuilder logging, ElasticSearchSettings settings, LogEventLevel minimumLevel = LogEventLevel.Debug, int bufferSize = 1000, bool blockWhenFull = false, bool logConsole = false, params CustomProperty[] customProperties)
+        {
+            var options = new ElasticsearchSinkOptions(new Uri(settings.Uri))
+            {
+                AutoRegisterTemplate = true,
+                OverwriteTemplate = true,
+                AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv7,
+                NumberOfReplicas = 1,
+                NumberOfShards = 2,
+                IndexFormat = settings.IndexFormat,
+                FailureCallback = e => Console.WriteLine(e.Exception)
+            };
+
+            if (!string.IsNullOrEmpty(settings.Username) && !string.IsNullOrEmpty(settings.Password))
+            {
+                options.ModifyConnectionSettings = x => x.BasicAuthentication(settings.Username, settings.Password);
             }
 
             var loggerConfigurations = new LoggerConfiguration()
