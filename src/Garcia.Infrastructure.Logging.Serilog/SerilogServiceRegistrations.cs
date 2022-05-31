@@ -1,4 +1,5 @@
 ﻿using Garcia.Infrastructure.Logging.Serilog.Configurations;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Events;
@@ -56,6 +57,23 @@ namespace Garcia.Infrastructure.Logging.Serilog
                 .MinimumLevel.Is(minimumLevel)
                 .Enrich.FromLogContext()
                 .WriteTo.Async(c => c.File(filePath), bufferSize, blockWhenFull);
+
+            if (logConsole)
+            {
+                logConfiguration.WriteTo.Async(c => c.Console(), bufferSize, blockWhenFull);
+            }
+
+            var logger = logConfiguration.CreateLogger();
+            return logging.ClearProviders().AddSerilog(logger);
+        }
+
+        public static ILoggingBuilder AddGarciaSerilogFile(this ILoggingBuilder logging, IConfiguration configuration, LogEventLevel minimumLevel = LogEventLevel.Debug, int bufferSize = 1000, bool blockWhenFull = false, bool logConsole = false, params CustomProperty[] customProperties)
+        {
+            var logConfiguration = new LoggerConfiguration()
+                .AddCustomProperties(customProperties)
+                .MinimumLevel.Is(minimumLevel)
+                .Enrich.FromLogContext()
+                .WriteTo.Async(c => c.File(configuration["FileLoggerConfiguration:Path"]), bufferSize, blockWhenFull);
 
             if (logConsole)
             {
