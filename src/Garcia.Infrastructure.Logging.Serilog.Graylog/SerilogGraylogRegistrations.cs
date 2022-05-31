@@ -5,6 +5,7 @@ using Serilog;
 using Serilog.Sinks.Graylog;
 using Serilog.Sinks.Graylog.Core.Transport;
 using Garcia.Infrastructure.Logging.Serilog.Configurations;
+using Microsoft.Extensions.Configuration;
 
 namespace Garcia.Infrastructure.Logging.Serilog.Graylog
 {
@@ -42,6 +43,37 @@ namespace Garcia.Infrastructure.Logging.Serilog.Graylog
             {
                 options.PasswordInHttp = password;
                 options.UsernameInHttp = username;
+            }
+
+            var loggerConfigurations = new LoggerConfiguration()
+                .AddCustomProperties(customProperties)
+                .MinimumLevel.Is(minimumLevel)
+                .Enrich.FromLogContext()
+                .Filter.ByExcluding(Matching.FromSource("System"))
+                .WriteTo.Async(c => c.Graylog(options), bufferSize, blockWhenFull);
+
+            if (logConsole)
+            {
+                loggerConfigurations.WriteTo.Async(c => c.Console(), bufferSize, blockWhenFull);
+            }
+            var logger = loggerConfigurations.CreateLogger();
+            return logging.ClearProviders().AddSerilog(logger);
+        }
+
+        public static ILoggingBuilder AddGarciaSerilogGraylog(this ILoggingBuilder logging, IConfiguration configuration, LogEventLevel minimumLevel = LogEventLevel.Debug, int bufferSize = 1000, bool blockWhenFull = false, bool logConsole = false, params CustomProperty[] customProperties)
+        {
+            var options = new GraylogSinkOptions
+            {
+                HostnameOrAddress = configuration["GraylogSettings:Host"],
+                Port = configuration.GetSection("GraylogSettings").GetValue<int>("Port"),
+                TransportType = TransportType.Http
+
+            };
+
+            if (!string.IsNullOrEmpty(configuration["GraylogSettings:Username"]) && !string.IsNullOrEmpty(configuration["GraylogSettings:Password"]))
+            {
+                options.PasswordInHttp = configuration["GraylogSettings:Password"];
+                options.UsernameInHttp = configuration["GraylogSettings:Username"];
             }
 
             var loggerConfigurations = new LoggerConfiguration()
