@@ -5,9 +5,8 @@ namespace Garcia.Application.Contracts.PushNotification
 {
     public interface IPushNotificationService
     {
-        Task<int> SendPushNotificationAsync(string token, Dictionary<string, string> data);
-        Task<int> SendPushNotificationAsync(List<string> tokens, Dictionary<string, string> data);
-        Task<int> SendBatchPushNotificationAsync(string token, List<Dictionary<string, string>> data);
-        Task<int> SendPushNotificationToTopicAsync(string topic, Dictionary<string, string> data);
+        Task<string> SendPushNotificationAsync(string token, string title, string body, string? imageUrl = null, Dictionary<string, string>? data = null);
+        Task<int> SendPushNotificationAsync(List<string> tokens, string title, string body, string? imageUrl = null, Dictionary<string, string>? data = null);
+        Task<string> SendPushNotificationToTopicAsync(string topic, string title, string body, string? imageUrl = null, Dictionary<string, string>? data = null);
     }
 }
