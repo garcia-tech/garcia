@@ -3,6 +3,7 @@ using FirebaseAdmin.Messaging;
 using Garcia.Application.Contracts.PushNotification;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.Extensions.Options;
+using Garcia.Infrastructure;
 
 namespace Garcia.Infrastructure.PushNotification.Firebase
 {
@@ -13,67 +14,65 @@ namespace Garcia.Infrastructure.PushNotification.Firebase
         public FirebasePushNotificationService(IOptions<FirebasePushNotificationSettings> options)
         {
             var settings = options.Value;
+            GoogleCredential googleCredential = null;
+
+            if (!string.IsNullOrEmpty(settings.JsonString))
+            {
+                googleCredential = GoogleCredential.FromJson(settings.JsonString);
+            }
+            else if (!string.IsNullOrEmpty(settings.JsonFilePath))
+            {
+                googleCredential = GoogleCredential.FromFile(settings.JsonFilePath);
+            }
+            else if (!string.IsNullOrEmpty(settings.AccessToken))
+            {
+                googleCredential = GoogleCredential.FromAccessToken(settings.AccessToken);
+            }
+
+            if (googleCredential == null)
+            {
+                throw new InfrastructureException("GoogleCredential cannot be empty.");
+            }
 
             _firebaseApp = FirebaseApp.Create(new AppOptions()
             {
-                Credential = !string.IsNullOrEmpty(settings.AccessToken) ? 
-                    GoogleCredential.FromAccessToken(settings.AccessToken) :
-                    GoogleCredential.FromFile(settings.FilePath)
+                Credential = googleCredential
             });
         }
 
-        public async Task<int> SendPushNotificationAsync(string token, Dictionary<string, string> data)
+        private Message CreateMessage(string token, string title, string body, string? imageUrl = null, Dictionary<string, string>? data = null)
         {
-            var message = new Message()
+            return new Message()
             {
                 Data = data,
                 Token = token,
-
-                Android = new AndroidConfig
+                Notification = new Notification()
                 {
-                    Data = data
-                },
-
-                Apns = new ApnsConfig
-                {
-                    CustomData = (IDictionary<string, object>) 
-                        data.ToDictionary(x => x.Key, x => x.Value),
-
-                    Aps = new Aps
-                    {
-                        MutableContent = true,
-                        ContentAvailable = false
-                    }
+                    Body = body,
+                    Title = title,
+                    ImageUrl = imageUrl
                 }
             };
+        }
 
+        public async Task<int> SendPushNotificationAsync(string token, string title, string body, string? imageUrl = null, Dictionary<string, string>? data = null)
+        {
+            var message = CreateMessage(token, title, body, imageUrl, data);
             string response = await FirebaseMessaging.DefaultInstance.SendAsync(message);
             return string.IsNullOrEmpty(response) ? 0 : 1;
         }
 
-        public async Task<int> SendPushNotificationToTopicAsync(string topic, Dictionary<string, string> data)
+        public async Task<int> SendPushNotificationToTopicAsync(string topic, string title, string body, string? imageUrl = null, Dictionary<string, string>? data = null)
         {
             var message = new Message()
             {
                 Data = data,
                 Topic = topic,
-
-                Android = new AndroidConfig
+                Notification = new Notification()
                 {
-                    Data = data
-                },
-
-                Apns = new ApnsConfig
-                {
-                    CustomData = (IDictionary<string, object>)
-                        data.ToDictionary(x => x.Key, x => x.Value),
-
-                    Aps = new Aps
-                    {
-                        MutableContent = true,
-                        ContentAvailable = false
-                    }
-
+                    Body = body,
+                    Title = title,
+                    ImageUrl = imageUrl
                 }
             };
 
@@ -81,60 +80,21 @@ namespace Garcia.Infrastructure.PushNotification.Firebase
             return string.IsNullOrEmpty(response) ? 0 : 1;
         }
 
-        public async Task<int> SendPushNotificationAsync(List<string> tokens, Dictionary<string, string> data)
+        public async Task<int> SendPushNotificationAsync(List<string> tokens, string title, string body, string? imageUrl = null, Dictionary<string, string>? data = null)
         {
             var message = new MulticastMessage()
             {
                 Tokens = tokens,
                 Data = data,
-
-                Android = new AndroidConfig
+                Notification = new Notification()
                 {
-                    Data = data
-                },
-
-                Apns = new ApnsConfig
-                {
-                    CustomData = (IDictionary<string, object>)
-                        data.ToDictionary(x => x.Key, x => x.Value),
-
-                    Aps = new Aps
-                    {
-                        MutableContent = true,
-                        ContentAvailable = false
-                    }
+                    Body = body,
+                    Title = title,
+                    ImageUrl = imageUrl
                 }
             };
 
             var response = await FirebaseMessaging.DefaultInstance.SendMulticastAsync(message);
-            return response.SuccessCount;
-        }
-
-        public async Task<int> SendBatchPushNotificationAsync(string token, List<Dictionary<string, string>> data)
-        {
-            var messages = data.Select(x => new Message()
-            {
-                Token = token,
-                Data = x,
-
-                Android = new AndroidConfig
-                {
-                    Data = x
-                },
-
-                Apns = new ApnsConfig
-                {
-                    CustomData = (IDictionary<string, object>)
-                        x.ToDictionary(d => d.Key, d => d.Value),
-
-                    Aps = new Aps
-                    {
-                        MutableContent = true,
-                        ContentAvailable = false
-                    }
-                }
-            });
-            var response = await FirebaseMessaging.DefaultInstance.SendAllAsync(messages);
             return response.SuccessCount;
         }
     }

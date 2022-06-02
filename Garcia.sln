@@ -105,7 +105,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Application.Cassandr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Exceptions.Cassandra", "src\Garcia.Exceptions.Cassandra\Garcia.Exceptions.Cassandra.csproj", "{9AD3AC64-DC58-4566-92A2-C4E26EB53F75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garcia.Infrastructure.Consul", "src\Garcia.Infrastructure.Consul\Garcia.Infrastructure.Consul.csproj", "{2ED88FEE-2E4D-4743-89B5-6E705BA9C764}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Infrastructure.Consul", "src\Garcia.Infrastructure.Consul\Garcia.Infrastructure.Consul.csproj", "{2ED88FEE-2E4D-4743-89B5-6E705BA9C764}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garcia.Infrastructure.PushNotification.Firebase.Sample", "samples\Garcia.Infrastructure.PushNotification.Firebase.Sample\Garcia.Infrastructure.PushNotification.Firebase.Sample.csproj", "{82BF9385-C612-4CC1-8C9E-121B5F7C5CCE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -309,6 +311,10 @@ Global
 		{2ED88FEE-2E4D-4743-89B5-6E705BA9C764}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2ED88FEE-2E4D-4743-89B5-6E705BA9C764}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2ED88FEE-2E4D-4743-89B5-6E705BA9C764}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82BF9385-C612-4CC1-8C9E-121B5F7C5CCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82BF9385-C612-4CC1-8C9E-121B5F7C5CCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82BF9385-C612-4CC1-8C9E-121B5F7C5CCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82BF9385-C612-4CC1-8C9E-121B5F7C5CCE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

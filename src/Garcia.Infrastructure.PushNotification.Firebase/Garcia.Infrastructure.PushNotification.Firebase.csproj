@@ -15,6 +15,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Garcia.Application\Garcia.Application.csproj" />
+		<ProjectReference Include="..\Garcia.Infrastructure\Garcia.Infrastructure.csproj" />
 	</ItemGroup>
 
 </Project>
