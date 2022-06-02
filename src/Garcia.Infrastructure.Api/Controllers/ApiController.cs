@@ -14,8 +14,9 @@ using System.Linq;
 
 namespace Garcia.Infrastructure.Api.Controllers
 {
-    public abstract class ApiController<T> : ControllerBase
-        where T : IApiUserModel, new()
+    public abstract class ApiController<TLoggedInUserModel, TKey> : ControllerBase
+        where TLoggedInUserModel : IApiUserModel, new()
+        where TKey : IEquatable<TKey>
     {
         protected GarciaInfrastructureApiSettings _settings;
         protected IAsyncRepository _repository;
@@ -99,24 +100,24 @@ namespace Garcia.Infrastructure.Api.Controllers
             return files;
         }
 
-        public T LoggedInApiUser
+        public TLoggedInUserModel LoggedInApiUser
         {
             get
             {
                 if (!string.IsNullOrEmpty(User.Identity.Name))
                 {
-                    return new T() { Id = GetValueFromClaims<string>("id") };
+                    return new TLoggedInUserModel() { Id = GetValueFromClaims<string>("id") };
                 }
 
-                return default(T);
+                return default(TLoggedInUserModel);
             }
         }
 
-        public long UserId
+        public TKey UserId
         {
             get
             {
-                return GetValueFromClaims<long>("id");
+                return GetValueFromClaims<TKey>("id");
             }
         }
 
