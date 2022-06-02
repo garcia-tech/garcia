@@ -8,20 +8,25 @@ namespace Garcia.Infrastructure.PushNotification.Firebase.Sample.Controllers
     [Route("api/[controller]")]
     public class PushNotificationController : ControllerBase
     {
-        private readonly ILogger<PushNotificationController> _logger;
         private readonly IPushNotificationService _pushNotificationService;
 
-        public PushNotificationController(ILogger<PushNotificationController> logger, IPushNotificationService pushNotificationService)
+        public PushNotificationController(IPushNotificationService pushNotificationService)
         {
-            _logger = logger;
             _pushNotificationService = pushNotificationService;
         }
 
         [HttpPost(Name = "SendPushNotification")]
         public async Task<IActionResult> SendPushNotification([FromBody] SendPushNotificationModel model)
         {
-            var response = await _pushNotificationService.SendPushNotificationAsync(model.Token, model.Title, model.Body);
-            return Ok(response);
+            try
+            {
+                var response = await _pushNotificationService.SendPushNotificationAsync(model.Token, model.Title, model.Body);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
     }
 }

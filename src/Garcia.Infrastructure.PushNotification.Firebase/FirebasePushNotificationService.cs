@@ -55,14 +55,14 @@ namespace Garcia.Infrastructure.PushNotification.Firebase
             };
         }
 
-        public async Task<int> SendPushNotificationAsync(string token, string title, string body, string? imageUrl = null, Dictionary<string, string>? data = null)
+        public async Task<string> SendPushNotificationAsync(string token, string title, string body, string? imageUrl = null, Dictionary<string, string>? data = null)
         {
             var message = CreateMessage(token, title, body, imageUrl, data);
             string response = await FirebaseMessaging.DefaultInstance.SendAsync(message);
-            return string.IsNullOrEmpty(response) ? 0 : 1;
+            return response;
         }
 
-        public async Task<int> SendPushNotificationToTopicAsync(string topic, string title, string body, string? imageUrl = null, Dictionary<string, string>? data = null)
+        public async Task<string> SendPushNotificationToTopicAsync(string topic, string title, string body, string? imageUrl = null, Dictionary<string, string>? data = null)
         {
             var message = new Message()
             {
@@ -77,7 +77,7 @@ namespace Garcia.Infrastructure.PushNotification.Firebase
             };
 
             string response = await FirebaseMessaging.DefaultInstance.SendAsync(message);
-            return string.IsNullOrEmpty(response) ? 0 : 1;
+            return response;
         }
 
         public async Task<int> SendPushNotificationAsync(List<string> tokens, string title, string body, string? imageUrl = null, Dictionary<string, string>? data = null)
