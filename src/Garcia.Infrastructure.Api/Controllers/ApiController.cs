@@ -9,10 +9,14 @@ using Garcia.Application;
 using Garcia.Application.Contracts.Persistence;
 using Garcia.Application.Contracts.FileUpload;
 using Garcia.Application.Contracts.ImageResize;
+using Garcia.Infrastructure.Api.Models;
+using System.Linq;
 
-namespace Garcia.Infrastructure.Api
+namespace Garcia.Infrastructure.Api.Controllers
 {
-    public abstract class ApiController : ControllerBase
+    public abstract class ApiController<TLoggedInUserModel, TKey> : ControllerBase
+        where TLoggedInUserModel : IApiUserModel, new()
+        where TKey : IEquatable<TKey>
     {
         protected GarciaInfrastructureApiSettings _settings;
         protected IAsyncRepository _repository;
@@ -94,6 +98,47 @@ namespace Garcia.Infrastructure.Api
             }
 
             return files;
+        }
+
+        public TLoggedInUserModel LoggedInApiUser
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(User.Identity.Name))
+                {
+                    return new TLoggedInUserModel() { Id = GetValueFromClaims<string>("id") };
+                }
+
+                return default(TLoggedInUserModel);
+            }
+        }
+
+        public TKey UserId
+        {
+            get
+            {
+                return GetValueFromClaims<TKey>("id");
+            }
+        }
+
+        public T GetValueFromClaims<T>(string claimsType)
+        {
+            if (User.Claims != null && !string.IsNullOrEmpty(claimsType))
+            {
+                var claims = User.Claims.FirstOrDefault(x => x.Type.ToLowerInvariant() == claimsType.ToLowerInvariant());
+
+                if (claims != null)
+                {
+                    return Helpers.GetValueFromObject<T>(claims.Value);
+                }
+            }
+
+            return default(T);
+        }
+
+        protected virtual string GetCultureCodeFromRequestHeaders()
+        {
+            return Request.Headers["Accept-Language"].ToString();
         }
     }
 
