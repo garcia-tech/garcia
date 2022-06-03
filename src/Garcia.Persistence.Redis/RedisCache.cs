@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text.Json;
@@ -53,9 +52,9 @@ namespace Garcia.Persistence.Redis
             await _database.KeyDeleteAsync(key);
         }
 
-        public async Task<T> SetAsync<T>(string key, T model)
+        public async Task<T> SetAsync<T>(string key, T model, bool persist = false)
         {
-            await _database.StringSetAsync(key, JsonSerializer.Serialize<T>(model), TimeSpan.FromMinutes(CacheExpirationInMinutes));
+            await _database.StringSetAsync(key, JsonSerializer.Serialize<T>(model), persist ? null : TimeSpan.FromMinutes(CacheExpirationInMinutes));
             return model;
         }
 

@@ -22,8 +22,9 @@ namespace Garcia.Application.Contracts.Infrastructure
         /// <typeparam name="T"></typeparam>
         /// <param name="key">Name of the key.</param>
         /// <param name="model">Object to be setted</param>
+        /// <param name="persist">Is setted data would be persist</param>
         /// <returns>Returns setted <typeparamref name="T"/> object</returns>
-        Task<T> SetAsync<T>(string key, T model);
+        Task<T> SetAsync<T>(string key, T model, bool persist = false);
         /// <summary>
         /// Removes the specifed key. A key is ignored if does not exists
         /// </summary>
