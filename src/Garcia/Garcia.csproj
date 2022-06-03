@@ -20,6 +20,7 @@
     <ProjectReference Include="..\Garcia.Infrastructure.FileUpload.AmazonS3\Garcia.Infrastructure.FileUpload.AmazonS3.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.FileUpload.Local\Garcia.Infrastructure.FileUpload.Local.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.ImageResize.Local\Garcia.Infrastructure.ImageResize.Local.csproj" />
+    <ProjectReference Include="..\Garcia.Infrastructure.Localization.Local\Garcia.Infrastructure.Localization.Local.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.Logging.Serilog.ElasticSearch\Garcia.Infrastructure.Logging.Serilog.ElasticSearch.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.Logging.Serilog.Graylog\Garcia.Infrastructure.Logging.Serilog.Graylog.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.Logging.Serilog\Garcia.Infrastructure.Logging.Serilog.csproj" />
