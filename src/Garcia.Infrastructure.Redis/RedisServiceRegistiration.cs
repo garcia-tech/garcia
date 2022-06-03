@@ -24,6 +24,20 @@ namespace Garcia.Infrastructure.Redis
             return services;
         }
 
+        public static IServiceCollection AddRedisConnection<T>(this IServiceCollection services, T settings) where T : RedisSettings
+        {
+            services.Configure<T>(o =>
+            {
+                o.CacheExpirationInMinutes = settings.CacheExpirationInMinutes;
+                o.Host = settings.Host;
+                o.Port = settings.Port;
+                o.Password = settings.Password;
+            });
+
+            services.AddSingleton<RedisConnectionFactory>();
+            return services;
+        }
+
         public static IServiceCollection AddRedisConnection(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<RedisSettings>(o =>
