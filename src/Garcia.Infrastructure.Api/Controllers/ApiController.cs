@@ -11,11 +11,12 @@ using Garcia.Application.Contracts.FileUpload;
 using Garcia.Application.Contracts.ImageResize;
 using Garcia.Infrastructure.Api.Models;
 using System.Linq;
+using Garcia.Application.Contracts.Identity;
 
 namespace Garcia.Infrastructure.Api.Controllers
 {
     public abstract class ApiController<TLoggedInUserModel, TKey> : ControllerBase
-        where TLoggedInUserModel : IApiUserModel, new()
+        where TLoggedInUserModel : IUser, new()
         where TKey : IEquatable<TKey>
     {
         protected GarciaInfrastructureApiSettings _settings;
