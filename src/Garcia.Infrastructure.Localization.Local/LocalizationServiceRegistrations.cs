@@ -44,7 +44,7 @@ namespace Garcia.Infrastructure.Localization.Local
             services.AddEfCore<TContext>(options);
             services.AddScoped<ILocalizationItemService, LocalizationItemService>();
             services.AddScoped<ILocalizationService, LocalizationService>();
-            services.AddScoped<ILocalizationItemRepository<LocalizationItem>, LocalizationItemRepository>();
+            services.AddScoped<ILocalizationItemRepository<LocalizationItem>, LocalizationItemRepository<TContext>>();
             return services;
         }
 
@@ -55,7 +55,7 @@ namespace Garcia.Infrastructure.Localization.Local
             services.AddEfCoreInMemory<TContext>(databaseName);
             services.AddScoped<ILocalizationItemService, LocalizationItemService>();
             services.AddScoped<ILocalizationService, LocalizationService>();
-            services.AddScoped<ILocalizationItemRepository<LocalizationItem>, LocalizationItemRepository>();
+            services.AddScoped<ILocalizationItemRepository<LocalizationItem>, LocalizationItemRepository<TContext>>();
             return services;
         }
     }

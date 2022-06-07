@@ -4,9 +4,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Garcia.Infrastructure.Localization.Local
 {
-    public class LocalizationItemRepository : EntityFrameworkRepository<LocalizationItem>, ILocalizationItemRepository<LocalizationItem>
+    public class LocalizationItemRepository<TContext> : EntityFrameworkRepository<LocalizationItem>, ILocalizationItemRepository<LocalizationItem>
+        where TContext : BaseContext
     {
-        public LocalizationItemRepository(DbContext dbContext) : base(dbContext)
+        public LocalizationItemRepository(TContext dbContext) : base(dbContext)
         {
         }
     }
