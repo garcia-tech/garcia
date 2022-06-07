@@ -109,7 +109,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Infrastructure.Consu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Infrastructure.PushNotification.Firebase.Sample", "samples\Garcia.Infrastructure.PushNotification.Firebase.Sample\Garcia.Infrastructure.PushNotification.Firebase.Sample.csproj", "{82BF9385-C612-4CC1-8C9E-121B5F7C5CCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garcia.Infrastructure.Localization.Local", "src\Garcia.Infrastructure.Localization.Local\Garcia.Infrastructure.Localization.Local.csproj", "{AE785385-814A-4142-8783-FA4A16B131C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Infrastructure.Localization.Local", "src\Garcia.Infrastructure.Localization.Local\Garcia.Infrastructure.Localization.Local.csproj", "{AE785385-814A-4142-8783-FA4A16B131C4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{46E29395-DDA5-43E6-88A2-E92AFB0E5B94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garcia.Infrastructure.Localization.Local.Sample", "samples\Garcia.Infrastructure.Localization.Local.Sample\Garcia.Infrastructure.Localization.Local.Sample.csproj", "{CF03A9BD-2578-43A2-92C0-3CADD3D87758}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -321,6 +325,10 @@ Global
 		{AE785385-814A-4142-8783-FA4A16B131C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE785385-814A-4142-8783-FA4A16B131C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE785385-814A-4142-8783-FA4A16B131C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF03A9BD-2578-43A2-92C0-3CADD3D87758}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF03A9BD-2578-43A2-92C0-3CADD3D87758}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF03A9BD-2578-43A2-92C0-3CADD3D87758}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF03A9BD-2578-43A2-92C0-3CADD3D87758}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -376,7 +384,9 @@ Global
 		{648F562E-9E08-47A8-936A-A4CBF66C80D4} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 		{9AD3AC64-DC58-4566-92A2-C4E26EB53F75} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 		{2ED88FEE-2E4D-4743-89B5-6E705BA9C764} = {087C542F-855C-47ED-96C8-9D088E416ED2}
+		{82BF9385-C612-4CC1-8C9E-121B5F7C5CCE} = {46E29395-DDA5-43E6-88A2-E92AFB0E5B94}
 		{AE785385-814A-4142-8783-FA4A16B131C4} = {087C542F-855C-47ED-96C8-9D088E416ED2}
+		{CF03A9BD-2578-43A2-92C0-3CADD3D87758} = {46E29395-DDA5-43E6-88A2-E92AFB0E5B94}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3255BD7C-849F-4F0F-B86D-5A266B1F50B6}
