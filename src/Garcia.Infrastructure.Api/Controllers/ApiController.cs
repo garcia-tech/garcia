@@ -147,4 +147,13 @@ namespace Garcia.Infrastructure.Api.Controllers
     {
         public string BaseImageUrl { get; set; }
     }
+
+    public abstract class ApiController<TLoggedInUserModel> : ApiController<TLoggedInUserModel, int>
+        where TLoggedInUserModel : IUser, new()
+    {
+        public ApiController(IOptions<GarciaInfrastructureApiSettings> settings, IMediator mediator, IAsyncRepository repository = null, IFileUploadService fileUploadService = null, IImageResizeService imageResizeService = null)
+            : base(settings, mediator, repository, fileUploadService, imageResizeService)
+        {
+        }
+    }
 }
