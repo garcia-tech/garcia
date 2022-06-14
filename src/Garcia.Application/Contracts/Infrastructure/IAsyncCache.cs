@@ -23,8 +23,9 @@ namespace Garcia.Application.Contracts.Infrastructure
         /// <param name="key">Name of the key.</param>
         /// <param name="model">Object to be setted</param>
         /// <param name="persist">Is setted data would be persist</param>
+        /// <param name="expirationInMinutes">Expiration time. If not setted, will be used default expiration time</param>
         /// <returns>Returns setted <typeparamref name="T"/> object</returns>
-        Task<T> SetAsync<T>(string key, T model, bool persist = false);
+        Task<T> SetAsync<T>(string key, T model, bool persist = false, int? expirationInMinutes = null);
         /// <summary>
         /// Removes the specifed key. A key is ignored if does not exists
         /// </summary>
