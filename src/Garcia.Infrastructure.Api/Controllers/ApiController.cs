@@ -139,7 +139,7 @@ namespace Garcia.Infrastructure.Api.Controllers
 
         protected virtual string GetCultureCodeFromRequestHeaders()
         {
-            return Request.Headers["Accept-Language"].ToString();
+            return Request.Headers["Accept-Language"].ToString().Split(',').FirstOrDefault()?.Substring(0, 2);
         }
     }
 

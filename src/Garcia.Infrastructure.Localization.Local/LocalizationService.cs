@@ -22,8 +22,7 @@ namespace Garcia.Infrastructure.Localization.Local
 
         public async Task<string> Localize(string cultureCode, string key)
         {
-            var item = _localizationItemService.LocalizationItems.FirstOrDefault(x =>
-                x.Key == key && x.CultureCode == cultureCode);
+            var item = await _localizationItemService.GetLocalizationItem(key, cultureCode);
 
             if (item == null && AddMissingItem)
             {
@@ -38,27 +37,29 @@ namespace Garcia.Infrastructure.Localization.Local
         {
             var type = item.GetType();
             var typeName = type.Name;
-            // var properties = type
-            //     .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-            //     .Where(x => x.PropertyType == typeof(string) && x.IsDefined(typeof(LocalizableAttribute)));
             var properties = type
-                .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-                .Where(x => x.IsDefined(typeof(LocalizableAttribute)));
+                .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
             foreach (var property in properties)
             {
-                try
-                {
-                    var localizedValue = await Localize(cultureCode, $"{typeName}.{item.Id}.{property.Name}");
+                var localizableAttribute =
+                    Attribute.GetCustomAttribute(property, typeof(LocalizableAttribute)) as LocalizableAttribute;
 
-                    if (!string.IsNullOrEmpty(localizedValue))
-                    {
-                        property.SetValue(item, localizedValue);
-                    }
-                }
-                catch (Exception e)
+                if (localizableAttribute != null && localizableAttribute.IsLocalizable)
                 {
-                    _logger.LogError(e.Message);
+                    try
+                    {
+                        var localizedValue = await Localize(cultureCode, $"{typeName}.{item.Id}.{property.Name}");
+
+                        if (!string.IsNullOrEmpty(localizedValue))
+                        {
+                            property.SetValue(item, localizedValue);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e.Message);
+                    }
                 }
             }
         }
