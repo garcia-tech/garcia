@@ -14,41 +14,41 @@ namespace Garcia.Application.Identity.Services
         where TUser : User<TKey>
         where TUserDto : IUser
     {
-        private readonly TRepository _repository;
-        private readonly IEncryption _encryption;
-        private readonly IMapper _mapper;
-        private readonly IJwtService _jwt;
+        protected TRepository Repository { get; }
+        protected IEncryption Encryption { get; }
+        protected IMapper Mapper { get; }
+        protected IJwtService Jwt { get; }
 
 
         public AuthenticationService(TRepository repository, IEncryption encryption, IJwtService jwt)
         {
-            _jwt = jwt;
-            _repository = repository;
-            _encryption = encryption;
-            _mapper = InitializeMapper()
+            Jwt = jwt;
+            Repository = repository;
+            Encryption = encryption;
+            Mapper = InitializeMapper()
                 .CreateMapper();
         }
 
         public virtual async Task<BaseResponse<TUserDto>> ValidateUser(Credentials request)
         {
-            request.Password = _encryption.CreateOneWayHash(request.Password);
-            var user = (await _repository.GetAsync(x => x.Username == request.Username && x.Password == request.Password))
+            request.Password = Encryption.CreateOneWayHash(request.Password);
+            var user = (await Repository.GetAsync(x => x.Username == request.Username && x.Password == request.Password))
                 .FirstOrDefault();
 
-            if(user == null)
+            if (user == null)
             {
                 return new BaseResponse<TUserDto>(default, System.Net.HttpStatusCode.NotFound,
                     new ApiError("User not found", "Requested user credentials doesn't match any record"));
             }
 
-            var result = _mapper.Map<TUserDto>(user);
+            var result = Mapper.Map<TUserDto>(user);
             return new BaseResponse<TUserDto>(result);
         }
 
         public virtual async Task<BaseResponse<LoginResponse<TUserDto>>> Login(Credentials request, string ip)
         {
-            request.Password = _encryption.CreateOneWayHash(request.Password);
-            var user = (await _repository.GetAsync(x => x.Username == request.Username && x.Password == request.Password))
+            request.Password = Encryption.CreateOneWayHash(request.Password);
+            var user = (await Repository.GetAsync(x => x.Username == request.Username && x.Password == request.Password))
                 .FirstOrDefault();
 
             if (user == null)
@@ -57,11 +57,11 @@ namespace Garcia.Application.Identity.Services
                     new ApiError("Username or Password is incorrect", ""));
             }
 
-            var token = await _jwt.GenerateJwt(user.Username, user.Id.ToString()!, user.Roles);
+            var token = await Jwt.GenerateJwt(user.Username, user.Id.ToString()!, user.Roles);
 
             var result = new LoginResponse<TUserDto>
             {
-                User = _mapper.Map<TUserDto>(user),
+                User = Mapper.Map<TUserDto>(user),
                 TokenInfo = token
             };
 
