@@ -52,9 +52,9 @@ namespace Garcia.Persistence.Redis
             await _database.KeyDeleteAsync(key);
         }
 
-        public async Task<T> SetAsync<T>(string key, T model, bool persist = false)
+        public async Task<T> SetAsync<T>(string key, T model, bool persist = false, int? expirationInMinutes = null)
         {
-            await _database.StringSetAsync(key, JsonSerializer.Serialize<T>(model), persist ? null : TimeSpan.FromMinutes(CacheExpirationInMinutes));
+            await _database.StringSetAsync(key, JsonSerializer.Serialize<T>(model), persist ? null : TimeSpan.FromMinutes(expirationInMinutes ?? CacheExpirationInMinutes));
             return model;
         }
 
