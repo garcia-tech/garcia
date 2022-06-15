@@ -17,11 +17,11 @@ namespace Garcia.Infrastructure.Api.Controllers
         where TKey : IEquatable<TKey>
         where TUserDto : IUser
     {
-        private readonly TService _service;
+        protected TService Service { get; }
 
         public BaseAuthController(TService service)
         {
-            _service = service;
+            Service = service;
         }
 
         [HttpPost("validate")]
@@ -34,7 +34,7 @@ namespace Garcia.Infrastructure.Api.Controllers
                 return StatusCode(400, error);
             }
 
-            var response = await _service.ValidateUser(request);
+            var response = await Service.ValidateUser(request);
             return StatusCode(
                 response.StatusCode,
                 response.Success ? response.Result : response.Error);
@@ -50,7 +50,7 @@ namespace Garcia.Infrastructure.Api.Controllers
                 return StatusCode(400, error);
             }
 
-            var response = await _service.Login(request, GetIpAddress());
+            var response = await Service.Login(request, GetIpAddress());
             return StatusCode(
                 response.StatusCode,
                 response.Success ? response.Result : response.Error);

@@ -15,17 +15,17 @@ namespace Garcia.Infrastructure.Api.Controllers
         where TEntity : IEntity<TKey>
         where TDto : class
     {
-        private readonly TService _service;
+        protected TService Service { get; }
 
         public BaseController(TService services)
         {
-            _service = services;
+            Service = services;
         }
 
         [HttpGet]
         public virtual async Task<ActionResult<BaseResponse<IEnumerable<TDto>>>> GetAll()
         {
-            var response = await _service.GetAllAsync();
+            var response = await Service.GetAllAsync();
             return StatusCode(
                 response.StatusCode,
                 response.Success ? response.Result : response.Error);
@@ -34,7 +34,7 @@ namespace Garcia.Infrastructure.Api.Controllers
         [HttpGet("{id}")]
         public virtual async Task<ActionResult<BaseResponse<TDto>>> GetById(TKey id)
         {
-            var response = await _service.GetByIdAsync(id);
+            var response = await Service.GetByIdAsync(id);
             return StatusCode(
                 response.StatusCode,
                 response.Success ? response.Result : response.Error);
@@ -43,7 +43,7 @@ namespace Garcia.Infrastructure.Api.Controllers
         [HttpPost]
         public virtual async Task<ActionResult<BaseResponse<long>>> Create([FromBody] TDto requestBody)
         {
-            var response = await _service.AddAsync(_service.Mapper.Map<TEntity>(requestBody));
+            var response = await Service.AddAsync(Service.Mapper.Map<TEntity>(requestBody));
             return StatusCode(
                 response.StatusCode,
                 response.Success ? response.Result : response.Error);
@@ -52,7 +52,7 @@ namespace Garcia.Infrastructure.Api.Controllers
         [HttpPut("{id}")]
         public virtual async Task<ActionResult<BaseResponse<long>>> Update(TKey id, [FromBody] TDto requestBody)
         {
-            var response = await _service.UpdateAsync(id, requestBody);
+            var response = await Service.UpdateAsync(id, requestBody);
             return StatusCode(
                 response.StatusCode,
                 response.Success ? response.Result : response.Error);
@@ -61,7 +61,7 @@ namespace Garcia.Infrastructure.Api.Controllers
         [HttpDelete("{id}")]
         public virtual async Task<ActionResult<BaseResponse<long>>> Delete(TKey id)
         {
-            var response = await _service.DeleteAsync(id);
+            var response = await Service.DeleteAsync(id);
             return StatusCode(
                 response.StatusCode,
                 response.Success ? response.Result : response.Error);
