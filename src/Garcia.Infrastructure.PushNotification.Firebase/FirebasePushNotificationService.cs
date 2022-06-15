@@ -34,10 +34,17 @@ namespace Garcia.Infrastructure.PushNotification.Firebase
                 throw new InfrastructureException("GoogleCredential cannot be empty.");
             }
 
-            _firebaseApp = FirebaseApp.Create(new AppOptions()
+            if (FirebaseApp.DefaultInstance == null)
             {
-                Credential = googleCredential
-            });
+                _firebaseApp = FirebaseApp.Create(new AppOptions()
+                {
+                    Credential = googleCredential
+                });
+            }
+            else
+            {
+                _firebaseApp = FirebaseApp.DefaultInstance;
+            }
         }
 
         private Message CreateMessage(string token, string title, string body, string? imageUrl = null, Dictionary<string, string>? data = null)
