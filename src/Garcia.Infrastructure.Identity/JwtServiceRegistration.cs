@@ -86,8 +86,13 @@ namespace Garcia.Infrastructure.Identity
                 options.Issuer = configuration[$"{nameof(JwtIssuerOptions)}:{nameof(options.Issuer)}"];
                 options.Audience = configuration[$"{nameof(JwtIssuerOptions)}:{nameof(options.Audience)}"];
                 options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
-                options.ValidFor = configuration.GetSection(nameof(JwtIssuerOptions)).GetValue<TimeSpan>(nameof(options.ValidFor));
-                options.RefreshTokenOptions = configuration.GetSection(nameof(JwtIssuerOptions)).GetValue<RefreshTokenOptions>(nameof(options.RefreshTokenOptions));
+                options.ValidFor = new TimeSpan(0, configuration.GetSection(nameof(JwtIssuerOptions)).GetValue<int>(nameof(options.ValidFor)), 0);
+
+                options.RefreshTokenOptions = new RefreshTokenOptions
+                {
+                    ValidFor = new TimeSpan(0, configuration.GetSection(nameof(JwtIssuerOptions) + ":" + nameof(options.RefreshTokenOptions)).GetValue<int>(nameof(options.RefreshTokenOptions.ValidFor)), 0)
+                };
+
             });
 
             var tokenValidationParameters = new TokenValidationParameters
