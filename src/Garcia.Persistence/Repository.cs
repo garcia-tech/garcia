@@ -66,5 +66,18 @@ namespace Garcia.Persistence
         {
             return await _repository.UpdateAsync(entity);
         }
+
+        public override async Task<T> GetByFilterWithNavigationsAsync(Expression<Func<T, bool>> filter)
+        {
+            return await _repository.GetByFilterWithNavigationsAsync(filter);
+        }
+        public override async Task<T> GetByFilterAsync(Expression<Func<T, bool>> filter)
+        {
+            return await _repository.GetByFilterAsync(filter);
+        }
+        public override async Task<bool> AnyAsync(Expression<Func<T, bool>> filter)
+        {
+            return await _repository.AnyAsync(filter);
+        }
     }
 }
