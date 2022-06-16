@@ -13,6 +13,8 @@ namespace Garcia.Infrastructure.PushNotification.Firebase
             services.Configure<FirebasePushNotificationSettings>(options =>
             {
                 options.AccessToken = settings.AccessToken;
+                options.JsonString = settings.JsonString;
+                options.JsonFilePath = settings.JsonFilePath;
             });
 
             services.AddScoped<IPushNotificationService, FirebasePushNotificationService>();
@@ -31,6 +33,8 @@ namespace Garcia.Infrastructure.PushNotification.Firebase
             services.Configure<FirebasePushNotificationSettings>(options =>
             {
                 options.AccessToken = configuration[$"{nameof(FirebasePushNotificationSettings)}:{nameof(options.AccessToken)}"];
+                options.JsonString = configuration[$"{nameof(FirebasePushNotificationSettings)}:{nameof(options.JsonString)}"];
+                options.JsonFilePath = configuration[$"{nameof(FirebasePushNotificationSettings)}:{nameof(options.JsonFilePath)}"];
             });
 
             services.AddScoped<IPushNotificationService, FirebasePushNotificationService>();

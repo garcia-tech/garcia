@@ -8,11 +8,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // ################ Garcia Code Start ################
-// Inject IPushNotificationService
-builder.Services.AddScoped<IPushNotificationService, FirebasePushNotificationService>();
-
-// Inject FirebasePushNotificationSettings
-builder.Services.Configure<FirebasePushNotificationSettings>(builder.Configuration.GetSection("FirebasePushNotificationSettings"));
+builder.Services.AddFirebasePushNotificationService(builder.Configuration);
+// builder.Services.AddScoped<IPushNotificationService, FirebasePushNotificationService>();
+// builder.Services.Configure<FirebasePushNotificationSettings>(builder.Configuration.GetSection("FirebasePushNotificationSettings"));
 // ################ Garcia Code End ################
 
 var app = builder.Build();
