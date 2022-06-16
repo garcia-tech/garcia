@@ -107,5 +107,32 @@ namespace Garcia.Persistence.EntityFramework
 
             return await query.FirstOrDefaultAsync(x => !x.Deleted && x.Id == id);
         }
+
+        public override async Task<T> GetByFilterWithNavigationsAsync(Expression<Func<T, bool>> filter)
+        {
+            var query = _dbContext.Set<T>().AsQueryable();
+            var navigations = _dbContext.Model.FindEntityType(typeof(T))?
+                    .GetDerivedTypesInclusive()
+                    .SelectMany(type => type.GetNavigations())
+                    .Distinct();
+
+            if (navigations != null && navigations.Count() > 0)
+            {
+                foreach (var property in navigations)
+                    query = query.Include(property.Name);
+            }
+
+            return await query.FirstOrDefaultAsync(filter);
+        }
+
+        public override async Task<T> GetByFilterAsync(Expression<Func<T, bool>> filter)
+        {
+            return await _dbContext.Set<T>().FirstOrDefaultAsync(filter);
+        }
+
+        public override async Task<bool> AnyAsync(Expression<Func<T, bool>> filter)
+        {
+            return await _dbContext.Set<T>().AnyAsync(filter);
+        }
     }
 }

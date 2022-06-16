@@ -77,5 +77,8 @@ namespace Garcia.Application.Contracts.Persistence
         /// <returns><see cref="IReadOnlyCollection{T}"/></returns>
         Task<IReadOnlyList<T>> GetAllAsync(int page, int size);
         Task<T> GetByIdWithNavigationsAsync(long id);
+        Task<T> GetByFilterWithNavigationsAsync(Expression<Func<T, bool>> filter);
+        Task<T> GetByFilterAsync(Expression<Func<T, bool>> filter);
+        Task<bool> AnyAsync(Expression<Func<T, bool>> filter);
     }
 }

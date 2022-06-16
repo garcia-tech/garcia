@@ -19,10 +19,10 @@ namespace Garcia.Domain
         [BsonRepresentation(BsonType.String)]
         public virtual DateTimeOffset LastUpdatedOn { get; set; }
         public virtual bool Active { get; set; }
-        public virtual int? CreatedBy { get; set; }
-        public virtual int? LastUpdatedBy { get; set; }
+        public virtual string? CreatedBy { get; set; }
+        public virtual string? LastUpdatedBy { get; set; }
         [JsonIgnore]
-        public virtual int? DeletedBy { get; set; }
+        public virtual string? DeletedBy { get; set; }
         [BsonRepresentation(BsonType.String)]
         public virtual DateTimeOffset DeletedOn { get; set; }
         [JsonIgnore]
@@ -88,6 +88,11 @@ namespace Garcia.Domain
         public override int GetHashCode()
         {
             return base.GetHashCode();
+        }
+
+        public TKey ConvertToId(string value)
+        {
+            return (TKey) Convert.ChangeType(value, typeof(TKey));
         }
     }
 }
