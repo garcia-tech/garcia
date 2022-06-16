@@ -21,6 +21,7 @@ namespace Garcia.Application
         public BaseResponse(HttpStatusCode status, ApiError error = null)
         {
             Status = status;
+            _error = error;
         }
 
         public HttpStatusCode Status { get; set; }
