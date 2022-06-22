@@ -2,8 +2,11 @@
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace Garcia.Domain
 {
@@ -58,7 +61,7 @@ namespace Garcia.Domain
             if (Active != isActive)
             {
                 // Question
-                
+
                 Active = isActive;
                 AddIsActiveChangedDomainEvent(isActive);
             }
@@ -67,6 +70,16 @@ namespace Garcia.Domain
         protected virtual void AddIsActiveChangedDomainEvent(bool isActive)
         {
             AddDomainEvent(new IsActiveChangedEvent<TKey>(this.Id, this, isActive));
+        }
+
+        public virtual async Task PublishDomainEvents(IMediator mediator, CancellationToken cancellationToken)
+        {
+            if (!DomainEvents.Any()) return;
+            
+            await Parallel.ForEachAsync(DomainEvents, async (eventItem, cancellationToken) =>
+            {
+                await mediator.Publish(eventItem, cancellationToken);
+            });
         }
 
         public override bool Equals(object obj)
@@ -92,7 +105,7 @@ namespace Garcia.Domain
 
         public TKey ConvertToId(string value)
         {
-            return (TKey) Convert.ChangeType(value, typeof(TKey));
+            return (TKey)Convert.ChangeType(value, typeof(TKey));
         }
     }
 }
