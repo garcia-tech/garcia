@@ -16,7 +16,6 @@ namespace Garcia.Infrastructure.Ocelot.Middleware
                     builder.AllowAnyMethod();
                     builder.AllowAnyHeader();
                     builder.WithExposedHeaders("Content-Disposition");
-                    builder.AllowCredentials();
                 });
 
             app.UseOcelot().Wait();
@@ -37,7 +36,6 @@ namespace Garcia.Infrastructure.Ocelot.Middleware
                     builder.AllowAnyMethod();
                     builder.AllowAnyHeader();
                     builder.WithExposedHeaders("Content-Disposition");
-                    builder.AllowCredentials();
                 });
 
             app.UseOcelot(pipelineConfiguration).Wait();
