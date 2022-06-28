@@ -16,7 +16,7 @@ namespace Garcia.Infrastructure.Email.Mandrill
                 options.SenderEmailAddress = settings.SenderEmailAddress;
             });
 
-            services.AddScoped<IEmailService, MandrillEmailService>();
+            services.AddScoped<IMandrillEmailService, MandrillEmailService>();
             return services;
         }
 
@@ -29,7 +29,7 @@ namespace Garcia.Infrastructure.Email.Mandrill
                 options.SenderEmailAddress = configuration[$"{nameof(MandrillEmailSettings)}:{nameof(options.SenderEmailAddress)}"];
             });
 
-            services.AddScoped<IEmailService, MandrillEmailService>();
+            services.AddScoped<IMandrillEmailService, MandrillEmailService>();
             return services;
         }
     }

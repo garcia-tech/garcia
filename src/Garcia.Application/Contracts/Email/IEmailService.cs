@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Garcia.Application.Contracts.Email
 {
     public interface IEmailService
     {
-        Task SendEmailAsync(string templateName, string recipientEmailAddress, string recipientFullName, string bcc, Dictionary<string, string> parameters);
+        Task SendEmailAsync(string to, string content, string subject, bool isBodyHtml = true, string attachmentPath = null, string attachmentName = null, string[] cc = null, string[] bcc = null);
     }
 }
