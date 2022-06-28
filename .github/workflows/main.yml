@@ -287,6 +287,12 @@ jobs:
           PROJECT_FILE_PATH: src/Garcia.Infrastructure.Consul/Garcia.Infrastructure.Consul.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
+    - name: Publish Garcia.Infrastructure.Email
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: src/Garcia.Infrastructure.Email/Garcia.Infrastructure.Email.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
     - name: Publish Garcia
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:

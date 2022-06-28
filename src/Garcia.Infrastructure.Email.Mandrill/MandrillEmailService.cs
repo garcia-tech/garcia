@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Garcia.Infrastructure.Email.Mandrill
 {
-    public class MandrillEmailService : IEmailService
+    public class MandrillEmailService : IMandrillEmailService
     {
         protected MandrillEmailSettings _settings;
         private ILogger _logger;
