@@ -17,12 +17,12 @@ namespace Garcia.Application.Contracts.Persistence
         /// </summary>
         /// <param name="id">Id of related entity.</param>
         /// <returns>A single entity <typeparamref name="T"/></returns>
-        Task<T> GetByIdAsync(TKey id);
+        Task<T> GetByIdAsync(TKey id, bool getSoftDeletes = false);
         /// <summary>
         /// Gets all entities without any <paramref name="filter"/>.
         /// </summary>
         /// <returns><c>IReadonlyList</c> of <typeparamref name="T"/> all entities.</returns>
-        Task<IReadOnlyList<T>> GetAllAsync();
+        Task<IReadOnlyList<T>> GetAllAsync(bool getSoftDeletes = false);
         /// <summary>
         /// Adds a single entity.
         /// </summary>
@@ -63,7 +63,7 @@ namespace Garcia.Application.Contracts.Persistence
         /// </summary>
         /// <param name="filter">Query of the operation.</param>
         /// <returns></returns>
-        Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> filter);
+        Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> filter, bool getSoftDeletes = false);
         //Task<IReadOnlyList<T>> GetAsync(Dictionary<string, object> filter);
     }
 
@@ -75,10 +75,10 @@ namespace Garcia.Application.Contracts.Persistence
         /// <param name="page">Desired page.</param>
         /// <param name="size">Count of entity.</param>
         /// <returns><see cref="IReadOnlyCollection{T}"/></returns>
-        Task<IReadOnlyList<T>> GetAllAsync(int page, int size);
-        Task<T> GetByIdWithNavigationsAsync(long id);
-        Task<T> GetByFilterWithNavigationsAsync(Expression<Func<T, bool>> filter);
-        Task<T> GetByFilterAsync(Expression<Func<T, bool>> filter);
+        Task<IReadOnlyList<T>> GetAllAsync(int page, int size, bool getSoftDeletes = false);
+        Task<T> GetByIdWithNavigationsAsync(long id, bool getSoftDeletes = false);
+        Task<T> GetByFilterWithNavigationsAsync(Expression<Func<T, bool>> filter, bool getSoftDeletes = false);
+        Task<T> GetByFilterAsync(Expression<Func<T, bool>> filter, bool getSoftDeletes = false);
         Task<bool> AnyAsync(Expression<Func<T, bool>> filter);
     }
 }

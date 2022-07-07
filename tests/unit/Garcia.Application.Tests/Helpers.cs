@@ -40,8 +40,8 @@ namespace Garcia.Application.Tests
             };
 
             var mockRepository = new Mock<IAsyncRepository<TestEntity, long>>();
-            mockRepository.Setup(repo => repo.GetAllAsync()).ReturnsAsync(list);
-            mockRepository.Setup(repo => repo.GetByIdAsync(1)).ReturnsAsync(list.Find(x => x.Id == 1));
+            mockRepository.Setup(repo => repo.GetAllAsync(false)).ReturnsAsync(list);
+            mockRepository.Setup(repo => repo.GetByIdAsync(1, false)).ReturnsAsync(list.Find(x => x.Id == 1));
 
             mockRepository.Setup(repo => repo.AddAsync(It.IsAny<TestEntity>()))
                 .ReturnsAsync(
@@ -78,7 +78,7 @@ namespace Garcia.Application.Tests
                     Password = "CY9rzUYh03PK3k6DJie09g=="
                 },
             };
-            repository.Setup(x => x.GetAsync(It.IsAny<Expression<Func<TestUser, bool>>>()))
+            repository.Setup(x => x.GetAsync(It.IsAny<Expression<Func<TestUser, bool>>>(), false))
                 .ReturnsAsync((Expression<Func<TestUser, bool>> expression) =>
                 {
                     var result = list.Where(expression.Compile());

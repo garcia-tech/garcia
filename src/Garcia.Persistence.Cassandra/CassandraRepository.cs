@@ -73,28 +73,39 @@ namespace Garcia.Persistence.Cassandra
             return result.GetRows().Count();
         }
 
-        public async Task<IReadOnlyList<T>> GetAllAsync()
+        public async Task<IReadOnlyList<T>> GetAllAsync(bool getSoftDeletes = false)
         {
-            var list = await _table.Where(x => !x.Deleted).ExecuteAsync();
+            var list = !getSoftDeletes ? await _table.Where(x => !x.Deleted).ExecuteAsync()
+                : await _table.ExecuteAsync();
             return list.ToList();
         }
 
-        public async Task<IReadOnlyList<T>> GetAllAsync(Guid referenceId, int size)
+        public async Task<IReadOnlyList<T>> GetAllAsync(Guid referenceId, int size, bool getSoftDeletes = false)
         {
-            var list = await _table.Where(x => !x.Deleted && x.Id.CompareTo(referenceId) > 0).Take(size)
+            Expression<Func<T, bool>> expression = !getSoftDeletes ? (x => !x.Deleted && x.Id.CompareTo(referenceId) > 0)
+                : x => x.Id.CompareTo(referenceId) > 0;
+            var list = await _table.Where(expression).Take(size)
                 .ExecuteAsync();
             return list.ToList();
         }
 
-        public async Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> filter)
+        public async Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> filter , bool getSoftDeletes = false)
         {
-            var result = await _table.Where(filter).ExecuteAsync();
+            var query = _table.Where(filter);
+
+            if(!getSoftDeletes)
+            {
+                query.Where(x => !x.Deleted);
+            }
+
+            var result = await query.ExecuteAsync();
             return result.ToList();
         }
 
-        public async Task<T> GetByIdAsync(Guid id)
+        public async Task<T> GetByIdAsync(Guid id, bool getSoftDeletes = false)
         {
-            return await _table.FirstOrDefault(x => !x.Deleted && x.Id == id).ExecuteAsync();
+            return !getSoftDeletes ? await _table.FirstOrDefault(x => !x.Deleted && x.Id == id).ExecuteAsync()
+                : await _table.FirstOrDefault(x => x.Id == id).ExecuteAsync();
         }
 
         public async Task<long> UpdateAsync(T entity)

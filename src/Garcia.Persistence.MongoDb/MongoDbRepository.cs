@@ -55,9 +55,10 @@ namespace Garcia.Persistence.MongoDb
 
         public async Task<long> DeleteAsync(T entity, bool hardDelete = false)
         {
-            if(!hardDelete)
+            if (!hardDelete)
             {
                 entity.Deleted = true;
+                entity.DeletedOn = DateTime.Now;
                 await Collection.FindOneAndReplaceAsync(x => x.Id == entity.Id, entity);
                 return entity == null ? 0 : 1;
             }
@@ -67,40 +68,52 @@ namespace Garcia.Persistence.MongoDb
 
         public async Task<long> DeleteManyAsync(Expression<Func<T, bool>> filter, bool hardDelete = false)
         {
-            if(!hardDelete)
+            if (!hardDelete)
             {
-                var definition = Builders<T>.Update.Set(x => x.Deleted, true);
+                var definition = Builders<T>.Update.Set(x => x.Deleted, true)
+                    .Set(x => x.DeletedOn, DateTime.Now);
                 return (await Collection.UpdateManyAsync(filter, definition)).ModifiedCount;
             }
 
             return (await Collection.DeleteManyAsync(filter)).DeletedCount;
         }
 
-        public async Task<IReadOnlyList<T>> GetAllAsync()
+        public async Task<IReadOnlyList<T>> GetAllAsync(bool getSoftDeletes = false)
         {
-            return await (await Collection
+            return !getSoftDeletes ? await (await Collection
                 .FindAsync(x => !x.Deleted))
+                .ToListAsync() : await (await Collection
+                .FindAsync(_ => true))
                 .ToListAsync();
         }
 
-        public async Task<IReadOnlyList<T>> GetAllAsync(int page, int size)
+        public async Task<IReadOnlyList<T>> GetAllAsync(int page, int size, bool getSoftDeletes = false)
         {
-            return await Collection
-                .Aggregate()
-                .Match(x => !x.Deleted)
-                .Skip((page - 1) * size)
-                .Limit(size)
-                .ToListAsync();
+            var aggregateFluent = Collection
+                .Aggregate();
+
+            if(!getSoftDeletes)
+            {
+                aggregateFluent.Match(x => !x.Deleted);
+            }
+
+            return await aggregateFluent.Skip((page - 1) * size)
+                .Limit(size).ToListAsync();
         }
 
-        public async Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> filter)
+        public async Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> filter, bool getSoftDeletes = false)
         {
-            return await (await Collection
-                .FindAsync(filter))
-                .ToListAsync();
+            var query = Collection.AsQueryable();
+
+            if(!getSoftDeletes)
+            {
+                query.Where(x => !x.Deleted);
+            }
+
+            return await query.Where(filter).ToAsyncEnumerable().ToListAsync();
         }
 
-        public async Task<T> GetByIdAsync(string id)
+        public async Task<T> GetByIdAsync(string id, bool getSoftDeletes = false)
         {
             return await (await Collection
                 .FindAsync(x => !x.Deleted && x.Id == id))
