@@ -37,27 +37,27 @@ namespace Garcia.Persistence
             return await _repository.DeleteManyAsync(filter, hardDelete);
         }
 
-        public override async Task<IReadOnlyList<T>> GetAllAsync()
+        public override async Task<IReadOnlyList<T>> GetAllAsync(bool getSoftDeletes = false)
         {
-            return (await _repository.GetAllAsync()).ToList();
+            return (await _repository.GetAllAsync(getSoftDeletes)).ToList();
         }
 
-        public override async Task<IReadOnlyList<T>> GetAllAsync(int page, int size)
+        public override async Task<IReadOnlyList<T>> GetAllAsync(int page, int size, bool getSoftDeletes = false)
         {
-            return await _repository.GetAllAsync(page, size);
+            return await _repository.GetAllAsync(page, size, getSoftDeletes);
         }
 
-        public override async Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> filter)
+        public override async Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> filter, bool getSoftDeletes = false)
         {
-            return await _repository.GetAsync(filter);
+            return await _repository.GetAsync(filter, getSoftDeletes);
         }
 
-        public override async Task<T> GetByIdAsync(long id)
+        public override async Task<T> GetByIdAsync(long id, bool getSoftDeletes = false)
         {
-            return await _repository.GetByIdAsync(id);
+            return await _repository.GetByIdAsync(id, getSoftDeletes);
         }
 
-        public override Task<T> GetByIdWithNavigationsAsync(long id)
+        public override Task<T> GetByIdWithNavigationsAsync(long id, bool getSoftDeletes = false)
         {
             throw new NotImplementedException();
         }
@@ -67,13 +67,13 @@ namespace Garcia.Persistence
             return await _repository.UpdateAsync(entity);
         }
 
-        public override async Task<T> GetByFilterWithNavigationsAsync(Expression<Func<T, bool>> filter)
+        public override async Task<T> GetByFilterWithNavigationsAsync(Expression<Func<T, bool>> filter, bool getSoftDeletes = false)
         {
-            return await _repository.GetByFilterWithNavigationsAsync(filter);
+            return await _repository.GetByFilterWithNavigationsAsync(filter, getSoftDeletes);
         }
-        public override async Task<T> GetByFilterAsync(Expression<Func<T, bool>> filter)
+        public override async Task<T> GetByFilterAsync(Expression<Func<T, bool>> filter, bool getSoftDeletes = false)
         {
-            return await _repository.GetByFilterAsync(filter);
+            return await _repository.GetByFilterAsync(filter, getSoftDeletes);
         }
         public override async Task<bool> AnyAsync(Expression<Func<T, bool>> filter)
         {

@@ -56,19 +56,19 @@ namespace Garcia.Test.Utils
                     return mockDataSet.Count(x => x.Id.Equals(testId));
                 });
 
-            repository.Setup(x => x.GetByIdAsync(testId))
+            repository.Setup(x => x.GetByIdAsync(testId, false))
                 .ReturnsAsync(() => 
                 {
                     return mockDataSet.FirstOrDefault(x => x.Id.Equals(testId));
                 });
 
-            repository.Setup(x => x.GetAllAsync())
+            repository.Setup(x => x.GetAllAsync(false))
                 .ReturnsAsync(() =>
                 {
                     return mockDataSet;
                 });
 
-            repository.Setup(x => x.GetAsync(It.IsAny<Expression<Func<TEntity, bool>>>()))
+            repository.Setup(x => x.GetAsync(It.IsAny<Expression<Func<TEntity, bool>>>(), false))
                 .ReturnsAsync((Expression<Func<TEntity, bool>> expression) =>
                 {
                     var result = mockDataSet.Where(expression.Compile());
@@ -121,19 +121,19 @@ namespace Garcia.Test.Utils
                     return mockDataSet.Count(x => x.Id.Equals(testId));
                 });
 
-            repository.Setup(x => x.GetByIdAsync(testId))
+            repository.Setup(x => x.GetByIdAsync(testId, false))
                 .ReturnsAsync(() =>
                 {
                     return mockDataSet.FirstOrDefault(x => x.Id.Equals(testId));
                 });
 
-            repository.Setup(x => x.GetAllAsync())
+            repository.Setup(x => x.GetAllAsync(false))
                 .ReturnsAsync(() =>
                 {
                     return mockDataSet;
                 });
 
-            repository.Setup(x => x.GetAsync(It.IsAny<Expression<Func<TEntity, bool>>>()))
+            repository.Setup(x => x.GetAsync(It.IsAny<Expression<Func<TEntity, bool>>>(), false))
                 .ReturnsAsync((Expression<Func<TEntity, bool>> expression) =>
                 {
                     var result = mockDataSet.Where(expression.Compile());
@@ -187,19 +187,19 @@ namespace Garcia.Test.Utils
                     return mockDataSet.Count(x => x.Id.Equals(testId));
                 });
 
-            mock.Setup(x => x.GetByIdAsync(testId))
+            mock.Setup(x => x.GetByIdAsync(testId, false))
                 .ReturnsAsync(() =>
                 {
                     return mockDataSet.FirstOrDefault(x => x.Id.Equals(testId));
                 });
 
-            mock.Setup(x => x.GetAllAsync())
+            mock.Setup(x => x.GetAllAsync(false))
                 .ReturnsAsync(() =>
                 {
                     return mockDataSet;
                 });
 
-            mock.Setup(x => x.GetAsync(It.IsAny<Expression<Func<TEntity, bool>>>()))
+            mock.Setup(x => x.GetAsync(It.IsAny<Expression<Func<TEntity, bool>>>(), false))
                 .ReturnsAsync((Expression<Func<TEntity, bool>> expression) =>
                 {
                     var result = mockDataSet.Where(expression.Compile());
@@ -255,19 +255,19 @@ namespace Garcia.Test.Utils
                     return mockDataSet.Count(x => x.Id.Equals(testId));
                 });
 
-            mock.Setup(x => x.GetByIdAsync(testId))
+            mock.Setup(x => x.GetByIdAsync(testId, false))
                 .ReturnsAsync(() =>
                 {
                     return mockDataSet.FirstOrDefault(x => x.Id.Equals(testId));
                 });
 
-            mock.Setup(x => x.GetAllAsync())
+            mock.Setup(x => x.GetAllAsync(false))
                 .ReturnsAsync(() =>
                 {
                     return mockDataSet;
                 });
 
-            mock.Setup(x => x.GetAsync(It.IsAny<Expression<Func<TEntity, bool>>>()))
+            mock.Setup(x => x.GetAsync(It.IsAny<Expression<Func<TEntity, bool>>>(), false))
                 .ReturnsAsync((Expression<Func<TEntity, bool>> expression) =>
                 {
                     var result = mockDataSet.Where(expression.Compile());

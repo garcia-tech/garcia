@@ -28,6 +28,6 @@ namespace Garcia.Application.MongoDb.Contracts.Persistence
         /// <param name="page">Desired page.</param>
         /// <param name="size">Count of entity.</param>
         /// <returns><c>IReadonlyList</c> of <typeparamref name="T"/> entities.</returns>
-        Task<IReadOnlyList<T>> GetAllAsync(int page, int size);
+        Task<IReadOnlyList<T>> GetAllAsync(int page, int size, bool getSoftDeletes = false);
     }
 }
