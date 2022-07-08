@@ -24,15 +24,18 @@ namespace Garcia.Persistence.EntityFramework
                 {
                     case EntityState.Added:
                         entry.Entity.CreatedOn = DateTimeOffset.UtcNow;
-                        entry.Entity.CreatedBy = _loggedInUserService?.UserId.ToString();
+                        entry.Entity.CreatedBy = _loggedInUserService?.UserId == null ?
+                            (long)_loggedInUserService!.UserId : default;
                         break;
                     case EntityState.Modified:
                         entry.Entity.LastUpdatedOn = DateTimeOffset.UtcNow;
-                        entry.Entity.LastUpdatedBy = _loggedInUserService?.UserId.ToString();
+                        entry.Entity.LastUpdatedBy = _loggedInUserService?.UserId == null ?
+                            (long)_loggedInUserService!.UserId : default;
                         break;
                     case EntityState.Deleted:
                         entry.Entity.DeletedOn = DateTimeOffset.UtcNow;
-                        entry.Entity.DeletedBy = _loggedInUserService?.UserId.ToString();
+                        entry.Entity.DeletedBy = _loggedInUserService?.UserId == null ?
+                            (long)_loggedInUserService!.UserId : default;
                         break;
                 }
             }
