@@ -9,9 +9,9 @@ namespace Garcia.Persistence.EntityFramework
 {
     public class BaseContext : DbContext
     {
-        private readonly ILoggedInUserService _loggedInUserService;
+        private readonly ILoggedInUserService<long> _loggedInUserService;
 
-        public BaseContext(DbContextOptions options, ILoggedInUserService loggedInUserService) : base(options)
+        public BaseContext(DbContextOptions options, ILoggedInUserService<long> loggedInUserService) : base(options)
         {
             _loggedInUserService = loggedInUserService;
         }

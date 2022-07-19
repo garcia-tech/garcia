@@ -8,20 +8,21 @@ namespace Garcia.Application
 {
     public static class ApplicationServiceRegistrations
     {
-        public static IServiceCollection AddLoggedInUserService(this IServiceCollection services)
+        public static IServiceCollection AddLoggedInUserService<TKey>(this IServiceCollection services)
+            where TKey : IEquatable<TKey>
         {
             services.AddHttpContextAccessor();
 
-            services.AddScoped<ILoggedInUserService>(provider =>
+            services.AddScoped<ILoggedInUserService<TKey>>(provider =>
             {
-                return new LoggedInUserService
-                {
-                    UserId = Convert.ToInt32(provider.GetService<IHttpContextAccessor>()?
+                var loggedInUser = new LoggedInUserService<TKey>();
+                loggedInUser.UserId = loggedInUser.ConvertToId(
+                    provider.GetService<IHttpContextAccessor>()?
                     .HttpContext?
                     .User
                     .Claims
-                    .FirstOrDefault(x => x.Type == "id")?.Value)
-                };
+                    .FirstOrDefault(x => x.Type == "id")?.Value);
+                return loggedInUser;
             });
 
             return services;

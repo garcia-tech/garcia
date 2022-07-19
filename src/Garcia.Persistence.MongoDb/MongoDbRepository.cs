@@ -8,36 +8,47 @@ using MongoDB.Driver;
 using Garcia.Domain.MongoDb;
 using Garcia.Application.MongoDb.Contracts.Persistence;
 using Garcia.Infrastructure.MongoDb;
+using Garcia.Application.Services;
 
 namespace Garcia.Persistence.MongoDb
 {
     public class MongoDbRepository<T> : IAsyncMongoDbRepository<T> where T : MongoDbEntity
     {
-        protected readonly IMongoCollection<T> Collection;
+        protected IMongoCollection<T> Collection { get; }
+        protected readonly ILoggedInUserService<string> _loggedInUserService;
 
-        public MongoDbRepository(IOptions<MongoDbSettings> options)
+        public MongoDbRepository(IOptions<MongoDbSettings> options, ILoggedInUserService<string> loggedInUserService)
         {
             var settings = options.Value;
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
             Collection = database.GetCollection<T>(typeof(T).Name);
+            _loggedInUserService = loggedInUserService;
         }
 
-        public MongoDbRepository(MongoDbSettings settings)
+        public MongoDbRepository(MongoDbSettings settings, ILoggedInUserService<string> loggedInUserService)
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
             Collection = database.GetCollection<T>(typeof(T).Name);
+            _loggedInUserService = loggedInUserService;
         }
 
         public async Task<long> AddAsync(T entity)
         {
+            entity.CreatedBy = _loggedInUserService?.UserId;
             await Collection.InsertOneAsync(entity);
             return entity == null ? 0 : 1;
         }
 
         public async Task<long> AddRangeAsync(IEnumerable<T> entities)
         {
+            entities = entities.Select(x =>
+            {
+                x.CreatedBy = _loggedInUserService.UserId;
+                return x;
+            });
+
             var options = new BulkWriteOptions
             {
                 IsOrdered = false,
@@ -59,6 +70,7 @@ namespace Garcia.Persistence.MongoDb
             {
                 entity.Deleted = true;
                 entity.DeletedOn = DateTime.Now;
+                entity.DeletedBy = _loggedInUserService?.UserId;
                 await Collection.FindOneAndReplaceAsync(x => x.Id == entity.Id, entity);
                 return entity == null ? 0 : 1;
             }
@@ -70,8 +82,10 @@ namespace Garcia.Persistence.MongoDb
         {
             if (!hardDelete)
             {
-                var definition = Builders<T>.Update.Set(x => x.Deleted, true)
-                    .Set(x => x.DeletedOn, DateTime.Now);
+                var definition = Builders<T>.Update
+                    .Set(x => x.Deleted, true)
+                    .Set(x => x.DeletedOn, DateTime.Now)
+                    .Set(x => x.DeletedBy, _loggedInUserService?.UserId);
                 return (await Collection.UpdateManyAsync(filter, definition)).ModifiedCount;
             }
 
@@ -122,12 +136,16 @@ namespace Garcia.Persistence.MongoDb
 
         public async Task<long> UpdateAsync(T entity)
         {
+            entity.LastUpdatedBy = _loggedInUserService?.UserId;
+            entity.LastUpdatedOn = DateTime.Now;
             await Collection.FindOneAndReplaceAsync(x => x.Id == entity.Id, entity);
             return entity == null ? 0 : 1;
         }
 
         public async Task<long> UpdateManyAsync(Expression<Func<T, bool>> filter, UpdateDefinition<T> definition)
         {
+            definition.Set(x => x.LastUpdatedBy, _loggedInUserService?.UserId)
+                .Set(x => x.LastUpdatedOn, DateTime.Now);
             return (await Collection.UpdateManyAsync(filter, definition)).ModifiedCount;
         }
     }

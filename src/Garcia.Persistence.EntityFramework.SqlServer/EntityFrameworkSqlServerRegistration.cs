@@ -10,7 +10,7 @@ namespace Garcia.Persistence.EntityFramework.SqlServer
             where TOptions : EfCoreSettings
             where TContext : BaseContext
         {
-            services.AddLoggedInUserService();
+            services.AddLoggedInUserService<long>();
             services.AddDbContext<TContext>(options => options.UseSqlServer(settings.ConnectionString,
                 x => x.MigrationsAssembly(settings.MigrationsAssembly)));
             return services;

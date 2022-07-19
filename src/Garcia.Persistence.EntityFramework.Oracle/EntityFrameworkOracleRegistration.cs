@@ -10,7 +10,7 @@ namespace Garcia.Persistence.EntityFramework.Oracle
             where TOptions : EfCoreSettings
             where TContext : BaseContext
         {
-            services.AddLoggedInUserService();
+            services.AddLoggedInUserService<long>();
             services.AddDbContext<TContext>(options => options.UseOracle(settings.ConnectionString,
                 x => x.MigrationsAssembly(settings.MigrationsAssembly)));
             return services;

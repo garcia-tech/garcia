@@ -1,7 +1,10 @@
-﻿namespace Garcia.Application.Services
+﻿using System;
+
+namespace Garcia.Application.Services
 {
-    public interface ILoggedInUserService
+    public interface ILoggedInUserService<TKey>
+        where TKey : IEquatable<TKey>
     {
-        public int UserId { get; set; }
+        public TKey UserId { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace Garcia.Persistence.EntityFramework.PostgreSql
             where TOptions : EfCoreSettings
             where TContext : BaseContext
         {
-            services.AddLoggedInUserService();
+            services.AddLoggedInUserService<long>();
             services.AddDbContext<TContext>(options => options.UseNpgsql(settings.ConnectionString,
                 x => x.MigrationsAssembly(settings.MigrationsAssembly)));
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
