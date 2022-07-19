@@ -18,7 +18,7 @@ namespace Garcia.Persistence.EntityFramework
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            foreach (var entry in ChangeTracker.Entries<IEntity<long>>())
+            foreach (var entry in ChangeTracker.Entries<Entity<long>>())
             {
                 switch (entry.State)
                 {

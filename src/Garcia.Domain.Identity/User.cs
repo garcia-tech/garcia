@@ -8,7 +8,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Garcia.Domain.Identity
 {
-    public class User<TKey> : Entity<TKey> where TKey : IEquatable<TKey>
+    public class User<TKey> : EntityBase<TKey> where TKey : IEquatable<TKey>
     { 
         public string Username { get; set; }
         public string Password { get; set; }

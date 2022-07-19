@@ -1,6 +1,6 @@
 ﻿namespace Garcia.Domain.Identity
 {
-    public class Session<TKey> : Entity<TKey>
+    public class Session<TKey> : EntityBase<TKey>
         where TKey : IEquatable<TKey>
     {
         public TKey UserId { get; set; }

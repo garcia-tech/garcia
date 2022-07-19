@@ -7,7 +7,7 @@ namespace Garcia.Application.Identity.Services
 {
     public interface IAuthenticationService<TUser, TUserDto, TKey>
         where TKey : IEquatable<TKey>
-        where TUser : Entity<TKey>
+        where TUser : EntityBase<TKey>
         where TUserDto : IUser
     {
         Task<BaseResponse<TUserDto>> ValidateUser(Credentials request);
