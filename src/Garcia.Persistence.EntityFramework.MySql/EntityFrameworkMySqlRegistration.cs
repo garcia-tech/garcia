@@ -10,7 +10,7 @@ namespace Garcia.Persistence.EntityFramework.MySql
             where TOptions : EfCoreSettings
             where TContext : BaseContext
         {
-            services.AddLoggedInUserService();
+            services.AddLoggedInUserService<long>();
             services.AddDbContext<TContext>(options => options.UseMySQL(settings.ConnectionString,
                 x => x.MigrationsAssembly(settings.MigrationsAssembly)));
             return services;

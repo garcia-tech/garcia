@@ -2,7 +2,7 @@
 
 namespace Garcia.Domain
 {
-    public interface IId<TKey> where TKey : IEquatable<TKey>
+    public interface IId<TKey>
     {
         public TKey Id { get; }
     }

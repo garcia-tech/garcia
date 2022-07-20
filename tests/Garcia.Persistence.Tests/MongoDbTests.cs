@@ -11,6 +11,8 @@ using Garcia.Infrastructure;
 using Garcia.Persistence.MongoDb;
 using static Garcia.Persistence.Tests.Utils.Helpers;
 using Garcia.Infrastructure.MongoDb;
+using Garcia.Application.Services;
+using MongoDB.Bson;
 
 namespace Garcia.Persistence.Tests
 {
@@ -19,6 +21,7 @@ namespace Garcia.Persistence.Tests
         private static Mock<IOptions<MongoDbSettings>> _mockOptions;
         private static MongoDbRepository<TestMongoEntity> _repository;
         private static MongoDbRunner _runner;
+        private readonly static string _loggedInUserId = ObjectId.GenerateNewId().ToString();
 
         public MongoDbTests()
         {
@@ -36,7 +39,11 @@ namespace Garcia.Persistence.Tests
             };
 
             _mockOptions.Setup(s => s.Value).Returns(settings);
-            _repository = new MongoDbRepository<TestMongoEntity>(_mockOptions.Object);
+            var mockLoggedInUser = new LoggedInUserService<string>
+            {
+                UserId = _loggedInUserId
+            };
+            _repository = new MongoDbRepository<TestMongoEntity>(_mockOptions.Object, mockLoggedInUser);
         }
 
         private static void DisposeConnection() => _runner.Dispose();
@@ -87,6 +94,7 @@ namespace Garcia.Persistence.Tests
 
             var result = await _repository.AddAsync(entity);
             Assert.Equal(1, result);
+            Assert.Equal(_loggedInUserId, entity.CreatedBy);
             DisposeConnection();
         }
 

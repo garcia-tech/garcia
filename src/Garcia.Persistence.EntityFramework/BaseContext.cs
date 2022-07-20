@@ -9,16 +9,16 @@ namespace Garcia.Persistence.EntityFramework
 {
     public class BaseContext : DbContext
     {
-        private readonly ILoggedInUserService _loggedInUserService;
+        private readonly ILoggedInUserService<long> _loggedInUserService;
 
-        public BaseContext(DbContextOptions options, ILoggedInUserService loggedInUserService) : base(options)
+        public BaseContext(DbContextOptions options, ILoggedInUserService<long> loggedInUserService) : base(options)
         {
             _loggedInUserService = loggedInUserService;
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            foreach (var entry in ChangeTracker.Entries<IEntity<long>>())
+            foreach (var entry in ChangeTracker.Entries<Entity<long>>())
             {
                 switch (entry.State)
                 {

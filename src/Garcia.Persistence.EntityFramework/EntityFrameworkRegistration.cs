@@ -10,14 +10,14 @@ namespace Garcia.Persistence.EntityFramework
     {
         public static IServiceCollection AddEfCore<TContext>(this IServiceCollection services, Action<DbContextOptionsBuilder> options) where TContext : BaseContext
         {
-            services.AddLoggedInUserService();
+            services.AddLoggedInUserService<long>();
             services.AddDbContext<TContext>(options);
             return services;
         }
 
         public static IServiceCollection AddEfCoreInMemory<TContext>(this IServiceCollection services, string databaseName) where TContext : BaseContext
         {
-            services.AddLoggedInUserService();
+            services.AddLoggedInUserService<long>();
             services.AddDbContext<TContext>(options => options.UseInMemoryDatabase(databaseName));
             return services;
         }

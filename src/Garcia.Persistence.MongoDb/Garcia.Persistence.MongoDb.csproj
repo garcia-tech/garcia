@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Garcia.Application.MongoDb\Garcia.Application.MongoDb.csproj" />
+    <ProjectReference Include="..\Garcia.Application\Garcia.Application.csproj" />
     <ProjectReference Include="..\Garcia.Domain.MongoDb\Garcia.Domain.MongoDb.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.MongoDb\Garcia.Infrastructure.MongoDb.csproj" />
   </ItemGroup>

@@ -1,8 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Garcia.Application.MongoDb.Contracts.Persistence;
 using Garcia.Infrastructure.MongoDb;
-using System;
+using Garcia.Application;
 
 namespace Garcia.Persistence.MongoDb
 {
@@ -18,6 +19,7 @@ namespace Garcia.Persistence.MongoDb
             });
 
             services.AddScoped(typeof(IAsyncMongoDbRepository<>), typeof(MongoDbRepository<>));
+            services.AddLoggedInUserService<string>();
             return services;
         }
 
@@ -25,6 +27,7 @@ namespace Garcia.Persistence.MongoDb
         {
             services.Configure(options);
             services.AddScoped(typeof(IAsyncMongoDbRepository<>), typeof(MongoDbRepository<>));
+            services.AddLoggedInUserService<string>();
             return services;
         }
     }
