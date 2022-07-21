@@ -21,6 +21,7 @@ namespace Garcia.Infrastructure.Api
                         Type = SecuritySchemeType.Http,
                         In = ParameterLocation.Header,
                         Name = "Authorization",
+                        Scheme = "Bearer"
                     });
 
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement {
