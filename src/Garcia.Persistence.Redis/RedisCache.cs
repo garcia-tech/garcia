@@ -9,6 +9,7 @@ using Garcia.Application.Redis.Contracts.Persistence;
 using Garcia.Infrastructure.Redis;
 using Garcia.Exceptions.Redis;
 using StackExchange.Redis;
+using Garcia.Domain;
 
 namespace Garcia.Persistence.Redis
 {
@@ -193,6 +194,11 @@ namespace Garcia.Persistence.Redis
             _connectionFactory.DisposeConnection();
         }
 
+        public async Task ClearRepositoryCacheAsync<T, TKey>(T entity)
+            where T : EntityBase<TKey>
+        {
+            await RemoveMatchingKeysAsync(nameof(T));
+        }
     }
 }
 

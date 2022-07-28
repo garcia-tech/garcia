@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Garcia.Application.Contracts.Infrastructure;
+using Garcia.Domain;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 
@@ -38,6 +41,22 @@ namespace Garcia.Infrastructure
         public T Get<T>(string key)
         {
             return _memoryCache.Get<T>(key);
+        }
+
+        public async Task ClearRepositoryCacheAsync<T, TKey>(T entity)
+            where T : EntityBase<TKey>
+        {
+            var keys = _memoryCache.GetKeys<string>()
+                .Where(x => x.Contains(typeof(T).Name))
+                .ToList();
+
+            for (int i = 0; i < keys.Count; i++)
+            {
+                var key = keys[i];
+                _memoryCache.Remove(key);
+            }
+
+            await Task.CompletedTask;
         }
     }
 }

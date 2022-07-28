@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Garcia.Domain;
 using Garcia.Persistence.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Shouldly;
+using Garcia.Infrastructure;
+using Microsoft.Extensions.Caching.Memory;
+using Moq;
+using Microsoft.Extensions.Options;
 
 namespace Garcia.Persistence.Tests
 {
@@ -35,7 +36,9 @@ namespace Garcia.Persistence.Tests
                     new TestEntity(2, "Two"));
                 context.Add(child);
                 context.SaveChanges();
-                _repository = new EntityFrameworkRepository<TestEntity>(CreateContext());
+                var mockOptions = new Mock<IOptions<CacheSettings>>();
+                mockOptions.Setup(x => x.Value).Returns(new CacheSettings { CacheExpirationInMinutes = 2 });
+                _repository = new EntityFrameworkRepository<TestEntity>(CreateContext(), new GarciaMemoryCache(new MemoryCache(new MemoryCacheOptions()), mockOptions.Object));
             }
         }
 
@@ -57,7 +60,7 @@ namespace Garcia.Persistence.Tests
         [Fact]
         public async void GetByIdWithNavigations()
         {
-            
+
             var item = await _repository.GetByIdWithNavigationsAsync(1);
             Assert.NotNull(item);
             Assert.NotEqual(0, item.TestChildEntities.Count);

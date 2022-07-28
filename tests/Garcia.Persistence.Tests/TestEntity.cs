@@ -9,10 +9,14 @@ namespace Garcia.Persistence.Tests
         {
             Key = key;
             Name = name;
+            CacheExpirationInMinutes = 2;
+            CachingEnabled = true;
         }
 
         public TestEntity()
         {
+            CacheExpirationInMinutes = 2;
+            CachingEnabled = true;
         }
 
         public int Key { get; set; } = 0;

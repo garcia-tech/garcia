@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -26,6 +27,14 @@ namespace Garcia.Domain
         public virtual DateTimeOffset LastUpdatedOn { get; set; }
         [BsonRepresentation(BsonType.String)]
         public virtual DateTimeOffset DeletedOn { get; set; }
+        [NotMapped]
+        [JsonIgnore]
+        [BsonIgnore]
+        public bool CachingEnabled { get; set; } = false;
+        [NotMapped]
+        [JsonIgnore]
+        [BsonIgnore]
+        public int CacheExpirationInMinutes { get; set; } = 1;
         protected List<INotification> domainItems;
         [JsonIgnore]
         [BsonIgnore]
