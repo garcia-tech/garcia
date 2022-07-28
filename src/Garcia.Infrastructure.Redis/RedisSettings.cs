@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Garcia.Infrastructure.Redis
 {
-    public class RedisSettings : DatabaseSettings
+    public class RedisSettings : DatabaseSettings, ICacheSettings
     {
         public string Host { get; set; }
         public string Port { get; set; } = "6379";

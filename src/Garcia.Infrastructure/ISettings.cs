@@ -2,6 +2,5 @@
 {
     public interface ISettings
     {
-        public int CacheExpirationTimeInMinutes { get; set; }
     }
 }

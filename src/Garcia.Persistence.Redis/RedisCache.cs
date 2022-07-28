@@ -47,15 +47,43 @@ namespace Garcia.Persistence.Redis
             }
         }
 
+        public T Get<T>(string key)
+        {
+            var data = _database.StringGet(key);
+
+            if (typeof(T) == typeof(string))
+                return (T)Convert.ChangeType(data, typeof(T));
+
+            try
+            {
+                return data.HasValue ? JsonSerializer.Deserialize<T>(data.ToString()) : default;
+            }
+            catch (JsonException e)
+            {
+                throw new KeyValueMatchException(typeof(T).FullName, e);
+            }
+        }
+
         public async Task RemoveAsync(string key)
         {
             await _database.KeyDeleteAsync(key);
+        }
+
+        public void Remove(string key)
+        {
+            _database.KeyDelete(key);
         }
 
         public async Task<T> SetAsync<T>(string key, T model, bool persist = false, int? expirationInMinutes = null)
         {
             await _database.StringSetAsync(key, JsonSerializer.Serialize<T>(model), persist ? null : TimeSpan.FromMinutes(expirationInMinutes ?? CacheExpirationInMinutes));
             return model;
+        }
+
+        public T Set<T>(string key, T item , int? expirationInMinutes = null)
+        {
+            _database.StringSet(key, JsonSerializer.Serialize<T>(item), TimeSpan.FromMinutes(expirationInMinutes ?? CacheExpirationInMinutes));
+            return item;
         }
 
         public async Task<bool> ExistsAsync(string key)
@@ -141,7 +169,7 @@ namespace Garcia.Persistence.Redis
                     var converter = TypeDescriptor.GetConverter(type);
                     var obj = converter.ConvertFromString(field.Value);
                     var fieldHasSetter = desiredObject.GetType().GetProperty(field.Name)?.GetSetMethod() != null;
-                    
+
                     if (fieldHasSetter)
                     {
                         desiredObject.GetType().GetProperty(field.Name)?.SetValue(desiredObject, obj);
@@ -164,6 +192,7 @@ namespace Garcia.Persistence.Redis
         {
             _connectionFactory.DisposeConnection();
         }
+
     }
 }
 
