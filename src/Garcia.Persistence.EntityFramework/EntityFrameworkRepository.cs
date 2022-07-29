@@ -78,6 +78,7 @@ namespace Garcia.Persistence.EntityFramework
                 entity.Deleted = true;
                 entity.DeletedOn = DateTime.Now;
                 _dbContext.Entry(entity).State = EntityState.Modified;
+                await ClearRepositoryCacheAsync(entity);
                 return await _dbContext.SaveChangesAsync();
             }
 
@@ -88,7 +89,7 @@ namespace Garcia.Persistence.EntityFramework
 
         public override async Task<IReadOnlyList<T>> GetAllAsync(int page, int size, bool getSoftDeletes = false)
         {
-            if(getSoftDeletes)
+            if (getSoftDeletes)
             {
                 return await _dbContext.Set<T>().Skip((page - 1) * size).Take(size).AsNoTracking().ToListAsync();
             }
@@ -114,14 +115,14 @@ namespace Garcia.Persistence.EntityFramework
 
         public override async Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> filter, bool getSoftDeletes = false)
         {
-            var query = _dbContext.Set<T>().AsNoTracking().Where(filter);
-
             if (!getSoftDeletes)
             {
-                query.Where(x => !x.Deleted);
+                return await _dbContext.Set<T>().AsNoTracking().Where(filter).Where(x => !x.Deleted)
+                    .ToListAsync();
             }
 
-            return await query.ToListAsync();
+            return await _dbContext.Set<T>().AsNoTracking().Where(filter)
+                .ToListAsync();
         }
 
         public override async Task<long> AddRangeAsync(IEnumerable<T> entities)
@@ -143,7 +144,7 @@ namespace Garcia.Persistence.EntityFramework
                     x.DeletedOn = DateTime.Now;
                     _dbContext.Entry(x).State = EntityState.Modified;
                 });
-
+                await ClearRepositoryCacheAsync(entities.First());
                 return await _dbContext.SaveChangesAsync();
             }
 
@@ -204,7 +205,8 @@ namespace Garcia.Persistence.EntityFramework
 
             if (!getSoftDeletes)
             {
-                query.Where(x => !x.Deleted);
+                return await query.Where(x => !x.Deleted)
+                    .FirstOrDefaultAsync(filter);
             }
 
             return await query.FirstOrDefaultAsync(filter);
@@ -212,14 +214,15 @@ namespace Garcia.Persistence.EntityFramework
 
         public override async Task<T> GetByFilterAsync(Expression<Func<T, bool>> filter, bool getSoftDeletes = false)
         {
-            var query = _dbContext.Set<T>().AsQueryable();
-
             if (!getSoftDeletes)
             {
-                query.Where(x => !x.Deleted);
+                return await _dbContext.Set<T>()
+                    .Where(x => !x.Deleted)
+                    .FirstOrDefaultAsync(filter);
             }
 
-            return await _dbContext.Set<T>().FirstOrDefaultAsync(filter);
+            return await _dbContext.Set<T>()
+                .FirstOrDefaultAsync(filter);
         }
 
         public override async Task<bool> AnyAsync(Expression<Func<T, bool>> filter)
