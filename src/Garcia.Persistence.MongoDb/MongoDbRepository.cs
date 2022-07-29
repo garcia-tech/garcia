@@ -9,12 +9,15 @@ using Garcia.Domain.MongoDb;
 using Garcia.Application.MongoDb.Contracts.Persistence;
 using Garcia.Infrastructure.MongoDb;
 using Garcia.Application.Services;
+using Garcia.Application.Contracts.Infrastructure;
+using Garcia.Domain;
 
 namespace Garcia.Persistence.MongoDb
 {
-    public class MongoDbRepository<T> : IAsyncMongoDbRepository<T> where T : MongoDbEntity
+    public class MongoDbRepository<T> : IAsyncMongoDbRepository<T> where T : MongoDbEntity, new()
     {
         protected IMongoCollection<T> Collection { get; }
+        protected IGarciaCache? GarciaCache { get; }
         protected readonly ILoggedInUserService<string> _loggedInUserService;
 
         public MongoDbRepository(IOptions<MongoDbSettings> options, ILoggedInUserService<string> loggedInUserService)
@@ -24,6 +27,16 @@ namespace Garcia.Persistence.MongoDb
             var database = client.GetDatabase(settings.DatabaseName);
             Collection = database.GetCollection<T>(typeof(T).Name);
             _loggedInUserService = loggedInUserService;
+        }
+
+        public MongoDbRepository(IOptions<MongoDbSettings> options, ILoggedInUserService<string> loggedInUserService, IGarciaCache garciaCache)
+        {
+            var settings = options.Value;
+            var client = new MongoClient(settings.ConnectionString);
+            var database = client.GetDatabase(settings.DatabaseName);
+            Collection = database.GetCollection<T>(typeof(T).Name);
+            _loggedInUserService = loggedInUserService;
+            GarciaCache = garciaCache;
         }
 
         public MongoDbRepository(MongoDbSettings settings, ILoggedInUserService<string> loggedInUserService)
@@ -38,6 +51,7 @@ namespace Garcia.Persistence.MongoDb
         {
             entity.CreatedBy = _loggedInUserService?.UserId;
             await Collection.InsertOneAsync(entity);
+            await ClearRepositoryCacheAsync(entity);
             return entity == null ? 0 : 1;
         }
 
@@ -55,6 +69,7 @@ namespace Garcia.Persistence.MongoDb
                 BypassDocumentValidation = false
             };
 
+            await ClearRepositoryCacheAsync(entities.First());
             return (await Collection.BulkWriteAsync(entities.Select(x => new InsertOneModel<T>(x)), options)).InsertedCount;
         }
 
@@ -75,6 +90,7 @@ namespace Garcia.Persistence.MongoDb
                 return entity == null ? 0 : 1;
             }
 
+            await ClearRepositoryCacheAsync(entity);
             return (await Collection.DeleteOneAsync(x => x.Id == entity.Id)).DeletedCount;
         }
 
@@ -89,6 +105,7 @@ namespace Garcia.Persistence.MongoDb
                 return (await Collection.UpdateManyAsync(filter, definition)).ModifiedCount;
             }
 
+            await ClearRepositoryCacheAsync(new T());
             return (await Collection.DeleteManyAsync(filter)).DeletedCount;
         }
 
@@ -106,20 +123,36 @@ namespace Garcia.Persistence.MongoDb
             var aggregateFluent = Collection
                 .Aggregate();
 
-            if(!getSoftDeletes)
+            if (getSoftDeletes)
             {
-                aggregateFluent.Match(x => !x.Deleted);
+                return await aggregateFluent.Skip((page - 1) * size)
+                .Limit(size).ToListAsync();
             }
 
-            return await aggregateFluent.Skip((page - 1) * size)
+            var proxyEntity = new T();
+
+            if (!proxyEntity.CachingEnabled)
+            {
+                return await aggregateFluent.Match(x => !x.Deleted).Skip((page - 1) * size)
+                    .Limit(size).ToListAsync();
+            }
+
+            var keyPrefix = $"{typeof(T).Name}:{nameof(this.GetAllAsync)}:{page}:{size}";
+            var cachedData = GarciaCache?.Get<List<T>>(keyPrefix);
+
+            if (cachedData != null) return cachedData;
+
+            var result = await aggregateFluent.Match(x => !x.Deleted).Skip((page - 1) * size)
                 .Limit(size).ToListAsync();
+            GarciaCache!.Set(keyPrefix, result, proxyEntity.CacheExpirationInMinutes);
+            return result;
         }
 
         public async Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> filter, bool getSoftDeletes = false)
         {
             var query = Collection.AsQueryable();
 
-            if(!getSoftDeletes)
+            if (!getSoftDeletes)
             {
                 query.Where(x => !x.Deleted);
             }
@@ -129,9 +162,32 @@ namespace Garcia.Persistence.MongoDb
 
         public async Task<T> GetByIdAsync(string id, bool getSoftDeletes = false)
         {
-            return await (await Collection
+            if (getSoftDeletes)
+            {
+                await (await Collection
+                .FindAsync(x => x.Id == id))
+                .FirstOrDefaultAsync();
+            }
+
+            var proxyEntity = new T();
+
+            if (!proxyEntity.CachingEnabled)
+            {
+                return await (await Collection
+                    .FindAsync(x => !x.Deleted && x.Id == id))
+                    .FirstOrDefaultAsync();
+            }
+
+            var keyPrefix = $"{typeof(T).Name}:{nameof(this.GetByIdAsync)}:{id}";
+            var cachedData = GarciaCache?.Get<T>(keyPrefix);
+
+            if (cachedData != null) return cachedData;
+
+            var result = await (await Collection
                 .FindAsync(x => !x.Deleted && x.Id == id))
                 .FirstOrDefaultAsync();
+            GarciaCache!.Set(keyPrefix, result, proxyEntity.CacheExpirationInMinutes);
+            return result;
         }
 
         public async Task<long> UpdateAsync(T entity)
@@ -139,6 +195,7 @@ namespace Garcia.Persistence.MongoDb
             entity.LastUpdatedBy = _loggedInUserService?.UserId;
             entity.LastUpdatedOn = DateTime.Now;
             await Collection.FindOneAndReplaceAsync(x => x.Id == entity.Id, entity);
+            await ClearRepositoryCacheAsync(entity);
             return entity == null ? 0 : 1;
         }
 
@@ -146,7 +203,16 @@ namespace Garcia.Persistence.MongoDb
         {
             definition.Set(x => x.LastUpdatedBy, _loggedInUserService?.UserId)
                 .Set(x => x.LastUpdatedOn, DateTime.Now);
+            await ClearRepositoryCacheAsync(new T());
             return (await Collection.UpdateManyAsync(filter, definition)).ModifiedCount;
+        }
+
+        private async Task ClearRepositoryCacheAsync(T proxyEntity)
+        {
+            if (proxyEntity.CachingEnabled)
+            {
+                await GarciaCache!.ClearRepositoryCacheAsync<T, string>(proxyEntity);
+            }
         }
     }
 }

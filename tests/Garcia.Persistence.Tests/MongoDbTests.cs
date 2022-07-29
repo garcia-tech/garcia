@@ -13,6 +13,8 @@ using static Garcia.Persistence.Tests.Utils.Helpers;
 using Garcia.Infrastructure.MongoDb;
 using Garcia.Application.Services;
 using MongoDB.Bson;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Garcia.Persistence.Tests
 {
@@ -43,7 +45,10 @@ namespace Garcia.Persistence.Tests
             {
                 UserId = _loggedInUserId
             };
-            _repository = new MongoDbRepository<TestMongoEntity>(_mockOptions.Object, mockLoggedInUser);
+
+            var mockCacheOptions = new Mock<IOptions<CacheSettings>>();
+            mockCacheOptions.Setup(x => x.Value).Returns(new CacheSettings { CacheExpirationInMinutes = 2 });
+            _repository = new MongoDbRepository<TestMongoEntity>(_mockOptions.Object, mockLoggedInUser, new GarciaMemoryCache(new MemoryCache(new MemoryCacheOptions()), mockCacheOptions.Object));
         }
 
         private static void DisposeConnection() => _runner.Dispose();
@@ -144,7 +149,7 @@ namespace Garcia.Persistence.Tests
             await SeedMongo(_repository);
             var entities = await _repository.GetAllAsync();
             var resultCount = await _repository.DeleteManyAsync(x => x.Indicator > 3);
-             resultCount.ShouldBe(2);
+            resultCount.ShouldBe(2);
             var result = await _repository.GetAllAsync();
 
             result.Count.ShouldBeLessThan(entities.Count);

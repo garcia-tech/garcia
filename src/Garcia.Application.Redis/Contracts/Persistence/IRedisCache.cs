@@ -7,7 +7,7 @@ using StackExchange.Redis;
 
 namespace Garcia.Application.Redis.Contracts.Persistence
 {
-    public interface IRedisCache : IAsyncCache
+    public interface IRedisCache : IAsyncCache, IGarciaCache
     {
         /// <summary>
         /// Returns if key exits.
