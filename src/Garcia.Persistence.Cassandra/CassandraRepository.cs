@@ -2,6 +2,7 @@
 using Cassandra;
 using Cassandra.Data.Linq;
 using Garcia.Application.Cassandra.Contracts.Persistence;
+using Garcia.Application.Contracts.Infrastructure;
 using Garcia.Domain;
 using Garcia.Infrastructure.Cassandra;
 
@@ -10,15 +11,25 @@ namespace Garcia.Persistence.Cassandra
     public class CassandraRepository<T> : IAsyncCassandraRepository<T> where T : Entity<Guid>, new()
     {
         private readonly Table<T> _table;
+        protected IGarciaCache? GarciaCache { get; }
+
         public CassandraRepository(CassandraConnectionFactory factory)
         {
             var session = factory.GetSession();
             _table = new Table<T>(session);
         }
 
+        public CassandraRepository(CassandraConnectionFactory factory, IGarciaCache garciaCache)
+        {
+            var session = factory.GetSession();
+            _table = new Table<T>(session);
+            GarciaCache = garciaCache;
+        }
+
         public async Task<long> AddAsync(T entity)
         {
             var result = await _table.Insert(entity, true).ExecuteAsync();
+            await ClearRepositoryCacheAsync(entity);
             return result.GetRows().Count();
         }
 
@@ -30,7 +41,7 @@ namespace Garcia.Persistence.Cassandra
             {
                 batch.Append(_table.Insert(entity, true));
             }
-
+            await ClearRepositoryCacheAsync(entities.First());
             await batch.ExecuteAsync();
             return entities.Count();
         }
@@ -52,6 +63,7 @@ namespace Garcia.Persistence.Cassandra
             result = await _table.Where(x => x.Id == entity.Id)
                 .Delete()
                 .ExecuteAsync();
+            await ClearRepositoryCacheAsync(entity);
             return result.GetRows().Count();
         }
 
@@ -62,7 +74,7 @@ namespace Garcia.Persistence.Cassandra
             if (!hardDelete)
             {
                 result = await _table.Where(filter)
-                    .Select(x => new T {Deleted = true})
+                    .Select(x => new T { Deleted = true })
                     .Update()
                     .ExecuteAsync();
             }
@@ -70,6 +82,7 @@ namespace Garcia.Persistence.Cassandra
             result = await _table.Where(filter)
                 .Delete()
                 .ExecuteAsync();
+            await ClearRepositoryCacheAsync(new T());
             return result.GetRows().Count();
         }
 
@@ -84,16 +97,42 @@ namespace Garcia.Persistence.Cassandra
         {
             Expression<Func<T, bool>> expression = !getSoftDeletes ? (x => !x.Deleted && x.Id.CompareTo(referenceId) > 0)
                 : x => x.Id.CompareTo(referenceId) > 0;
-            var list = await _table.Where(expression).Take(size)
-                .ExecuteAsync();
-            return list.ToList();
+
+            if (getSoftDeletes)
+            {
+                return (await _table.Where(expression).Take(size)
+                    .ExecuteAsync())
+                    .ToList();
+            }
+
+            var proxyEntity = new T();
+
+            if (!proxyEntity.CachingEnabled)
+            {
+                return (await _table.Where(expression).Take(size)
+                    .ExecuteAsync())
+                    .ToList();
+            }
+
+            var keyPrefix = $"{typeof(T).Name}:{nameof(this.GetAllAsync)}:{referenceId}:{size}";
+            var cachedData = GarciaCache?.Get<List<T>>(keyPrefix);
+
+            if (cachedData != null) return cachedData;
+
+            var result = (await _table
+                .Where(expression)
+                .Take(size)
+                .ExecuteAsync())
+                .ToList();
+            GarciaCache!.Set(keyPrefix, result, proxyEntity.CacheExpirationInMinutes);
+            return result;
         }
 
-        public async Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> filter , bool getSoftDeletes = false)
+        public async Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> filter, bool getSoftDeletes = false)
         {
             var query = _table.Where(filter);
 
-            if(!getSoftDeletes)
+            if (!getSoftDeletes)
             {
                 query.Where(x => !x.Deleted);
             }
@@ -104,8 +143,26 @@ namespace Garcia.Persistence.Cassandra
 
         public async Task<T> GetByIdAsync(Guid id, bool getSoftDeletes = false)
         {
-            return !getSoftDeletes ? await _table.FirstOrDefault(x => !x.Deleted && x.Id == id).ExecuteAsync()
-                : await _table.FirstOrDefault(x => x.Id == id).ExecuteAsync();
+            if (getSoftDeletes)
+            {
+                return await _table.FirstOrDefault(x => x.Id == id).ExecuteAsync();
+            }
+
+            var proxyEntity = new T();
+
+            if (!proxyEntity.CachingEnabled)
+            {
+                return await _table.FirstOrDefault(x => !x.Deleted && x.Id == id).ExecuteAsync();
+            }
+
+            var keyPrefix = $"{typeof(T).Name}:{nameof(this.GetByIdAsync)}:{id}";
+            var cachedData = GarciaCache?.Get<T>(keyPrefix);
+
+            if (cachedData != null) return cachedData;
+
+            var result = await _table.FirstOrDefault(x => !x.Deleted && x.Id == id).ExecuteAsync();
+            GarciaCache!.Set(keyPrefix, result, proxyEntity.CacheExpirationInMinutes);
+            return result;
         }
 
         public async Task<long> UpdateAsync(T entity)
@@ -114,7 +171,16 @@ namespace Garcia.Persistence.Cassandra
                 .Select(x => entity)
                 .Update()
                 .ExecuteAsync();
+            await ClearRepositoryCacheAsync(entity);
             return result.GetRows().Count();
+        }
+
+        private async Task ClearRepositoryCacheAsync(T proxyEntity)
+        {
+            if (proxyEntity.CachingEnabled)
+            {
+                await GarciaCache!.ClearRepositoryCacheAsync<T, Guid>(proxyEntity);
+            }
         }
     }
 }
