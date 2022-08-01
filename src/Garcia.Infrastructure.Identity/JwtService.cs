@@ -1,14 +1,8 @@
 ﻿using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
-using System.Threading.Tasks;
-using System.Text.Json;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using Garcia.Domain.Identity;
 using System.Security.Cryptography;
 using Garcia.Application.Contracts.Identity;
@@ -111,13 +105,13 @@ namespace Garcia.Infrastructure.Identity
 
         public T GenerateRefreshToken<T>(string ip) where T : RefreshToken, new()
         {
+            using var rngCryptoServiceProvider = new RNGCryptoServiceProvider();
             var randomBytes = new byte[64];
-            var refreshToken = Convert.ToBase64String(randomBytes);
-
+            rngCryptoServiceProvider.GetBytes(randomBytes);
             return new()
             {
-                Token = refreshToken,
-                ExpirationDate = _jwtOptions.RefreshTokenOptions.Expiration,
+                Token = Convert.ToBase64String(randomBytes),
+                ExpirationDate = _jwtOptions.RefreshTokenOptions?.Expiration ?? DateTime.UtcNow.Add(TimeSpan.FromMinutes(7200)),
                 CreatedByIp = ip
             };
         }
