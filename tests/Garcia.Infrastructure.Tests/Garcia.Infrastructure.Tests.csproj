@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Garcia.Infrastructure.ElasticSearch\Garcia.Infrastructure.ElasticSearch.csproj" />
+    <ProjectReference Include="..\..\src\Garcia.Infrastructure.Identity\Garcia.Infrastructure.Identity.csproj" />
     <ProjectReference Include="..\..\src\Garcia.Infrastructure.Redis\Garcia.Infrastructure.Redis.csproj" />
   </ItemGroup>
 
