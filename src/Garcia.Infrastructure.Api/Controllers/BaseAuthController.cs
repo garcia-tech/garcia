@@ -13,7 +13,7 @@ namespace Garcia.Infrastructure.Api.Controllers
     [Route("api/[controller]")]
     public class BaseAuthController<TService, TUser, TUserDto, TKey> : ControllerBase
         where TService : IAuthenticationService<TUser, TUserDto, TKey>
-        where TUser : User<TKey>
+        where TUser : IUserEntity<TKey>
         where TKey : IEquatable<TKey>
         where TUserDto : IUser
     {

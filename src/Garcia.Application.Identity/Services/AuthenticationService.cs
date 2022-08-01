@@ -11,7 +11,7 @@ namespace Garcia.Application.Identity.Services
     public class AuthenticationService<TRepository, TUser, TUserDto, TKey> : IAuthenticationService<TUser, TUserDto, TKey>
         where TRepository : IAsyncRepository<TUser, TKey>
         where TKey : IEquatable<TKey>
-        where TUser : User<TKey>
+        where TUser : IUserEntity<TKey>
         where TUserDto : IUser
     {
         protected TRepository Repository { get; }
