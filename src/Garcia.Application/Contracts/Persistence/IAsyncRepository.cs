@@ -67,7 +67,7 @@ namespace Garcia.Application.Contracts.Persistence
         //Task<IReadOnlyList<T>> GetAsync(Dictionary<string, object> filter);
     }
 
-    public interface IAsyncRepository<T> : IAsyncRepository<T, long> where T : EntityBase<long>
+    public interface IAsyncRepository<T> : IAsyncRepository<T, long> where T : Entity<long>
     {
         /// <summary>
         /// Gets all entities with pagination.
