@@ -136,6 +136,8 @@ namespace Garcia.Persistence.EntityFramework
         {
             var entities = _dbContext.Set<T>().Where(filter);
 
+            if (!entities.Any()) return 0;
+
             if (!hardDelete)
             {
                 await entities.ForEachAsync(x =>
