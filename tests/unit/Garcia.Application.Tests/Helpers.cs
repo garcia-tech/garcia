@@ -74,16 +74,19 @@ namespace Garcia.Application.Tests
                 new TestUser
                 {
                     Id = 1,
-                    Username = "seckinpullu", 
-                    Password = "CY9rzUYh03PK3k6DJie09g=="
+                    Username = testusername, 
+                    Password = testpassword
                 },
             };
+
+            var returns = (Expression<Func<TestUser, bool>> expression, bool getSoftDeletes) =>
+            {
+                var result = list.Where(expression.Compile());
+                return result.ToList();
+            };
+
             repository.Setup(x => x.GetAsync(It.IsAny<Expression<Func<TestUser, bool>>>(), false))
-                .ReturnsAsync((Expression<Func<TestUser, bool>> expression) =>
-                {
-                    var result = list.Where(expression.Compile());
-                    return result.ToList();
-                });
+                .ReturnsAsync(returns);
 
             return repository;
         }
