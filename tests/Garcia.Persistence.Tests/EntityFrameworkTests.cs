@@ -9,6 +9,7 @@ using Garcia.Infrastructure;
 using Microsoft.Extensions.Caching.Memory;
 using Moq;
 using Microsoft.Extensions.Options;
+using Garcia.Application.Contracts.Persistence;
 
 namespace Garcia.Persistence.Tests
 {
@@ -17,7 +18,7 @@ namespace Garcia.Persistence.Tests
         private const string ConnectionString =
             @"Server=(localdb)\mssqllocaldb;Database=EFTestSample;Trusted_Connection=True";
 
-        private EntityFrameworkRepository<TestEntity> _repository;
+        private IAsyncRepository<TestEntity> _repository;
 
         public EntityFrameworkTestFixture()
         {
@@ -102,7 +103,7 @@ namespace Garcia.Persistence.Tests
 
             item = await _repository.GetByIdAsync(2);
             item.Deleted = true;
-            await _repository.SaveAsync(item);
+            await _repository.UpdateAsync(item);
             item = await _repository.GetByIdAsync(2);
             Assert.Null(item);
         }
@@ -170,9 +171,9 @@ namespace Garcia.Persistence.Tests
         [Fact]
         public async void DeleteManyAsync()
         {
-            await _repository.DeleteManyAsync(x => x.Key > 4);
+            await _repository.DeleteManyAsync(x => x.Key > 1);
             var entities = await _repository.GetAllAsync();
-            Assert.DoesNotContain(entities, x => x.Key > 4);
+            entities.Any(x => x.Key > 1).ShouldBeFalse();
         }
 
         [Fact]
