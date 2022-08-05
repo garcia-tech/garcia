@@ -11,10 +11,10 @@ using Garcia.Infrastructure;
 using Garcia.Persistence.MongoDb;
 using static Garcia.Persistence.Tests.Utils.Helpers;
 using Garcia.Infrastructure.MongoDb;
-using Garcia.Application.Services;
 using MongoDB.Bson;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using Garcia.Infrastructure.Identity;
+using Microsoft.AspNetCore.Http;
 
 namespace Garcia.Persistence.Tests
 {
@@ -41,7 +41,7 @@ namespace Garcia.Persistence.Tests
             };
 
             _mockOptions.Setup(s => s.Value).Returns(settings);
-            var mockLoggedInUser = new LoggedInUserService<string>
+            var mockLoggedInUser = new LoggedInUserService<string>(new HttpContextAccessor())
             {
                 UserId = _loggedInUserId
             };

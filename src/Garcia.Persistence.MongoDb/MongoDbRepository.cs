@@ -8,9 +8,8 @@ using MongoDB.Driver;
 using Garcia.Domain.MongoDb;
 using Garcia.Application.MongoDb.Contracts.Persistence;
 using Garcia.Infrastructure.MongoDb;
-using Garcia.Application.Services;
 using Garcia.Application.Contracts.Infrastructure;
-using Garcia.Domain;
+using Garcia.Application.Contracts.Identity;
 
 namespace Garcia.Persistence.MongoDb
 {

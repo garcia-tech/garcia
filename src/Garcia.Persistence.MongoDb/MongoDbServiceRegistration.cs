@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Garcia.Application.MongoDb.Contracts.Persistence;
 using Garcia.Infrastructure.MongoDb;
-using Garcia.Application;
+using Garcia.Infrastructure.Identity;
 
 namespace Garcia.Persistence.MongoDb
 {

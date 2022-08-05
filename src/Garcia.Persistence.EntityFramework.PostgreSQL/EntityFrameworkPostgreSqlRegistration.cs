@@ -1,4 +1,4 @@
-﻿using Garcia.Application;
+﻿using Garcia.Infrastructure.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 

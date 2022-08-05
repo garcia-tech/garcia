@@ -14,6 +14,7 @@
   </ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Garcia.Infrastructure.Identity\Garcia.Infrastructure.Identity.csproj" />
 		<ProjectReference Include="..\Garcia.Persistence.EntityFramework\Garcia.Persistence.EntityFramework.csproj" />
 	</ItemGroup>
 
