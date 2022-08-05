@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Garcia.Application\Garcia.Application.csproj" />
+    <ProjectReference Include="..\Garcia.Infrastructure.Identity\Garcia.Infrastructure.Identity.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure\Garcia.Infrastructure.csproj" />
     <ProjectReference Include="..\Garcia.Persistence\Garcia.Persistence.csproj" />
   </ItemGroup>

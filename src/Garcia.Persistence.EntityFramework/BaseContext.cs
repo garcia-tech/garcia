@@ -1,4 +1,4 @@
-using Garcia.Application.Services;
+using Garcia.Application.Contracts.Identity;
 using Garcia.Domain;
 using Microsoft.EntityFrameworkCore;
 using System;

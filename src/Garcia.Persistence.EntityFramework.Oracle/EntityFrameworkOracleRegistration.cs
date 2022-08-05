@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using Garcia.Application;
+using Garcia.Infrastructure.Identity;
 
 namespace Garcia.Persistence.EntityFramework.Oracle
 {

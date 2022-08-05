@@ -1,4 +1,4 @@
-﻿using Garcia.Application.Services;
+﻿using Garcia.Application.Contracts.Identity;
 using Garcia.Infrastructure.Localization.Local.Sample.Models;
 using Garcia.Persistence.EntityFramework;
 using Microsoft.EntityFrameworkCore;
