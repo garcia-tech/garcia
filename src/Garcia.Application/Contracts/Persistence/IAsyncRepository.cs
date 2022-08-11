@@ -65,6 +65,7 @@ namespace Garcia.Application.Contracts.Persistence
         /// <returns></returns>
         Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> filter, bool getSoftDeletes = false);
         //Task<IReadOnlyList<T>> GetAsync(Dictionary<string, object> filter);
+        Task<long> CountAsync(Expression<Func<T, bool>> filter, bool countSoftDeletes = false);
     }
 
     public interface IAsyncRepository<T> : IAsyncRepository<T, long> where T : Entity<long>

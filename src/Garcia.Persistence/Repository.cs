@@ -79,5 +79,10 @@ namespace Garcia.Persistence
         {
             return await _repository.AnyAsync(filter);
         }
+
+        public override async Task<long> CountAsync(Expression<Func<T, bool>> filter, bool countSoftDeletes = false)
+        {
+            return await _repository.CountAsync(filter, countSoftDeletes);
+        }
     }
 }

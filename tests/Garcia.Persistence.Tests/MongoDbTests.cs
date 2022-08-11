@@ -226,5 +226,14 @@ namespace Garcia.Persistence.Tests
             var deletedItem = await _repository.GetByIdAsync(refItem.Id);
             deletedItem.ShouldBeNull();
         }
+
+        [Fact]
+        public async void CountAsync()
+        {
+            CreateConnection();
+            await SeedMongo(_repository);
+            var count = await _repository.CountAsync(x => x.Indicator == 1);
+            count.ShouldBe(1);
+        }
     }
 }

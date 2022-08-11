@@ -206,6 +206,18 @@ namespace Garcia.Persistence.MongoDb
             return (await Collection.UpdateManyAsync(filter, definition)).ModifiedCount;
         }
 
+        public async Task<long> CountAsync(Expression<Func<T, bool>> filter, bool countSoftDeletes = false)
+        {
+            if(!countSoftDeletes)
+            {
+                return Collection.AsQueryable()
+                    .Where(x => !x.Deleted)
+                    .Count(filter);
+            }
+
+            return await Collection.CountDocumentsAsync(filter);
+        }
+
         private async Task ClearRepositoryCacheAsync(T proxyEntity)
         {
             if (proxyEntity.CachingEnabled)
