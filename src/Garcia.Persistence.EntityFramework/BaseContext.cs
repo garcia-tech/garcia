@@ -1,5 +1,6 @@
 using Garcia.Application.Contracts.Identity;
 using Garcia.Domain;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading;
@@ -10,10 +11,17 @@ namespace Garcia.Persistence.EntityFramework
     public class BaseContext : DbContext
     {
         private readonly ILoggedInUserService<long> _loggedInUserService;
+        private readonly IMediator _mediator;
 
         public BaseContext(DbContextOptions options, ILoggedInUserService<long> loggedInUserService) : base(options)
         {
             _loggedInUserService = loggedInUserService;
+        }
+
+        public BaseContext(DbContextOptions options, ILoggedInUserService<long> loggedInUserService, IMediator mediator) : base(options)
+        {
+            _loggedInUserService = loggedInUserService;
+            _mediator = mediator;
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
@@ -38,6 +46,12 @@ namespace Garcia.Persistence.EntityFramework
                             (long)_loggedInUserService!.UserId : default;
                         break;
                 }
+
+                if(_mediator != null && entry.Entity.DomainEvents.Count > 0)
+                {
+                    _ = entry.Entity.PublishDomainEvents(_mediator, cancellationToken);
+                }
+
             }
 
             return base.SaveChangesAsync(cancellationToken);
