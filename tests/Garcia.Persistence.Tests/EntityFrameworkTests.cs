@@ -177,6 +177,13 @@ namespace Garcia.Persistence.Tests
         }
 
         [Fact]
+        public async void CountAsync()
+        {
+            var count = await _repository.CountAsync(x => x.Id == 1);
+            count.ShouldBe(1);
+        }
+
+        [Fact]
         public async void Soft_Delete_Should_Success()
         {
             var item = await _repository.GetByIdAsync(1);

@@ -175,6 +175,20 @@ namespace Garcia.Persistence.Cassandra
             return result.GetRows().Count();
         }
 
+        public async Task<long> CountAsync(Expression<Func<T, bool>> filter, bool countSoftDeletes = false)
+        {
+            if(!countSoftDeletes)
+            {
+                return await _table
+                    .Where(x => !x.Deleted)
+                    .Where(filter)
+                    .Count()
+                    .ExecuteAsync();
+            }
+
+            return await _table.Where(filter).Count().ExecuteAsync();
+        }
+
         private async Task ClearRepositoryCacheAsync(T proxyEntity)
         {
             if (proxyEntity.CachingEnabled)

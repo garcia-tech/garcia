@@ -239,5 +239,16 @@ namespace Garcia.Persistence.EntityFramework
                 await GarciaCache!.ClearRepositoryCacheAsync<T, long>(proxyEntity);
             }
         }
+
+        public override async Task<long> CountAsync(Expression<Func<T, bool>> filter, bool countSoftDeletes = false)
+        {
+            if (!countSoftDeletes)
+            {
+                return await _dbContext.Set<T>().Where(x => !x.Deleted)
+                    .CountAsync(filter);
+            }
+
+            return await _dbContext.Set<T>().CountAsync(filter);
+        }
     }
 }
