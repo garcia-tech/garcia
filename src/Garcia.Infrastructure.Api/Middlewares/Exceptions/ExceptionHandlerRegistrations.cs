@@ -5,7 +5,7 @@ using Garcia.Application;
 
 namespace Garcia.Infrastructure.Api.Middlewares.Exceptions
 {
-    public static class ExceptionHandlerRegistration
+    public static class ExceptionHandlerRegistrations
     {
         public static IServiceCollection AddExceptionHandlingOptions(this IServiceCollection services, Action<ExceptionHandlingOptions> options)
         {
