@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Garcia.Application.Contracts.Infrastructure;
 using Garcia.Application.Contracts.Persistence;
 using Garcia.Domain;
+using Garcia.Exceptions.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace Garcia.Persistence.EntityFramework
@@ -41,14 +42,22 @@ namespace Garcia.Persistence.EntityFramework
                     .FirstOrDefaultAsync(x => !x.Deleted && x.Id == id);
             }
 
-            var keyPrefix = $"{typeof(T).Name}:{nameof(this.GetByIdAsync)}:{id}";
-            var cachedData = GarciaCache?.Get<T>(keyPrefix);
+            try
+            {
+                var keyPrefix = $"{typeof(T).Name}:{nameof(this.GetByIdAsync)}:{id}";
+                var cachedData = GarciaCache?.Get<T>(keyPrefix);
 
-            if (cachedData != null) return cachedData;
+                if (cachedData != null) return cachedData;
 
-            var result = await _dbContext.Set<T>().FirstOrDefaultAsync(x => !x.Deleted && x.Id == id);
-            GarciaCache!.Set(keyPrefix, result, proxyEntity.CacheExpirationInMinutes);
-            return result;
+                var result = await _dbContext.Set<T>().FirstOrDefaultAsync(x => !x.Deleted && x.Id == id);
+                GarciaCache!.Set(keyPrefix, result, proxyEntity.CacheExpirationInMinutes);
+                return result;
+            }
+            catch (ArgumentNullException)
+            {
+
+                throw new GarciaCacheInstanceMissingException();
+            }
         }
 
         public override async Task<IReadOnlyList<T>> GetAllAsync(bool getSoftDeletes = false)
@@ -102,15 +111,23 @@ namespace Garcia.Persistence.EntityFramework
                     .Skip((page - 1) * size).Take(size).AsNoTracking().ToListAsync();
             }
 
-            var keyPrefix = $"{typeof(T).Name}:{nameof(this.GetAllAsync)}:{page}:{size}";
-            var cachedData = GarciaCache?.Get<List<T>>(keyPrefix);
+            try
+            {
+                var keyPrefix = $"{typeof(T).Name}:{nameof(this.GetAllAsync)}:{page}:{size}";
+                var cachedData = GarciaCache?.Get<List<T>>(keyPrefix);
 
-            if (cachedData != null) return cachedData;
+                if (cachedData != null) return cachedData;
 
-            var result = await _dbContext.Set<T>().Where(x => !x.Deleted)
-                .Skip((page - 1) * size).Take(size).AsNoTracking().ToListAsync();
-            GarciaCache!.Set(keyPrefix, result, proxyEntity.CacheExpirationInMinutes);
-            return result;
+                var result = await _dbContext.Set<T>().Where(x => !x.Deleted)
+                    .Skip((page - 1) * size).Take(size).AsNoTracking().ToListAsync();
+                GarciaCache!.Set(keyPrefix, result, proxyEntity.CacheExpirationInMinutes);
+                return result;
+
+            }
+            catch (ArgumentNullException)
+            {
+                throw new GarciaCacheInstanceMissingException();
+            }
         }
 
         public override async Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> filter, bool getSoftDeletes = false)
@@ -181,14 +198,21 @@ namespace Garcia.Persistence.EntityFramework
                 return await query.FirstOrDefaultAsync(x => !x.Deleted && x.Id == id);
             }
 
-            var keyPrefix = $"{typeof(T).Name}:{nameof(this.GetByIdWithNavigationsAsync)}:{id}";
-            var cachedData = GarciaCache?.Get<T>(keyPrefix);
+            try
+            {
+                var keyPrefix = $"{typeof(T).Name}:{nameof(this.GetByIdWithNavigationsAsync)}:{id}";
+                var cachedData = GarciaCache?.Get<T>(keyPrefix);
 
-            if (cachedData != null) return cachedData;
+                if (cachedData != null) return cachedData;
 
-            var result = await query.FirstOrDefaultAsync(x => !x.Deleted && x.Id == id);
-            GarciaCache!.Set(keyPrefix, result, proxyEntity.CacheExpirationInMinutes);
-            return result;
+                var result = await query.FirstOrDefaultAsync(x => !x.Deleted && x.Id == id);
+                GarciaCache!.Set(keyPrefix, result, proxyEntity.CacheExpirationInMinutes);
+                return result;
+            }
+            catch (ArgumentNullException)
+            {
+                throw new GarciaCacheInstanceMissingException();
+            }
         }
 
         public override async Task<T> GetByFilterWithNavigationsAsync(Expression<Func<T, bool>> filter, bool getSoftDeletes = false)
@@ -236,7 +260,14 @@ namespace Garcia.Persistence.EntityFramework
         {
             if (proxyEntity.CachingEnabled)
             {
-                await GarciaCache!.ClearRepositoryCacheAsync<T, long>(proxyEntity);
+                try
+                {
+                    await GarciaCache!.ClearRepositoryCacheAsync<T, long>(proxyEntity);
+                }
+                catch (ArgumentNullException)
+                {
+                    throw new GarciaCacheInstanceMissingException();
+                }
             }
         }
 

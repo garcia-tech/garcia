@@ -13,6 +13,7 @@
     <ProjectReference Include="..\Garcia.Application.Identity\Garcia.Application.Identity.csproj" />
     <ProjectReference Include="..\Garcia.Exceptions.Cassandra\Garcia.Exceptions.Cassandra.csproj" />
     <ProjectReference Include="..\Garcia.Exceptions.ElasticSearch\Garcia.Exceptions.ElasticSearch.csproj" />
+    <ProjectReference Include="..\Garcia.Exceptions.Persistence\Garcia.Exceptions.Persistence.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.Cassandra\Garcia.Infrastructure.Cassandra.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.Consul\Garcia.Infrastructure.Consul.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.ElasticSearch\Garcia.Infrastructure.ElasticSearch.csproj" />
