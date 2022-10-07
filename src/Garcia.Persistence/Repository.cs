@@ -57,9 +57,9 @@ namespace Garcia.Persistence
             return await _repository.GetByIdAsync(id, getSoftDeletes);
         }
 
-        public override Task<T> GetByIdWithNavigationsAsync(long id, bool getSoftDeletes = false)
+        public override async Task<T> GetByIdWithNavigationsAsync(long id, bool getSoftDeletes = false)
         {
-            throw new NotImplementedException();
+            return await _repository.GetByIdWithNavigationsAsync(id, getSoftDeletes);
         }
 
         public override async Task<long> UpdateAsync(T entity)
@@ -83,6 +83,11 @@ namespace Garcia.Persistence
         public override async Task<long> CountAsync(Expression<Func<T, bool>> filter, bool countSoftDeletes = false)
         {
             return await _repository.CountAsync(filter, countSoftDeletes);
+        }
+
+        public override async Task<long> UpdateManyAsync(IEnumerable<T> updatedList)
+        {
+            return await _repository.UpdateManyAsync(updatedList);
         }
     }
 }
