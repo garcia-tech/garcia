@@ -80,6 +80,13 @@ namespace Garcia.Persistence.EntityFramework
             return await _dbContext.SaveChangesAsync();
         }
 
+        public override async Task<long> UpdateManyAsync(IEnumerable<T> updatedList)
+        {
+            _dbContext.Set<T>().UpdateRange(updatedList);
+            await ClearRepositoryCacheAsync(new T());
+            return await _dbContext.SaveChangesAsync();
+        }
+
         public override async Task<long> DeleteAsync(T entity, bool hardDelete = false)
         {
             if (!hardDelete)

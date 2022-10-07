@@ -81,5 +81,6 @@ namespace Garcia.Application.Contracts.Persistence
         Task<T> GetByFilterWithNavigationsAsync(Expression<Func<T, bool>> filter, bool getSoftDeletes = false);
         Task<T> GetByFilterAsync(Expression<Func<T, bool>> filter, bool getSoftDeletes = false);
         Task<bool> AnyAsync(Expression<Func<T, bool>> filter);
+        Task<long> UpdateManyAsync(IEnumerable<T> updatedList);
     }
 }
