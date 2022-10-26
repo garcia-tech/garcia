@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Garcia.Infrastructure.Api.Filters
 {
+    /// <summary>
+    /// Handles validation violation. In case of violation returns <typeparamref name="T"/> to the client.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class ValidationFilter<T> : IAsyncActionFilter where T : ApiError, new()
     {
         protected T Response { get; } = new();

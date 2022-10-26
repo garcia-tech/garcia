@@ -2,12 +2,13 @@
 using Garcia.Application.Contracts.FileUpload;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
+using MimeTypes;
 
 namespace Garcia.Infrastructure.FileUpload.Local
 {
     public partial class LocalFileUploadService : IFileUploadService
     {
-        private LocalFileUploadSettings _settings;
+        private readonly LocalFileUploadSettings _settings;
 
         public LocalFileUploadService(IOptions<LocalFileUploadSettings> settings)
         {
@@ -64,9 +65,18 @@ namespace Garcia.Infrastructure.FileUpload.Local
             return new UploadedFile(null, fileName);
         }
 
-        public Task<UploadedFile> MultipartUploadAsync(Stream stream, string originalFileName, string contentType, string newFileName = null)
+        public async Task<UploadedFile> MultipartUploadAsync(Stream stream, string originalFileName, string contentType, string newFileName = null)
         {
-            throw new NotImplementedException();
+            var info = new DirectoryInfo(_settings.FileUploadPath);
+
+            if (!info.Exists) info.Create();
+
+            var fileName = !string.IsNullOrEmpty(newFileName) ? newFileName : $"{Helpers.CreateKey(8)}_{originalFileName}";
+            var extention = MimeTypeMap.GetExtension(contentType);
+            var path = Path.Combine(_settings.FileUploadPath, fileName, extention);
+            using var outputFileStream = new FileStream(path, FileMode.Create);
+            await stream.CopyToAsync(outputFileStream);
+            return new UploadedFile(originalFileName, fileName);
         }
     }
 }

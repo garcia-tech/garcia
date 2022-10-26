@@ -7,6 +7,10 @@ using Microsoft.Extensions.Hosting;
 
 namespace Garcia.Infrastructure
 {
+    /// <summary>
+    /// Subscribes to the <typeparamref name="T"/> channel via service bus.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public abstract class BaseConsumer<T> : BackgroundService where T : IMessage
     {
         private readonly IServiceBus _bus;

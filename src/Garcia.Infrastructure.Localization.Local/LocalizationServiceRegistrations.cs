@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Garcia.Application;
-using Garcia.Application.Contracts.Localization;
+﻿using Garcia.Application.Contracts.Localization;
 using Garcia.Persistence.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,8 +33,6 @@ namespace Garcia.Infrastructure.Localization.Local
 
         public static IServiceCollection AddGarciaLocalization<TContext>(this IServiceCollection services, Action<DbContextOptionsBuilder> options) where TContext : BaseContext
         {
-            //services.AddDbContext<TContext>(options);
-            //services.AddLoggedInUserService();
             services.AddEfCore<TContext>(options);
             services.AddScoped<ILocalizationItemService, LocalizationItemService>();
             services.AddScoped<ILocalizationService, LocalizationService>();
@@ -50,8 +42,6 @@ namespace Garcia.Infrastructure.Localization.Local
 
         public static IServiceCollection AddGarciaLocalization<TContext>(this IServiceCollection services, string databaseName) where TContext : BaseContext
         {
-            //services.AddDbContext<TContext>(options => options.UseInMemoryDatabase(databaseName));
-            //services.AddLoggedInUserService();
             services.AddEfCoreInMemory<TContext>(databaseName);
             services.AddScoped<ILocalizationItemService, LocalizationItemService>();
             services.AddScoped<ILocalizationService, LocalizationService>();

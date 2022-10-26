@@ -1,9 +1,9 @@
 ﻿using System;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
 using Garcia.Application.MongoDb.Contracts.Persistence;
-using Garcia.Infrastructure.MongoDb;
 using Garcia.Infrastructure.Identity;
+using Garcia.Infrastructure.MongoDb;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Garcia.Persistence.MongoDb
 {

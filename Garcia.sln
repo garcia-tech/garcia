@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Persistence.ORM", "src\Garcia.Persistence.ORM\Garcia.Persistence.ORM.csproj", "{9C0E97BF-1AD7-4738-A678-4397C7D7164D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Infrastructure", "src\Garcia.Infrastructure\Garcia.Infrastructure.csproj", "{9D55FE1B-20CF-4579-8747-352CD2E1DBA5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Domain", "src\Garcia.Domain\Garcia.Domain.csproj", "{BD2F2F1C-9B76-4552-81FB-E441EE142AA9}"
@@ -107,17 +105,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Exceptions.Cassandra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Infrastructure.Consul", "src\Garcia.Infrastructure.Consul\Garcia.Infrastructure.Consul.csproj", "{2ED88FEE-2E4D-4743-89B5-6E705BA9C764}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Infrastructure.PushNotification.Firebase.Sample", "samples\Garcia.Infrastructure.PushNotification.Firebase.Sample\Garcia.Infrastructure.PushNotification.Firebase.Sample.csproj", "{82BF9385-C612-4CC1-8C9E-121B5F7C5CCE}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Infrastructure.Localization.Local", "src\Garcia.Infrastructure.Localization.Local\Garcia.Infrastructure.Localization.Local.csproj", "{AE785385-814A-4142-8783-FA4A16B131C4}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{46E29395-DDA5-43E6-88A2-E92AFB0E5B94}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Infrastructure.Localization.Local.Sample", "samples\Garcia.Infrastructure.Localization.Local.Sample\Garcia.Infrastructure.Localization.Local.Sample.csproj", "{CF03A9BD-2578-43A2-92C0-3CADD3D87758}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Infrastructure.Email", "src\Garcia.Infrastructure.Email\Garcia.Infrastructure.Email.csproj", "{C2A11CAB-6691-4974-90E1-3CA3DBEBC9CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garcia.Exceptions.Persistence", "src\Garcia.Exceptions.Persistence\Garcia.Exceptions.Persistence.csproj", "{CFD43AC3-4932-42FD-BDFF-F06CA66828DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Exceptions.Persistence", "src\Garcia.Exceptions.Persistence\Garcia.Exceptions.Persistence.csproj", "{CFD43AC3-4932-42FD-BDFF-F06CA66828DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -125,10 +117,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9C0E97BF-1AD7-4738-A678-4397C7D7164D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9C0E97BF-1AD7-4738-A678-4397C7D7164D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9C0E97BF-1AD7-4738-A678-4397C7D7164D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9C0E97BF-1AD7-4738-A678-4397C7D7164D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9D55FE1B-20CF-4579-8747-352CD2E1DBA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9D55FE1B-20CF-4579-8747-352CD2E1DBA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D55FE1B-20CF-4579-8747-352CD2E1DBA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -321,18 +309,10 @@ Global
 		{2ED88FEE-2E4D-4743-89B5-6E705BA9C764}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2ED88FEE-2E4D-4743-89B5-6E705BA9C764}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2ED88FEE-2E4D-4743-89B5-6E705BA9C764}.Release|Any CPU.Build.0 = Release|Any CPU
-		{82BF9385-C612-4CC1-8C9E-121B5F7C5CCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{82BF9385-C612-4CC1-8C9E-121B5F7C5CCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{82BF9385-C612-4CC1-8C9E-121B5F7C5CCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{82BF9385-C612-4CC1-8C9E-121B5F7C5CCE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AE785385-814A-4142-8783-FA4A16B131C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AE785385-814A-4142-8783-FA4A16B131C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE785385-814A-4142-8783-FA4A16B131C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE785385-814A-4142-8783-FA4A16B131C4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CF03A9BD-2578-43A2-92C0-3CADD3D87758}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CF03A9BD-2578-43A2-92C0-3CADD3D87758}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CF03A9BD-2578-43A2-92C0-3CADD3D87758}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CF03A9BD-2578-43A2-92C0-3CADD3D87758}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C2A11CAB-6691-4974-90E1-3CA3DBEBC9CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C2A11CAB-6691-4974-90E1-3CA3DBEBC9CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2A11CAB-6691-4974-90E1-3CA3DBEBC9CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -346,7 +326,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{9C0E97BF-1AD7-4738-A678-4397C7D7164D} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 		{9D55FE1B-20CF-4579-8747-352CD2E1DBA5} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 		{BD2F2F1C-9B76-4552-81FB-E441EE142AA9} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 		{910268B2-274A-4728-ACA6-44327C537703} = {087C542F-855C-47ED-96C8-9D088E416ED2}
@@ -396,9 +375,7 @@ Global
 		{648F562E-9E08-47A8-936A-A4CBF66C80D4} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 		{9AD3AC64-DC58-4566-92A2-C4E26EB53F75} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 		{2ED88FEE-2E4D-4743-89B5-6E705BA9C764} = {087C542F-855C-47ED-96C8-9D088E416ED2}
-		{82BF9385-C612-4CC1-8C9E-121B5F7C5CCE} = {46E29395-DDA5-43E6-88A2-E92AFB0E5B94}
 		{AE785385-814A-4142-8783-FA4A16B131C4} = {087C542F-855C-47ED-96C8-9D088E416ED2}
-		{CF03A9BD-2578-43A2-92C0-3CADD3D87758} = {46E29395-DDA5-43E6-88A2-E92AFB0E5B94}
 		{C2A11CAB-6691-4974-90E1-3CA3DBEBC9CC} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 		{CFD43AC3-4932-42FD-BDFF-F06CA66828DE} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 	EndGlobalSection

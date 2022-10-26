@@ -3,16 +3,14 @@ using MailChimp.Net;
 using MailChimp.Net.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System;
-using System.Threading.Tasks;
 
 namespace Garcia.Infrastructure.Marketing.MailChimp
 {
     public class MailChimpMarketingService : IMarketingService
     {
         protected MailChimpMarketingSettings _settings;
-        private ILogger _logger;
-        private MailChimpManager _mailChimpManager;
+        private readonly ILogger _logger;
+        private readonly MailChimpManager _mailChimpManager;
 
         public MailChimpMarketingService(IOptions<MailChimpMarketingSettings> settings, ILoggerFactory logger)
         {

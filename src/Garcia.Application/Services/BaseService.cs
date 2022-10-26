@@ -7,6 +7,13 @@ using Garcia.Domain;
 
 namespace Garcia.Application.Services
 {
+    /// <summary>
+    /// Service base included basic crud methods.
+    /// </summary>
+    /// <typeparam name="TEntity">The entity.</typeparam>
+    /// <typeparam name="TDto">Entity's data transfer object.</typeparam>
+    /// <typeparam name="TKey">Entity id type.</typeparam>
+    /// <typeparam name="TRepository">The repository of entity. It might be entityframework, mongodb or cassandra repository. Doesn't matter. It must be registered to service collection.</typeparam>
     public class BaseService<TRepository, TEntity, TDto, TKey> : IBaseService<TEntity, TDto, TKey>
         where TRepository : IAsyncRepository<TEntity, TKey>
         where TKey : IEquatable<TKey>

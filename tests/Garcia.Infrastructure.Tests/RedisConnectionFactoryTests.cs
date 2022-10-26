@@ -1,15 +1,14 @@
-using System;
+using Garcia.Infrastructure.Redis;
 using Microsoft.Extensions.Options;
 using Moq;
 using Shouldly;
 using Xunit;
-using Garcia.Infrastructure.Redis;
 
 namespace Garcia.Infrastructure.Tests
 {
     public class RedisConnectionFactoryTests
     {
-        private static Mock<IOptions<RedisSettings>> _mockOptions = new();
+        private static readonly Mock<IOptions<RedisSettings>> _mockOptions = new();
         private static RedisConnectionFactory _redisConnectionFactory;
 
         [Fact]

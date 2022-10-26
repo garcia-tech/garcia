@@ -4,26 +4,21 @@ using Mandrill.Models;
 using Mandrill.Requests.Messages;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Garcia.Infrastructure.Email.Mandrill
 {
     public class MandrillEmailService : IMandrillEmailService
     {
         protected MandrillEmailSettings _settings;
-        private ILogger _logger;
+        private readonly ILogger _logger;
 
         public MandrillEmailService(IOptions<MandrillEmailSettings> settings, ILoggerFactory logger)
         {
-            _settings = settings?.Value;
+            _settings = settings.Value;
             _logger = logger.CreateLogger<MandrillEmailService>();
         }
 
-        public async Task SendEmailAsync(string templateName, string recipientEmailAddress, string recipientFullName, string bcc, Dictionary<string, string> parameters)
+        public async Task SendEmailAsync(string templateName, string recipientEmailAddress, string recipientFullName, string[]? cc = null, string[]? bcc = null, Dictionary<string, string>? parameters = null, IEnumerable<EmailAttachment> attachments = null)
         {
             try
             {
@@ -31,9 +26,20 @@ namespace Garcia.Infrastructure.Email.Mandrill
                 var toList = new List<EmailAddress>();
                 toList.Add(new EmailAddress(recipientEmailAddress, recipientFullName));
 
-                if (!string.IsNullOrEmpty(bcc))
+                if (bcc != null && bcc.Any())
                 {
-                    toList.Add(new EmailAddress(bcc, recipientFullName, "bcc"));
+                    foreach (var item in bcc)
+                    {
+                        toList.Add(new EmailAddress(item, recipientFullName, "bcc"));
+                    }
+                }
+
+                if (cc != null && cc.Any())
+                {
+                    foreach (var item in cc)
+                    {
+                        toList.Add(new EmailAddress(item, recipientFullName, "cc"));
+                    }
                 }
 
                 if (_settings.Bcc != null)
@@ -55,12 +61,18 @@ namespace Garcia.Infrastructure.Email.Mandrill
                     }
                 }
 
+                if(attachments?.Any() == true)
+                {
+                    message.Attachments = attachments;
+                }
+
                 var templateRequest = new SendMessageTemplateRequest(message, templateName);
                 var result = await api.SendMessageTemplate(templateRequest);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
+                throw;
             }
         }
     }

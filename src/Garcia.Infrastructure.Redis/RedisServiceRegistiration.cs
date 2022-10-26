@@ -1,7 +1,5 @@
 ﻿using System;
 using Garcia.Application.Redis.Contracts.Infrastructure;
-using Garcia.Application.Contracts.Infrastructure;
-using Garcia.Domain;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;

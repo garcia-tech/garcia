@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Garcia.Domain;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Garcia.Application.Contracts.Persistence;
+using Garcia.Domain;
 
 namespace Garcia.Persistence
 {
     public class Repository<T> : BaseRepository<T> where T : Entity<long>
     {
-        private IAsyncRepository<T> _repository;
+        private readonly IAsyncRepository<T> _repository;
 
         public Repository(IAsyncRepository<T> repository)
         {

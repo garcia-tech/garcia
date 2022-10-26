@@ -1,8 +1,8 @@
-﻿using Garcia.Infrastructure.RealTime.SignalR.Hubs;
+﻿using Garcia.Infrastructure.RealTime.SignalR.Clients;
+using Garcia.Infrastructure.RealTime.SignalR.Hubs;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Http.Connections;
-using Garcia.Infrastructure.RealTime.SignalR.Clients;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Garcia.Infrastructure.RealTime.SignalR
 {
@@ -12,6 +12,21 @@ namespace Garcia.Infrastructure.RealTime.SignalR
         {
             services.Configure(options);
 
+            services.AddSignalR(configuration =>
+            {
+                configuration.EnableDetailedErrors = false;
+                configuration.HandshakeTimeout = new TimeSpan(0, 0, 15);
+            })
+                .AddJsonProtocol(protocol =>
+                {
+                    protocol.PayloadSerializerOptions.PropertyNamingPolicy = null;
+                });
+
+            return services;
+        }
+
+        public static IServiceCollection AddGarciaSignalR(this IServiceCollection services)
+        {
             services.AddSignalR(configuration =>
             {
                 configuration.EnableDetailedErrors = false;

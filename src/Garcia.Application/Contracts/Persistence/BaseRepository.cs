@@ -14,9 +14,7 @@ namespace Garcia.Application.Contracts.Persistence
 
         public abstract Task<T> GetByIdAsync(long id, bool getSoftDeletes = false);
         public abstract Task<IReadOnlyList<T>> GetAllAsync(bool getSoftDeletes = false);
-        //public abstract Task<IReadOnlyList<T>> GetByKeyAsync(string key, object value);
         public abstract Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> filter, bool getSoftDeletes = false);
-        //public abstract Task<IReadOnlyList<T>> GetAsync(Dictionary<string, object> filter);
         public abstract Task<long> AddAsync(T entity);
         public abstract Task<long> AddRangeAsync(IEnumerable<T> entities);
         public abstract Task<long> UpdateAsync(T entity);

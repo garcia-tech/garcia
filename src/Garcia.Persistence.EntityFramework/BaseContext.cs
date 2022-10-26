@@ -1,10 +1,10 @@
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Garcia.Application.Contracts.Identity;
 using Garcia.Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Garcia.Persistence.EntityFramework
 {
@@ -33,21 +33,21 @@ namespace Garcia.Persistence.EntityFramework
                     case EntityState.Added:
                         entry.Entity.CreatedOn = DateTimeOffset.UtcNow;
                         entry.Entity.CreatedBy = _loggedInUserService?.UserId != null ?
-                            (long)_loggedInUserService!.UserId : default;
+                            _loggedInUserService!.UserId : default;
                         break;
                     case EntityState.Modified:
                         entry.Entity.LastUpdatedOn = DateTimeOffset.UtcNow;
                         entry.Entity.LastUpdatedBy = _loggedInUserService?.UserId != null ?
-                            (long)_loggedInUserService!.UserId : default;
+                            _loggedInUserService!.UserId : default;
                         break;
                     case EntityState.Deleted:
                         entry.Entity.DeletedOn = DateTimeOffset.UtcNow;
                         entry.Entity.DeletedBy = _loggedInUserService?.UserId != null ?
-                            (long)_loggedInUserService!.UserId : default;
+                            _loggedInUserService!.UserId : default;
                         break;
                 }
 
-                if(_mediator != null && entry.Entity.DomainEvents.Count > 0)
+                if (_mediator != null && entry.Entity.DomainEvents.Count > 0)
                 {
                     _ = entry.Entity.PublishDomainEvents(_mediator, cancellationToken);
                 }

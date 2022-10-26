@@ -1,8 +1,5 @@
-﻿using Garcia.Domain;
-using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Garcia.Domain;
 
 namespace Garcia.Application.Contracts.Localization
 {

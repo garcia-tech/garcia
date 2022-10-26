@@ -1,5 +1,5 @@
-﻿using Garcia.Domain;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using Garcia.Domain;
 
 namespace Garcia.Infrastructure.Localization.Local.Sample.Models
 {

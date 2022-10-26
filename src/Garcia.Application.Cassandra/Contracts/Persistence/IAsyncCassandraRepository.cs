@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Garcia.Application.Contracts.Persistence;
+﻿using Garcia.Application.Contracts.Persistence;
 using Garcia.Domain;
 
 namespace Garcia.Application.Cassandra.Contracts.Persistence

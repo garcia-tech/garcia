@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Garcia.Infrastructure.Redis
+﻿namespace Garcia.Infrastructure.Redis
 {
     public class RedisSettings : DatabaseSettings, ICacheSettings
     {

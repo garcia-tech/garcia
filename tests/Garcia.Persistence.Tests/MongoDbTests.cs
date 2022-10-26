@@ -1,20 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Garcia.Infrastructure;
+using Garcia.Infrastructure.Identity;
+using Garcia.Infrastructure.MongoDb;
+using Garcia.Persistence.MongoDb;
+using MediatR;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
+using Mongo2Go;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using Moq;
-using Xunit;
 using Shouldly;
-using Mongo2Go;
-using Garcia.Infrastructure;
-using Garcia.Persistence.MongoDb;
+using Xunit;
 using static Garcia.Persistence.Tests.Utils.Helpers;
-using Garcia.Infrastructure.MongoDb;
-using MongoDB.Bson;
-using Microsoft.Extensions.Caching.Memory;
-using Garcia.Infrastructure.Identity;
-using Microsoft.AspNetCore.Http;
 
 namespace Garcia.Persistence.Tests
 {
@@ -24,10 +25,21 @@ namespace Garcia.Persistence.Tests
         private static MongoDbRepository<TestMongoEntity> _repository;
         private static MongoDbRunner _runner;
         private readonly static string _loggedInUserId = ObjectId.GenerateNewId().ToString();
+        private readonly static Mock<IMediator> _mockMediator = new Mock<IMediator>();
+        private readonly static Mock<IOptions<CacheSettings>> _mockCacheOptions = new Mock<IOptions<CacheSettings>>();
+        private bool _testFlag;
 
         public MongoDbTests()
         {
             _mockOptions = new Mock<IOptions<MongoDbSettings>>();
+
+            _mockMediator.Setup(x => x.Publish(It.IsAny<INotification>(), It.IsAny<System.Threading.CancellationToken>())).Returns(() =>
+            {
+                _testFlag = true;
+                return Task.FromResult(_testFlag);
+            });
+
+            _mockCacheOptions.Setup(x => x.Value).Returns(new CacheSettings { CacheExpirationInMinutes = 2 });
         }
 
         private static void CreateConnection()
@@ -46,9 +58,7 @@ namespace Garcia.Persistence.Tests
                 UserId = _loggedInUserId
             };
 
-            var mockCacheOptions = new Mock<IOptions<CacheSettings>>();
-            mockCacheOptions.Setup(x => x.Value).Returns(new CacheSettings { CacheExpirationInMinutes = 2 });
-            _repository = new MongoDbRepository<TestMongoEntity>(_mockOptions.Object, mockLoggedInUser, new GarciaMemoryCache(new MemoryCache(new MemoryCacheOptions()), mockCacheOptions.Object));
+            _repository = new MongoDbRepository<TestMongoEntity>(_mockOptions.Object, mockLoggedInUser, new GarciaMemoryCache(new MemoryCache(new MemoryCacheOptions()), _mockCacheOptions.Object), _mockMediator.Object);
         }
 
         private static void DisposeConnection() => _runner.Dispose();
@@ -200,7 +210,7 @@ namespace Garcia.Persistence.Tests
         }
 
         [Fact]
-        public async void Soft_Delete_Should_Success()
+        public async Task Soft_Delete_Should_Success()
         {
             CreateConnection();
 
@@ -228,12 +238,27 @@ namespace Garcia.Persistence.Tests
         }
 
         [Fact]
-        public async void CountAsync()
+        public async Task CountAsync()
         {
             CreateConnection();
             await SeedMongo(_repository);
             var count = await _repository.CountAsync(x => x.Indicator == 1);
             count.ShouldBe(1);
+        }
+
+        [Fact]
+        public async Task PublishDomainEventsAsync_Should_Succsess_When_Domain_Events_Contains_Element()
+        {
+            CreateConnection();
+
+            var entity = new TestMongoEntity
+            {
+                Name = "PublishDomainEvents"
+            };
+
+            entity.AddDomainEvent(new TestEvent());
+            await _repository.AddAsync(entity);
+            _testFlag.ShouldBeTrue();
         }
     }
 }

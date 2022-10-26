@@ -1,8 +1,8 @@
-﻿using Garcia.Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Garcia.Domain;
 
 namespace Garcia.Application.Contracts.Persistence
 {
@@ -77,10 +77,38 @@ namespace Garcia.Application.Contracts.Persistence
         /// <param name="size">Count of entity.</param>
         /// <returns><see cref="IReadOnlyCollection{T}"/></returns>
         Task<IReadOnlyList<T>> GetAllAsync(int page, int size, bool getSoftDeletes = false);
+        /// <summary>
+        /// Gets the <typeparamref name="T"/> by id with all navigations.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="getSoftDeletes"></param>
+        /// <returns></returns>
         Task<T> GetByIdWithNavigationsAsync(long id, bool getSoftDeletes = false);
+        /// <summary>
+        /// Gets the <typeparamref name="T"/> by filter with all navigations.
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <param name="getSoftDeletes"></param>
+        /// <returns></returns>
         Task<T> GetByFilterWithNavigationsAsync(Expression<Func<T, bool>> filter, bool getSoftDeletes = false);
+        /// <summary>
+        /// Gets a single record of the <typeparamref name="T"/> by filter.
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <param name="getSoftDeletes"></param>
+        /// <returns></returns>
         Task<T> GetByFilterAsync(Expression<Func<T, bool>> filter, bool getSoftDeletes = false);
+        /// <summary>
+        /// It will return true if <typeparamref name="T"/> exits by filter otherwise false.
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
         Task<bool> AnyAsync(Expression<Func<T, bool>> filter);
+        /// <summary>
+        /// Bulk updates <typeparamref name="T"/> of <paramref name="updatedList"/>.
+        /// </summary>
+        /// <param name="updatedList"></param>
+        /// <returns></returns>
         Task<long> UpdateManyAsync(IEnumerable<T> updatedList);
     }
 }

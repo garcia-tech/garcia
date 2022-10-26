@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Garcia.Infrastructure.Redis;
 using Microsoft.Extensions.Options;
@@ -13,7 +10,7 @@ namespace Garcia.Infrastructure.Tests
 {
     public class RedisServiceTests
     {
-        private static Mock<IOptions<RedisSettings>> _mockOptions = new();
+        private static readonly Mock<IOptions<RedisSettings>> _mockOptions = new();
         private static RedisConnectionFactory _redisConnectionFactory;
         private static RedisService _service;
 

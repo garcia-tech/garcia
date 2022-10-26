@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Xunit;
+using Garcia.Application.Contracts.Persistence;
+using Garcia.Application.Services;
 using Moq;
 using Shouldly;
-using Garcia.Application.Services;
-using Garcia.Application.Contracts.Persistence;
+using Xunit;
 
 namespace Garcia.Application.Tests.Services
 {
@@ -82,7 +82,7 @@ namespace Garcia.Application.Tests.Services
         [InlineData(120)]
         public async Task UpdateAsync_Should_Not_Be_Successful(long id)
         {
-            var response = await _service.UpdateAsync(id, new {});
+            var response = await _service.UpdateAsync(id, new { });
             response.Success.ShouldBeFalse();
             response.Status.ShouldBe(System.Net.HttpStatusCode.NotFound);
         }

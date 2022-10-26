@@ -1,9 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using CacheManager.Core;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Ocelot.DependencyInjection;
-using Ocelot.Cache.CacheManager;
 using Ocelot.Cache;
-using CacheManager.Core;
+using Ocelot.Cache.CacheManager;
+using Ocelot.DependencyInjection;
 using Ocelot.Provider.Consul;
 using Ocelot.Provider.Eureka;
 

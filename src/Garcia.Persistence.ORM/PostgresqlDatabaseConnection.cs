@@ -1,9 +1,9 @@
-﻿using Garcia.Infrastructure;
-using Microsoft.Extensions.Options;
-using Npgsql;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using Garcia.Infrastructure;
+using Microsoft.Extensions.Options;
+using Npgsql;
 
 namespace Garcia.Persistence.ORM
 {

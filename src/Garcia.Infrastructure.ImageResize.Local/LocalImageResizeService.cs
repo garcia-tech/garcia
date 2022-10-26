@@ -5,7 +5,6 @@ using Microsoft.Extensions.Options;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
 using SixLabors.ImageSharp.Processing;
-using System.Drawing.Imaging;
 
 namespace Garcia.Infrastructure.ImageResize.Local
 {

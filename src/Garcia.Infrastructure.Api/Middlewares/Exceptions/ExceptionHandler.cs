@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Garcia.Application;
 using Microsoft.AspNetCore.Http;
@@ -10,6 +7,11 @@ using Microsoft.Extensions.Options;
 
 namespace Garcia.Infrastructure.Api.Middlewares.Exceptions
 {
+    /// <summary>
+    /// When an exception is thrown, automatically executes if there is no catch block for that exception.
+    /// In case of exception returns <typeparamref name="TErrorModel"/> to the client.
+    /// </summary>
+    /// <typeparam name="TErrorModel"></typeparam>
     public class ExceptionHandler<TErrorModel> : IMiddleware where TErrorModel : ApiError, new()
     {
         private readonly ILogger<ExceptionHandler<TErrorModel>> _logger;

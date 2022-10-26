@@ -2,11 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using Garcia.Application.Contracts.Persistence;
-using Garcia.Domain;
 using Moq;
 
 namespace Garcia.Application.Tests
@@ -74,7 +70,7 @@ namespace Garcia.Application.Tests
                 new TestUser
                 {
                     Id = 1,
-                    Username = testusername, 
+                    Username = testusername,
                     Password = testpassword
                 },
             };
@@ -87,7 +83,8 @@ namespace Garcia.Application.Tests
 
             repository.Setup(x => x.GetAsync(It.IsAny<Expression<Func<TestUser, bool>>>(), false))
                 .ReturnsAsync(returns);
-
+            repository.Setup(x => x.AddAsync(It.IsAny<TestUser>()))
+                .ReturnsAsync(1);
             return repository;
         }
     }

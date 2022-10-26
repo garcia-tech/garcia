@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Garcia.Application.Contracts.Persistence;
+using Garcia.Infrastructure;
 using Garcia.Persistence.EntityFramework;
 using Microsoft.EntityFrameworkCore;
-using Xunit;
-using Shouldly;
-using Garcia.Infrastructure;
 using Microsoft.Extensions.Caching.Memory;
-using Moq;
 using Microsoft.Extensions.Options;
-using Garcia.Application.Contracts.Persistence;
+using Moq;
+using Shouldly;
+using Xunit;
 
 namespace Garcia.Persistence.Tests
 {
@@ -18,7 +18,7 @@ namespace Garcia.Persistence.Tests
         private const string ConnectionString =
             @"Server=(localdb)\mssqllocaldb;Database=EFTestSample;Trusted_Connection=True";
 
-        private IAsyncRepository<TestEntity> _repository;
+        private readonly IAsyncRepository<TestEntity> _repository;
 
         public EntityFrameworkTestFixture()
         {

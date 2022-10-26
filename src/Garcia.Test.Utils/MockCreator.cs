@@ -1,12 +1,11 @@
-﻿using Moq;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Garcia.Domain;
-using Garcia.Application;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+﻿using System.Linq.Expressions;
 using Garcia.Application.Contracts.Persistence;
-using System.Linq.Expressions;
+using Garcia.Domain;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Moq;
 
 namespace Garcia.Test.Utils
 {
@@ -22,7 +21,7 @@ namespace Garcia.Test.Utils
         /// <param name="mockDataSet">Mock dataset that mock repository will use.</param>
         /// <param name="testId">A test id of type TKey. Mock repository will use it for generating some expressions.</param>
         /// <returns></returns>
-        public static Mock<IAsyncRepository<TEntity, TKey>> CreateMockRepository<TEntity, TKey>(List<TEntity> mockDataSet, TKey testId) 
+        public static Mock<IAsyncRepository<TEntity, TKey>> CreateMockRepository<TEntity, TKey>(List<TEntity> mockDataSet, TKey testId)
             where TEntity : IEntity<TKey>
             where TKey : IEquatable<TKey>
         {
@@ -57,7 +56,7 @@ namespace Garcia.Test.Utils
                 });
 
             repository.Setup(x => x.GetByIdAsync(testId, false))
-                .ReturnsAsync(() => 
+                .ReturnsAsync(() =>
                 {
                     return mockDataSet.FirstOrDefault(x => x.Id.Equals(testId));
                 });
@@ -88,12 +87,12 @@ namespace Garcia.Test.Utils
         /// <param name="mockDataSet">Mock dataset that mock repository will use.</param>
         /// <param name="testId">A test id of type TKey. Mock repository will use it for generating some expressions.</param>
         /// <returns><typeparamref name="TMockRepository"/></returns>
-        public static TMockRepository CreateMockRepository<TMockRepository, TEntity, TKey>(TMockRepository repository ,List<TEntity> mockDataSet, TKey testId)
+        public static TMockRepository CreateMockRepository<TMockRepository, TEntity, TKey>(TMockRepository repository, List<TEntity> mockDataSet, TKey testId)
             where TEntity : IEntity<TKey>
             where TKey : IEquatable<TKey>
             where TMockRepository : Mock<IAsyncRepository<TEntity, TKey>>
         {
-            repository.Setup(x => x.AddAsync(It.IsAny<TEntity>())) 
+            repository.Setup(x => x.AddAsync(It.IsAny<TEntity>()))
                 .ReturnsAsync((TEntity entity) =>
                 {
                     mockDataSet.Add(entity);
@@ -206,7 +205,7 @@ namespace Garcia.Test.Utils
                     return result.ToList();
                 });
 
-            return (TRepository) mock.Object;
+            return (TRepository)mock.Object;
         }
 
         /// <summary>
@@ -241,7 +240,7 @@ namespace Garcia.Test.Utils
                     return entities.Count();
                 });
 
-            mock.Setup(x => x.DeleteAsync(It.IsAny<TEntity>(),true))
+            mock.Setup(x => x.DeleteAsync(It.IsAny<TEntity>(), true))
                 .ReturnsAsync((TEntity entity) =>
                 {
                     var result = mockDataSet.Remove(entity);
@@ -309,7 +308,7 @@ namespace Garcia.Test.Utils
         /// </summary>
         /// <typeparam name="TEntryPoint"></typeparam>
         /// <returns><see cref="HttpClient"/></returns>
-        public static HttpClient CreateTestClient<TEntryPoint>(Action<WebHostBuilderContext, IConfigurationBuilder> configureDelegate, Action<IServiceCollection> services) 
+        public static HttpClient CreateTestClient<TEntryPoint>(Action<WebHostBuilderContext, IConfigurationBuilder> configureDelegate, Action<IServiceCollection> services)
             where TEntryPoint : class
         {
             return new WebApplicationFactory<TEntryPoint>()

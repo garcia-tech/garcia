@@ -6,10 +6,10 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Garcia.Application.Redis.Contracts.Persistence;
-using Garcia.Infrastructure.Redis;
-using Garcia.Exceptions.Redis;
-using StackExchange.Redis;
 using Garcia.Domain;
+using Garcia.Exceptions.Redis;
+using Garcia.Infrastructure.Redis;
+using StackExchange.Redis;
 
 namespace Garcia.Persistence.Redis
 {
@@ -81,7 +81,7 @@ namespace Garcia.Persistence.Redis
             return model;
         }
 
-        public T Set<T>(string key, T item , int? expirationInMinutes = null)
+        public T Set<T>(string key, T item, int? expirationInMinutes = null)
         {
             _database.StringSet(key, JsonSerializer.Serialize<T>(item), TimeSpan.FromMinutes(expirationInMinutes ?? CacheExpirationInMinutes));
             return item;

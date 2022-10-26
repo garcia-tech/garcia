@@ -3,7 +3,7 @@
 namespace Garcia.Exceptions.Redis
 {
     /// <summary>
-    /// The exception that is thrown when type parameter doest not match value of key
+    /// Thrown when type parameter doest not match value of key.
     /// </summary>
     public class KeyValueMatchException : Exception
     {

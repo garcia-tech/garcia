@@ -1,5 +1,5 @@
-﻿using Serilog;
-using Garcia.Infrastructure.Logging.Serilog.Configurations;
+﻿using Garcia.Infrastructure.Logging.Serilog.Configurations;
+using Serilog;
 
 namespace Garcia.Infrastructure.Logging.Serilog
 {

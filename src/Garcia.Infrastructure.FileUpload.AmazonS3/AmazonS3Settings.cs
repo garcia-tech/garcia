@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Garcia.Infrastructure.FileUpload.AmazonS3
+﻿namespace Garcia.Infrastructure.FileUpload.AmazonS3
 {
     public class AmazonS3Settings
     {

@@ -2,6 +2,9 @@
 
 namespace Garcia.Exceptions.ElasticSearch
 {
+    /// <summary>
+    /// Thrown when an error occurs during deletion.
+    /// </summary>
     [Serializable]
     public class DeleteDocumentException : Exception
     {

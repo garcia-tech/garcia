@@ -1,14 +1,14 @@
-﻿using Garcia.Application.Contracts.Localization;
+﻿using System.ComponentModel;
+using System.Reflection;
+using Garcia.Application.Contracts.Localization;
 using Garcia.Domain;
 using Microsoft.Extensions.Logging;
-using System.ComponentModel;
-using System.Reflection;
 
 namespace Garcia.Infrastructure.Localization.Local
 {
     public class LocalizationService : ILocalizationService
     {
-        private ILocalizationItemService _localizationItemService;
+        private readonly ILocalizationItemService _localizationItemService;
         private readonly ILogger<LocalizationService> _logger;
 
         public LocalizationService(ILocalizationItemService localizationItemService,

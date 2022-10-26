@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Garcia.Domain;
-using StackExchange.Redis;
-using Newtonsoft.Json;
 using Garcia.Application.Redis.Contracts.Infrastructure;
+using Garcia.Domain;
+using Newtonsoft.Json;
+using StackExchange.Redis;
 
 namespace Garcia.Infrastructure.Redis
 {

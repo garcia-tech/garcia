@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Garcia.Domain;
 using Garcia.Domain.Identity;
 
@@ -12,6 +8,7 @@ namespace Garcia.Application.Tests
     {
         public string Username { get; set; }
         public string Password { get; set; }
+        public string Email { get; set; }
         public List<string> Roles { get; set; } = new List<string>();
     }
 }
