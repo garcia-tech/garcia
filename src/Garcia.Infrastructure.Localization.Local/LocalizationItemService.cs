@@ -1,24 +1,27 @@
 ﻿using Garcia.Application.Contracts.Localization;
+using Garcia.Application.Contracts.Persistence;
 
 namespace Garcia.Infrastructure.Localization.Local
 {
-    public class LocalizationItemService : ILocalizationItemService
+    public class LocalizationItemService<T, TKey> : ILocalizationItemService<T>
+        where T : LocalizationItem<TKey>
+        where TKey : struct, IEquatable<TKey>
     {
-        private readonly ILocalizationItemRepository<LocalizationItem> _localizationItemRepository;
+        private readonly IAsyncRepository<T, TKey> _localizationItemRepository;
 
-        public LocalizationItemService(ILocalizationItemRepository<LocalizationItem> localizationItemRepository)
+        public LocalizationItemService(IAsyncRepository<T, TKey> localizationItemRepository)
         {
             _localizationItemRepository = localizationItemRepository;
         }
 
-        public async Task AddLocalizationItem(ILocalizationItem item)
+        public async Task AddLocalizationItem(T item)
         {
-            await _localizationItemRepository.AddAsync(item as LocalizationItem);
+            await _localizationItemRepository.AddAsync(item);
         }
 
-        public async Task<ILocalizationItem> GetLocalizationItem(string key, string cultureCode)
+        public async Task<T> GetLocalizationItem(string key, string cultureCode)
         {
-            return (await _localizationItemRepository.GetAsync(x => x.Key == key && x.CultureCode == cultureCode))
+            return (T)(await _localizationItemRepository.GetAsync(x => x.Key == key && x.CultureCode == cultureCode))
                 .FirstOrDefault();
         }
     }

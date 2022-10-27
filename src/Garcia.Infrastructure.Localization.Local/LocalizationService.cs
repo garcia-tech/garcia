@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Linq.Expressions;
 using System.Reflection;
 using Garcia.Application.Contracts.Localization;
 using Garcia.Domain;
@@ -6,13 +7,14 @@ using Microsoft.Extensions.Logging;
 
 namespace Garcia.Infrastructure.Localization.Local
 {
-    public class LocalizationService : ILocalizationService
+    public class LocalizationService<T> : ILocalizationService<T>
+        where T : ILocalizationItem, new()
     {
-        private readonly ILocalizationItemService _localizationItemService;
-        private readonly ILogger<LocalizationService> _logger;
+        private readonly ILocalizationItemService<T> _localizationItemService;
+        private readonly ILogger<LocalizationService<T>> _logger;
 
-        public LocalizationService(ILocalizationItemService localizationItemService,
-            ILogger<LocalizationService> logger)
+        public LocalizationService(ILocalizationItemService<T> localizationItemService,
+            ILogger<LocalizationService<T>> logger)
         {
             _localizationItemService = localizationItemService;
             _logger = logger;
@@ -26,14 +28,13 @@ namespace Garcia.Infrastructure.Localization.Local
 
             if (item == null && AddMissingItem)
             {
-                await _localizationItemService.AddLocalizationItem(new LocalizationItem(cultureCode, key,
-                    string.Empty));
+                await _localizationItemService.AddLocalizationItem(new T { CultureCode = cultureCode, Key = key, Value = string.Empty });
             }
 
             return item?.Value;
         }
 
-        public async Task Localize(string cultureCode, IId<long> item)
+        public async Task Localize<TKey>(string cultureCode, IEntity<TKey> item)
         {
             var type = item.GetType();
             var typeName = type.Name;
@@ -64,24 +65,15 @@ namespace Garcia.Infrastructure.Localization.Local
             }
         }
 
-        public async Task<string> Localize(string cultureCode, Entity<long> item, string propertyName)
+        public async Task<string> Localize<TItem, TKey>(string cultureCode, TItem item, Expression<Func<TItem, object>> expression)
+            where TItem : IEntity<TKey>
         {
-            var type = item.GetType();
+            var type = typeof(TItem);
             var typeName = type.Name;
+            var propertyName = ((MemberExpression)expression.Body).Member.Name;
             var property = type.GetProperty(propertyName,
                 BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-
-            if (property == null)
-            {
-                throw new LocalizationException($"Property {propertyName} does not exist in entity {typeName}.");
-            }
-
-            if (property == null)
-            {
-                throw new LocalizationException($"Property {propertyName} is not a string.");
-            }
-
-            var localizedValue = await Localize(cultureCode, $"{typeName}.{item.Id}.{property.Name}");
+            var localizedValue = await Localize(cultureCode, $"{typeName}.{item.Id}.{property!.Name}");
             return localizedValue;
         }
     }
