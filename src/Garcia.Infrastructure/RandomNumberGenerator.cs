@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Security.Cryptography;
 using Garcia.Application.Contracts.Infrastructure;
 
 namespace Garcia.Infrastructure
 {
     public class RandomNumberGenerator : IRandomNumberGenerator
     {
-        private readonly RNGCryptoServiceProvider _generator = new RNGCryptoServiceProvider();
-
         public int Generate(int minimumValue, int maximumValue)
         {
             var randomNumber = new byte[1];
-            _generator.GetBytes(randomNumber);
+            using var randomNumberGenerator = System.Security.Cryptography.RandomNumberGenerator.Create();
+            randomNumberGenerator.GetBytes(randomNumber);
             var asciiValueOfRandomCharacter = Convert.ToDouble(randomNumber[0]);
             var multiplier = Math.Max(0, asciiValueOfRandomCharacter / 255d - 0.00000000001d);
             var range = maximumValue - minimumValue + 1;
@@ -23,7 +21,7 @@ namespace Garcia.Infrastructure
         {
             string number = Generate(100000000, int.MaxValue).ToString();
             int numberLength = number.Length;
-            return length >= numberLength ? number : number.Substring(0, length);
+            return length >= numberLength ? number : number[..length];
         }
     }
 }

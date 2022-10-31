@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using Garcia.Infrastructure.Redis;
+using Garcia.Persistence.Redis;
 using Microsoft.Extensions.Options;
 using Moq;
-using Garcia.Persistence.Redis;
-using Xunit;
 using Shouldly;
-using Garcia.Infrastructure.Redis;
+using Xunit;
 
 namespace Garcia.Persistence.Tests
 {
     public class RedisCacheTests
     {
-        private static Mock<IOptions<RedisSettings>> _mockOptions = new();
+        private static readonly Mock<IOptions<RedisSettings>> _mockOptions = new();
         private static RedisConnectionFactory _redisConnectionFactory;
         private static RedisCache _redisCache;
 
@@ -52,7 +49,7 @@ namespace Garcia.Persistence.Tests
         public async Task SetAsync()
         {
             var key = "test";
-            var addedData = await _redisCache.SetAsync(key, new TestEntity(1,"testData"));
+            var addedData = await _redisCache.SetAsync(key, new TestEntity(1, "testData"));
             var result = await _redisCache.GetAsync<TestEntity>(key);
             result.Name.ShouldBe(addedData.Name);
         }

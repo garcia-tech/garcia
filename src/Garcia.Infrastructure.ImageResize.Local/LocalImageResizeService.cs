@@ -5,7 +5,6 @@ using Microsoft.Extensions.Options;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
 using SixLabors.ImageSharp.Processing;
-using System.Drawing.Imaging;
 
 namespace Garcia.Infrastructure.ImageResize.Local
 {
@@ -25,9 +24,8 @@ namespace Garcia.Infrastructure.ImageResize.Local
                 newHeight = ImageResizeSettings.DefaultHeight;
             }
 
-            IImageFormat format;
-            var stream = new MemoryStream();
-            using var image = Image.Load(file.OpenReadStream(), out format);
+            using var stream = new MemoryStream();
+            using var image = Image.Load(file.OpenReadStream(), out IImageFormat format);
             image.Mutate(x => x.Resize(image.Width / (image.Height / newHeight.Value), newHeight.Value));
             image.Save(stream, format);
             return stream;

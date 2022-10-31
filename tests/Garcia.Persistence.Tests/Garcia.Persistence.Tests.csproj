@@ -35,8 +35,6 @@
       <ProjectReference Include="..\..\src\Garcia.Persistence.EntityFramework.SqlServer\Garcia.Persistence.EntityFramework.SqlServer.csproj" />
      
       <ProjectReference Include="..\..\src\Garcia.Persistence.MongoDb\Garcia.Persistence.MongoDb.csproj" />
-     
-      <ProjectReference Include="..\..\src\Garcia.Persistence.ORM\Garcia.Persistence.ORM.csproj" />
       <ProjectReference Include="..\..\src\Garcia.Persistence.EntityFramework\Garcia.Persistence.EntityFramework.csproj" />
       <ProjectReference Include="..\..\src\Garcia.Persistence.Redis\Garcia.Persistence.Redis.csproj" />
       <ProjectReference Include="..\..\src\Garcia.Persistence\Garcia.Persistence.csproj" />

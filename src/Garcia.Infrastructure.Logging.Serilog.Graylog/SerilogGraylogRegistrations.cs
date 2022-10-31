@@ -1,11 +1,11 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Garcia.Infrastructure.Logging.Serilog.Configurations;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Serilog;
 using Serilog.Events;
 using Serilog.Filters;
-using Serilog;
 using Serilog.Sinks.Graylog;
 using Serilog.Sinks.Graylog.Core.Transport;
-using Garcia.Infrastructure.Logging.Serilog.Configurations;
-using Microsoft.Extensions.Configuration;
 
 namespace Garcia.Infrastructure.Logging.Serilog.Graylog
 {

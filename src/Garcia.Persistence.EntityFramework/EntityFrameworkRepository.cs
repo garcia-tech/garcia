@@ -13,15 +13,15 @@ namespace Garcia.Persistence.EntityFramework
 {
     public partial class EntityFrameworkRepository<T> : BaseRepository<T> where T : Entity<long>, new()
     {
-        protected readonly DbContext _dbContext;
+        protected readonly BaseContext _dbContext;
         protected IGarciaCache? GarciaCache { get; }
 
-        public EntityFrameworkRepository(DbContext dbContext)
+        public EntityFrameworkRepository(BaseContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public EntityFrameworkRepository(DbContext dbContext, IGarciaCache garciaCache)
+        public EntityFrameworkRepository(BaseContext dbContext, IGarciaCache garciaCache)
         {
             _dbContext = dbContext;
             GarciaCache = garciaCache;

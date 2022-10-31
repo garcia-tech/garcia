@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Garcia.Application.Contracts.Infrastructure;
-using Garcia.Domain;
 
 namespace Garcia.Application.Redis.Contracts.Infrastructure
 {

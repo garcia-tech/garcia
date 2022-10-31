@@ -5,7 +5,7 @@ namespace Garcia.Persistence.ORM
 {
     public class DatabaseConnectionFactory
     {
-        private IOptions<DatabaseSettings> _databaseSettings;
+        private readonly IOptions<DatabaseSettings> _databaseSettings;
 
         public DatabaseConnectionFactory(IOptions<DatabaseSettings> databaseSettings)
         {

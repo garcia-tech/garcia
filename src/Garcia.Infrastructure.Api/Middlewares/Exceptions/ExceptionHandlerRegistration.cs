@@ -1,7 +1,7 @@
 ﻿using System;
+using Garcia.Application;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using Garcia.Application;
 
 namespace Garcia.Infrastructure.Api.Middlewares.Exceptions
 {

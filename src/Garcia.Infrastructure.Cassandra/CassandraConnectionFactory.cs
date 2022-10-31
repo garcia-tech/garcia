@@ -25,13 +25,13 @@ namespace Garcia.Infrastructure.Cassandra
             if (_settings.ContactPoints?.Length < 1)
                 throw new ContactPointsEmptyException();
 
-            if(!string.IsNullOrEmpty(_settings.ConncetionString))
+            if (!string.IsNullOrEmpty(_settings.ConncetionString))
             {
                 return builder.WithConnectionString(_settings.ConncetionString)
                     .Build();
             }
 
-            if(!string.IsNullOrEmpty(_settings.Username) && !string.IsNullOrEmpty(_settings.Password))
+            if (!string.IsNullOrEmpty(_settings.Username) && !string.IsNullOrEmpty(_settings.Password))
             {
                 return builder.AddContactPoints(_settings.ContactPoints)
                     .WithCredentials(_settings.Username, _settings.Password)

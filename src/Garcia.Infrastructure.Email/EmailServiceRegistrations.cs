@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
-using System.Threading.Tasks;
+﻿using Garcia.Application.Contracts.Email;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Garcia.Application.Contracts.Email;
+using Newtonsoft.Json;
 
 namespace Garcia.Infrastructure.Email
 {

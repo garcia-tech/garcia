@@ -1,7 +1,7 @@
-﻿using Garcia.Infrastructure;
-using Microsoft.Extensions.Options;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
+using Garcia.Infrastructure;
+using Microsoft.Extensions.Options;
 
 namespace Garcia.Persistence.ORM
 {

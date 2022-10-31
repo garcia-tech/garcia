@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Garcia.Infrastructure.Identity
+﻿namespace Garcia.Infrastructure.Identity
 {
     public class RefreshTokenOptions
     {

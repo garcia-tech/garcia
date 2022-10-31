@@ -4,16 +4,12 @@ using Garcia.Application;
 using Garcia.Application.Contracts.FileUpload;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
-using System;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Garcia.Infrastructure.FileUpload.AmazonS3
 {
     public class AmazonS3FileUplaodService : IFileUploadService
     {
-        private AmazonS3Settings _settings;
+        private readonly AmazonS3Settings _settings;
         private readonly AmazonS3Client s3Client;
 
         public AmazonS3FileUplaodService(IOptions<AmazonS3Settings> settings)

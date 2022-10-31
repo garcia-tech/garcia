@@ -1,9 +1,7 @@
-﻿using Garcia.Application.Contracts.Infrastructure;
+﻿using Garcia.Application.RabbitMQ.Contracts.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using Garcia.Domain;
-using Garcia.Application.RabbitMQ.Contracts.Infrastructure;
 
 namespace Garcia.Infrastructure.RabbitMQ
 {

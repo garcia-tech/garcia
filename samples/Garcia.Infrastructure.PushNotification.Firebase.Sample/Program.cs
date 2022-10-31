@@ -1,4 +1,3 @@
-using Garcia.Application.Contracts.PushNotification;
 using Garcia.Infrastructure.PushNotification.Firebase;
 
 var builder = WebApplication.CreateBuilder(args);

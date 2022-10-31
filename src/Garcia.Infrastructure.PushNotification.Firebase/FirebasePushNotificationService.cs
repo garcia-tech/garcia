@@ -3,7 +3,6 @@ using FirebaseAdmin.Messaging;
 using Garcia.Application.Contracts.PushNotification;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.Extensions.Options;
-using Garcia.Infrastructure;
 
 namespace Garcia.Infrastructure.PushNotification.Firebase
 {

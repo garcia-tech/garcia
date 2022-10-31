@@ -1,17 +1,15 @@
-﻿using Garcia.Persistence;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Garcia.Application;
+using Garcia.Application.Contracts.FileUpload;
+using Garcia.Application.Contracts.Identity;
+using Garcia.Application.Contracts.ImageResize;
+using Garcia.Application.Contracts.Persistence;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Garcia.Application;
-using Garcia.Application.Contracts.Persistence;
-using Garcia.Application.Contracts.FileUpload;
-using Garcia.Application.Contracts.ImageResize;
-using Garcia.Infrastructure.Api.Models;
-using System.Linq;
-using Garcia.Application.Contracts.Identity;
 
 namespace Garcia.Infrastructure.Api.Controllers
 {

@@ -3,7 +3,8 @@ using Garcia.Domain;
 
 namespace Garcia.Infrastructure.Localization.Local
 {
-    public class LocalizationItem : Entity<long>, ILocalizationItem
+    public class LocalizationItem<TKey> : Entity<TKey>, ILocalizationItem
+        where TKey : struct, IEquatable<TKey>
     {
         public string Key { get; set; }
         public string CultureCode { get; set; }

@@ -43,7 +43,7 @@ namespace Garcia.Infrastructure.Api.Controllers
         [HttpPost("login")]
         public virtual async Task<ActionResult<BaseResponse<LoginResponse<TUserDto>>>> Login([FromBody] Credentials request)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 var error = new ApiError();
                 error.SetStatusCode(System.Net.HttpStatusCode.BadRequest);
@@ -51,6 +51,22 @@ namespace Garcia.Infrastructure.Api.Controllers
             }
 
             var response = await Service.Login(request, GetIpAddress());
+            return StatusCode(
+                response.StatusCode,
+                response.Success ? response.Result : response.Error);
+        }
+
+        [HttpPost("signup")]
+        public virtual async Task<ActionResult<BaseResponse<LoginResponse<TUserDto>>>> Signup([FromBody] Credentials request)
+        {
+            if (!ModelState.IsValid)
+            {
+                var error = new ApiError();
+                error.SetStatusCode(System.Net.HttpStatusCode.BadRequest);
+                return StatusCode(400, error);
+            }
+
+            var response = await Service.Signup(request, GetIpAddress());
             return StatusCode(
                 response.StatusCode,
                 response.Success ? response.Result : response.Error);

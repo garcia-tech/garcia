@@ -1,13 +1,11 @@
-using System;
 using System.Linq;
-using NuGet.Frameworks;
 using Xunit;
 
 namespace Garcia.Domain.Tests;
 
 public class EntityTests
 {
-    private FakeEntity _sut;
+    private readonly FakeEntity _sut;
 
     public EntityTests()
     {
@@ -29,13 +27,13 @@ public class EntityTests
 
         _sut.AddDomainEvent(isActiveChangedEvent);
 
-        var addedEvent = (IsActiveChangedEvent<int>) _sut.DomainEvents.First();
+        var addedEvent = (IsActiveChangedEvent<int>)_sut.DomainEvents.First();
 
         Assert.Equal(1, _sut.DomainEvents.Count);
         Assert.Equal(1, addedEvent.Id);
         Assert.False(addedEvent.IsActive);
     }
-    
+
     [Fact(DisplayName = "Remove domain events")]
     public void Test3()
     {
@@ -46,11 +44,11 @@ public class EntityTests
 
         _sut.RemoveDomainEvent(isActiveChangedEvent);
 
-        var notDeletedDomainEvent = (IsActiveChangedEvent<int>) _sut.DomainEvents.First();
+        var notDeletedDomainEvent = (IsActiveChangedEvent<int>)_sut.DomainEvents.First();
         Assert.Equal(1, _sut.DomainEvents.Count);
         Assert.Equal(2, notDeletedDomainEvent.Id);
     }
-    
+
     [Fact(DisplayName = "Clear domain events")]
     public void Test4()
     {
