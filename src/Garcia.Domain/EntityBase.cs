@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text.Json.Serialization;
@@ -16,6 +17,7 @@ namespace Garcia.Domain
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonId]
         [BsonElement(Order = 0)]
+        [Key]
         public TKey Id { get; set; }
         public virtual Guid UniqueId { get; set; } = Guid.NewGuid();
         public virtual bool Active { get; set; }
