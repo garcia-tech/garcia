@@ -1,4 +1,7 @@
 using System;
+using System.Linq;
+using System.Collections.Generic;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Garcia.Application.Contracts.Identity;
@@ -55,6 +58,31 @@ namespace Garcia.Persistence.EntityFramework
             }
 
             return base.SaveChangesAsync(cancellationToken);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            var entities = ResolveEntities();
+
+            foreach (var entity in entities)
+            {
+                modelBuilder.Entity(entity.GetTypeInfo()).HasKey("Id");
+            }
+        }
+
+        protected virtual IEnumerable<TypeInfo> ResolveEntities()
+        {
+            var assemblies = Assembly.GetEntryAssembly()?
+                .GetReferencedAssemblies()
+                .Where(x => !x.FullName.Contains("System")
+                    && !x.FullName.Contains("Microsoft")
+                    && !x.FullName.Contains("Garcia"))
+                .Select(x => Assembly.Load(x.FullName));
+            assemblies?.Append(Assembly.GetEntryAssembly());
+
+            return assemblies?
+                .SelectMany(x => x.DefinedTypes)
+                    .Where(x => x.BaseType == typeof(Entity<long>)) ?? new List<TypeInfo>();
         }
     }
 }
