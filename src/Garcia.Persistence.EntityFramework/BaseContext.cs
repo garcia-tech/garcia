@@ -79,10 +79,11 @@ namespace Garcia.Persistence.EntityFramework
                     && !x.FullName.Contains("Garcia"))
                 .Select(x => Assembly.Load(x.FullName));
             assemblies?.Append(Assembly.GetEntryAssembly());
+            assemblies?.Append(Assembly.GetExecutingAssembly());
 
             return assemblies?
                 .SelectMany(x => x.DefinedTypes)
-                    .Where(x => x.BaseType == typeof(Entity<long>)) ?? new List<TypeInfo>();
+                    .Where(x => x.BaseType == typeof(Entity<long>) || x.BaseType == typeof(Entity<int>)) ?? new List<TypeInfo>();
         }
     }
 }
