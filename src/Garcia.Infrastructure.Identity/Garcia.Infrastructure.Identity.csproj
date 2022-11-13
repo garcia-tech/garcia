@@ -6,6 +6,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Garcia.Application.Identity\Garcia.Application.Identity.csproj" />
 		<ProjectReference Include="..\Garcia.Application\Garcia.Application.csproj" />
 		<ProjectReference Include="..\Garcia.Domain.Identity\Garcia.Domain.Identity.csproj" />
 		<ProjectReference Include="..\Garcia.Infrastructure\Garcia.Infrastructure.csproj" />
