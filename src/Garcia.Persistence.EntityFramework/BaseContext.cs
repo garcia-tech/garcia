@@ -77,9 +77,8 @@ namespace Garcia.Persistence.EntityFramework
                 .Where(x => !x.FullName.Contains("System")
                     && !x.FullName.Contains("Microsoft")
                     && !x.FullName.Contains("Garcia"))
-                .Select(x => Assembly.Load(x.FullName));
-            assemblies?.Append(Assembly.GetEntryAssembly());
-            assemblies?.Append(Assembly.GetExecutingAssembly());
+                .Select(x => Assembly.Load(x.FullName)) ?? new List<Assembly>();
+            assemblies = assemblies?.Append(Assembly.GetEntryAssembly());
 
             return assemblies?
                 .SelectMany(x => x.DefinedTypes)
