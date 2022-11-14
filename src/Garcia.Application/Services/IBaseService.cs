@@ -31,7 +31,7 @@ namespace Garcia.Application.Services
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<BaseResponse<long>> AddAsync(TEntity entity);
+        Task<BaseResponse<TKey>> AddAsync(TEntity entity);
         /// <summary>
         /// Finds the <typeparamref name="TEntity"/> by id and updates it.
         /// The <paramref name="updateRequest"/> is mapped to the relevant fields of the <typeparamref name="TEntity"/>.
@@ -39,13 +39,13 @@ namespace Garcia.Application.Services
         /// <param name="id"></param>
         /// <param name="updateRequest"></param>
         /// <returns></returns>
-        Task<BaseResponse<long>> UpdateAsync(TKey id, object updateRequest);
+        Task<BaseResponse<TKey>> UpdateAsync(TKey id, object updateRequest);
         /// <summary>
         /// Deletes the <typeparamref name="TEntity"/> by id.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<BaseResponse<long>> DeleteAsync(TKey id);
+        Task<BaseResponse<TKey>> DeleteAsync(TKey id);
         IMapper Mapper { get; }
     }
 }

@@ -295,6 +295,8 @@ namespace Garcia.Application
 
                 var propName = t.Name;
 
+                if (propName == "Id") continue;
+
                 dest!.GetType().GetProperty(propName)?.SetValue(dest, t.GetValue(source));
             }
 
@@ -315,6 +317,8 @@ namespace Garcia.Application
                 if (t.GetValue(source) == null) continue;
 
                 var propName = t.Name;
+
+                if (propName == "Id") continue;
 
                 destination!.GetType().GetProperty(propName)?.SetValue(destination, t.GetValue(source));
             }
