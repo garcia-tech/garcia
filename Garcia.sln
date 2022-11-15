@@ -111,6 +111,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Infrastructure.Email
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Exceptions.Persistence", "src\Garcia.Exceptions.Persistence\Garcia.Exceptions.Persistence.csproj", "{CFD43AC3-4932-42FD-BDFF-F06CA66828DE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{2A90CE27-E354-4649-8161-E0ADB6A55A8D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickStart", "samples\QuickStart\QuickStart.csproj", "{02FF4A7F-DB47-435D-B04B-42E4FC0CF4C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -321,6 +325,10 @@ Global
 		{CFD43AC3-4932-42FD-BDFF-F06CA66828DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFD43AC3-4932-42FD-BDFF-F06CA66828DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFD43AC3-4932-42FD-BDFF-F06CA66828DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02FF4A7F-DB47-435D-B04B-42E4FC0CF4C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02FF4A7F-DB47-435D-B04B-42E4FC0CF4C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02FF4A7F-DB47-435D-B04B-42E4FC0CF4C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02FF4A7F-DB47-435D-B04B-42E4FC0CF4C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -378,6 +386,7 @@ Global
 		{AE785385-814A-4142-8783-FA4A16B131C4} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 		{C2A11CAB-6691-4974-90E1-3CA3DBEBC9CC} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 		{CFD43AC3-4932-42FD-BDFF-F06CA66828DE} = {087C542F-855C-47ED-96C8-9D088E416ED2}
+		{02FF4A7F-DB47-435D-B04B-42E4FC0CF4C6} = {2A90CE27-E354-4649-8161-E0ADB6A55A8D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3255BD7C-849F-4F0F-B86D-5A266B1F50B6}
