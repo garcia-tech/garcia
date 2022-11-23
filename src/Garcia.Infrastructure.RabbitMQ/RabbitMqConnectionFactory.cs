@@ -27,13 +27,20 @@ namespace Garcia.Infrastructure.RabbitMQ
 
         public IConnection CreateConnection()
         {
-            _connection = _factory.CreateConnection();
-            return _connection;
+            try
+            {
+                _connection = _factory.CreateConnection();
+                return _connection;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void Dispose()
         {
-            _connection.Close();
+            _connection?.Close();
         }
     }
 }
