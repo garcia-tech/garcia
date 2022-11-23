@@ -1,4 +1,6 @@
-﻿using Garcia.Infrastructure.RealTime.SignalR.Clients;
+﻿using Garcia.Application.Contracts.Persistence;
+using Garcia.Domain.RealTime;
+using Garcia.Infrastructure.RealTime.SignalR.Clients;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -106,6 +108,83 @@ namespace Garcia.Infrastructure.RealTime.SignalR.Hubs
         public virtual async Task RemoveGroup(string group)
         {
             await Groups.RemoveFromGroupAsync(Context.ConnectionId, group);
+        }
+    }
+
+    public class BaseHub<TRepository, TMessage, TKey> : BaseHub
+        where TKey : struct, IEquatable<TKey>
+        where TMessage : Message<TKey>, new()
+        where TRepository : IAsyncRepository<TMessage, TKey>
+    {
+        private readonly TRepository _repostiory;
+        public BaseHub(IOptions<SignalRSettings> options, ILogger<BaseHub> logger, TRepository repostiory) : base(options, logger)
+        {
+            _repostiory = repostiory;
+        }
+
+        public override async Task SendMessage(string user, string message)
+        {
+            var sentMessage = new TMessage
+            {
+                Content = message,
+                Sender = user,
+                Receiver = null,
+                Group = null,
+                Type = MessageType.All
+            };
+
+            await _repostiory.AddAsync(sentMessage);
+            await base.SendMessage(user, message);
+        }
+
+        public override async Task SendMessageToGroup(string group, string message)
+        {
+            var sentMessage = new TMessage
+            {
+                Content = message,
+                Receiver = null,
+                Group = group,
+                Type = MessageType.Group
+            };
+
+            await _repostiory.AddAsync(sentMessage);
+            await base.SendMessageToGroup(group, message);
+        }
+
+        public override async Task SendPrivateMessage(string sender, string receiver, string message)
+        {
+            var sentMessage = new TMessage
+            {
+                Content = message,
+                Receiver = receiver,
+                Sender = sender,
+                Group = null,
+                Type = MessageType.Private
+            };
+
+            await _repostiory.AddAsync(sentMessage);
+            await base.SendPrivateMessage(sender, receiver, message);
+        }
+
+        public override async Task SendMessageToGroups(IEnumerable<string> groups, string message)
+        {
+            var messages = new List<TMessage>();
+
+            foreach (var group in groups)
+            {
+                var sentMessage = new TMessage
+                {
+                    Content = message,
+                    Receiver = null,
+                    Group = group,
+                    Type = MessageType.Group
+                };
+
+                messages.Add(sentMessage);
+            }
+
+            await _repostiory.AddRangeAsync(messages);
+            await base.SendMessageToGroups(groups, message);
         }
     }
 }
