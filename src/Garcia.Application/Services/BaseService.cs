@@ -105,4 +105,21 @@ namespace Garcia.Application.Services
             });
 
     }
+
+    public class BaseService<TRepository, TEntity, TDto> : BaseService<TRepository, TEntity, TDto, long>, IBaseService<TEntity, TDto>
+        where TRepository : IAsyncRepository<TEntity, long>
+        where TEntity : IEntity<long>
+    {
+        public BaseService(TRepository repository) : base(repository)
+        {
+        }
+    }
+
+    public class BaseService<TEntity, TDto> : BaseService<IAsyncRepository<TEntity>, TEntity, TDto>
+        where TEntity : Entity<long>
+    {
+        public BaseService(IAsyncRepository<TEntity> repository) : base(repository)
+        {
+        }
+    }
 }

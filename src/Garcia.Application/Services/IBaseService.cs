@@ -48,4 +48,8 @@ namespace Garcia.Application.Services
         Task<BaseResponse<TKey>> DeleteAsync(TKey id);
         IMapper Mapper { get; }
     }
+
+    public interface IBaseService<TEntity, TDto> : IBaseService<TEntity, TDto, long>
+        where TEntity : IEntity<long> 
+    { }
 }

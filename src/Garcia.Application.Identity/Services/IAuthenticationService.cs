@@ -31,4 +31,10 @@ namespace Garcia.Application.Identity.Services
         /// <returns>Returns <see cref="LoginResponse{TUserDto}"/> if provided <paramref name="request"/>'s Username is unique; otherwise <see cref="System.Net.HttpStatusCode.Conflict"/>.</returns>
         Task<BaseResponse<LoginResponse<TUserDto>>> Signup<TRequest>(TRequest request, string ip) where TRequest : Credentials;
     }
+
+    public interface IAuthenticationService<TUser, TUserDto> : IAuthenticationService<TUser, TUserDto, long>
+        where TUser : IUserEntity<long>
+        where TUserDto : IUser 
+    {
+    }
 }

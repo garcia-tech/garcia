@@ -4,6 +4,7 @@ using Garcia.Application.Contracts.Infrastructure;
 using Garcia.Application.Contracts.Persistence;
 using Garcia.Application.Identity.Models.Request;
 using Garcia.Application.Identity.Models.Response;
+using Garcia.Domain;
 using Garcia.Domain.Identity;
 
 namespace Garcia.Application.Identity.Services
@@ -100,5 +101,24 @@ namespace Garcia.Application.Identity.Services
                 cfg.CreateMap<TUser, TUserDto>()
                    .ReverseMap();
             });
+    }
+
+    public class AuthenticationService<TRepository, TUser, TUserDto> : AuthenticationService<TRepository, TUser, TUserDto, long>, IAuthenticationService<TUser, TUserDto>
+        where TRepository : IAsyncRepository<TUser, long>
+        where TUser : class, IUserEntity<long>
+        where TUserDto : class, IUser
+    {
+        public AuthenticationService(TRepository repository, IEncryption encryption, IJwtService jwt) : base(repository, encryption, jwt)
+        {
+        }
+    }
+
+    public class AuthenticationService<TUser, TUserDto> : AuthenticationService<IAsyncRepository<TUser>, TUser, TUserDto>, IAuthenticationService<TUser, TUserDto>
+    where TUser : Entity<long>, IUserEntity<long>
+    where TUserDto : class, IUser
+    {
+        public AuthenticationService(IAsyncRepository<TUser> repository, IEncryption encryption, IJwtService jwt) : base(repository, encryption, jwt)
+        {
+        }
     }
 }

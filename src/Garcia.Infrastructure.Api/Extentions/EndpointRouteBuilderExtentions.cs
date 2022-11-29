@@ -81,6 +81,13 @@ namespace Garcia.Infrastructure.Api.Extentions
             return endpointRoute;
         }
 
+        public static IEndpointRouteBuilder CreateCrudApi<TEntity, TDto>(this IEndpointRouteBuilder endpointRoute, bool authorizationRequired = false)
+            where TEntity : Entity<long>
+            where TDto : class, new()
+        {
+            return endpointRoute.CreateCrudApi<TEntity, TDto, long>(authorizationRequired);
+        }
+
         public static IEndpointRouteBuilder CreateAuthApi<TUser, TUserDto, TKey>(this IEndpointRouteBuilder endpointRoute)
             where TUser : IUserEntity<TKey>
             where TKey : IEquatable<TKey>
@@ -128,6 +135,13 @@ namespace Garcia.Infrastructure.Api.Extentions
             }).AllowAnonymous();
 
             return endpointRoute;
+        }
+
+        public static IEndpointRouteBuilder CreateAuthApi<TUser, TUserDto>(this IEndpointRouteBuilder endpointRoute)
+            where TUser : IUserEntity<long>
+            where TUserDto : IUser
+        {
+            return endpointRoute.CreateAuthApi<TUser, TUserDto>();
         }
 
         private static RouteHandlerBuilder Authorization(this RouteHandlerBuilder routeHandlerBuilder, bool authorizationRequired)
