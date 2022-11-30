@@ -7,7 +7,7 @@ namespace QuickStart.Controllers;
 
 [ApiController]
 [Authorize(AuthenticationSchemes = "Bearer")]
-public class SampleController : BaseController<IBaseService<Sample, SampleDto, long>, Sample, SampleDto, long>
+public class SampleController : BaseController<Sample, SampleDto>
 {
     public SampleController(IBaseService<Sample, SampleDto, long> services) : base(services)
     {

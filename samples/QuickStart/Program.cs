@@ -1,5 +1,4 @@
 using Garcia.Application;
-using Garcia.Application.Contracts.Persistence;
 using Garcia.Infrastructure.Api;
 using Garcia.Infrastructure.Identity;
 using Garcia.Persistence.EntityFramework;
@@ -16,8 +15,8 @@ builder.Services
     .AddEfCoreInMemory<BaseContext>("Sample")
     .AddEfCoreRepository();
 
-builder.Services.AddBaseService<IAsyncRepository<Sample>, Sample, SampleDto, long>();
-builder.Services.AddAuthenticationService<IAsyncRepository<User>, User, UserDto, long>(builder.Configuration);
+builder.Services.AddBaseService<Sample, SampleDto>();
+builder.Services.AddAuthenticationService<User, UserDto>(builder.Configuration);
 
 var app = builder.Build();
 

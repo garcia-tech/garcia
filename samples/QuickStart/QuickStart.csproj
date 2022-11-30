@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Garcia" Version="1.2.284-prelease-g63b7d0108d" />
+    <PackageReference Include="Garcia" Version="1.2.294-prelease-g748ec72eb5" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
