@@ -82,4 +82,15 @@ namespace Garcia.Infrastructure.Api.Controllers
             return HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
         }
     }
+
+    [Route("api/[controller]")]
+    public class BaseAuthController<TUser, TUserDto> : BaseAuthController<IAuthenticationService<TUser, TUserDto, long>, TUser, TUserDto, long>
+        where TUser : IUserEntity<long>
+        where TUserDto : IUser
+
+    {
+        public BaseAuthController(IAuthenticationService<TUser, TUserDto, long> service) : base(service)
+        {
+        }
+    }
 }
