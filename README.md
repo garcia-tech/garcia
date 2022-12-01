@@ -1,6 +1,6 @@
 # <img src = "http://www.garcia.com.tr/assets/base/img/layout/logos/logo-3.png" width = 200 alt = "Garcia"/>
 
-Garcia is a .net framework that includes many integrations and utility services. It provides developers to develop fast and powerful web apis without wasting any time with integrations.
+Garcia is a .Net framework that includes various integrations and utility services. Garcia provides developers to develop fast and powerful web APIs without wasting time with integrations.
 
 ## Project Architecture:
 
@@ -165,8 +165,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace QuickStart.Controllers;
 
 [ApiController]
-public class SampleController : BaseController<IBaseService<Sample, SampleDto, long>, Sample, SampleDto, long>
-// BaseController has 4 generic parameters. These are a BaseService, an Entity<TKey>, a Dto of the Entity and the Id type of the Entity in question.
+public class SampleController : BaseController<Sample, SampleDto>
+// BaseController has 2 generic parameters. These are an Entity<long> and a Dto of the Entity.
 {
     public SampleController(IBaseService<Sample, SampleDto, long> services) : base(services)
     {
@@ -194,8 +194,8 @@ builder.Services
     .AddEfCoreInMemory<BaseContext>("Sample")
     .AddEfCoreRepository();
 
-builder.Services.AddBaseService<IAsyncRepository<Sample>, Sample, SampleDto, long>();
-// BaseService also has a 4 generic parameters. These are a IAsyncRepository implemented from IAsyncRepository<TEntity, TKey>, an Entity<TKey>, a Dto of the Entity and the Id type of the Entity in question.
+builder.Services.AddBaseService<Sample, SampleDto>();
+// BaseService also has a 2 generic parameters. These are an Entity<long> and a Dto of the Entity.
 ```
 
 ## Why Not Add An Authentication While You Are At It ?
@@ -243,10 +243,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace QuickStart.Controllers;
 
 [ApiController]
-public class AuthenticationController : BaseAuthController<IAuthenticationService<User, UserDto, long>, User, UserDto, long>
-/* BaseAuthController has also 4 generic parameters like a BaseController. 
-These are an AuthenticationService, a User BaseType is Entity<TKey> and implemented from IUserEntity<TKey>, 
-a UserDto implemented from IUser and the Id type of the User. */
+public class AuthenticationController : BaseAuthController<User, UserDto>
+/* BaseAuthController has also 2 generic parameters like a BaseController. 
+These are a User BaseType is Entity<long> and implemented from IUserEntity<long>, 
+a UserDto implemented from IUser. */
 {
     public AuthenticationController(IAuthenticationService<User, UserDto, long> service) : base(service)
     {
@@ -260,10 +260,9 @@ a UserDto implemented from IUser and the Id type of the User. */
 Add the following statement to the Program.cs:
 
 ```cs
-builder.Services.AddAuthenticationService<IAsyncRepository<User>, User, UserDto, long>(builder.Configuration);
-/* AuthenticationService also has a 4 generic parameters like BaseService. 
-These are a IAsyncRepository implemented from IAsyncRepository<TEntity, TKey>, 
-a User BaseType is Entity<TKey> and implemented from IUserEntity<TKey>, a UserDto implemented from IUser and the Id type of the User.*/
+builder.Services.AddAuthenticationService<User, UserDto>(builder.Configuration);
+/* AuthenticationService also has a 2 generic parameters like BaseService. 
+These are a User BaseType is Entity<long> and implemented from IUserEntity<long> and a UserDto implemented from IUser.*/
 ```
 
 ### Add JwtIssuerOptions To appsettings.json For AuthenticationService:
@@ -293,7 +292,7 @@ namespace QuickStart.Controllers;
 
 [ApiController]
 [Authorize(AuthenticationSchemes = "Bearer")]
-public class SampleController : BaseController<IBaseService<Sample, SampleDto, long>, Sample, SampleDto, long>
+public class SampleController : BaseController<Sample, SampleDto>
 {
     public SampleController(IBaseService<Sample, SampleDto, long> services) : base(services)
     {
@@ -319,4 +318,4 @@ builder.Services.AddSwaggerWithAuthorization();
 
 <i>You can find complete project in <a href = "https://github.com/GarciaTechnology/garcia/tree/dev/samples/QuickStart">here.</a></i>
 
-<b>And Thats It. Welcome to Garcia.</b>
+<b>And thats it. Many more different features are waiting for you in here. Welcome to Garcia.</b>
