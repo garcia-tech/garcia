@@ -1,9 +1,9 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
 using Garcia.Domain.Identity;
 using Garcia.Infrastructure.Identity;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Moq;
 using Shouldly;
 using Xunit;
@@ -17,7 +17,7 @@ namespace Garcia.Infrastructure.Tests
         public JwtServiceTests()
         {
             var mockOptions = new Mock<IOptions<JwtIssuerOptions>>();
-            SymmetricSecurityKey signingKey = 
+            SymmetricSecurityKey signingKey =
                 new SymmetricSecurityKey(Encoding.ASCII.GetBytes("8b95c3c301a54b39b7b9b4c612bc6844"));
 
             mockOptions.Setup(x => x.Value)

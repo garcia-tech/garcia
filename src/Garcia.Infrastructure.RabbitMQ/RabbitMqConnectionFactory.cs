@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 
 namespace Garcia.Infrastructure.RabbitMQ
@@ -32,13 +27,20 @@ namespace Garcia.Infrastructure.RabbitMQ
 
         public IConnection CreateConnection()
         {
-            _connection = _factory.CreateConnection();
-            return _connection;
+            try
+            {
+                _connection = _factory.CreateConnection();
+                return _connection;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void Dispose()
         {
-            _connection.Close();
+            _connection?.Close();
         }
     }
 }

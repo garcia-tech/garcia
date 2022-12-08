@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Garcia.Domain
+﻿namespace Garcia.Domain
 {
     public interface IId<TKey>
     {

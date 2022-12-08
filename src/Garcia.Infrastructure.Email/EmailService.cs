@@ -62,6 +62,7 @@ namespace Garcia.Infrastructure.Email
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message, ex);
+                throw;
             }
         }
     }

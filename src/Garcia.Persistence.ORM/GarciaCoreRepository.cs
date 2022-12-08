@@ -5,12 +5,11 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Dapper;
-using Garcia.Infrastructure;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Options;
-using Garcia.Domain;
 using Garcia.Application;
 using Garcia.Application.Contracts.Infrastructure;
+using Garcia.Domain;
+using Garcia.Infrastructure;
+using Microsoft.Extensions.Options;
 
 namespace Garcia.Persistence.ORM
 {
@@ -24,16 +23,16 @@ namespace Garcia.Persistence.ORM
         {
             get
             {
-                return _settings.CacheExpirationTimeInMinutes != 0;
+                return _settings.CacheExpirationInMinutes != 0;
             }
         }
 
-        protected Settings _settings;
+        protected CacheSettings _settings;
         protected IGarciaCache cache;
         protected DatabaseConnection _databaseConnection;
         protected DatabaseSettings _databaseSettings;
 
-        protected GarciaRepository(IOptions<Settings> settings, IOptions<DatabaseSettings> databaseSettings, IGarciaCache cache)
+        protected GarciaRepository(IOptions<CacheSettings> settings, IOptions<DatabaseSettings> databaseSettings, IGarciaCache cache)
         {
             _settings = settings.Value;
             _databaseSettings = databaseSettings.Value;
@@ -354,7 +353,7 @@ namespace Garcia.Persistence.ORM
         private string GetTypeName(object item)
         {
             //return TablePrefix + item.GetType().Name.ToLowerInvariant() + TablePrefix;
-            return _databaseConnection.TablePrefix + item.GetType().Name.PrepareName() + _databaseConnection.TablePrefix;
+            return _databaseConnection.TablePrefix + item.GetType().Name + _databaseConnection.TablePrefix;
         }
 
         private string GenerateInsertScript(Entity<long> item)
@@ -375,11 +374,11 @@ namespace Garcia.Persistence.ORM
             foreach (var property in properties)
             {
                 propertyNames += _databaseConnection.ColumnPrefix;
-                propertyNames += property.Name.PrepareName();
+                propertyNames += property.Name;
                 propertyNames += _databaseConnection.ColumnPpostfix;
                 propertyNames += ",";
                 values += "@";
-                values += property.Name.PrepareName();
+                values += property.Name;
                 values += ", ";
             }
 
@@ -407,10 +406,10 @@ namespace Garcia.Persistence.ORM
             foreach (var property in properties)
             {
                 propertyNames += _databaseConnection.ColumnPrefix;
-                propertyNames += property.Name.PrepareName();
+                propertyNames += property.Name;
                 propertyNames += _databaseConnection.ColumnPpostfix;
                 propertyNames += "=@";
-                propertyNames += property.Name.PrepareName();
+                propertyNames += property.Name;
                 propertyNames += ", ";
             }
 

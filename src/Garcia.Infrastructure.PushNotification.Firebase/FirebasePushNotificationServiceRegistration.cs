@@ -1,6 +1,4 @@
 ﻿using Garcia.Application.Contracts.PushNotification;
-using Garcia.Application.Contracts.Email;
-using Garcia.Application.Contracts.Marketing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

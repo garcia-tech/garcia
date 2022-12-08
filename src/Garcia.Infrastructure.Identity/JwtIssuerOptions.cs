@@ -1,7 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Garcia.Infrastructure.Identity
 {

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
-namespace Garcia.Infrastructure.Api.Models
+namespace Garcia.Persistence.Tests
 {
-    public interface IApiUserModel
+    public class TestEvent : INotification
     {
-        string Id { get; set; }
     }
 }

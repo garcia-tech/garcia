@@ -1,5 +1,4 @@
-﻿using Garcia.Infrastructure.Api;
-using Microsoft.AspNetCore.Diagnostics;
+﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Garcia.Infrastructure.Api.Controllers

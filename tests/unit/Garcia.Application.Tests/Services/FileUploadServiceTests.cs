@@ -1,28 +1,24 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Xunit;
-using Garcia.Application.Contracts.Persistence;
-using Garcia.Application.Services;
-using Moq;
-using Shouldly;
-using Microsoft.Extensions.Options;
+﻿using System.Threading.Tasks;
 using Garcia.Application.Contracts.FileUpload;
 using Garcia.Infrastructure.FileUpload.Local;
+using Microsoft.Extensions.Options;
+using Moq;
+using Shouldly;
+using Xunit;
 
 namespace Garcia.Application.Tests.Services
 {
     public class FileUploadServiceTests
     {
-        private static Mock<IOptions<LocalFileUploadSettings>> _mockOptions = new();
+        private static readonly Mock<IOptions<LocalFileUploadSettings>> _mockOptions = new();
         private readonly IFileUploadService _service;
 
         public FileUploadServiceTests()
         {
             var settings = new LocalFileUploadSettings
             {
-              BaseUrl = "http://baseurl/",
-              FileUploadPath = "c:\\files\\"
+                BaseUrl = "http://baseurl/",
+                FileUploadPath = "c:\\files\\"
             };
 
             _mockOptions.Setup(s => s.Value).Returns(settings);

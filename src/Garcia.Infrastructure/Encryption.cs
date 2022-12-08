@@ -3,14 +3,25 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using Garcia.Application.Contracts.Infrastructure;
+using Microsoft.Extensions.Options;
 
 namespace Garcia.Infrastructure
 {
     public class Encryption : IEncryption
     {
-        private static string initVector = "E6C15F23B1E94008";
-        private static string passPhrase = "3D4124B2A8748E4B55A997D1C2B4C40";
+        private readonly string initVector = "E6C15F23B1E94008";
+        private readonly string passPhrase = "3D4124B2A8748E4B55A997D1C2B4C40";
         private const int keysize = 256;
+
+        public Encryption(IOptions<EncryptionSettings> settings)
+        {
+            initVector = settings.Value?.InitVector ?? initVector;
+            passPhrase = settings.Value?.PassPharse ?? passPhrase;
+        }
+
+        public Encryption()
+        {
+        }
 
         public string Encrypt(string plainText)
         {
@@ -22,18 +33,16 @@ namespace Garcia.Infrastructure
 
             byte[] initVectorBytes = Encoding.UTF8.GetBytes(initVector);
             byte[] plainTextBytes = Encoding.UTF8.GetBytes(plainText);
-            PasswordDeriveBytes password = new PasswordDeriveBytes(passPhrase, null);
+            var password = new PasswordDeriveBytes(passPhrase, null);
             byte[] keyBytes = password.GetBytes(keysize / 8);
-            var symmetricKey = new RijndaelManaged();
+            var symmetricKey = Aes.Create();
             symmetricKey.Mode = CipherMode.CBC;
-            ICryptoTransform encryptor = symmetricKey.CreateEncryptor(keyBytes, initVectorBytes);
-            MemoryStream memoryStream = new MemoryStream();
-            CryptoStream cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write);
+            var encryptor = symmetricKey.CreateEncryptor(keyBytes, initVectorBytes);
+            using var memoryStream = new MemoryStream();
+            using var cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write);
             cryptoStream.Write(plainTextBytes, 0, plainTextBytes.Length);
             cryptoStream.FlushFinalBlock();
             byte[] cipherTextBytes = memoryStream.ToArray();
-            memoryStream.Close();
-            cryptoStream.Close();
             return Convert.ToBase64String(cipherTextBytes);
         }
 
@@ -47,39 +56,35 @@ namespace Garcia.Infrastructure
 
             byte[] initVectorBytes = Encoding.ASCII.GetBytes(initVector);
             byte[] cipherTextBytes = Convert.FromBase64String(cipherText);
-            PasswordDeriveBytes password = new PasswordDeriveBytes(passPhrase, null);
+            var password = new PasswordDeriveBytes(passPhrase, null);
             byte[] keyBytes = password.GetBytes(keysize / 8);
-            RijndaelManaged symmetricKey = new RijndaelManaged();
+            var symmetricKey = Aes.Create();
             symmetricKey.Mode = CipherMode.CBC;
-            ICryptoTransform decryptor = symmetricKey.CreateDecryptor(keyBytes, initVectorBytes);
-            MemoryStream memoryStream = new MemoryStream(cipherTextBytes);
-            CryptoStream cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read);
+            var decryptor = symmetricKey.CreateDecryptor(keyBytes, initVectorBytes);
+            using var memoryStream = new MemoryStream(cipherTextBytes);
+            using var cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read);
             byte[] plainTextBytes = new byte[cipherTextBytes.Length];
             int decryptedByteCount = cryptoStream.Read(plainTextBytes, 0, plainTextBytes.Length);
-            memoryStream.Close();
-            cryptoStream.Close();
             return Encoding.UTF8.GetString(plainTextBytes, 0, decryptedByteCount);
         }
 
         public string CreateOneWayHash(string inValue, Application.HashAlgorithm HashAlgorithm = Application.HashAlgorithm.MD5)
         {
-            var result = new byte[inValue.Length];
-
             try
             {
-                System.Security.Cryptography.HashAlgorithm hash = null;
+                HashAlgorithm hash = null;
 
                 switch (HashAlgorithm)
                 {
                     case Application.HashAlgorithm.SHA1:
-                        hash = new SHA1CryptoServiceProvider();
+                        hash = SHA1.Create();
                         break;
                     case Application.HashAlgorithm.MD5:
-                        hash = new MD5CryptoServiceProvider();
+                        hash = MD5.Create();
                         break;
                 }
 
-                result = hash.ComputeHash(Encoding.UTF8.GetBytes(inValue));
+                var result = hash.ComputeHash(Encoding.UTF8.GetBytes(inValue));
                 return Convert.ToBase64String(result);
             }
             catch

@@ -1,9 +1,9 @@
-﻿using Garcia.Application.Contracts.Persistence;
-using MongoDB.Driver;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Garcia.Application.Contracts.Persistence;
+using MongoDB.Driver;
 
 namespace Garcia.Application.MongoDb.Contracts.Persistence
 {

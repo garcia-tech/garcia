@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net;
 using Garcia.Domain;
 
 namespace Garcia.Application
@@ -44,7 +39,6 @@ namespace Garcia.Application
         {
             Result = model;
             Status = status;
-
         }
 
         public TModel Result { get; }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Garcia.Infrastructure.MongoDb
+﻿namespace Garcia.Infrastructure.MongoDb
 {
     public class MongoDbSettings : DatabaseSettings
     {

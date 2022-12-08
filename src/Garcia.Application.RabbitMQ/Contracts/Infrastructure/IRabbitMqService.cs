@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Garcia.Application.Contracts.Infrastructure;
-using Garcia.Domain;
+﻿using Garcia.Application.Contracts.Infrastructure;
 
 namespace Garcia.Application.RabbitMQ.Contracts.Infrastructure
 {

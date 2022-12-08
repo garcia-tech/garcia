@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Garcia.Infrastructure.ElasticSearch;
 using Microsoft.Extensions.Options;
 using Moq;
-using Xunit;
-using Shouldly;
 using Nest;
-using Garcia.Infrastructure.ElasticSearch;
+using Shouldly;
+using Xunit;
 
 namespace Garcia.Infrastructure.Tests
 {
     public class ElasticServiceTests
     {
-        private static Mock<IOptions<ElasticSearchSettings>> _mockOptions = new();
+        private static readonly Mock<IOptions<ElasticSearchSettings>> _mockOptions = new();
         private static ElasticSearchConnectionFactory _connectionFactory;
         private static ElasticSearchService<TestDocument, string> _service;
 
@@ -71,7 +67,7 @@ namespace Garcia.Infrastructure.Tests
             document.Name = "testMulti";
             var setResult = await _service.SetDocumentAsync(document);
             setResult.ShouldBeGreaterThanOrEqualTo(0);
-            var result = await _service.SearchMultiMatchAsync(x => 
+            var result = await _service.SearchMultiMatchAsync(x =>
                     x.Fields(f => f.Name, f => f.Id),
                     "testMulti"
                 );

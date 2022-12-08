@@ -11,6 +11,7 @@
     <ProjectReference Include="..\Garcia.Application.Cassandra\Garcia.Application.Cassandra.csproj" />
     <ProjectReference Include="..\Garcia.Application.ElasticSearch\Garcia.Application.ElasticSearch.csproj" />
     <ProjectReference Include="..\Garcia.Application.Identity\Garcia.Application.Identity.csproj" />
+    <ProjectReference Include="..\Garcia.Domain.RealTime\Garcia.Domain.RealTime.csproj" />
     <ProjectReference Include="..\Garcia.Exceptions.Cassandra\Garcia.Exceptions.Cassandra.csproj" />
     <ProjectReference Include="..\Garcia.Exceptions.ElasticSearch\Garcia.Exceptions.ElasticSearch.csproj" />
     <ProjectReference Include="..\Garcia.Exceptions.Persistence\Garcia.Exceptions.Persistence.csproj" />

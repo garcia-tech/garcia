@@ -1,5 +1,4 @@
 ﻿using Garcia.Application.Contracts.FileUpload;
-using Garcia.Application.Contracts.Marketing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

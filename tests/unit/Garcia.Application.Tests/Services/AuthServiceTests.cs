@@ -1,18 +1,16 @@
 ﻿using System.Text;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using Xunit;
-using Moq;
-using Shouldly;
 using Garcia.Application.Contracts.Persistence;
-using Garcia.Application.Services;
+using Garcia.Application.Identity.Models.Request;
 using Garcia.Application.Identity.Services;
-using Garcia.Application.Contracts.Identity;
+using Garcia.Application.Tests.Services.Models;
 using Garcia.Infrastructure;
 using Garcia.Infrastructure.Identity;
 using Microsoft.Extensions.Options;
-using Garcia.Application.Identity.Models.Request;
 using Microsoft.IdentityModel.Tokens;
+using Moq;
+using Shouldly;
+using Xunit;
 using static Garcia.Application.Tests.Helpers;
 
 namespace Garcia.Application.Tests.Services
@@ -30,7 +28,7 @@ namespace Garcia.Application.Tests.Services
                 Issuer = "garcia",
                 Audience = "garcia",
                 SecretKey = "8b95c3c301a54b39b7b9b4c612bc6844",
-                ValidFor = new System.TimeSpan(0,5,0),
+                ValidFor = new System.TimeSpan(0, 5, 0),
                 RefreshTokenOptions = new RefreshTokenOptions
                 {
                     ValidFor = new System.TimeSpan(0, 15, 0)
@@ -91,6 +89,26 @@ namespace Garcia.Application.Tests.Services
             var result = await _service.ValidateUser(request);
             result.StatusCode.ShouldBe(200);
             result.Result.Id = "1";
+        }
+
+        [Theory(DisplayName = "Signup should success when custom signup request successfully entered")]
+        [ClassData(typeof(SignupServiceTestData))]
+        public async Task Singup_Should_Success(SignupServiceTestData request)
+        {
+            var result = await _service.Signup(request, "127.0.0.1");
+            result.Success.ShouldBeTrue();
+            result.Result.User.Email.ShouldBe(request.Email);
+            result.Result.User.Username.ShouldBe(request.Username);
+        }
+
+        [Theory(DisplayName = "Signup should not be success when provided username has already been taken")]
+        [ClassData(typeof(SignupServiceTestData))]
+        public async Task Singup_Should_Not_Success(SignupServiceTestData request)
+        {
+            request.Username = "seckinpullu";
+            var result = await _service.Signup(request, "127.0.0.1");
+            result.Success.ShouldBeFalse();
+            result.Status.ShouldBe(System.Net.HttpStatusCode.Conflict);
         }
     }
 }

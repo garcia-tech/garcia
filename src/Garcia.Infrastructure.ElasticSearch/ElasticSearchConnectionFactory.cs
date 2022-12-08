@@ -26,7 +26,7 @@ namespace Garcia.Infrastructure.ElasticSearch
             return connection;
         }
 
-        public ElasticClient GetClient<T>() where T : class 
+        public ElasticClient GetClient<T>() where T : class
             => new ElasticClient(GetConnection<T>(typeof(T).Name.ToLower()));
     }
 }

@@ -1,6 +1,4 @@
-﻿using Garcia.Exceptions.Cassandra;
-
-namespace Garcia.Infrastructure.Cassandra
+﻿namespace Garcia.Infrastructure.Cassandra
 {
     public class CassandraSettings
     {

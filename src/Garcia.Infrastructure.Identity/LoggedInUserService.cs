@@ -1,6 +1,4 @@
-﻿using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
+﻿using System.IdentityModel.Tokens.Jwt;
 using Garcia.Application;
 using Garcia.Application.Contracts.Identity;
 using Microsoft.AspNetCore.Http;
@@ -8,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 namespace Garcia.Infrastructure.Identity
 {
     public class LoggedInUserService<TKey> : ILoggedInUserService<TKey>
-        where TKey : IEquatable<TKey> 
+        where TKey : IEquatable<TKey>
     {
         public TKey UserId { get; set; }
         public LoggedInUser LoggedInUser { get; set; }

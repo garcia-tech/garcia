@@ -67,4 +67,14 @@ namespace Garcia.Infrastructure.Api.Controllers
                 response.Success ? response.Result : response.Error);
         }
     }
+
+    [Route("api/[controller]")]
+    public class BaseController<TEntity, TDto> : BaseController<IBaseService<TEntity, TDto, long>, TEntity, TDto, long>
+        where TEntity : IEntity<long>
+        where TDto : class
+    {
+        public BaseController(IBaseService<TEntity, TDto, long> services) : base(services)
+        {
+        }
+    }
 }

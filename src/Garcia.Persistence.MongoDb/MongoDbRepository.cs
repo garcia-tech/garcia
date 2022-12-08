@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Garcia.Application.Contracts.Identity;
+using Garcia.Application.Contracts.Infrastructure;
+using Garcia.Application.MongoDb.Contracts.Persistence;
+using Garcia.Domain.MongoDb;
+using Garcia.Infrastructure.MongoDb;
+using MediatR;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using Garcia.Domain.MongoDb;
-using Garcia.Application.MongoDb.Contracts.Persistence;
-using Garcia.Infrastructure.MongoDb;
-using Garcia.Application.Contracts.Infrastructure;
-using Garcia.Application.Contracts.Identity;
 
 namespace Garcia.Persistence.MongoDb
 {
     public class MongoDbRepository<T> : IAsyncMongoDbRepository<T> where T : MongoDbEntity, new()
     {
+        private readonly IMediator? _mediator;
         protected IMongoCollection<T> Collection { get; }
         protected IGarciaCache? GarciaCache { get; }
         protected readonly ILoggedInUserService<string> _loggedInUserService;
@@ -28,6 +30,16 @@ namespace Garcia.Persistence.MongoDb
             _loggedInUserService = loggedInUserService;
         }
 
+        public MongoDbRepository(IOptions<MongoDbSettings> options, ILoggedInUserService<string> loggedInUserService, IMediator mediator)
+        {
+            var settings = options.Value;
+            var client = new MongoClient(settings.ConnectionString);
+            var database = client.GetDatabase(settings.DatabaseName);
+            Collection = database.GetCollection<T>(typeof(T).Name);
+            _loggedInUserService = loggedInUserService;
+            _mediator = mediator;
+        }
+
         public MongoDbRepository(IOptions<MongoDbSettings> options, ILoggedInUserService<string> loggedInUserService, IGarciaCache garciaCache)
         {
             var settings = options.Value;
@@ -36,6 +48,17 @@ namespace Garcia.Persistence.MongoDb
             Collection = database.GetCollection<T>(typeof(T).Name);
             _loggedInUserService = loggedInUserService;
             GarciaCache = garciaCache;
+        }
+
+        public MongoDbRepository(IOptions<MongoDbSettings> options, ILoggedInUserService<string> loggedInUserService, IGarciaCache garciaCache, IMediator mediator)
+        {
+            var settings = options.Value;
+            var client = new MongoClient(settings.ConnectionString);
+            var database = client.GetDatabase(settings.DatabaseName);
+            Collection = database.GetCollection<T>(typeof(T).Name);
+            _loggedInUserService = loggedInUserService;
+            GarciaCache = garciaCache;
+            _mediator = mediator;
         }
 
         public MongoDbRepository(MongoDbSettings settings, ILoggedInUserService<string> loggedInUserService)
@@ -51,6 +74,7 @@ namespace Garcia.Persistence.MongoDb
             entity.CreatedBy = _loggedInUserService?.UserId;
             await Collection.InsertOneAsync(entity);
             await ClearRepositoryCacheAsync(entity);
+            await PublishDomainEvents(entity);
             return entity == null ? 0 : 1;
         }
 
@@ -69,6 +93,7 @@ namespace Garcia.Persistence.MongoDb
             };
 
             await ClearRepositoryCacheAsync(entities.First());
+            await PublishDomainEvents(entities.ToArray());
             return (await Collection.BulkWriteAsync(entities.Select(x => new InsertOneModel<T>(x)), options)).InsertedCount;
         }
 
@@ -86,6 +111,7 @@ namespace Garcia.Persistence.MongoDb
                 entity.DeletedOn = DateTime.Now;
                 entity.DeletedBy = _loggedInUserService?.UserId;
                 await Collection.FindOneAndReplaceAsync(x => x.Id == entity.Id, entity);
+                await PublishDomainEvents(entity);
                 return entity == null ? 0 : 1;
             }
 
@@ -195,6 +221,7 @@ namespace Garcia.Persistence.MongoDb
             entity.LastUpdatedOn = DateTime.Now;
             await Collection.FindOneAndReplaceAsync(x => x.Id == entity.Id, entity);
             await ClearRepositoryCacheAsync(entity);
+            await PublishDomainEvents(entity);
             return entity == null ? 0 : 1;
         }
 
@@ -208,7 +235,7 @@ namespace Garcia.Persistence.MongoDb
 
         public async Task<long> CountAsync(Expression<Func<T, bool>> filter, bool countSoftDeletes = false)
         {
-            if(!countSoftDeletes)
+            if (!countSoftDeletes)
             {
                 return Collection.AsQueryable()
                     .Where(x => !x.Deleted)
@@ -224,6 +251,18 @@ namespace Garcia.Persistence.MongoDb
             {
                 await GarciaCache!.ClearRepositoryCacheAsync<T, string>(proxyEntity);
             }
+        }
+
+        private async Task PublishDomainEvents(params T[] entities)
+        {
+            if (_mediator == null) return;
+
+            if (!entities.Where(x => x.DomainEvents.Any()).Any()) return;
+
+            await Parallel.ForEachAsync(entities, async (entity, cancellationToken) =>
+            {
+                await entity.PublishDomainEvents(_mediator, cancellationToken);
+            });
         }
     }
 }

@@ -1,10 +1,13 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 using Garcia.Application.Contracts.Identity;
 using Garcia.Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Garcia.Persistence.EntityFramework
 {
@@ -33,21 +36,21 @@ namespace Garcia.Persistence.EntityFramework
                     case EntityState.Added:
                         entry.Entity.CreatedOn = DateTimeOffset.UtcNow;
                         entry.Entity.CreatedBy = _loggedInUserService?.UserId != null ?
-                            (long)_loggedInUserService!.UserId : default;
+                            _loggedInUserService!.UserId : default;
                         break;
                     case EntityState.Modified:
                         entry.Entity.LastUpdatedOn = DateTimeOffset.UtcNow;
                         entry.Entity.LastUpdatedBy = _loggedInUserService?.UserId != null ?
-                            (long)_loggedInUserService!.UserId : default;
+                            _loggedInUserService!.UserId : default;
                         break;
                     case EntityState.Deleted:
                         entry.Entity.DeletedOn = DateTimeOffset.UtcNow;
                         entry.Entity.DeletedBy = _loggedInUserService?.UserId != null ?
-                            (long)_loggedInUserService!.UserId : default;
+                            _loggedInUserService!.UserId : default;
                         break;
                 }
 
-                if(_mediator != null && entry.Entity.DomainEvents.Count > 0)
+                if (_mediator != null && entry.Entity.DomainEvents.Count > 0)
                 {
                     _ = entry.Entity.PublishDomainEvents(_mediator, cancellationToken);
                 }
@@ -55,6 +58,31 @@ namespace Garcia.Persistence.EntityFramework
             }
 
             return base.SaveChangesAsync(cancellationToken);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            var entities = ResolveEntities();
+
+            foreach (var entity in entities)
+            {
+                modelBuilder.Entity(entity.GetTypeInfo()).HasKey("Id");
+            }
+        }
+
+        protected virtual IEnumerable<TypeInfo> ResolveEntities()
+        {
+            var assemblies = Assembly.GetEntryAssembly()?
+                .GetReferencedAssemblies()
+                .Where(x => !x.FullName.Contains("System")
+                    && !x.FullName.Contains("Microsoft")
+                    && !x.FullName.Contains("Garcia"))
+                .Select(x => Assembly.Load(x.FullName)) ?? new List<Assembly>();
+            assemblies = assemblies?.Append(Assembly.GetEntryAssembly());
+
+            return assemblies?
+                .SelectMany(x => x.DefinedTypes)
+                    .Where(x => x.BaseType == typeof(Entity<long>) || x.BaseType == typeof(Entity<int>)) ?? new List<TypeInfo>();
         }
     }
 }

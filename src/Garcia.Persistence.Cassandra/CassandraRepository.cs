@@ -5,6 +5,7 @@ using Garcia.Application.Cassandra.Contracts.Persistence;
 using Garcia.Application.Contracts.Infrastructure;
 using Garcia.Domain;
 using Garcia.Infrastructure.Cassandra;
+using MediatR;
 
 namespace Garcia.Persistence.Cassandra
 {
@@ -13,10 +14,19 @@ namespace Garcia.Persistence.Cassandra
         private readonly Table<T> _table;
         protected IGarciaCache? GarciaCache { get; }
 
+        private readonly IMediator? _mediator;
+
         public CassandraRepository(CassandraConnectionFactory factory)
         {
             var session = factory.GetSession();
             _table = new Table<T>(session);
+        }
+
+        public CassandraRepository(CassandraConnectionFactory factory, IMediator mediator)
+        {
+            var session = factory.GetSession();
+            _table = new Table<T>(session);
+            _mediator = mediator;
         }
 
         public CassandraRepository(CassandraConnectionFactory factory, IGarciaCache garciaCache)
@@ -26,10 +36,19 @@ namespace Garcia.Persistence.Cassandra
             GarciaCache = garciaCache;
         }
 
+        public CassandraRepository(CassandraConnectionFactory factory, IGarciaCache garciaCache, IMediator mediator)
+        {
+            var session = factory.GetSession();
+            _table = new Table<T>(session);
+            GarciaCache = garciaCache;
+            _mediator = mediator;
+        }
+
         public async Task<long> AddAsync(T entity)
         {
             var result = await _table.Insert(entity, true).ExecuteAsync();
             await ClearRepositoryCacheAsync(entity);
+            await PublishDomainEvents(entity);
             return result.GetRows().Count();
         }
 
@@ -43,6 +62,7 @@ namespace Garcia.Persistence.Cassandra
             }
             await ClearRepositoryCacheAsync(entities.First());
             await batch.ExecuteAsync();
+            await PublishDomainEvents(entities.ToArray());
             return entities.Count();
         }
 
@@ -57,6 +77,8 @@ namespace Garcia.Persistence.Cassandra
                     .Select(x => entity)
                     .Update()
                     .ExecuteAsync();
+                await ClearRepositoryCacheAsync(entity);
+                await PublishDomainEvents(entity);
                 return result.GetRows().Count();
             }
 
@@ -64,6 +86,7 @@ namespace Garcia.Persistence.Cassandra
                 .Delete()
                 .ExecuteAsync();
             await ClearRepositoryCacheAsync(entity);
+            await PublishDomainEvents(entity);
             return result.GetRows().Count();
         }
 
@@ -172,12 +195,13 @@ namespace Garcia.Persistence.Cassandra
                 .Update()
                 .ExecuteAsync();
             await ClearRepositoryCacheAsync(entity);
+            await PublishDomainEvents(entity);
             return result.GetRows().Count();
         }
 
         public async Task<long> CountAsync(Expression<Func<T, bool>> filter, bool countSoftDeletes = false)
         {
-            if(!countSoftDeletes)
+            if (!countSoftDeletes)
             {
                 return await _table
                     .Where(x => !x.Deleted)
@@ -195,6 +219,18 @@ namespace Garcia.Persistence.Cassandra
             {
                 await GarciaCache!.ClearRepositoryCacheAsync<T, Guid>(proxyEntity);
             }
+        }
+
+        private async Task PublishDomainEvents(params T[] entities)
+        {
+            if (_mediator == null) return;
+
+            if (!entities.Where(x => x.DomainEvents.Any()).Any()) return;
+
+            await Parallel.ForEachAsync(entities, async (entity, cancellationToken) =>
+            {
+                await entity.PublishDomainEvents(_mediator, cancellationToken);
+            });
         }
     }
 }

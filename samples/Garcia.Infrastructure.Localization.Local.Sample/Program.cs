@@ -1,7 +1,5 @@
 using Garcia.Infrastructure.Localization.Local;
 using Garcia.Infrastructure.Localization.Local.Sample;
-using Garcia.Persistence.EntityFramework;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 

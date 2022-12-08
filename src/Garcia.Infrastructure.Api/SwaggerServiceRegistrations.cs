@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
@@ -10,6 +6,11 @@ namespace Garcia.Infrastructure.Api
 {
     public static class SwaggerServiceRegistrations
     {
+        /// <summary>
+        /// Adds swagger ui with authorization button.
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
         public static IServiceCollection AddSwaggerWithAuthorization(this IServiceCollection services)
         {
             return services.AddSwaggerGen(c =>

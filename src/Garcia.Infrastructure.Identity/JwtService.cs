@@ -1,11 +1,11 @@
-﻿using Microsoft.Extensions.Options;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Principal;
-using Microsoft.IdentityModel.Tokens;
-using Garcia.Domain.Identity;
 using System.Security.Cryptography;
+using System.Security.Principal;
 using Garcia.Application.Contracts.Identity;
+using Garcia.Domain.Identity;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Garcia.Infrastructure.Identity
 {
@@ -91,7 +91,7 @@ namespace Garcia.Infrastructure.Identity
             {
                 Id = identity.Claims.Single(c => c.Type == "id").Value,
                 AuthToken = await GenerateEncodedToken(userName, identity),
-                ExpiresIn = (int) _jwtOptions.ValidFor.TotalSeconds
+                ExpiresIn = (int)_jwtOptions.ValidFor.TotalSeconds
             };
 
             return response;
