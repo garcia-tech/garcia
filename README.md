@@ -316,6 +316,6 @@ builder.Services.AddSwaggerWithAuthorization();
 > dotnet run
 ```
 
-<i>You can find complete project in <a href = "https://github.com/GarciaTechnology/garcia/tree/dev/samples/QuickStart">here.</a></i>
+<i>You can find complete project in <a href = "https://github.com/garcia-tech/garcia/tree/dev/samples/QuickStart">here.</a></i>
 
 <b>And thats it. Many more different features are waiting for you in here. Welcome to Garcia.</b>
