@@ -19,13 +19,17 @@ namespace Garcia.Domain
         [BsonElement(Order = 0)]
         [Key]
         public TKey Id { get; set; }
-        public virtual Guid UniqueId { get; set; } = Guid.NewGuid();
+        public virtual Guid UniqueId { get; private set; } = Guid.NewGuid();
         public virtual bool Active { get; set; }
+        [JsonIgnore]
         public virtual bool Deleted { get; set; }
+        [JsonIgnore]
         [BsonRepresentation(BsonType.String)]
         public virtual DateTimeOffset CreatedOn { get; set; }
+        [JsonIgnore]
         [BsonRepresentation(BsonType.String)]
         public virtual DateTimeOffset LastUpdatedOn { get; set; }
+        [JsonIgnore]
         [BsonRepresentation(BsonType.String)]
         public virtual DateTimeOffset DeletedOn { get; set; }
         [NotMapped]
