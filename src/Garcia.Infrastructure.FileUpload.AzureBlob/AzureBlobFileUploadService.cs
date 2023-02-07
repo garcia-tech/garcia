@@ -53,7 +53,7 @@ namespace Garcia.Infrastructure.FileUpload.AzureBlob
             var name = originalFileName;
             var extention = MimeTypeMap.GetExtension(contentType);
             var uploadedFileName = new GarciaStringBuilder(fileName, extention).ToString();
-            return await CreateResponse(name, fileName, stream);
+            return await CreateResponse(name, uploadedFileName, stream);
         }
 
         private async Task<UploadedFile> CreateResponse(string name, string fileName, Stream stream)
