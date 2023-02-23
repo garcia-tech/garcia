@@ -317,6 +317,12 @@ jobs:
           PROJECT_FILE_PATH: src/Garcia.Infrastructure.FileUpload.AzureBlob/Garcia.Infrastructure.FileUpload.AzureBlob.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
+    - name: Publish Garcia.Infrastructure.Email.SendGrid
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: src/Garcia.Infrastructure.Email.SendGrid/Garcia.Infrastructure.Email.SendGrid.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
     - name: Report Status
       if: always()
       uses: ravsamhq/notify-slack-action@v1
