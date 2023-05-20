@@ -30,7 +30,7 @@ namespace Garcia.Infrastructure.Identity
                  identity.FindFirst(Constants.Strings.JwtClaimIdentifiers.Id),
             };
 
-            claims.AddRange(identity.Claims.Where(x => x.Type == Constants.Strings.JwtClaimIdentifiers.Role));
+            claims.AddRange(identity.Claims);
 
             var jwt = new JwtSecurityToken(
                 issuer: _jwtOptions.Issuer,
