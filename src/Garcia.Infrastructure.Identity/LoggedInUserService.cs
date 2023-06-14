@@ -20,7 +20,7 @@ namespace Garcia.Infrastructure.Identity
                 Id = contextAccessor.HttpContext?.User.Claims.FirstOrDefault(x => x.Type == Constants.Strings.JwtClaimIdentifiers.Id)?.Value ?? default,
                 Username = contextAccessor.HttpContext?.User.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Sub)?.Value ?? default,
                 Roles = contextAccessor.HttpContext?.User.Claims.Where(x => x.Type == Constants.Strings.JwtClaimIdentifiers.Role).Select(x => x.Value).ToList() ?? default,
-                IpAddress = GetIpAddress(contextAccessor.HttpContext!)
+                IpAddress = GetIpAddress(contextAccessor.HttpContext)
             };
         }
 
@@ -31,10 +31,14 @@ namespace Garcia.Infrastructure.Identity
             return (TKey)Convert.ChangeType(value, typeof(TKey));
         }
 
-        private string GetIpAddress(HttpContext context) =>
-            context.Request.Headers.ContainsKey("X-Forwarded-For") ?
-                context.Request.Headers["X-Forwarded-For"] : 
+        private string GetIpAddress(HttpContext context)
+        {
+            if(context == null)
+                return string.Empty;
+
+            return context.Request.Headers.ContainsKey("X-Forwarded-For") ?
+                context.Request.Headers["X-Forwarded-For"] :
             context.Connection.RemoteIpAddress!.MapToIPv4().ToString();
-        
+        }
     }
 }
