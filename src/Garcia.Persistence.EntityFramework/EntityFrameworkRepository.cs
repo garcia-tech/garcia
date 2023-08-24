@@ -181,38 +181,44 @@ namespace Garcia.Persistence.EntityFramework
 
         public override async Task<T> GetByIdWithNavigationsAsync(long id, bool getSoftDeletes = false)
         {
-            var query = _dbContext.Set<T>().AsQueryable();
-            var navigations = _dbContext.Model.FindEntityType(typeof(T))?
-                    .GetDerivedTypesInclusive()
-                    .SelectMany(type => type.GetNavigations())
-                    .Distinct();
-
-            if (navigations != null && navigations.Count() > 0)
-            {
-                foreach (var property in navigations)
-                    query = query.Include(property.Name);
-            }
-
-            if (getSoftDeletes)
-            {
-                return await query.FirstOrDefaultAsync(x => x.Id == id);
-            }
-
-            var proxyEntity = new T();
-
-            if (!proxyEntity.CachingEnabled)
-            {
-                return await query.FirstOrDefaultAsync(x => !x.Deleted && x.Id == id);
-            }
 
             try
             {
-                var keyPrefix = $"{typeof(T).Name}:{nameof(this.GetByIdWithNavigationsAsync)}:{id}";
-                var cachedData = GarciaCache?.Get<T>(keyPrefix);
+                var proxyEntity = new T();
+                var keyPrefix = string.Empty;
 
-                if (cachedData != null) return cachedData;
+                if (proxyEntity.CachingEnabled)
+                {
+                    keyPrefix = $"{typeof(T).Name}:{nameof(this.GetByIdWithNavigationsAsync)}:{id}";
+                    var cachedData = GarciaCache?.Get<T>(keyPrefix);
+
+                    if (cachedData != null) return cachedData;
+                }
+
+                var query = _dbContext.Set<T>().AsQueryable();
+                var navigations = _dbContext.Model.FindEntityType(typeof(T))?
+                        .GetDerivedTypesInclusive()
+                        .SelectMany(type => type.GetNavigations())
+                        .Distinct();
+
+                if (navigations != null && navigations.Any())
+                {
+                    foreach (var property in navigations)
+                        query = query.Include(property.Name);
+                }
+
+                if (getSoftDeletes)
+                {
+                    return await query.FirstOrDefaultAsync(x => x.Id == id);
+                }
 
                 var result = await query.FirstOrDefaultAsync(x => !x.Deleted && x.Id == id);
+
+                if (!proxyEntity.CachingEnabled || result == null)
+                {
+                    return result;
+                }
+
                 GarciaCache!.Set(keyPrefix, result, proxyEntity.CacheExpirationInMinutes);
                 return result;
             }
@@ -224,25 +230,51 @@ namespace Garcia.Persistence.EntityFramework
 
         public override async Task<T> GetByFilterWithNavigationsAsync(Expression<Func<T, bool>> filter, bool getSoftDeletes = false)
         {
-            var query = _dbContext.Set<T>().AsQueryable();
-            var navigations = _dbContext.Model.FindEntityType(typeof(T))?
-                    .GetDerivedTypesInclusive()
-                    .SelectMany(type => type.GetNavigations())
-                    .Distinct();
-
-            if (navigations != null && navigations.Count() > 0)
+            try
             {
-                foreach (var property in navigations)
-                    query = query.Include(property.Name);
-            }
+                var proxyEntity = new T();
+                var keyPrefix = string.Empty;
 
-            if (!getSoftDeletes)
+                if (proxyEntity.CachingEnabled)
+                {
+                    keyPrefix = $"{typeof(T).Name}:{nameof(this.GetByFilterWithNavigationsAsync)}:{filter}";
+                    var cachedData = GarciaCache?.Get<T>(keyPrefix);
+
+                    if (cachedData != null) return cachedData;
+                }
+
+                var query = _dbContext.Set<T>().AsQueryable();
+                var navigations = _dbContext.Model.FindEntityType(typeof(T))?
+                        .GetDerivedTypesInclusive()
+                        .SelectMany(type => type.GetNavigations())
+                        .Distinct();
+
+                if (navigations != null && navigations.Any())
+                {
+                    foreach (var property in navigations)
+                        query = query.Include(property.Name);
+                }
+
+                if (getSoftDeletes)
+                {
+                    return await query.FirstOrDefaultAsync(filter);
+                }
+
+                var result = await query.Where(x => !x.Deleted).FirstOrDefaultAsync(filter);
+
+                if (!proxyEntity.CachingEnabled || result == null)
+                {
+                    return result;
+                }
+
+                GarciaCache!.Set(keyPrefix, result, proxyEntity.CacheExpirationInMinutes);
+                return result;
+            }
+            catch (ArgumentNullException)
             {
-                return await query.Where(x => !x.Deleted)
-                    .FirstOrDefaultAsync(filter);
-            }
 
-            return await query.FirstOrDefaultAsync(filter);
+                throw new GarciaCacheInstanceMissingException();
+            }
         }
 
         public override async Task<T> GetByFilterAsync(Expression<Func<T, bool>> filter, bool getSoftDeletes = false)
