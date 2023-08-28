@@ -47,6 +47,7 @@ namespace Garcia.Infrastructure.FileUpload.AmazonS3
                 putObjectRequest.Key = fileName;
                 putObjectRequest.InputStream = fileToUpload;
                 putObjectRequest.ContentType = file.ContentType;
+                putObjectRequest.DisablePayloadSigning = !string.IsNullOrEmpty(_settings.ServiceUrl);
                 var response = await s3Client.PutObjectAsync(putObjectRequest);
                 return response.HttpStatusCode == System.Net.HttpStatusCode.OK ? new UploadedFile(name, fileName) : null;
             }
@@ -61,6 +62,7 @@ namespace Garcia.Infrastructure.FileUpload.AmazonS3
             putObjectRequest.Key = fileName;
             putObjectRequest.InputStream = stream;
             putObjectRequest.ContentType = contentType;
+            putObjectRequest.DisablePayloadSigning = !string.IsNullOrEmpty(_settings.ServiceUrl);
             var response = await s3Client.PutObjectAsync(putObjectRequest);
             return response.HttpStatusCode == System.Net.HttpStatusCode.OK ? new UploadedFile(name, fileName) : null;
         }
@@ -100,6 +102,7 @@ namespace Garcia.Infrastructure.FileUpload.AmazonS3
                 putObjectRequest.BucketName = _settings.BucketName;
                 putObjectRequest.Key = fileName;
                 putObjectRequest.InputStream = fileToUpload;
+                putObjectRequest.DisablePayloadSigning = !string.IsNullOrEmpty(_settings.ServiceUrl);
                 var response = await s3Client.PutObjectAsync(putObjectRequest);
                 return response.HttpStatusCode == System.Net.HttpStatusCode.OK ? new UploadedFile(null, fileName) : null;
             }
