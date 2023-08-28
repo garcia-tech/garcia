@@ -14,7 +14,7 @@ namespace Garcia.Infrastructure.Api.Extentions
 {
     public static class EndpointRouteBuilderExtentions
     {
-        public static IEndpointRouteBuilder CreateCrudApi<TEntity, TDto, TKey>(this IEndpointRouteBuilder endpointRoute, bool authorizationRequired = false)
+        public static IEndpointRouteBuilder CreateCrudApi<TEntity, TDto, TKey>(this IEndpointRouteBuilder endpointRoute, bool authorizationRequired = false, string authorizedRole = null)
             where TEntity : Entity<TKey>
             where TDto : class, new()
             where TKey : struct, IEquatable<TKey>
@@ -38,20 +38,20 @@ namespace Garcia.Infrastructure.Api.Extentions
                 }
 
                 return Results.Ok(result.Result);
-            }).Authorization(authorizationRequired);
+            }).Authorization(authorizationRequired, authorizedRole);
 
             endpointRoute.MapGet(endpointRouteName, async (IBaseService<TEntity, TDto, TKey> service) =>
             {
                 var result = await service.GetAllAsync();
                 return Results.Ok(result.Result);
-            }).Authorization(authorizationRequired);
+            }).Authorization(authorizationRequired, authorizedRole);
 
             endpointRoute.MapPost(endpointRouteName, async (TDto request, IBaseService<TEntity, TDto, TKey> service) =>
             {
                 var data = mapper.Map<TEntity>(request);
                 await service.AddAsync(data);
                 return Results.Created(endpointRouteName + $"/{data.Id}", mapper.Map<TDto>(data));
-            }).Authorization(authorizationRequired);
+            }).Authorization(authorizationRequired, authorizedRole);
 
             endpointRoute.MapPut(endpointRouteName + "/{id}", async (TKey id, TDto request, IBaseService<TEntity, TDto, TKey> service) =>
             {
@@ -64,7 +64,7 @@ namespace Garcia.Infrastructure.Api.Extentions
                 }
 
                 return Results.NoContent();
-            }).Authorization(authorizationRequired);
+            }).Authorization(authorizationRequired, authorizedRole);
 
             endpointRoute.MapDelete(endpointRouteName + "/{id}", async (TKey id, IBaseService<TEntity, TDto, TKey> service) =>
             {
@@ -76,16 +76,16 @@ namespace Garcia.Infrastructure.Api.Extentions
                 }
 
                 return Results.NoContent();
-            }).Authorization(authorizationRequired);
+            }).Authorization(authorizationRequired, authorizedRole);
 
             return endpointRoute;
         }
 
-        public static IEndpointRouteBuilder CreateCrudApi<TEntity, TDto>(this IEndpointRouteBuilder endpointRoute, bool authorizationRequired = false)
+        public static IEndpointRouteBuilder CreateCrudApi<TEntity, TDto>(this IEndpointRouteBuilder endpointRoute, bool authorizationRequired = false, string authorizedRole = null)
             where TEntity : Entity<long>
             where TDto : class, new()
         {
-            return endpointRoute.CreateCrudApi<TEntity, TDto, long>(authorizationRequired);
+            return endpointRoute.CreateCrudApi<TEntity, TDto, long>(authorizationRequired, authorizedRole);
         }
 
         public static IEndpointRouteBuilder CreateAuthApi<TUser, TUserDto, TKey>(this IEndpointRouteBuilder endpointRoute)
@@ -144,9 +144,9 @@ namespace Garcia.Infrastructure.Api.Extentions
             return endpointRoute.CreateAuthApi<TUser, TUserDto>();
         }
 
-        private static RouteHandlerBuilder Authorization(this RouteHandlerBuilder routeHandlerBuilder, bool authorizationRequired)
+        private static RouteHandlerBuilder Authorization(this RouteHandlerBuilder routeHandlerBuilder, bool authorizationRequired, string role)
         {
-            return authorizationRequired ? routeHandlerBuilder.RequireAuthorization(new AuthorizeData { AuthenticationSchemes = "Bearer" }) : routeHandlerBuilder;
+            return authorizationRequired ? routeHandlerBuilder.RequireAuthorization(new AuthorizeData { AuthenticationSchemes = "Bearer", Roles = role }) : routeHandlerBuilder;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Garcia.Domain.Identity;
 
@@ -9,11 +10,11 @@ namespace Garcia.Application.Contracts.Identity
         /// <summary>
         /// Generates a json web token using the options in the JwtIssuerOptions
         /// </summary>
-        /// <param name="userName">Requesting username.</param>
+        /// <param name="username">Requesting username.</param>
         /// <param name="id">Requesting user id.</param>
         /// <param name="roles">Requesting user roles.</param>
         /// <returns><see cref="TokenInfo"/></returns>
-        Task<TokenInfo> GenerateJwt(string userName, string id, List<string> roles);
+        Task<TokenInfo> GenerateJwt(string username, string id, List<string> roles);
         /// <summary>
         /// Generates a <typeparamref name="T"/> type refresh token. 
         /// Generated refresh token is not an entity.
@@ -30,5 +31,12 @@ namespace Garcia.Application.Contracts.Identity
         /// <param name="ip">Revoked by ip.</param>
         /// <returns></returns>
         T RevokeRefreshToken<T>(T token, string ip) where T : RefreshToken;
+        /// <summary>
+        /// Generates a json web token using the options in the JwtIssuerOptions
+        /// </summary>
+        /// <param name="identity">Desired claims to store in jwt</param>
+        /// <param name="username">Requesting username</param>
+        /// <returns><see cref="TokenInfo"/></returns>
+        Task<TokenInfo> GenerateJwt(ClaimsIdentity identity, string username);
     }
 }

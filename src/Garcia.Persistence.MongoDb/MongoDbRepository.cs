@@ -11,6 +11,7 @@ using Garcia.Infrastructure.MongoDb;
 using MediatR;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 
 namespace Garcia.Persistence.MongoDb
 {
@@ -213,6 +214,18 @@ namespace Garcia.Persistence.MongoDb
                 .FirstOrDefaultAsync();
             GarciaCache!.Set(keyPrefix, result, proxyEntity.CacheExpirationInMinutes);
             return result;
+        }
+
+        public async Task<T> GetByFilterAsync(Expression<Func<T, bool>> filter, bool getSoftDeletes = false)
+        {
+            var query = Collection.AsQueryable();
+
+            if (!getSoftDeletes)
+            {
+                query.Where(x => !x.Deleted);
+            }
+
+            return await query.FirstOrDefaultAsync(filter);
         }
 
         public async Task<long> UpdateAsync(T entity)

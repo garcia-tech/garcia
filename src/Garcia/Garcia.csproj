@@ -19,8 +19,10 @@
     <ProjectReference Include="..\Garcia.Infrastructure.Consul\Garcia.Infrastructure.Consul.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.ElasticSearch\Garcia.Infrastructure.ElasticSearch.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.Email.Mandrill\Garcia.Infrastructure.Email.Mandrill.csproj" />
+    <ProjectReference Include="..\Garcia.Infrastructure.Email.SendGrid\Garcia.Infrastructure.Email.SendGrid.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.Email\Garcia.Infrastructure.Email.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.FileUpload.AmazonS3\Garcia.Infrastructure.FileUpload.AmazonS3.csproj" />
+    <ProjectReference Include="..\Garcia.Infrastructure.FileUpload.AzureBlob\Garcia.Infrastructure.FileUpload.AzureBlob.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.FileUpload.Local\Garcia.Infrastructure.FileUpload.Local.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.ImageResize.Local\Garcia.Infrastructure.ImageResize.Local.csproj" />
     <ProjectReference Include="..\Garcia.Infrastructure.Localization.Local\Garcia.Infrastructure.Localization.Local.csproj" />

@@ -42,7 +42,7 @@ namespace Garcia.Test.Utils
                 });
 
             repository.Setup(x => x.DeleteAsync(It.IsAny<TEntity>(), true))
-                .ReturnsAsync((TEntity entity) =>
+                .ReturnsAsync((TEntity entity, bool hardDelete) =>
                 {
                     var result = mockDataSet.Remove(entity);
                     return Convert.ToInt32(result);
@@ -68,7 +68,7 @@ namespace Garcia.Test.Utils
                 });
 
             repository.Setup(x => x.GetAsync(It.IsAny<Expression<Func<TEntity, bool>>>(), false))
-                .ReturnsAsync((Expression<Func<TEntity, bool>> expression) =>
+                .ReturnsAsync((Expression<Func<TEntity, bool>> expression, bool getSoftDeletes) =>
                 {
                     var result = mockDataSet.Where(expression.Compile());
                     return result.ToList();
@@ -107,7 +107,7 @@ namespace Garcia.Test.Utils
                 });
 
             repository.Setup(x => x.DeleteAsync(It.IsAny<TEntity>(), true))
-                .ReturnsAsync((TEntity entity) =>
+                .ReturnsAsync((TEntity entity, bool hardDelete) =>
                 {
                     var result = mockDataSet.Remove(entity);
                     return Convert.ToInt32(result);
@@ -133,7 +133,7 @@ namespace Garcia.Test.Utils
                 });
 
             repository.Setup(x => x.GetAsync(It.IsAny<Expression<Func<TEntity, bool>>>(), false))
-                .ReturnsAsync((Expression<Func<TEntity, bool>> expression) =>
+                .ReturnsAsync((Expression<Func<TEntity, bool>> expression, bool getSoftDeletes) =>
                 {
                     var result = mockDataSet.Where(expression.Compile());
                     return result.ToList();
@@ -173,7 +173,7 @@ namespace Garcia.Test.Utils
                 });
 
             mock.Setup(x => x.DeleteAsync(It.IsAny<TEntity>(), true))
-                .ReturnsAsync((TEntity entity) =>
+                .ReturnsAsync((TEntity entity, bool hardDelete) =>
                 {
                     var result = mockDataSet.Remove(entity);
                     return Convert.ToInt32(result);
@@ -199,7 +199,7 @@ namespace Garcia.Test.Utils
                 });
 
             mock.Setup(x => x.GetAsync(It.IsAny<Expression<Func<TEntity, bool>>>(), false))
-                .ReturnsAsync((Expression<Func<TEntity, bool>> expression) =>
+                .ReturnsAsync((Expression<Func<TEntity, bool>> expression, bool getSoftDeletes) =>
                 {
                     var result = mockDataSet.Where(expression.Compile());
                     return result.ToList();
@@ -241,7 +241,7 @@ namespace Garcia.Test.Utils
                 });
 
             mock.Setup(x => x.DeleteAsync(It.IsAny<TEntity>(), true))
-                .ReturnsAsync((TEntity entity) =>
+                .ReturnsAsync((TEntity entity, bool hardDelete) =>
                 {
                     var result = mockDataSet.Remove(entity);
                     return Convert.ToInt32(result);
@@ -267,7 +267,7 @@ namespace Garcia.Test.Utils
                 });
 
             mock.Setup(x => x.GetAsync(It.IsAny<Expression<Func<TEntity, bool>>>(), false))
-                .ReturnsAsync((Expression<Func<TEntity, bool>> expression) =>
+                .ReturnsAsync((Expression<Func<TEntity, bool>> expression, bool getSoftDeletes) =>
                 {
                     var result = mockDataSet.Where(expression.Compile());
                     return result.ToList();

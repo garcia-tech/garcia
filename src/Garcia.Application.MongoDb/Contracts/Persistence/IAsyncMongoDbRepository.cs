@@ -29,5 +29,12 @@ namespace Garcia.Application.MongoDb.Contracts.Persistence
         /// <param name="size">Count of entity.</param>
         /// <returns><c>IReadonlyList</c> of <typeparamref name="T"/> entities.</returns>
         Task<IReadOnlyList<T>> GetAllAsync(int page, int size, bool getSoftDeletes = false);
+        /// <summary>
+        /// Gets a single entity by filter.
+        /// </summary>
+        /// <param name="filter">The filter to be applied on data.</param>
+        /// <param name="getSoftDeletes"></param>
+        /// <returns></returns>
+        Task<T> GetByFilterAsync(Expression<Func<T, bool>> filter, bool getSoftDeletes = false);
     }
 }
