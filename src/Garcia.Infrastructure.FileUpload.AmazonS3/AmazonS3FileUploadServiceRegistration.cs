@@ -1,4 +1,6 @@
-﻿using Garcia.Application.Contracts.FileUpload;
+﻿using System.Reflection;
+using Amazon;
+using Garcia.Application.Contracts.FileUpload;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,6 +16,8 @@ namespace Garcia.Infrastructure.FileUpload.AmazonS3
                 options.BucketName = settings.BucketName;
                 options.BucketUrl = settings.BucketUrl;
                 options.SecretAccessKey = settings.SecretAccessKey;
+                options.ServiceUrl = settings.ServiceUrl;
+                options.RegionEndpoint = settings.RegionEndpoint;
             });
 
             services.AddScoped<IFileUploadService, AmazonS3FileUplaodService>();
@@ -28,6 +32,7 @@ namespace Garcia.Infrastructure.FileUpload.AmazonS3
                 options.BucketName = configuration[$"{nameof(AmazonS3Settings)}:{nameof(options.BucketName)}"];
                 options.BucketUrl = configuration[$"{nameof(AmazonS3Settings)}:{nameof(options.BucketUrl)}"];
                 options.SecretAccessKey = configuration[$"{nameof(AmazonS3Settings)}:{nameof(options.SecretAccessKey)}"];
+                options.ServiceUrl = configuration[$"{nameof(AmazonS3Settings)}:{nameof(options.ServiceUrl)}"];
             });
 
             services.AddScoped<IFileUploadService, AmazonS3FileUplaodService>();

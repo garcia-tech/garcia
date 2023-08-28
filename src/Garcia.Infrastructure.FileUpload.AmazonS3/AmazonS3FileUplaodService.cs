@@ -1,4 +1,5 @@
-﻿using Amazon.S3;
+﻿using Amazon.Runtime;
+using Amazon.S3;
 using Amazon.S3.Model;
 using Garcia.Application;
 using Garcia.Application.Contracts.FileUpload;
@@ -15,7 +16,13 @@ namespace Garcia.Infrastructure.FileUpload.AmazonS3
         public AmazonS3FileUplaodService(IOptions<AmazonS3Settings> settings)
         {
             _settings = settings.Value;
-            s3Client = new AmazonS3Client(_settings.AccessKeyId, _settings.SecretAccessKey, Amazon.RegionEndpoint.EUCentral1);
+            var credentials = new BasicAWSCredentials(_settings.AccessKeyId, _settings.SecretAccessKey);
+
+            s3Client = new AmazonS3Client(credentials, new AmazonS3Config
+            {
+                RegionEndpoint = _settings.RegionEndpoint,
+                ServiceURL = _settings.ServiceUrl
+            });
         }
 
         public FileWrapper GetDetails(string fileName)
