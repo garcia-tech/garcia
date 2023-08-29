@@ -119,7 +119,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Domain.RealTime", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Infrastructure.FileUpload.AzureBlob", "src\Garcia.Infrastructure.FileUpload.AzureBlob\Garcia.Infrastructure.FileUpload.AzureBlob.csproj", "{0A62DD27-DC10-4B49-8E72-13E09E2D2F01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garcia.Infrastructure.Email.SendGrid", "src\Garcia.Infrastructure.Email.SendGrid\Garcia.Infrastructure.Email.SendGrid.csproj", "{030F44A3-64E0-47B0-AC25-510DD29F0689}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garcia.Infrastructure.Email.SendGrid", "src\Garcia.Infrastructure.Email.SendGrid\Garcia.Infrastructure.Email.SendGrid.csproj", "{030F44A3-64E0-47B0-AC25-510DD29F0689}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garcia.Domain.PostgreSql", "src\Garcia.Domain.PostgreSql\Garcia.Domain.PostgreSql.csproj", "{22268825-2F8A-43C7-AF02-E034E3CE4260}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -347,6 +349,10 @@ Global
 		{030F44A3-64E0-47B0-AC25-510DD29F0689}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{030F44A3-64E0-47B0-AC25-510DD29F0689}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{030F44A3-64E0-47B0-AC25-510DD29F0689}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22268825-2F8A-43C7-AF02-E034E3CE4260}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22268825-2F8A-43C7-AF02-E034E3CE4260}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22268825-2F8A-43C7-AF02-E034E3CE4260}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22268825-2F8A-43C7-AF02-E034E3CE4260}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -408,6 +414,7 @@ Global
 		{CC9213DB-66D9-4936-96A4-88C65063EB58} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 		{0A62DD27-DC10-4B49-8E72-13E09E2D2F01} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 		{030F44A3-64E0-47B0-AC25-510DD29F0689} = {087C542F-855C-47ED-96C8-9D088E416ED2}
+		{22268825-2F8A-43C7-AF02-E034E3CE4260} = {087C542F-855C-47ED-96C8-9D088E416ED2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3255BD7C-849F-4F0F-B86D-5A266B1F50B6}
