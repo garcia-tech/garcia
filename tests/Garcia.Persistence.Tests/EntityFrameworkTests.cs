@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Garcia.Application.Contracts.Persistence;
 using Garcia.Infrastructure;
 using Garcia.Persistence.EntityFramework;
@@ -50,7 +51,7 @@ namespace Garcia.Persistence.Tests
                     .Options);
 
         [Fact]
-        public async void GetByIdAsync()
+        public async Task GetByIdAsync()
         {
             var item = await _repository.GetByIdAsync(1);
             Assert.NotNull(item);
@@ -59,7 +60,7 @@ namespace Garcia.Persistence.Tests
         }
 
         [Fact]
-        public async void GetByIdWithNavigations()
+        public async Task GetByIdWithNavigations()
         {
 
             var item = await _repository.GetByIdWithNavigationsAsync(1);
@@ -68,7 +69,7 @@ namespace Garcia.Persistence.Tests
         }
 
         [Fact]
-        public async void GetAllAsync()
+        public async Task GetAllAsync()
         {
             var items = await _repository.GetAllAsync();
             Assert.NotNull(items);
@@ -76,7 +77,7 @@ namespace Garcia.Persistence.Tests
         }
 
         [Fact]
-        public async void AddAsync()
+        public async Task AddAsync()
         {
             var item = new TestEntity(3, "Three");
             var result = await _repository.AddAsync(item);
@@ -84,7 +85,7 @@ namespace Garcia.Persistence.Tests
         }
 
         [Fact]
-        public async void UpdateAsync()
+        public async Task UpdateAsync()
         {
             var item = await _repository.GetByIdAsync(1);
             item.Name = $"One-{DateTime.Now}";
@@ -94,7 +95,7 @@ namespace Garcia.Persistence.Tests
         }
 
         [Fact]
-        public async void DeleteAsync()
+        public async Task DeleteAsync()
         {
             var item = await _repository.GetByIdAsync(1);
             await _repository.DeleteAsync(item);
@@ -109,7 +110,7 @@ namespace Garcia.Persistence.Tests
         }
 
         [Fact]
-        public async void GetAllAsync2()
+        public async Task GetAllAsync2()
         {
             var items = await _repository.GetAllAsync(1, 1);
             Assert.NotNull(items);
@@ -120,7 +121,7 @@ namespace Garcia.Persistence.Tests
         }
 
         [Fact]
-        public async void GetAsync()
+        public async Task GetAsync()
         {
             var items = await _repository.GetAsync(x => x.Id == 1);
             Assert.NotNull(items);
@@ -131,7 +132,7 @@ namespace Garcia.Persistence.Tests
         }
 
         [Fact]
-        public async void GetAsync_Should_Not_Get_Deleted_Items()
+        public async Task GetAsync_Should_Not_Get_Deleted_Items()
         {
             var item = new TestEntity(6, "Six");
             await _repository.AddAsync(item);
@@ -142,7 +143,7 @@ namespace Garcia.Persistence.Tests
         }
 
         [Fact]
-        public async void GetByFilterAsync_Should_Not_Get_Deleted_Items()
+        public async Task GetByFilterAsync_Should_Not_Get_Deleted_Items()
         {
             var item = new TestEntity(7, "Seven");
             await _repository.AddAsync(item);
@@ -152,7 +153,7 @@ namespace Garcia.Persistence.Tests
         }
 
         [Fact]
-        public async void AddRangeAsync()
+        public async Task AddRangeAsync()
         {
             var items = new List<TestEntity>()
             {
@@ -169,7 +170,7 @@ namespace Garcia.Persistence.Tests
         }
 
         [Fact]
-        public async void DeleteManyAsync()
+        public async Task DeleteManyAsync()
         {
             await _repository.DeleteManyAsync(x => x.Key > 1);
             var entities = await _repository.GetAllAsync();
@@ -177,14 +178,14 @@ namespace Garcia.Persistence.Tests
         }
 
         [Fact]
-        public async void CountAsync()
+        public async Task CountAsync()
         {
             var count = await _repository.CountAsync(x => x.Id == 1);
             count.ShouldBe(1);
         }
 
         [Fact]
-        public async void Soft_Delete_Should_Success()
+        public async Task Soft_Delete_Should_Success()
         {
             var item = await _repository.GetByIdAsync(1);
             await _repository.DeleteAsync(item);
@@ -200,6 +201,17 @@ namespace Garcia.Persistence.Tests
             item.ShouldBeNull();
             item = await _repository.GetByIdWithNavigationsAsync(1);
             item.ShouldBeNull();
+        }
+
+        [Theory(DisplayName = "GetByFilterWithNavigationsAsync method do not sets cache key with variable name instead of their value")]
+        [InlineData(1)]
+        public async Task GetByFilterWithNavigationsAsync_CacheKey_Must_Be_Unique(int id)
+        {
+            var testItem1 = await _repository.GetByFilterWithNavigationsAsync(x => x.Id == id);
+            id = 2;
+            var testItem2 = await _repository.GetByFilterWithNavigationsAsync(x => x.Id == id);
+
+            testItem1.ShouldNotBe(testItem2);
         }
     }
 }
