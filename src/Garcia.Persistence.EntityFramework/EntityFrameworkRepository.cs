@@ -230,51 +230,27 @@ namespace Garcia.Persistence.EntityFramework
 
         public override async Task<T> GetByFilterWithNavigationsAsync(Expression<Func<T, bool>> filter, bool getSoftDeletes = false)
         {
-            try
+
+            var query = _dbContext.Set<T>().AsQueryable();
+            var navigations = _dbContext.Model.FindEntityType(typeof(T))?
+                    .GetDerivedTypesInclusive()
+                    .SelectMany(type => type.GetNavigations())
+                    .Distinct();
+
+            if (navigations != null && navigations.Any())
             {
-                var proxyEntity = new T();
-                var keyPrefix = string.Empty;
-
-                if (proxyEntity.CachingEnabled)
-                {
-                    keyPrefix = $"{typeof(T).Name}:{nameof(this.GetByFilterWithNavigationsAsync)}:{filter}";
-                    var cachedData = GarciaCache?.Get<T>(keyPrefix);
-
-                    if (cachedData != null) return cachedData;
-                }
-
-                var query = _dbContext.Set<T>().AsQueryable();
-                var navigations = _dbContext.Model.FindEntityType(typeof(T))?
-                        .GetDerivedTypesInclusive()
-                        .SelectMany(type => type.GetNavigations())
-                        .Distinct();
-
-                if (navigations != null && navigations.Any())
-                {
-                    foreach (var property in navigations)
-                        query = query.Include(property.Name);
-                }
-
-                if (getSoftDeletes)
-                {
-                    return await query.FirstOrDefaultAsync(filter);
-                }
-
-                var result = await query.Where(x => !x.Deleted).FirstOrDefaultAsync(filter);
-
-                if (!proxyEntity.CachingEnabled || result == null)
-                {
-                    return result;
-                }
-
-                GarciaCache!.Set(keyPrefix, result, proxyEntity.CacheExpirationInMinutes);
-                return result;
+                foreach (var property in navigations)
+                    query = query.Include(property.Name);
             }
-            catch (ArgumentNullException)
+
+            if (getSoftDeletes)
             {
-
-                throw new GarciaCacheInstanceMissingException();
+                return await query.FirstOrDefaultAsync(filter);
             }
+
+            var result = await query.Where(x => !x.Deleted).FirstOrDefaultAsync(filter);
+            return result;
+
         }
 
         public override async Task<T> GetByFilterAsync(Expression<Func<T, bool>> filter, bool getSoftDeletes = false)
