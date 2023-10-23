@@ -27,6 +27,7 @@ namespace Garcia.Application.Contracts.Persistence
         public abstract Task<bool> AnyAsync(Expression<Func<T, bool>> filter);
         public abstract Task<long> CountAsync(Expression<Func<T, bool>> filter, bool countSoftDeletes = false);
         public abstract Task<long> UpdateManyAsync(IEnumerable<T> updatedList);
+        public abstract Task<IReadOnlyList<T>> GetAllWithNavigationsAsync(Expression<Func<T, bool>> filter = null, bool getSoftDeletes = false, int? page = null, int? size = null);
 
         public virtual async Task<long> SaveAsync(T entity)
         {
