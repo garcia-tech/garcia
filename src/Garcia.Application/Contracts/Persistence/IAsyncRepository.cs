@@ -74,7 +74,7 @@ namespace Garcia.Application.Contracts.Persistence
         /// Gets all entities with pagination.
         /// </summary>
         /// <param name="page">Desired page.</param>
-        /// <param name="size">Count of entity.</param>
+        /// <param name="size">Count of entities.</param>
         /// <returns><see cref="IReadOnlyCollection{T}"/></returns>
         Task<IReadOnlyList<T>> GetAllAsync(int page, int size, bool getSoftDeletes = false);
         /// <summary>
@@ -110,5 +110,15 @@ namespace Garcia.Application.Contracts.Persistence
         /// <param name="updatedList"></param>
         /// <returns></returns>
         Task<long> UpdateManyAsync(IEnumerable<T> updatedList);
+
+        /// <summary>
+        /// Gets all entities with their navigations.
+        /// </summary>
+        /// <param name="filter">Optional filter param</param>
+        /// <param name="getSoftDeletes"></param>
+        /// <param name="page">Desired page</param>
+        /// <param name="size">Count of entities.</param>
+        /// <returns></returns>
+        Task<IReadOnlyList<T>> GetAllWithNavigationsAsync(Expression<Func<T, bool>> filter = null, bool getSoftDeletes = false, int? page = null, int? size = null);
     }
 }

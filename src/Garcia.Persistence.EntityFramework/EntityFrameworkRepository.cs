@@ -137,6 +137,38 @@ namespace Garcia.Persistence.EntityFramework
             }
         }
 
+        public override async Task<IReadOnlyList<T>> GetAllWithNavigationsAsync(Expression<Func<T, bool>> filter = null, bool getSoftDeletes = false, int? page = null, int? size = null)
+        {
+            var query = _dbContext.Set<T>().AsQueryable();
+            var navigations = _dbContext.Model.FindEntityType(typeof(T))?
+                    .GetDerivedTypesInclusive()
+                    .SelectMany(type => type.GetNavigations())
+                    .Distinct();
+
+            if (navigations != null && navigations.Any())
+            {
+                foreach (var property in navigations)
+                    query = query.Include(property.Name);
+            }
+
+            if(!getSoftDeletes)
+            {
+                query = query.Where(x => !x.Deleted);
+            }
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            if(page != null && size != null)
+            {
+                query = query.Skip(((page - 1) * size).Value).Take(size.Value);
+            }
+
+            return await query.ToListAsync();
+        }
+
         public override async Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> filter, bool getSoftDeletes = false)
         {
             if (!getSoftDeletes)
