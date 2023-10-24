@@ -1,12 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+	</PropertyGroup>
 	<PropertyGroup>
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Serilog.Sinks.Elasticsearch" Version="8.4.1" />
-		<PackageReference Include="Nerdbank.GitVersioning" Version="3.5.107">
+		<PackageReference Include="Serilog.Sinks.Elasticsearch" Version="9.0.3" />
+		<PackageReference Include="Nerdbank.GitVersioning" Version="3.6.133">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>

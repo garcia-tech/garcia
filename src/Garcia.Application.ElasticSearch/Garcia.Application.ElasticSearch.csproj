@@ -1,12 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
+	<PropertyGroup>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<TargetFramework>net7.0</TargetFramework>
+	</PropertyGroup>
 	<PropertyGroup>
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="NEST" Version="7.17.2" />
-		<PackageReference Include="Nerdbank.GitVersioning" Version="3.5.107">
+		<PackageReference Include="NEST" Version="7.17.5" />
+		<PackageReference Include="Nerdbank.GitVersioning" Version="3.6.133">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>

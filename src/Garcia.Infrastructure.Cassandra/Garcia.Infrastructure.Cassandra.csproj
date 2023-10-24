@@ -1,14 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+	</PropertyGroup>
 	<PropertyGroup>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CassandraCSharpDriver" Version="3.17.1" />
-		<PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
-		<PackageReference Include="Nerdbank.GitVersioning" Version="3.5.107">
+		<PackageReference Include="CassandraCSharpDriver" Version="3.19.3" />
+		<PackageReference Include="Microsoft.Extensions.Options" Version="7.0.1" />
+		<PackageReference Include="Nerdbank.GitVersioning" Version="3.6.133">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>

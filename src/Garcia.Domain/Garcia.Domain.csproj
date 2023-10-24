@@ -1,13 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+    <PropertyGroup>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+        <TargetFramework>net7.0</TargetFramework>
+    </PropertyGroup>
     <PropertyGroup>
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="MediatR" Version="11.0.0" />
-      <PackageReference Include="MongoDB.Bson" Version="2.15.1" />
-      <PackageReference Include="Nerdbank.GitVersioning" Version="3.5.107">
+      <PackageReference Include="MediatR" Version="12.1.1" />
+      <PackageReference Include="MongoDB.Bson" Version="2.22.0" />
+      <PackageReference Include="Nerdbank.GitVersioning" Version="3.6.133">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
