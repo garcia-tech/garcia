@@ -3,18 +3,19 @@
 	<PropertyGroup>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<TargetFramework>net8.0</TargetFramework>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="MMLib.SwaggerForOcelot" Version="5.2.0" />
-		<PackageReference Include="Ocelot" Version="18.0.0" />
-		<PackageReference Include="Ocelot.Cache.CacheManager" Version="18.0.0" />
-		<PackageReference Include="Nerdbank.GitVersioning" Version="3.5.107">
+		<PackageReference Include="MMLib.SwaggerForOcelot" Version="8.3.0" />
+		<PackageReference Include="Ocelot" Version="23.3.3" />
+		<PackageReference Include="Ocelot.Cache.CacheManager" Version="23.3.3" />
+		<PackageReference Include="Nerdbank.GitVersioning" Version="3.6.141">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Ocelot.Provider.Consul" Version="18.0.0" />
-		<PackageReference Include="Ocelot.Provider.Eureka" Version="18.0.0" />
+		<PackageReference Include="Ocelot.Provider.Consul" Version="23.3.3" />
+		<PackageReference Include="Ocelot.Provider.Eureka" Version="23.3.3" />
 	</ItemGroup>
 
 </Project>
