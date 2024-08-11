@@ -2,11 +2,12 @@
 
 	<PropertyGroup>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<TargetFramework>net8.0</TargetFramework>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Serilog.Sinks.Elasticsearch" Version="8.4.1" />
-		<PackageReference Include="Nerdbank.GitVersioning" Version="3.5.107">
+		<PackageReference Include="Elastic.Serilog.Sinks" Version="8.11.1" />
+		<PackageReference Include="Nerdbank.GitVersioning" Version="3.6.141">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
