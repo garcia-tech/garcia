@@ -25,7 +25,8 @@ namespace Garcia.Infrastructure.ImageResize.Local
             }
 
             using var stream = new MemoryStream();
-            using var image = Image.Load(file.OpenReadStream(), out IImageFormat format);
+            using var image = Image.Load(file.OpenReadStream());
+            var format = Image.DetectFormat(file.OpenReadStream());
             image.Mutate(x => x.Resize(image.Width / (image.Height / newHeight.Value), newHeight.Value));
             image.Save(stream, format);
             return stream;

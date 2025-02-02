@@ -3,11 +3,12 @@
   <PropertyGroup>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+      <TargetFramework>net9.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Serilog.Sinks.Graylog" Version="2.3.0" />
-	  <PackageReference Include="Nerdbank.GitVersioning" Version="3.5.107">
+    <PackageReference Include="Serilog.Sinks.Graylog" Version="3.1.1" />
+	  <PackageReference Include="Nerdbank.GitVersioning" Version="3.7.115">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
