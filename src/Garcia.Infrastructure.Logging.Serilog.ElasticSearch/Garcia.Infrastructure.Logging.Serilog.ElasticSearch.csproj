@@ -6,8 +6,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Elastic.Serilog.Sinks" Version="8.11.1" />
-		<PackageReference Include="Nerdbank.GitVersioning" Version="3.6.141">
+		<PackageReference Include="Elastic.Serilog.Sinks" Version="8.12.3" />
+		<PackageReference Include="Nerdbank.GitVersioning" Version="3.7.115">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>

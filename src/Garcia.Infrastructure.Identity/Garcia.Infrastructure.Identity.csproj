@@ -11,7 +11,7 @@
 		<ProjectReference Include="..\Garcia.Application\Garcia.Application.csproj" />
 		<ProjectReference Include="..\Garcia.Domain.Identity\Garcia.Domain.Identity.csproj" />
 		<ProjectReference Include="..\Garcia.Infrastructure\Garcia.Infrastructure.csproj" />
-		<PackageReference Include="Nerdbank.GitVersioning" Version="3.6.141">
+		<PackageReference Include="Nerdbank.GitVersioning" Version="3.7.115">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
